@@ -2,6 +2,6 @@
 namespace Vision\Filter;
 
 interface FilterInterface 
-{	
-	public function filter($value);
+{
+    public function filter($value);
 }

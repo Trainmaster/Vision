@@ -32,13 +32,13 @@ class FrontController
             Locale::setDefault($locale);    
         }
     }
-	
-	public function setContainer($container) 
+    
+    public function setContainer($container) 
     {
         $this->container = $container;
     }
-	
-	public function getContainer() 
+    
+    public function getContainer() 
     {
         return $this->container;
     }

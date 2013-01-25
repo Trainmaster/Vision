@@ -1,8 +1,8 @@
 <?php
 namespace Vision\Html;
 
-class ElementFactory {
-
+class ElementFactory
+{
     protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed', 
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta', 
                                             'param', 'source', 'track', 'wbr');

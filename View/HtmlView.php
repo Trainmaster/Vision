@@ -103,7 +103,7 @@ class HtmlView extends AbstractView
         print $parent;
         print $this->template;
         if ($this->template === $parent) {
-            throw new RuntimeException(sprintf('No output before calling "%s".', __METHOD__));
+            //throw new RuntimeException(sprintf('No output before calling "%s".', __METHOD__));
         }
         
         $length = ob_get_length();

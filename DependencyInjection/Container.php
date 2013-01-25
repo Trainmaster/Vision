@@ -16,12 +16,14 @@ class Container
     
     private $objects = array();
     
-    public function __construct($loader, $resource) {
+    public function __construct($loader, $resource)
+    {
         $this->loader = $loader;
         $this->addConfiguration($resource);
-	}
+    }
     
-    public function addConfiguration($resource) {
+    public function addConfiguration($resource)
+    {
         $config = $this->loader->load($resource);
         if ($config instanceof ContainerConfig) {
             if ($config->getParameters()) {
@@ -44,7 +46,8 @@ class Container
         return $this;
 	}
     
-    public function mergeParameters(array $parameters) {
+    public function mergeParameters(array $parameters)
+    {
         foreach ($parameters as $key => $value) {
             if (isset($this->parameters[$key])) {
                 throw new ContainerException(sprintf('Parameter "%s" is already defined.', $key));
@@ -54,7 +57,8 @@ class Container
         return true;
     }
     
-    public function mergeDefinitions(array $definitions) {
+    public function mergeDefinitions(array $definitions)
+    {
         foreach ($definitions as $key => $value) {
             if (isset($this->definitions[$key])) {
                 throw new ContainerException(sprintf('Definition "%s" is already defined.', $key));
@@ -64,7 +68,8 @@ class Container
         return true;
     }
     
-    public function mergeResources(array $resources) {
+    public function mergeResources(array $resources)
+    {
         foreach ($resources as $value) {
             if (in_array($value, $this->resources, true)) {
                 throw new ContainerException(sprintf('Resource "%s" is already defined.', $key));
@@ -74,11 +79,13 @@ class Container
         return true;
     }
     
-    public function getResources() {
+    public function getResources() 
+    {
         return $this->resources;
     }
     
-    public function addParameter($key, $value) {
+    public function addParameter($key, $value)
+    {
         if (isset($this->parameters[$key])) {
             throw new ContainerException(sprintf('Parameter "%s" does already exist.', $key));
         } else {
@@ -87,21 +94,24 @@ class Container
         return $this;
 	}
     
-    public function addParameters(array $parameters) {
-		foreach ($parameters as $key => $value) {
-			$this->addParameter($key, $value);
-		}		
-		return $this;
+    public function addParameters(array $parameters) 
+    {
+        foreach ($parameters as $key => $value) {
+            $this->addParameter($key, $value);
+        }		
+        return $this;
 	}
     
-    public function getParameter($key) {
+    public function getParameter($key)
+    {
         if (isset($this->parameters[$key])) {
             return $this->parameters[$key];
         }
         return null;
-	}
+    }
     
-    public function addDefinition($key, $value) {
+    public function addDefinition($key, $value)
+    {
         if (isset($this->definitions[$key])) {
             throw new ContainerException(sprintf('Definition "%s" does already exist.', $key));
         } else {
@@ -110,14 +120,16 @@ class Container
         return $this;
     }
     
-    public function addDefinitions(array $definitions) {
+    public function addDefinitions(array $definitions)
+    {
         foreach ($definitions as $key => $value) {
             $this->addDefinition($key, $value);
         }		
         return $this;
     }
     
-    public function set($id, $object) {
+    public function set($id, $object)
+    {
         if (isset($this->objects[$key])) {
             throw new ContainerException(sprintf('Service "%s" does already exist.', $id));
         } else {
@@ -126,18 +138,21 @@ class Container
         return $this;
     }
     
-    public function get($id) {			
+    public function get($id)
+    {			
         if (isset($this->objects[$id])) {
             return $this->objects[$id];
         } 			
         return $this->createObject($id);
     }
     
-    public function getAll() {
+    public function getAll()
+    {
         return $this->objects;
     }
     
-    private function createObject($id) {			
+    private function createObject($id)
+    {			
         if (isset($this->definitions[$id])) {
             $definition = $this->definitions[$id];
             $reflection = new \ReflectionClass($definition->getClass());
@@ -203,5 +218,5 @@ class Container
         $this->objects[$id] = $instance;
 
         return $instance;		
-	}
+    }
 }

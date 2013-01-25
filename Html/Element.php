@@ -84,23 +84,23 @@ class Element
     public function getAttributes() 
     {
         return $this->attributes;
-    }  
+    }
     
-	public function addClass($class) 
+    public function addClass($class) 
     {
         $class = trim($class);
         if ($this->getAttribute('class') !== null) {
             $class = $this->getAttribute('class').' '.$class;	
         }
-		$this->setAttribute('class', $class);
-		return $this;
-	}
-    	
-	public function removeClass($class) 
-    {
-		$classAttribute = $this->getAttribute('class');
-		$class = str_replace($class, '', $classAttribute);
-		$this->setAttribute('class', $class);
+        $this->setAttribute('class', $class);
         return $this;
-	}
+    }
+    
+    public function removeClass($class) 
+    {
+        $classAttribute = $this->getAttribute('class');
+        $class = str_replace($class, '', $classAttribute);
+        $this->setAttribute('class', $class);
+        return $this;
+    }
 }

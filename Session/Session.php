@@ -7,14 +7,14 @@ use ArrayObject;
 class Session extends ArrayObject
 {    
     protected $extension = null;
-
-	public function __construct($extension) 
+    
+    public function __construct($extension) 
     {		
         register_shutdown_function(array($this, '__destruct'));
         $this->setExtension($extension);
         $this->extension->start();
         $this->extension->load($this);
-	}
+    }
     
     public function __destruct()    
     {
@@ -55,45 +55,46 @@ class Session extends ArrayObject
     public function regenerateId($deleteOldSession = false)
     {
         return $this->extension->regenerateId($deleteOldSession);
-    }    
+    }
     
-    public function init() {
-		if (empty($_SESSION['security_token'])) {
-			$_SESSION['start'] = time();
-			$_SESSION['end'] = time() + 3600;
-			$_SESSION['client_group'] = '1';
-			$_SESSION['lang'] = 'de';
-			if (isset($_SERVER['HTTP_USER_AGENT'])) {
-				$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-			}
-			$_SESSION['security_token'] = hash('sha512', uniqid(mt_rand(), true));
-		}		
-		if ($this->validate() === false){
-			session_unset();
-			session_destroy();
-		} else {	
+    public function init()
+    {
+        if (empty($_SESSION['security_token'])) {
+            $_SESSION['start'] = time();
+            $_SESSION['end'] = time() + 3600;
+            $_SESSION['client_group'] = '1';
+            $_SESSION['lang'] = 'de';
+            if (isset($_SERVER['HTTP_USER_AGENT'])) {
+                $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+            }
+            $_SESSION['security_token'] = hash('sha512', uniqid(mt_rand(), true));
+        }		
+        if ($this->validate() === false) {
+            session_unset();
+            session_destroy();
+        } else {	
             $difference = $_SESSION['end'] - time();
-            if ($difference > 0){
+            if ($difference > 0) {
                 $_SESSION['end'] = time() + 3600;
             }	
         }        
-	}
+    }
     
     private function validate() {	
-		if ($_SESSION['end'] < time()) {
-			return false;
-		}		
-		if (isset($_SERVER['HTTP_USER_AGENT'])) {
-			if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) { 
-				return false;
-			}	
-		} else {
-			return false;
-		}
-		return true;
+        if ($_SESSION['end'] < time()) {
+            return false;
+        }		
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
+            if ($_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) { 
+                return false;
+            }	
+        } else {
+            return false;
+        }
+        return true;
 	}
-	
-	public function setNamespace($namespace) {
+    
+    public function setNamespace($namespace) {
 		$this->namespace = (string) $namespace;
 		return $this;
 	}
@@ -101,33 +102,34 @@ class Session extends ArrayObject
     public function getNamespace() {
         return $this->namespace;
     }
-	
-	public function load($key) {
-		if ($this->getNamespace()) {			
-			if (isset($_SESSION[$this->getNamespace()][$key])) {
-				return $_SESSION[$this->getNamespace()][$key];
-			}
-		} elseif (isset($_SESSION[$key])) {
-			return $_SESSION[$key];
-		} else {
-			return null;
-		}
-	}	
-	
-	public function save($key, $value) {
-		if ($this->getNamespace()) {
-			$_SESSION[$this->getNamespace()][$key] = $value;
-		} else {
-			$_SESSION[$key] = $value;
-		}
-		return $this;
+    
+    public function load($key) {
+        if ($this->getNamespace()) {			
+            if (isset($_SESSION[$this->getNamespace()][$key])) {
+                return $_SESSION[$this->getNamespace()][$key];
+            }
+        } elseif (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
+        } else {
+            return null;
+        }
 	}
-	
-	public function delete($key) {
-		if ($this->getNamespace()) {
-			unset($_SESSION[$this->getNamespace()][$key]);
-		} else {
-			unset($_SESSION[$key]);
-		}
+    
+    public function save($key, $value) {
+        if ($this->getNamespace()) {
+            $_SESSION[$this->getNamespace()][$key] = $value;
+        } else {
+            $_SESSION[$key] = $value;
+        }
+        return $this;
 	}
+    
+    public function delete($key)
+    {
+        if ($this->getNamespace()) {
+            unset($_SESSION[$this->getNamespace()][$key]);
+        } else {
+            unset($_SESSION[$key]);
+        }
+    }
 }

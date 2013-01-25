@@ -6,8 +6,8 @@ use RuntimeException;
 class SplClassLoader 
 {	
     protected $fileExtension = '.php';
-
-	protected $namespace = null;
+    
+    protected $namespace = null;
     
     protected $namespaceSeparator = '\\';
     

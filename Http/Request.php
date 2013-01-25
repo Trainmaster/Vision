@@ -5,8 +5,8 @@ use Vision\Http\RequestHandler;
 
 class RequestException extends \Exception {}
 
-class Request implements RequestInterface {
-
+class Request implements RequestInterface
+{
     private $get = null;
     
     private $post = null;
@@ -14,8 +14,8 @@ class Request implements RequestInterface {
     private $files = null;
     
     private $cookie = null;
-	
-	private $server = null;
+    
+    private $server = null;
     
     protected $baseUrl = null;
     
@@ -23,30 +23,34 @@ class Request implements RequestInterface {
     
     protected $path = null;
         
-    public function __construct () {
+    public function __construct ()
+    {
         $this->get = new RequestHandler($_GET);
         $this->post = new RequestHandler($_POST);
         $this->files = new RequestHandler($_FILES);
         $this->cookie = new RequestHandler($_COOKIE);
-		$this->server = new RequestHandler($_SERVER);
+        $this->server = new RequestHandler($_SERVER);
     }
-	
-	public function __get($key) {
-		if (isset($this->$key)) {
-			return $this->$key;
-		}
-		return null;
-	}
-	
-	public function __set($key, $value) {
-		if (in_array($key, array('get', 'post', 'files', 'cookie', 'server'))) {
-			throw new RequestException('You may not override the default request properties "get, post, files, cookie, server"');
-		}
-		$this->$key = $value;
-		return $this;
-	}
     
-    public function getMethod() {
+    public function __get($key)
+    {
+        if (isset($this->$key)) {
+            return $this->$key;
+        }
+        return null;
+    }
+    
+    public function __set($key, $value)
+    {
+        if (in_array($key, array('get', 'post', 'files', 'cookie', 'server'))) {
+            throw new RequestException('You may not override the default request properties "get, post, files, cookie, server"');
+        }
+        $this->$key = $value;
+        return $this;
+    }
+    
+    public function getMethod()
+    {
         if ($this->method === null) {
             $method = $this->server->get('REQUEST_METHOD');
             $method = strtoupper($method);
@@ -54,7 +58,8 @@ class Request implements RequestInterface {
         return $this->method;
     }
     
-    public function setBaseUrl($baseUrl) {
+    public function setBaseUrl($baseUrl)
+    {
         $baseUrl = trim($baseUrl);
         $this->baseUrl = rtrim($baseUrl, '/');
         return $this;

@@ -1,8 +1,8 @@
 <?php
 namespace Vision\Http;
 
-interface RequestInterface {
-
+interface RequestInterface
+{
     public function __construct();
     
     public function __set($key, $value);

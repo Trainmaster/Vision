@@ -3,8 +3,8 @@ namespace Vision\View\Html;
 
 use Vision\Html\Element as HtmlElement;
 
-class Element {
-
+class Element 
+{
     /**
     * HtmlElement
     *

@@ -5,7 +5,7 @@ class PregReplace implements FilterInterface
 {
     protected $pattern = null;
     
-    protected $replacement = 1;
+    protected $replacement = null;
     
     public function __construct(array $options = array())
     {
@@ -25,7 +25,6 @@ class PregReplace implements FilterInterface
     */
     public function filter($value) 
     {   
-        var_dump($this->replacement);
         return preg_replace($this->pattern, $this->replacement, $value);
     }
 }

@@ -22,9 +22,9 @@ class Definition
     
     public function setter(array $setter)
     {
-		$this->resolveDependency($setter, Dependency::METHOD_SETTER);
-		return $this;
-	}
+        $this->resolveDependency($setter, Dependency::METHOD_SETTER);
+        return $this;
+    }
     
     public function property(array $property)
     {

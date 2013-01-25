@@ -3,7 +3,7 @@ namespace Vision\Http;
 
 class Response extends AbstractMessage
 {
-	protected $headers = array();
+    protected $headers = array();
     
     protected $statusCode = 200;
     
@@ -61,12 +61,12 @@ class Response extends AbstractMessage
         return (string) $this->body;
     }
     
-	public function addHeader($name, $value) 
+    public function addHeader($name, $value) 
     {
-		$this->headers[(string) $name] = (string) $value;
-		return $this;
-	}									
-	
+        $this->headers[(string) $name] = (string) $value;
+        return $this;
+    }
+    
     public function body($body) 
     {
         $this->body .= (string) $body;
@@ -101,13 +101,13 @@ class Response extends AbstractMessage
         return $this->reasonPhrase;
     }
     
-	protected function sendHeaders() 
+    protected function sendHeaders() 
     {
-		foreach ($this->headers as $key => $value) {
-			header($key.': '.$value);
-		}
+        foreach ($this->headers as $key => $value) {
+            header($key.': '.$value);
+        }
         return $this;
-	}
+    }
     
     protected function sendStatusLine()
     {
