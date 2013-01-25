@@ -1,9 +1,7 @@
 <?php
 namespace Vision\Autoload;
 
-class SplClassLoaderException extends \Exception 
-{
-}
+use RuntimeException;
 
 class SplClassLoader 
 {	
@@ -31,17 +29,17 @@ class SplClassLoader
     {
         return $this->fileExtension;
     }
-	
-	public function setNamespace($namespace) 
+    
+    public function setNamespace($namespace) 
     {
         $this->namespace = (string) $namespace;
-		return $this;
-	}
+        return $this;
+    }
     
     public function getNamespace() 
     {
-		return $this->namespace;
-	}
+        return $this->namespace;
+    }
     
     public function setNamespaceSeparator($namespaceSeparator) 
     {
@@ -64,29 +62,28 @@ class SplClassLoader
     {
         return $this->path;
     }
-	
-	public function load($class) 
+    
+    public function load($class) 
     {
-       $hasNamespace = strpos($class, $this->namespace . $this->namespaceSeparator);
-        
-		if ($hasNamespace === 0) {
+        $hasNamespace = strpos($class, $this->namespace . $this->namespaceSeparator);
+        if ($hasNamespace === 0) {
             $class = strtr($class, $this->namespaceSeparator, DIRECTORY_SEPARATOR);
             
             $fileName = $this->path . DIRECTORY_SEPARATOR . $class . $this->fileExtension;
             
             if (is_file($fileName) === false) {
-                throw new SplClassLoaderException(sprintf('The file "%s" does not exist and/or is not a file.', $fileName));
+                throw new RuntimeException(sprintf('The file "%s" does not exist and/or is not a file.', $fileName));
             }
             
             if (is_readable($fileName) === false) {
-                throw new SplClassLoaderException(sprintf('The file "%s" is not readable.', $fileName));
+                throw new RuntimeException(sprintf('The file "%s" is not readable.', $fileName));
             }
             
             return include $fileName;
-		}
-	}
-
-	public function register($prepend = false) 
+        }
+    }
+    
+    public function register($prepend = false) 
     {
         spl_autoload_register(array($this, 'load'), true, $prepend);
     }

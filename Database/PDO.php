@@ -10,13 +10,14 @@ class PDO extends \PDO
     *
     * @return string
     */
-	public function bindArray(array $args) 
+    
+    public function bindArray(array $args) 
     {
-		foreach($args as &$arg) {
-			$arg = $this->quote($arg);
-		}
-		$args = implode(',', $args);
-		$args = '(' . $args . ')';
-		return $args;
-	}
+        foreach($args as &$arg) {
+            $arg = $this->quote($arg);
+        }
+        $args = implode(',', $args);
+        $args = '(' . $args . ')';
+        return $args;
+    }
 }

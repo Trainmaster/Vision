@@ -11,41 +11,37 @@ use RuntimeException;
 
 class FrontController 
 {
-	protected $container;
+    protected $container;
 	
     protected $router;
 	
-	protected $request;
+    protected $request;
 	
-	protected $response;
+    protected $response;
    
     protected $parser = null;
-	
-	protected $preFilterChain = array();
-	
-	protected $postFilterChain = array();
-    
+	    
     public function __construct(Request $request, Router $router) 
     {
-		$this->request = $request;        
+        $this->request = $request;        
         $this->router = $router;
-
+        
         $locale = Locale::acceptFromHttp($this->request->server->get('HTTP_ACCEPT_LANGUAGE'));
         
         if ($locale !== null) {
             Locale::setDefault($locale);    
         }
-	}
+    }
 	
 	public function setContainer($container) 
     {
-		$this->container = $container;
-	}
+        $this->container = $container;
+    }
 	
 	public function getContainer() 
     {
-		return $this->container;
-	}
+        return $this->container;
+    }
     
     public function setParser($parser) 
     {
@@ -63,10 +59,10 @@ class FrontController
 	
     public function dispatch() 
     {     
-		try {
-			$route = $this->router->resolve($this->request);	
-			if ($route !== null) {
-				$class = $route->getController();                
+        try {
+            $route = $this->router->resolve($this->request);
+            if ($route !== null) {
+                $class = $route->getController();                
                 $parser = $this->getParser();                
                 $result = $parser->parse($class);                
                 if (isset($result['class'], $result['action'])) {
@@ -87,17 +83,16 @@ class FrontController
                         'The controller parser must return an array having the two keys "class" and "method".'
                     ));
                 }
-			} else {
-				throw new RuntimeException('No matching route.');
-			}
+            } else {
+                throw new RuntimeException('No matching route.');
+            }
         } catch (Exception $e) {
-			$this->handleException($e);
-		}		
+            $this->handleException($e);
+        }		
     }
     
     public function handleException(Exception $e) 
     {
-        print '<pre>';
-        print_r ($e);
+        // To be implemented
     }
 }
