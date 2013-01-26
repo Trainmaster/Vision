@@ -70,7 +70,7 @@ class Response extends AbstractMessage
     public function body($body) 
     {
         $this->body .= (string) $body;
-		return $this;
+        return $this;
     }
 	
     public function setStatusCode($statusCode)

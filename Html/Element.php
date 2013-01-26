@@ -9,22 +9,22 @@ class Element
     
     protected $isVoidElement = false;
     
-    protected $tag = null; 
-   
+    protected $tag = null;
+    
     protected $view = null;
     
     public function __construct($tag) 
     {
         $this->setTag($tag);
-    }    
-        
+    }
+    
     public function __toString() 
     {
         if ($this->view === null) {
             $this->view = new \Vision\View\Html\Element($this);
         }
         return $this->view->__toString();
-    } 
+    }
     
     public function setTag($tag) 
     {       
@@ -36,7 +36,7 @@ class Element
     {
         return $this->tag;
     }
-      
+    
     public function setIsVoidElement($isVoidElement) 
     {
         $this->isVoidElement = (bool) $isVoidElement;
@@ -57,7 +57,7 @@ class Element
     public function getContent() 
     {
         return $this->content;
-    }   
+    }
     
     public function setAttribute($key, $value) 
     {
@@ -79,7 +79,7 @@ class Element
             return $this->attributes[$key];
         }
         return null;
-    } 
+    }
     
     public function getAttributes() 
     {

@@ -30,31 +30,38 @@ class RouteCollection implements IteratorAggregate
         return $this->routes[$route->getName()] = $route;
     }
     
-    public function get($name) {
+    public function get($name)
+    {
         if (isset($this->routes[$name])) {
             return $this->routes[$name];
         }
         return null;
     }
-    public function getAll() {
+    
+    public function getAll()
+    {
         return $this->routes;
     }
     
-    public function setPrefix($prefix) {
+    public function setPrefix($prefix)
+    {
         $this->prefix = (string) $prefix;
         return $this;
     }
     
-    public function getPrefix() {
+    public function getPrefix()
+    {
         return $this->prefix;
     }
 
-    public function setSuffix($suffix) {
+    public function setSuffix($suffix)
+    {
         $this->suffix = (string) $suffix;
         return $this;
     }
 
-    public function getSuffix() {
+    public function getSuffix()
+    {
         return $suffix;
     }
 }

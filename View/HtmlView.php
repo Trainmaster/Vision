@@ -7,12 +7,12 @@ use RuntimeException;
 class HtmlView extends AbstractView
 {  
     protected $container = null;
-
-	protected $blocks = array();
     
-	protected $parent = null;
+    protected $blocks = array();
     
-	protected $template = null;
+    protected $parent = null;
+    
+    protected $template = null;
     
     protected $stack = array();
     
@@ -117,7 +117,7 @@ class HtmlView extends AbstractView
         return $this;
 	}
     
-	public function startBlock($block) 
+    public function startBlock($block)
     {	
         if (isset($this->blocks[$block])) {            
             // throw new RuntimeException(sprintf('The block "%s" is already defined', $block));
@@ -134,9 +134,9 @@ class HtmlView extends AbstractView
         $this->stack[] = $block;
         
         return $this;
-	}
-	
-	public function endBlock() 
+    }
+    
+    public function endBlock()
     {
         $length = ob_get_length();
         
@@ -154,8 +154,8 @@ class HtmlView extends AbstractView
             }            
         }    
         
-        return $this;  
-	}
+        return $this;
+    }
     
     public function showParent()
     {
@@ -164,11 +164,11 @@ class HtmlView extends AbstractView
         var_dump('Parent');
     }
     
-    public function setTemplate($template) 
+    public function setTemplate($template)
     {
-		$this->template = (string) $template;
-		return $this;
-	}
+        $this->template = (string) $template;
+        return $this;
+    }
     
     public function escape($value) 
     {

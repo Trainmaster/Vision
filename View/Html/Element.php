@@ -17,7 +17,8 @@ class Element
     *
     * @param \Vision\Html\Element $element
     */
-    public function __construct(HtmlElement $element) {
+    public function __construct(HtmlElement $element)
+    {
         $this->element = $element;
     }
     
@@ -26,11 +27,12 @@ class Element
     *
     * @return string
     */
-    public function __toString() {
+    public function __toString()
+    {
         $html = $this->renderStartTag()
-			  . $this->element->getContent()
-			  . $this->renderEndTag();
-		return $html;
+              . $this->element->getContent()
+              . $this->renderEndTag();
+        return $html;
     }
     
     /**
@@ -38,16 +40,18 @@ class Element
     *
     * @return string
     */
-	protected function clean($value) {
-		return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-	}
+	protected function clean($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+    }
     
     /**
     * Render start tag
     *
     * @return string
     */  
-    private function renderStartTag() {
+    private function renderStartTag()
+    {
         $html = '<%s%s%s>';
         $tag = $this->element->getTag();
         $attributes = $this->renderAttributes();
@@ -63,7 +67,8 @@ class Element
     *
     * @return string
     */   
-    private function renderEndTag() {
+    private function renderEndTag()
+    {
         $html = '';
         if ($this->element->isVoidElement()) {
             return $html;
@@ -77,8 +82,9 @@ class Element
     * Render attributes
     *
     * @return string
-    */    
-	private function renderAttributes() {
+    */
+    private function renderAttributes()
+    {
         $html = '';
         $attributes = $this->element->getAttributes();
         if (!empty($attributes)) {       
@@ -90,6 +96,6 @@ class Element
                 }
             }
         }
-		return $html;
-	}       
+        return $html;
+    }       
 }

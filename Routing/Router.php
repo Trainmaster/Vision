@@ -70,9 +70,9 @@ class Router
                         if (isset($matches[$token])) {
                             $request->get->add($token, $matches[$token]);
                         }
-                }
-                $match = true;
-                break;
+                    }
+                    $match = true;
+                    break;
                 }
             } else {
                 continue;

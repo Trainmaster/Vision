@@ -27,5 +27,5 @@ class PregMatch extends ValidatorAbstract
             return false;
         }
         return true;
-	}
+    }
 }

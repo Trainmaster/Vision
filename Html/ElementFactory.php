@@ -7,7 +7,8 @@ class ElementFactory
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta', 
                                             'param', 'source', 'track', 'wbr');
 
-    public static function create($tag) {        
+    public static function create($tag)
+    {
         if (is_string($tag) === false) {
             throw new \Exception('String must be provided');
         }

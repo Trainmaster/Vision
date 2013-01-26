@@ -107,10 +107,10 @@ class Route {
     public function hasExtras()
     {
         return (bool) !empty($this->extras);
-	}
+    }
     
     public function isStatic()
     {
         return (bool) !strpos($this->pattern, '{');
-	}
+    }
 }

@@ -10,7 +10,6 @@ class PDO extends \PDO
     *
     * @return string
     */
-    
     public function bindArray(array $args) 
     {
         foreach($args as &$arg) {

@@ -16,7 +16,7 @@ class RequestHandler {
             $this->data[$key] = $value;
         }
         return $this;
-	}
+    }
     
     public function get($key)
     {
