@@ -71,16 +71,11 @@ class SplClassLoader
             
             $fileName = $this->path . DIRECTORY_SEPARATOR . $class . $this->fileExtension;
             
-            if (is_file($fileName) === false) {
-                throw new RuntimeException(sprintf('The file "%s" does not exist and/or is not a file.', $fileName));
-            }
-            
-            if (is_readable($fileName) === false) {
-                throw new RuntimeException(sprintf('The file "%s" is not readable.', $fileName));
-            }
-            
-            return include $fileName;
+            if (stream_resolve_include_path($fileName)) {
+                return include $fileName;
+            }           
         }
+        return false;
     }
     
     public function register($prepend = false) 
