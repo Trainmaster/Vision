@@ -13,7 +13,7 @@ class FrontController
 {
     protected $container = null;
     
-	protected $request = null;
+    protected $request = null;
     
     protected $response = null;   
     
@@ -45,6 +45,7 @@ class FrontController
     public function invokeController($class, $method)
     {
         $interfaces = class_implements($class);
+        
         if (is_array($interfaces)) {
             foreach ($interfaces as $interface) {
                 if ($this->container->getDefinition($interface) !== null) {
