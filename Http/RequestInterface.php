@@ -1,13 +1,14 @@
 <?php
 namespace Vision\Http;
 
+/**
+ * RequestInterface
+ *
+ * @author Frank Liepert
+ */
 interface RequestInterface
 {
-    public function __construct();
+    public function getMethod();
     
-    public function __set($key, $value);
-    
-    public function __get($key);
-    
-    public function getMethod();   
+    public function getPathInfo();
 }

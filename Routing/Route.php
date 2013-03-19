@@ -1,63 +1,31 @@
 <?php
 namespace Vision\Routing;
 
-class RouteException extends \Exception {}
-
-class Route {
+class Route
+{
+    protected $path = null;
     
-    private $name = null;
+    protected $controller = null;
     
-    private $pattern = null;
+    protected $requirements = array();
     
-    private $controller = null;
+    protected $defaults = array();
     
-    private $requirements = array();
-    
-    private $defaults = array();
-    
-    private $extras = array();
-    
-    public function __construct($name, $pattern, $controller)
+    public function __construct($path, $controller)
     {        
-        if (isset($name)) {
-            $this->setName($name);
-        } else {
-            throw new RouteException('Name must be specified.');
-        }
-
-        if (isset($pattern)) {
-            $this->setPattern($pattern);
-        } else {
-            throw new RouteException('Pattern must be specified.');
-        }
-
-        if (isset($controller)) {
-            $this->setController($controller);
-        } else {
-            throw new RouteException('Controller must be specified.');
-        }
+        $this->setPath($path);
+        $this->setController($controller);
     }
 	
-    public function setName($name)
+    public function setPath($path)
     {
-        $this->name = trim($name);
+        $this->path = trim($path);
         return $this;
     }
     
-    public function getName()
+    public function getPath()
     {
-        return $this->name;
-    }
-	
-    public function setPattern($pattern)
-    {
-        $this->pattern = trim($pattern);
-        return $this;
-    }
-    
-    public function getPattern()
-    {
-        return $this->pattern;
+        return $this->path;
     }
 
     public function setController($controller)
@@ -91,26 +59,5 @@ class Route {
     public function getRequirements()
     {
         return $this->requirements;
-    }
-    
-    public function setExtras(array $extras)
-    {
-        $this->extras = $extras;
-        return $this;
-    }
-
-    public function getExtras()
-    {
-        return $this->extras;
-    }
-    
-    public function hasExtras()
-    {
-        return (bool) !empty($this->extras);
-    }
-    
-    public function isStatic()
-    {
-        return (bool) !strpos($this->pattern, '{');
     }
 }

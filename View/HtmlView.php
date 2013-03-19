@@ -8,7 +8,7 @@ class HtmlView extends AbstractView
 {  
     protected $container = null;
     
-    protected $blocks = array();
+    public $blocks = array();
     
     protected $parent = null;
     
@@ -16,7 +16,7 @@ class HtmlView extends AbstractView
     
     protected $stack = array();
     
-    protected $bufferTree = array();
+    protected $insertions = array();
 		    	
     public function __call($name, $array) 
     {
@@ -25,10 +25,10 @@ class HtmlView extends AbstractView
         }
     }   
 
-    public function __toString() 
+    public function render() 
     {		         
         if ($this->template === null) {
-            return parent::__toString();
+            throw new RuntimeException('A template file must be provided.');
         }    
         
         $currentBuffer = '';          
@@ -44,52 +44,89 @@ class HtmlView extends AbstractView
                 $parent->vars = $this->vars;
                 $parent->template = $file->getPath() . DIRECTORY_SEPARATOR . $this->parent;
                 $parent->container = $this->container;
-                $parentBuffer = $parent->__toString();
-            } 
-            
-            $currentBuffer = ob_get_clean();    
-            
-            if (!empty($this->stack)) {
-                 // throw new RuntimeException(sprintf('The blocks are not properly closed'));
+                $parentBuffer = $parent->render();
             }
             
-            //print '<pre>';
-            //print_r ($this->bufferTree);
+            $currentBuffer = ob_get_clean();
+            
+            if (!empty($this->stack)) {
+                throw new RuntimeException(sprintf(
+                    'The blocks are not properly closed in "%s".',
+                    $this->template
+                ));
+            }
 
             if (isset($parent)) {
-                foreach ($this->bufferTree as $key => &$value) {                    
-                    if (isset($parent->bufferTree[$key])) {
-                        $extract = substr($currentBuffer, $value['start'], $value['length']);
-                        
-                        $parentBuffer = substr_replace($parentBuffer, $extract, $parent->bufferTree[$key]['start'], $parent->bufferTree[$key]['length']); 
-
-                        $diff = $value['length'] - $parent->bufferTree[$key]['length'];
-                        
-                        $parent->bufferTree[$key]['length'] += $diff;
-                        
-                        foreach ($parent->bufferTree as $key2 => &$value2) {                           
-                            if ($value2['start'] > $parent->bufferTree[$key]['start']) {
-                                $value2['start'] += $diff;
-                            }
+                if (!empty($this->insertions)) {
+                    foreach($this->insertions as $key => $value) {
+                        if (isset($parent->blocks[$value['parent']])) {
+                            $extract = substr($parentBuffer, $parent->blocks[$value['parent']]['start'], $parent->blocks[$value['parent']]['length']);
+                            $currentBuffer = substr_replace($currentBuffer, $extract, $value['start'], 0);
+                            $diff = $parent->blocks[$value['parent']]['length'];                           
+                            foreach ($this->blocks as $key2 => &$value2) {
+                                if ($value2['start'] > $value['start']) {
+                                    $value2['start'] += $diff;
+                                }
+                            }                            
+                            $this->recurse($value, $diff);
                         }
-                    } elseif (isset($this->parent) && $value['parent'] === 'root') {
-                        unset($this->bufferTree[$key]);
-                    } else {
-                        $bar = $this->bufferTree[$value['parent']]['start'];
-                        $foo = $value['start'] - $bar;
-                        $parent->bufferTree[$key] = array(
-                            'start' => $parent->bufferTree[$value['parent']]['start'] + $foo,
-                            'length' => $value['length'],
-                            'parent' => $value['parent']
-                        );
                     }
-                }                
-                $this->bufferTree = $parent->bufferTree;
+                    unset($this->insertions[$key]);
+                }   
+                
+                if (!empty($this->blocks)) {
+                    $max = 0;
+                    foreach ($this->blocks as $key => &$value) {                       
+                        if (isset($parent->blocks[$key])) {
+                            if ($value['start'] < $max) {
+                                $parent->blocks[$key]['start'] = $value['start'] + $parent->blocks[$value['parent']]['start'];
+                                $parent->blocks[$key]['length'] = $value['length'];
+                                continue;
+                            }
+                            $extract = substr($currentBuffer, $value['start'], $value['length']);
+
+                            $parentBuffer = substr_replace($parentBuffer, $extract, $parent->blocks[$key]['start'], $parent->blocks[$key]['length']); 
+                            $diff = $value['length'] - $parent->blocks[$key]['length'];
+                            
+                            $len = $parent->blocks[$key]['start'] + $parent->blocks[$key]['length'];
+                            
+                            $parent->blocks[$key]['length'] += $diff;     
+
+                            foreach ($parent->blocks as $key2 => &$value2) {   
+                                if ($value2['start'] > $len) {                                    
+                                    $value2['start'] += $diff;
+                                }
+                            }
+                        } elseif (isset($this->parent) && $value['parent'] === 'root') {
+                            unset($this->blocks[$key]);
+                        } else {
+                            $bar = $this->blocks[$value['parent']]['start'];
+                            $foo = $value['start'] - $bar;
+                            $parent->blocks[$key] = array(
+                                'start' => $parent->blocks[$value['parent']]['start'] + $foo,
+                                'length' => $value['length'],
+                                'parent' => $value['parent']
+                            );
+                        }
+                        $max = $value['start'] + $value['length'];  
+                    }
+                    
+                }
+                                
+                $this->blocks = $parent->blocks;
                 $currentBuffer = $parentBuffer;
             }
             unset($parent);
         }      
         return $currentBuffer;        
+    }
+    
+    public function recurse(array $array, $diff)
+    {
+        if (isset($array['parent']) && $array['parent'] !== 'root') {
+            $this->blocks[$array['parent']]['length'] += $diff; 
+            return $this->recurse($this->blocks[$array['parent']], $diff);
+        }              
     }
     
     public function setContainer($container) 
@@ -100,16 +137,14 @@ class HtmlView extends AbstractView
     
     public function extend($parent) 
     {
-        print $parent;
-        print $this->template;
         if ($this->template === $parent) {
-            //throw new RuntimeException(sprintf('No output before calling "%s".', __METHOD__));
+            throw new RuntimeException(sprintf('Recursion in "%s".', __METHOD__));
         }
         
         $length = ob_get_length();
         
         if ($length > 0) {
-            //throw new RuntimeException(sprintf('No output before calling "%s".', __METHOD__));
+            throw new RuntimeException(sprintf('No output before calling "%s".', __METHOD__));
         }
         
 		$this->parent = $parent;
@@ -120,15 +155,17 @@ class HtmlView extends AbstractView
     public function startBlock($block)
     {	
         if (isset($this->blocks[$block])) {            
-            // throw new RuntimeException(sprintf('The block "%s" is already defined', $block));
+            throw new RuntimeException(sprintf(
+                'The block "%s" is already defined in "%s"', 
+                $block,
+                $this->template
+            ));
         }
-        
-        $this->blocks[$block] = true;
         
         $length = ob_get_length();
         
         if ($length !== false) {
-            $this->bufferTree[$block]['start'] = $length;            
+            $this->blocks[$block]['start'] = $length;            
         }
         
         $this->stack[] = $block;
@@ -145,23 +182,39 @@ class HtmlView extends AbstractView
 
             $lastElement = end($this->stack);
             
-            $this->bufferTree[$block]['length'] = $length - $this->bufferTree[$block]['start'];         
+            $this->blocks[$block]['length'] = $length - $this->blocks[$block]['start'];         
 
             if ($lastElement !== false) {
-                $this->bufferTree[$block]['parent'] = $lastElement;    
+                $this->blocks[$block]['parent'] = $lastElement;    
             } else {
-                $this->bufferTree[$block]['parent'] = 'root';
+                $this->blocks[$block]['parent'] = 'root';
             }            
         }    
         
         return $this;
     }
     
-    public function showParent()
+    public function parent()
     {
         $lastElement = end($this->stack);
-        var_Dump ($lastElement);
-        var_dump('Parent');
+        if ($lastElement === false) {
+            throw new RuntimeException(sprintf('Call to "%s" outside of a block is not allowed.', __FUNCTION__));
+        }
+        $this->insertions[] = array(
+            'start' => ob_get_length(),
+            'length' => 0,
+            'parent' => $lastElement
+        );
+        return $this;
+    }
+    
+    public function block($block)
+    {
+        if (in_array($block, $this->stack, true)) {
+            //throw new RuntimeException(sprintf('Recursion %s.', __FUNCTION__));
+        }
+        //var_dump($this->stack);
+        //var_dump($block);
     }
     
     public function setTemplate($template)

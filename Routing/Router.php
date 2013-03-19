@@ -1,42 +1,59 @@
 <?php
 namespace Vision\Routing;
 
-use Vision\Http\Request;
+use Vision\Controller\ControllerParserInterface;
+use Vision\Http\RequestInterface;
 
-class RouterException extends \Exception {}
-
-class Router 
+class Router extends Config\AbstractConfig
 {
-    private $collection = null;
-
-    private $resource = null;
-
-    public $defaultParameterPattern = '[\w.~-]+';
-
-    public function __construct ($loader, $resource) 
-    {
-        $this->collection = $loader->load($resource, 'Vision\Routing\RouteCollection');
+    protected $defaultParameterPattern = '[\w.~-]+';
+    
+    protected $parser = null;
+    
+    protected $request = null;
+    
+    public function __construct($parser, $request)
+    {        
+        $this->setParser($parser);
+        $this->setRequest($request);
     }
     
-    public function resolve(Request $request) 
+    public function setRequest(RequestInterface $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+    
+    public function setParser(ControllerParserInterface $parser)
+    {
+        $this->parser = $parser;
+        return $this;
+    }
+
+    public function resolve() 
     {	        
         $match = false;
         
-        $path = $request->getPath();
-        
-        foreach ($this->collection as $route) {
-            if ($route->isStatic()) {
-                if ($route->getPattern() === $path) {	
+        $pathInfo = $this->request->getPathInfo();
+       
+        foreach ($this->routes as $route) {
+            if ($this->checkRouteForPlaceholder($route) === false) {
+                if ($route->getPath() === $pathInfo) {	
                     $match = true;
                     break;
-                } else {
-                    continue;
                 }
-            } elseif (strpos($route->getPattern(), '{') !== false)  {
+            } else {
                 $matches = array();
-                $tokens = array();	
-                $pattern = $route->getPattern();							
+                $tokens = array();
                 $requirements = $route->getRequirements();
+                
+                if (isset($requirements['HTTP_METHOD'])) {
+                    if (strcasecmp($this->request->getMethod(), $requirements['HTTP_METHOD']) !== 0) {
+                        break;
+                    }
+                }
+                
+                $pattern = $route->getPath();               
                 preg_match_all('#\{([\w\d_=]+)\}#u', $pattern, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);	
                 if (!empty($matches)) {
                     $start = 0;
@@ -65,29 +82,36 @@ class Router
 
                 $pattern = '#^'.$pattern.'$#u';	
 
-                if (preg_match($pattern, $path, $matches)) {
+                if (preg_match($pattern, $pathInfo, $matches)) {
                     foreach ($tokens as $token) {
                         if (isset($matches[$token])) {
-                            $request->get->add($token, $matches[$token]);
+                            $this->request->get->add($token, $matches[$token]);
                         }
                     }
                     $match = true;
                     break;
                 }
-            } else {
-                continue;
             }
         }
         
         if ($match === true) {
-            if ($route->hasExtras()) {
-                foreach ($route->getExtras() as $key => $value) {
-                $request->get->add($key, $value);
+            $defaults = $route->getDefaults();
+            if (!empty($defaults)) {
+                foreach ($defaults as $key => &$value) {
+                    $this->request->get->add($key, $value);
                 }
             }
-            return $route;
+            return $this->parser->parse($route->getController());
         }
         
         return null;
+    }
+    
+    public function checkRouteForPlaceholder(Route $route)
+    {
+        if (strpos($route->getPath(), '{') !== false) {
+            return true;
+        }
+        return false;    
     }
 }

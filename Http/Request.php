@@ -2,10 +2,15 @@
 namespace Vision\Http;
 
 use Vision\Http\RequestHandler;
+use Vision\DataStructures\ArrayProxyObject;
+use RuntimeException;
 
-class RequestException extends \Exception {}
-
-class Request implements RequestInterface
+/**
+ * Request
+ *
+ * @author Frank Liepert
+ */
+class Request extends AbstractMessage implements RequestInterface
 {
     private $get = null;
     
@@ -17,19 +22,20 @@ class Request implements RequestInterface
     
     private $server = null;
     
-    protected $baseUrl = null;
+    protected $basePath = null;
     
     protected $method = null;
     
     protected $path = null;
         
-    public function __construct ()
+    public function __construct($GET = null, $POST = null, $FILES = null, $COOKIE = null)
     {
-        $this->get = new RequestHandler($_GET);
-        $this->post = new RequestHandler($_POST);
+        $this->get = new ArrayProxyObject($_GET);
+        $this->post = new ArrayProxyObject($_POST);
         $this->files = new RequestHandler($_FILES);
         $this->cookie = new RequestHandler($_COOKIE);
         $this->server = new RequestHandler($_SERVER);
+        // $this->setVersion($this->server->get('SERVER_PROTOCOL'));
     }
     
     public function __get($key)
@@ -43,7 +49,7 @@ class Request implements RequestInterface
     public function __set($key, $value)
     {
         if (in_array($key, array('get', 'post', 'files', 'cookie', 'server'))) {
-            throw new RequestException('You may not override the default request properties "get, post, files, cookie, server"');
+            throw new RuntimeException('You may not override the default request properties "get, post, files, cookie, server"');
         }
         $this->$key = $value;
         return $this;
@@ -58,30 +64,57 @@ class Request implements RequestInterface
         return $this->method;
     }
     
-    public function setBaseUrl($baseUrl)
+    public function setBasePath($basePath)
     {
-        $baseUrl = trim($baseUrl);
-        $this->baseUrl = rtrim($baseUrl, '/');
+        $basePath = trim($basePath);
+        $this->basePath = rtrim($basePath, '/');
         return $this;
     }
     
-    public function getBaseUrl() 
+    public function getBasePath()
     {
-        if ($this->baseUrl === null) {
-            $dirName = dirname($this->server->get('SCRIPT_NAME'));
-            if ($dirName !== '.') {
-                $this->setBaseUrl($dirName);
-            }
+        if ($this->basePath === null) {
+            $this->setBasePath($this->findBasePath());            
         }
-        return $this->baseUrl;
+        return $this->basePath;
     }
     
-    public function getPath() 
-    {            
-        if ($this->path === null) {        
-            $path = str_replace($this->getBaseUrl(), '', $this->server->get('REQUEST_URI'));
-            $this->path = parse_url($path, PHP_URL_PATH);
+    protected function findBasePath()
+    {
+        if ($this->server->get('SCRIPT_NAME') !== null) {
+            $basePath = dirname($this->server->get('SCRIPT_NAME'));
+            if ($basePath !== '.') {
+                return $basePath;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Get path info of current url
+     *
+     * Example: http://www.example.com/foo/index.php/bar
+     * Result: "/bar"
+     *
+     * @return string
+     */
+    public function getPathInfo()
+    {
+        if ($this->path === null) {
+            $this->path = $this->findPathInfo();
         }
         return $this->path;
+    }
+    
+    protected function findPathInfo()
+    {
+        if ($this->server->get('PATH_INFO') !== null) {
+            $pathInfo = $this->server->get('PATH_INFO');
+        } elseif ($this->server->get('ORIG_PATH_INFO') !== null) {
+            $pathInfo = $this->server->get('ORIG_PATH_INFO');
+        } else {
+            $pathInfo = str_replace($this->getBasePath(), '', $this->server->get('REQUEST_URI'));
+        }
+        return $pathInfo;
     }
 }

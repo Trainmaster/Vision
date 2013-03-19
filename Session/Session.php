@@ -115,12 +115,9 @@ class Session extends ArrayObject
         }
 	}
     
-    public function save($key, $value) {
-        if ($this->getNamespace()) {
-            $_SESSION[$this->getNamespace()][$key] = $value;
-        } else {
-            $_SESSION[$key] = $value;
-        }
+    public function save($key, $value)
+    {
+        $_SESSION[$key] = $value;
         return $this;
 	}
     

@@ -33,6 +33,8 @@ class NativeExtension
     
     public function save($session)
     {
+        // Hackish workaround for session_status() of PHP 5.4
+        @session_start();
         return $_SESSION = $session->getArrayCopy();
     }
 

@@ -2,66 +2,56 @@
 namespace Vision\Routing;
 
 use ArrayIterator, IteratorAggregate;
-use Vision\Routing\Route;
+use RuntimeException;
 
-class RouteCollectionException extends \Exception {}
-
-class RouteCollection implements IteratorAggregate
-{
-    private $routes = array();
-    
-    private $prefix = null;
-    
-    private $suffix = null;
-    
+class RouteCollection extends Config\AbstractConfig implements IteratorAggregate
+{    
     public function getIterator()
     {
         return new ArrayIterator($this->routes);
     }
     
-    public function add(Route $route)
+    public function add($alias, Route $route)
     {
-        if (isset($this->routes[$route->getName()])) {
-            throw new RouteCollectionException(sprintf(
-                'The route "%s" is already defined.', 
-                $route->getName()
-            ));
-        }
-        return $this->routes[$route->getName()] = $route;
+        return parent::addRoute($alias, $route);
     }
     
-    public function get($name)
+    public function get($alias)
     {
-        if (isset($this->routes[$name])) {
-            return $this->routes[$name];
-        }
-        return null;
+        return parent::getRoute($alias);
+    }
+    
+    public function has($alias)
+    {
+        return parent::hasRoute($alias);
     }
     
     public function getAll()
     {
-        return $this->routes;
+        return parent::getAllRoutes();
     }
     
-    public function setPrefix($prefix)
+    public function applyDefaults(array $defaults)
     {
-        $this->prefix = (string) $prefix;
+        foreach ($this->routes as &$route) {
+            $route->setDefaults($route->getDefaults() + $defaults);
+        }
         return $this;
     }
     
-    public function getPrefix()
+    public function applyPrefix($prefix)
     {
-        return $this->prefix;
-    }
-
-    public function setSuffix($suffix)
-    {
-        $this->suffix = (string) $suffix;
+        foreach ($this->routes as &$route) {
+            $route->setPath($prefix . $route->getPath());
+        }
         return $this;
-    }
+    }   
 
-    public function getSuffix()
+    public function applyRequirements(array $requirements)
     {
-        return $suffix;
+        foreach ($this->routes as &$route) {
+            $route->setRequirements($route->getRequirements() + $requirements);
+        }
+        return $this;
     }
 }

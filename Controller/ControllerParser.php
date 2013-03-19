@@ -3,8 +3,22 @@ namespace Vision\Controller;
 
 use InvalidArgumentException;
 
-class ControllerParser
+/**
+ * ControllerParser
+ *
+ * @author Frank Liepert
+ */
+class ControllerParser implements ControllerParserInterface
 {
+    /**
+     * Parses a string and returns the corresponding class and method names.
+     *
+     * @param string $controller
+     *
+     * @throws InvalidArgumentException if the provided argument is malformed.
+     *
+     * @return array('class' => string, 'method' => string)
+     */
     public function parse($controller)
     {
         $continue = false;
@@ -37,7 +51,7 @@ class ControllerParser
                 $action = (isset($action)) ? $action . 'Action' : 'indexAction';
                 return array(
                     'class' => $class, 
-                    'action' => $action
+                    'method' => $action
                 ); 
             }
         }

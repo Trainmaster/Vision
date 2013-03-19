@@ -1,6 +1,13 @@
 <?php
 namespace Vision\Http;
 
+use InvalidArgumentException;
+
+/**
+ * AbstractMessage
+ *
+ * @author Frank Liepert
+ */
 abstract class AbstractMessage 
 {
     const VERSION_10 = '1.0';
@@ -11,8 +18,8 @@ abstract class AbstractMessage
     
     public function setVersion($version)
     {
-        if ($version != self::VERSION_10 && $version != self::VERSION_11) {
-            throw new Exception\InvalidArgumentException(
+        if ($version != self::VERSION_10 || $version != self::VERSION_11) {
+            throw new InvalidArgumentException(
                 'Not valid or not supported HTTP version: ' . $version
             );
         }

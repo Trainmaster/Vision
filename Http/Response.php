@@ -1,7 +1,12 @@
 <?php
 namespace Vision\Http;
 
-class Response extends AbstractMessage
+/**
+ * Response
+ *
+ * @author Frank Liepert
+ */
+class Response extends AbstractMessage implements ResponseInterface
 {
     protected $headers = array();
     
@@ -53,17 +58,18 @@ class Response extends AbstractMessage
         504 => 'Gateway Time-out',
         505 => 'HTTP Version not supported'
     );
-	
-    public function __toString() 
-    {
-        $this->sendStatusLine()
-             ->sendHeaders();
-        return (string) $this->body;
-    }
-    
+
     public function addHeader($name, $value) 
     {
         $this->headers[(string) $name] = (string) $value;
+        return $this;
+    }
+    
+    protected function sendHeaders() 
+    {
+        foreach ($this->headers as $key => $value) {
+            header($key.': '.$value);
+        }
         return $this;
     }
     
@@ -72,7 +78,12 @@ class Response extends AbstractMessage
         $this->body .= (string) $body;
         return $this;
     }
-	
+    
+    public function sendBody()
+    {
+        echo $this->body;
+    }
+    
     public function setStatusCode($statusCode)
     {          
         $statusCode = (int) $statusCode;
@@ -85,6 +96,18 @@ class Response extends AbstractMessage
     public function getStatusCode()
     {
         return $this->statusCode;
+    }
+    
+    protected function sendStatusLine()
+    {
+        $statusLine = sprintf(
+            'HTTP/%s %s %s', 
+            $this->getVersion(), 
+            $this->getStatusCode(), 
+            $this->getReasonPhrase()
+        );
+        header($statusLine);
+        return $this;
     }
     
     public function setReasonPhrase($reasonPhrase) 
@@ -101,23 +124,10 @@ class Response extends AbstractMessage
         return $this->reasonPhrase;
     }
     
-    protected function sendHeaders() 
+    public function send()
     {
-        foreach ($this->headers as $key => $value) {
-            header($key.': '.$value);
-        }
-        return $this;
-    }
-    
-    protected function sendStatusLine()
-    {
-        $statusLine = sprintf(
-            'HTTP/%s %s %s', 
-            $this->getVersion(), 
-            $this->getStatusCode(), 
-            $this->getReasonPhrase()
-        );
-        header($statusLine);
-        return $this;
+        $this->sendStatusLine()
+             ->sendHeaders()
+             ->sendBody();
     }
 }

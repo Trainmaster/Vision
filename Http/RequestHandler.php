@@ -1,9 +1,9 @@
 <?php
 namespace Vision\Http;
 
-class RequestHandler {
-
-    private $data = array();
+class RequestHandler
+{
+    protected $data = array();
 
     public function __construct (array $data)
     {
