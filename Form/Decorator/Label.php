@@ -4,19 +4,24 @@ namespace Vision\Form\Decorator;
 use Vision\Html\ElementFactory;
 
 class Label extends HtmlTag 
-{		
+{	
+    protected $placement = self::PREPEND;	
+    
+    public function __construct()
+    {
+        $label = ElementFactory::create('label');
+        $this->decorator = $label;
+    }
+    
 	public function render($content) 
     {		
-        $label = ElementFactory::create('label');
-        $label->setAttribute('for', $this->element->getId());
-        $label->setContent($this->element->getLabel());
+        $this->decorator->setAttribute('for', $this->element->getId());
+        $this->decorator->setContent($this->element->getLabel());
         
         if ($this->element->isRequired()) {
-            $label->setContent($label->getContent() . '<span class="required">*</span>');
+            $this->decorator->setContent($this->decorator->getContent() . '<span class="required">*</span>');
         }
-        
-        $this->decorator = $label;
-        
+
         return parent::render($content);
 	}
 }

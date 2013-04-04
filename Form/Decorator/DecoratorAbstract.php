@@ -5,17 +5,15 @@ abstract class DecoratorAbstract implements DecoratorInterface
 {	
 	const APPEND = 'APPEND';
     
-	const EMBED = 'EMBED';	
-    
 	const PREPEND = 'PREPEND';	
+    
+	const WRAP = 'WRAP';	
     
     protected $element = null;
 		
 	protected $placement = self::PREPEND;	
     
-    public function render($content) 
-    {
-    }
+    public function render($content) {}
     
     public function setElement($element) 
     {
@@ -30,7 +28,7 @@ abstract class DecoratorAbstract implements DecoratorInterface
 	
 	public function setPlacement($placement) 
     {
-		$this->placement = $placement;
+		$this->placement = strtoupper($placement);
         return $this;
 	}
 	

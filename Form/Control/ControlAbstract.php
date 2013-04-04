@@ -15,8 +15,6 @@ abstract class ControlAbstract extends HtmlElement
 	protected $validators = array();
 	
 	protected $errors = array();
-		
-	protected $required = true;
     	
     protected $label = null; 
         
@@ -24,31 +22,43 @@ abstract class ControlAbstract extends HtmlElement
     
     protected $rawValue = null;
 	
-	public function __construct ($name) 
+	final public function __construct($name) 
     {
 		$this->setName($name);		
+        $this->setRequired(true);
         $this->init();
-	}    
-    
-    public function __toString() 
-    {		
-        if ($this->view === null) {
-            $this->view = new \Vision\View\Html\Element($this);  
-        }
-		$content = (string) $this->view;
-        foreach ($this->decorators as $decorator) {
-            $decorator->setElement($this);
-            $content = $decorator->render($content);
-        }
-        return (string) $content;
 	}
     
+    abstract public function init();
+
+    public function __toString()
+    {
+        $html = parent::__toString();
+        
+        foreach ($this->decorators as $decorator) {
+            $html = $decorator->render($html);
+        }
+        
+        return $html;
+    }
+
 	/**
-     * Adds a decorator
+     * Add a decorator
      */
 	public function addDecorator(DecoratorInterface $decorator) 
     {
-        $this->decorators[] = $decorator;
+        $this->decorators[] = $decorator->setElement($this);
+        return $this;
+	}
+    
+    /**
+     * Add decorators
+     */
+	public function addDecorators(array $decorators) 
+    {
+        foreach ($decorators as $decorator) {
+            $this->addDecorator($decorator);
+        }
         return $this;
 	}
 	
@@ -59,6 +69,12 @@ abstract class ControlAbstract extends HtmlElement
     {
 		return $this->decorators;
 	}
+    
+    public function resetDecorators()
+    {
+        $this->decorators = array();
+        return $this;
+    }
     
     /**
      * Removes a decorator
@@ -177,6 +193,12 @@ abstract class ControlAbstract extends HtmlElement
 	public function setRequired($required) 
     {
 		$this->required = (bool) $required;
+        $attribute = $this->getAttribute('required');
+        if ($required === true) {
+            $this->setAttribute('required');
+        } elseif ($attribute === null) {
+            $this->removeAttribute('required');
+        }
 		return $this;
 	}
 	
@@ -205,16 +227,7 @@ abstract class ControlAbstract extends HtmlElement
     {
 		return $this->value;
 	}	
-    
-    /**
-     * Set raw value
-     */
-	public function setRawValue($rawValue) 
-    {
-		$this->rawValue = $rawValue;
-		return $this;
-	}
-	
+    	
 	/**
      * Get raw value
      */
@@ -222,30 +235,7 @@ abstract class ControlAbstract extends HtmlElement
     {
 		return $this->rawValue;
 	}
-	
-	/**
-     * Check element's name for html array notation.
-     */
-	public function isArrayElement() 
-    {
-		return (bool) strpos($this->getName(), '[');
-	}
-	
-    /**
-     * Convert html array notation to array.
-     */
-    public function convertToArray() 
-    {
-        $parts = explode('[', $this->getName());
-        $parts = array_reverse($parts);
-        $value = $this->getValue();
-        foreach ($parts as $part) {            
-            $part = trim($part, ']');
-            $value = array($part => $value);              
-        }    
-        return $value;            
-    }
-	
+
 	/**
      * Set label
      */
@@ -270,6 +260,10 @@ abstract class ControlAbstract extends HtmlElement
     {    
         $isValid = true;
         
+        if ($value === null) {
+            return $isValid;
+        }
+        
         $this->rawValue = $value;
         
         if ($this->isRequired()) {		
@@ -282,12 +276,12 @@ abstract class ControlAbstract extends HtmlElement
         
         $validators = $this->getValidators();
         
-		foreach ($validators as $validator) {            
-			if ($validator->isValid($value) === false) {
-                $isValid = false;
-                // $validator->getMessages();				
+		foreach ($validators as $validator) {
+            if ($validator->isValid($value) === false) {   
+                $isValid = false;				
 			}             
-		}       
+		}  
+        
         if ($isValid === true) {
             $this->setValue($value);
         }

@@ -1,67 +1,55 @@
 <?php
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator\Label;
+use Vision\Form\Decorator;
+use Vision\Html\ElementFactory;
 
 class Select extends MultiOptionControlAbstract 
 {
     protected $tag = 'select';
 
-    protected $size = null;
-    
-    protected $multiple = false;
-
     public function init() 
     {
-        $this->addDecorator(new Label);
-        $this->setAttribute('id', $this->getName());
-        $this->addClass('input-textarea');
+        $this->addDecorator(new Decorator\Label)
+             ->addDecorator(new Decorator\Li);
+        $this->addClass('input-select');    
     }
     
     public function __toString() 
     {
         $content = null;
-        if ($this->view === null) {
-            foreach ($this->options as $key => $value) {
-                if (is_string($value)) {
-                    $option = new \Vision\Html\Element('option');
-                    $option->setContent($key);
-                    $option->setAttribute('value', $value);
-                    $content .= $option;  
-                } elseif (is_array($value)) {
-                
-                }
-            }            
-            $select = new \Vision\View\Html\Element($this);
-            $this->setContent($content);
-            $content = $select;
-        }
-        foreach ($this->decorators as $decorator) {
-            $decorator->setElement($this);
-            $content = $decorator->render($content);
-        }
-        return $content;
+
+        foreach ($this->options as $key => $value) {
+            $option = ElementFactory::create('option');
+            $option->setContent($key);
+            $option->setAttribute('value', $value);
+            $content .= $option;  
+        }            
+        
+        $this->content = $content;
+        
+        return parent::__toString();
     }
     
     public function setSize($size) 
     {
-		$this->size = (int) $size;
+        $this->setAttribute('size', (int) $size);
 		return $this;
 	}
 	
 	public function getSize() 
     {
-		return $this->size;
+		return $this->getAttribute('size');
 	}
 	
 	public function setMultiple($multiple) 
     {
-		$this->multiple = (bool) $multiple;
+		$this->setAttribute('multiple', null);
 		return $this;
 	}
 	
 	public function getMultiple() 
     {
-		return $this->multiple;
+		return $this->getAttribute('multiple');
 	}
 }

@@ -2,6 +2,7 @@
 namespace Vision\DependencyInjection;
 
 use Vision\DependencyInjection\Dependency;
+use InvalidArgumentException;
 
 class Definition 
 {
@@ -38,33 +39,39 @@ class Definition
     
     public function constructor(array $constructor) 
     {   
-        if (empty($this->constructor)) {
-            $this->constructor = $constructor;
-        } else {
-            $this->constructor = $this->constructor + $constructor;
-        }
+        $this->constructor = $constructor;
         return $this;
     }
     
-    public function property(array $property) 
+    public function property($property, array $dependencies) 
     {
-        if (empty($this->property)) {
-            $this->property = $property;
-        } else {
-            $this->property = $this->property + $property;
+        if (is_string($property) === false) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be a string.',
+                __METHOD__
+            ));
         }
+        $this->property[][$property] = $dependencies;
         return $this;
     }
     
-    public function setter(array $setter) 
+    public function setter($setter, array $dependencies) 
     {
-        if (empty($this->setter)) {
-            $this->setter = $setter;
-        } else {
-            $this->setter = $this->setter + $setter;
+        if (is_string($setter) === false) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be a string.',
+                __METHOD__
+            ));
         }
+        $this->setter[][$setter] = $dependencies;
         return $this;
     } 
+    
+    public function setSetter(array $setter)
+    {
+        $this->setter = $setter;
+        return $this;
+    }
     
     public function getConstructorInjections() 
     {   

@@ -70,7 +70,7 @@ class SplClassLoader
             $class = strtr($class, $this->namespaceSeparator, DIRECTORY_SEPARATOR);
             
             $fileName = $this->path . DIRECTORY_SEPARATOR . $class . $this->fileExtension;
-            
+
             if (stream_resolve_include_path($fileName)) {
                 return include $fileName;
             }           

@@ -31,4 +31,9 @@ class ArrayProxyObject implements ArrayAccess
     {
         unset($this->data[$offset]);
     }
+    
+    public function toArray()
+    {
+        return $this->data;
+    }
 }

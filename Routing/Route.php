@@ -3,6 +3,8 @@ namespace Vision\Routing;
 
 class Route
 {
+    protected $hasPlaceholder = false;
+    
     protected $path = null;
     
     protected $controller = null;
@@ -17,8 +19,16 @@ class Route
         $this->setController($controller);
     }
 	
+    public function hasPlaceholder()
+    {
+        return $this->hasPlaceholder;
+    }
+    
     public function setPath($path)
     {
+        if (strpos($path, '{') !== false) {
+            $this->hasPlaceholder = true;
+        }
         $this->path = trim($path);
         return $this;
     }

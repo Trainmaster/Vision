@@ -1,13 +1,15 @@
 <?php
 namespace Vision\Html;
 
+use Vision\View\Html\Element as HtmlElementView;
+
 class Element 
 {
     protected $attributes = array();
     
     protected $content = null;
     
-    protected $isVoidElement = false;
+    protected $isVoid = false;
     
     protected $tag = null;
     
@@ -16,14 +18,32 @@ class Element
     public function __construct($tag) 
     {
         $this->setTag($tag);
-    }
+    } 
     
     public function __toString() 
     {
-        if ($this->view === null) {
-            $this->view = new \Vision\View\Html\Element($this);
-        }
+        $this->initView();
         return $this->view->__toString();
+    }
+    
+    public function renderStartTag()
+    {
+        $this->initView();
+        return $this->view->renderStartTag();
+    }
+    
+    public function renderEndTag()
+    {
+        $this->initView();
+        return $this->view->renderEndTag();
+    }
+    
+    public function initView()
+    {
+        if ($this->view === null) {
+            $this->view = new HtmlElementView($this);
+        }
+        return $this;
     }
     
     public function setTag($tag) 
@@ -37,15 +57,15 @@ class Element
         return $this->tag;
     }
     
-    public function setIsVoidElement($isVoidElement) 
+    public function setVoid($isVoid) 
     {
-        $this->isVoidElement = (bool) $isVoidElement;
+        $this->isVoid = (bool) $isVoid;
         return $this;    
     }
     
-    public function isVoidElement() 
+    public function isVoid() 
     {
-        return $this->isVoidElement;    
+        return $this->isVoid;    
     }
     
     public function setContent($content) 
@@ -59,7 +79,7 @@ class Element
         return $this->content;
     }
     
-    public function setAttribute($key, $value) 
+    public function setAttribute($key, $value = null) 
     {
         $this->attributes[$key] = $value;
         return $this;
@@ -84,6 +104,27 @@ class Element
     public function getAttributes() 
     {
         return $this->attributes;
+    }
+    
+    public function removeAttribute($key)
+    {
+        if (array_key_exists($key, $this->attributes)) {
+            unset($this->attributes[$key]);
+            return true;
+        }
+        return false;
+    }
+    
+    public function setId($id)
+    {
+        $id = str_replace('_', '-', $id);
+        $this->setAttribute('id', $id);
+        return $this;
+    }
+    
+    public function getId()
+    {
+        return $this->getAttribute('id');
     }
     
     public function addClass($class) 

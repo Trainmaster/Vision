@@ -1,17 +1,15 @@
 <?php
 namespace Vision\Form\Control;
 
+use Vision\Validator;
+
 class Email extends Text 
-{
-    protected $tag = 'input'; 
-    
-    protected $attributes = array('type' => 'text');
-    
-    protected $isVoidElement = true;          
+{    
+    protected $attributes = array('type' => 'email');   
     
     public function init() 
     {
         parent::init();
-        $this->addValidator(new \Vision\Validator\Email);            
+        $this->addValidator(new Validator\Email);            
     }
 }

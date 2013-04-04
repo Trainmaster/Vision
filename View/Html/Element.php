@@ -29,9 +29,11 @@ class Element
     */
     public function __toString()
     {
-        $html = $this->renderStartTag()
-              . $this->element->getContent()
-              . $this->renderEndTag();
+        $html = $this->renderStartTag();        
+        if ($this->element->isVoid() === false) {
+            $html .= $this->element->getContent() 
+                  . $this->renderEndTag();
+        }        
         return $html;
     }
     
@@ -50,14 +52,14 @@ class Element
     *
     * @return string
     */  
-    private function renderStartTag()
+    public function renderStartTag()
     {
         $html = '<%s%s%s>';
         $tag = $this->element->getTag();
         $attributes = $this->renderAttributes();
         $slash = null;
-        if ($this->element->isVoidElement()) {
-            $slash = '/';
+        if ($this->element->isVoid()) {
+            $slash = ' /';
         }    
         return sprintf($html, $tag, $attributes, $slash);
     }
@@ -67,13 +69,9 @@ class Element
     *
     * @return string
     */   
-    private function renderEndTag()
+    public function renderEndTag()
     {
-        $html = '';
-        if ($this->element->isVoidElement()) {
-            return $html;
-        }
-        $html .= '</%s>';
+        $html = '</%s>';
         $tag = $this->element->getTag();
         return sprintf ($html, $tag);
     }
@@ -89,6 +87,9 @@ class Element
         $attributes = $this->element->getAttributes();
         if (!empty($attributes)) {       
             foreach ($attributes as $key => $value) {
+                if (strlen($key) < 1) {
+                    break;
+                }
                 if ($value === null) {
                     $html .= ' '.$this->clean($key);
                 } else {

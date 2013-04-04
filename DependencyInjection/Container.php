@@ -9,9 +9,21 @@ class Container extends Config\AbstractConfig implements ContainerInterface
 {    
     protected $objects = array();
     
-    public function get($alias)
+    public function isDefined($alias)
     {
         if (isset($this->definitions[$alias])) {
+            return true;
+        } else {
+            throw new RuntimeException(sprintf(
+                'No definition for "%s". Please check the container configuration.', 
+                $alias
+            ));
+        }
+    }
+    
+    public function get($alias)
+    {
+        if ($this->isDefined($alias)) {
             $definition = $this->definitions[$alias];
             $isShared = $definition->isShared();
             if ($isShared && isset($this->objects[$alias])) {
@@ -23,11 +35,6 @@ class Container extends Config\AbstractConfig implements ContainerInterface
                 $this->objects[$alias] = $instance;
                 return $instance;
             }
-        } else {
-            throw new RuntimeException(sprintf(
-                'No definition for "%s". Please check the container configuration.', 
-                $alias
-            ));
         }
     }
     
@@ -48,15 +55,19 @@ class Container extends Config\AbstractConfig implements ContainerInterface
 
         $propertyInjections = $definition->getPropertyInjections();
         if (!empty($propertyInjections)) {
-            foreach ($this->resolveDependencies($propertyInjections) as $key => $value) {
-                $reflection->getProperty($key)->setValue($instance, $value);
+            foreach ($propertyInjections as $property) {
+                foreach ($property as $propertyName => $dependencies) {
+                    $reflection->getProperty($propertyName)->setValue($instance, $this->resolveDependencies($dependencies));
+                }
             }
         }
         
         $setterInjections = $definition->getSetterInjections();
         if (!empty($setterInjections)) {	
-            foreach ($this->resolveDependencies($setterInjections) as $key => $value) {
-                $reflection->getMethod($key)->invokeArgs($instance, $value);
+            foreach ($setterInjections as $setter) {
+                foreach ($setter as $method => $dependencies) {
+                    $reflection->getMethod($method)->invokeArgs($instance, $this->resolveDependencies($dependencies));
+                }
             }				
         }	
         

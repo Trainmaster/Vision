@@ -1,9 +1,9 @@
 <?php
 namespace Vision\Helper\Navigation;
 
-class Node {	
-	
-	protected $navigationId = null;
+class Node
+{
+    protected $navigationId = null;
 	
 	protected $showLink = true;
 	
@@ -16,13 +16,13 @@ class Node {
 	protected $path = null;
 	
 	protected $attributes = array();
-		
-	protected $children = array();
-	
+    
+    protected $children = array();
+
 	public function __construct($navigationId) {
 		$this->setNavigationId($navigationId);
 	}
-	
+
 	public function setNavigationId($navigationId) {
 		$this->navigationId = (int) $navigationId;
 		return $this;
@@ -37,7 +37,7 @@ class Node {
 		return $this;
 	}
 	
-	public function getShowLink() {
+	public function showLink() {
 		return $this->showLink;
 	}
 	

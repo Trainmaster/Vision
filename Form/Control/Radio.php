@@ -9,7 +9,7 @@ class Radio extends MultiOptionControlAbstract
     
     protected $attributes = array('type' => 'radio');
     
-    protected $isVoidElement = true;
+    protected $isVoid = true; 
     
     public function init() 
     {

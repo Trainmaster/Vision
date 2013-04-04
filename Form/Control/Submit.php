@@ -9,11 +9,12 @@ class Submit extends ControlAbstract
     
     protected $attributes = array('type' => 'submit');
     
-    protected $isVoidElement = true;
+    protected $isVoid = true; 
     
     public function init() 
     {
         $this->setAttribute('id', $this->getName());
-		$this->addClass('input-'.$this->getAttribute('type'));    
+		$this->addClass('input-' . $this->getAttribute('type'));  
+        $this->setRequired(false);
     }
 }

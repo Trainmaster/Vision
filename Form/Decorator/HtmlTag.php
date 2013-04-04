@@ -1,27 +1,31 @@
 <?php
 namespace Vision\Form\Decorator;
 
-use Vision\Html\Element;
+use Vision\Html\Element as HtmlElement;
 
 class HtmlTag extends DecoratorAbstract 
 {
     protected $decorator = null;
     
     protected $placement = self::PREPEND;		    
-
-    public function __construct(Element $decorator = null) 
+    
+    public function getDecorator()
     {
-        $this->decorator = $decorator;
+        return $this->decorator;
     }
 
 	public function render($content) 
-    {		            
+    {		
+        $html = '';
 		switch ($this->placement) {   
             case self::PREPEND:
 				$html = $this->decorator . $content;
 				break;
                 
-            case self::EMBED:
+            case self::WRAP:
+                if ($this->decorator->isVoid()) {
+                    return $content;
+                }
                 $this->decorator->setContent($content);
                 $html = (string) $this->decorator;
                 break;

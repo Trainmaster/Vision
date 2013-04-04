@@ -3,14 +3,14 @@ namespace Vision\Form\Decorator;
 
 use Vision\Html\ElementFactory;
 
-class Li extends HtmlTag 
+class P extends HtmlTag 
 {		
     protected $placement = self::WRAP;
     
     public function __construct()
     {
-        $li = ElementFactory::create('li');
+        $paragraph = ElementFactory::create('p');
         
-        $this->decorator = $li;
+        $this->decorator = $paragraph;
     }
 }

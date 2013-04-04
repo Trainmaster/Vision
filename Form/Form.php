@@ -1,14 +1,10 @@
 <?php 
 namespace Vision\Form;
 
-use Vision\Http\Request;
+use Vision\Http\RequestInterface;
 use Vision\Html\Element as HtmlElement;
 use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
 use RecursiveIteratorIterator;
-
-class FormException extends \Exception 
-{
-}
 
 class Form extends AbstractCompositeType 
 {    
@@ -22,27 +18,42 @@ class Form extends AbstractCompositeType
                             
     protected $data = null;
     
-    public function getContent() 
+    protected $formElementsIterator = null;
+    
+    public function init() {}
+    
+    public function setAction($action)
     {
-        $content = '';
-        foreach ($this->elements as $element) {
-            $content .= $element;
+        $this->setAttribute('action', $action);
+        return $this;
+    }           
+    
+    public function getFormElementsIterator()
+    {
+        if ($this->formElementsIterator === null) {
+            $formElementsIterator = new Iterator\FormElementsIterator($this->elements);             
+            $this->formElementsIterator = new RecursiveIteratorIterator($formElementsIterator, RecursiveIteratorIterator::CHILD_FIRST);
         }
-        return $content;
+        
+        return $this->formElementsIterator;
     }
     
     public function getElement($name) 
     {
-        $formElementsIterator = new Iterator\FormElementsIterator($this->elements);             
+        $iterator = $this->getFormElementsIterator();
         
-        $recursiveIteratorIterator = new RecursiveIteratorIterator($formElementsIterator);
-        
-        foreach ($recursiveIteratorIterator as $key => $element) {
+        foreach ($iterator as $key => $element) {       
             if ($element->getName() === $name) {
                 return $element;
             }            
         } 
+        
         return null;
+    }
+    
+    public function getElementByName($name)
+    {
+        return $this->getElement($name);
     }
     
     /**
@@ -69,44 +80,38 @@ class Form extends AbstractCompositeType
 		} 
 		return $value;
 	}
-
-    /**
-     * Process form
-     *
-     * http://www.w3.org/TR/html401/interact/forms.html#h-17.3
-     *
-     * @return bool
-     */
-	public function process(Request $request) 
+     
+    public function bindData($data)
+    {
+        $this->data = $data;
+        return $this;
+    }
+    
+    public function getData()
+    {
+        return $this->data;
+    }
+    
+    public function isSent()
+    {
+        if (isset($this->data[$this->name])) {
+            return true;
+        }
+        return false;
+    }
+    
+	public function isValid() 
     {         
         $isValid = true;    
         
-        $method = $request->getMethod();     
-        $method = strtoupper($method);
+        $iterator = $this->getFormElementsIterator();
         
-        switch ($method) {
-            case 'GET':
-                $data = $request->get->getAll();
-                break;
-            
-            case 'POST':
-                $data = $request->post->getAll();
-                break;
-                
-            default:
-                throw new Exception(sprintf('The request method "%s" is not supported by form.', $method));
-        }      
-        
-        $this->data = $data;
-        
-        $formElementsIterator = new Iterator\FormElementsIterator($this->elements);             
-        
-        $recursiveIteratorIterator = new RecursiveIteratorIterator($formElementsIterator);
-        
-        foreach ($recursiveIteratorIterator as $key => $element) {
-            $value = $this->extractValue($element->getName());
-            if ($element->isValid($value) === false) {
-                $isValid = false;
+        foreach ($iterator as $key => $element) {
+            if ($element instanceof Control\ControlAbstract) {
+                $value = $this->extractValue($element->getName());
+                if ($element->isValid($value) === false) {
+                    $isValid = false;
+                }
             }
         }  
 

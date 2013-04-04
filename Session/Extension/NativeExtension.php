@@ -1,14 +1,12 @@
 <?php
 namespace Vision\Session\Extension;
 
+use RuntimeException;
+
 class NativeExtension 
 {
     protected $started = false;
-    
-    public function __construct()
-    {
-    }
-    
+        
     public function start()
     {
         if ($this->started === true) {
@@ -18,7 +16,7 @@ class NativeExtension
         if (session_start()) {
             $this->started = true;
 		} else {
-            throw \Exception('Session could not be started.');
+            throw RuntimeException('Session could not be started.');
         }
     }
     
@@ -33,7 +31,7 @@ class NativeExtension
     
     public function save($session)
     {
-        // Hackish workaround for session_status() of PHP 5.4
+        // Hackish workaround for session_status() as of PHP 5.4
         @session_start();
         return $_SESSION = $session->getArrayCopy();
     }
@@ -53,7 +51,7 @@ class NativeExtension
         return session_id();
     }
     
-    public function regenerateId($deleteOldSession)
+    public function regenerateId($deleteOldSession = true)
     {
         return session_regenerate_id($deleteOldSession);
     }

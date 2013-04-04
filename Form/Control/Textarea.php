@@ -27,6 +27,13 @@ class Textarea extends ControlAbstract
         return $this;
     }
     
+    public function setValue($value) 
+    {   
+        $this->content = $value;
+		$this->value = $value;
+		return $this;
+	}
+    
     public function isValid($value) 
     {
         if (parent::isValid($value) === true) {

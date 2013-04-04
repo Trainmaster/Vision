@@ -21,21 +21,28 @@ class Request extends AbstractMessage implements RequestInterface
     private $cookie = null;
     
     private $server = null;
+
+    protected $method = null;
     
     protected $basePath = null;
     
-    protected $method = null;
+    protected $path = null;   
     
-    protected $path = null;
+    protected $pathInfo = null;
         
-    public function __construct($GET = null, $POST = null, $FILES = null, $COOKIE = null)
+    public function __construct()
     {
         $this->get = new ArrayProxyObject($_GET);
         $this->post = new ArrayProxyObject($_POST);
-        $this->files = new RequestHandler($_FILES);
-        $this->cookie = new RequestHandler($_COOKIE);
-        $this->server = new RequestHandler($_SERVER);
-        // $this->setVersion($this->server->get('SERVER_PROTOCOL'));
+        $this->files = new ArrayProxyObject($_FILES);
+        $this->cookie = new ArrayProxyObject($_COOKIE);
+        $this->server = new ArrayProxyObject($_SERVER);
+        
+        $this->initMethod();
+        
+        $this->initBasePath();               
+        $this->initPathInfo();
+        $this->initPath(); 
     }
     
     public function __get($key)
@@ -57,38 +64,67 @@ class Request extends AbstractMessage implements RequestInterface
     
     public function getMethod()
     {
-        if ($this->method === null) {
-            $method = $this->server->get('REQUEST_METHOD');
-            $method = strtoupper($method);
-        }
         return $this->method;
     }
     
-    public function setBasePath($basePath)
+    public function initMethod()
     {
-        $basePath = trim($basePath);
-        $this->basePath = rtrim($basePath, '/');
+        if (isset($this->server['REQUEST_METHOD'])) {
+            $this->method = strtoupper($this->server['REQUEST_METHOD']);
+        }
+        
         return $this;
     }
     
+    public function isPost()
+    {
+        return $this->method === 'POST' ? true : false;
+    }
+    
+    public function isGet()
+    {
+        return $this->method === 'GET' ? true : false;
+    }
+    
+    public function isHead()
+    {
+        return $this->method === 'HEAD' ? true : false;
+    }
+    
+    public function isPut()
+    {
+        return $this->method === 'PUT' ? true : false;
+    }
+    
+    /**
+     * Get base path of current url
+     *
+     * Example: http://www.example.com/foo/index.php/bar
+     * Result: "/foo"
+     *
+     * @return string
+     */
     public function getBasePath()
     {
-        if ($this->basePath === null) {
-            $this->setBasePath($this->findBasePath());            
-        }
         return $this->basePath;
     }
     
-    protected function findBasePath()
+    protected function initBasePath()
     {
-        if ($this->server->get('SCRIPT_NAME') !== null) {
-            $basePath = dirname($this->server->get('SCRIPT_NAME'));
-            if ($basePath !== '.') {
-                return $basePath;
-            }
+        if (isset($this->server['SCRIPT_NAME'])) {
+            $path = dirname($this->server['SCRIPT_NAME']);
+        }        
+        
+        if ($path !== '.') {
+            $this->basePath = $path;
+        }        
+        
+        if ($path === '/') {
+            $this->basePath = '';
         }
-        return null;
-    }
+        
+        return $this;
+    }   
     
     /**
      * Get path info of current url
@@ -100,21 +136,43 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function getPathInfo()
     {
-        if ($this->path === null) {
-            $this->path = $this->findPathInfo();
+        return $this->pathInfo;
+    }
+    
+    protected function initPathInfo()
+    {
+        if (isset($this->server['PATH_INFO'])) {
+            $pathInfo = $this->server['PATH_INFO'];
+        } elseif (isset($this->server['ORIG_PATH_INFO'])) {
+            $pathInfo = $this->server['ORIG_PATH_INFO'];
+        } elseif (isset($this->server['REQUEST_URI'])) {
+            $pathInfo = str_replace($this->getBasePath(), '', $this->server['REQUEST_URI']);
         }
+        
+        $this->pathInfo = $pathInfo;
+        
+        return $this;
+    }
+    
+    /**
+     * Get path of current url
+     *
+     * Example: http://www.example.com/foo/index.php/bar
+     * Result: "/foo/index.php/bar"
+     *
+     * @return string
+     */
+    public function getPath()
+    {
         return $this->path;
     }
     
-    protected function findPathInfo()
+    protected function initPath()
     {
-        if ($this->server->get('PATH_INFO') !== null) {
-            $pathInfo = $this->server->get('PATH_INFO');
-        } elseif ($this->server->get('ORIG_PATH_INFO') !== null) {
-            $pathInfo = $this->server->get('ORIG_PATH_INFO');
-        } else {
-            $pathInfo = str_replace($this->getBasePath(), '', $this->server->get('REQUEST_URI'));
-        }
-        return $pathInfo;
+        $path = $this->getBasePath() . $this->getPathInfo();
+        
+        $this->path = rtrim($path, '/');
+        
+        return $this;
     }
 }

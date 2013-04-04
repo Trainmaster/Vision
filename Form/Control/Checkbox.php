@@ -12,7 +12,7 @@ class Checkbox extends MultiOptionControlAbstract
     
     protected $attributes = array('type' => 'checkbox');
     
-    protected $isVoidElement = true;
+    protected $isVoid = true; 
     
     public function init() 
     {

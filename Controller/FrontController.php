@@ -43,24 +43,48 @@ class FrontController
     }
     
     public function invokeController($class, $method)
-    {
-        $interfaces = class_implements($class);
-        
-        if (is_array($interfaces)) {
-            foreach ($interfaces as $interface) {
-                if ($this->container->getDefinition($interface) !== null) {
-                    $setterInjections = $this->container->getDefinition($interface)->getSetterInjections();
-                    $this->container->getDefinition($class)->setter($setterInjections);                    
-                }
+    {        
+        if ($this->container->isDefined($class)) {
+            // To do: What if $class is not defined in container? wireUp... will result in an error
+            // print_r (get_declared_classes());
+            $this->wireUpInterfaceAwareDependencies($class);
+            $instance = $this->container->get($class);   
+            $instance->preFilter();
+            if (method_exists($instance, $method)) {
+                return $instance->$method();
             }
         }
-        
-        $instance = $this->container->get($class); 
-        
-        if (method_exists($instance, $method)) {
-            return $instance->$method();
+    }
+    
+    public function wireUpInterfaceAwareDependencies($class)
+    {    
+        if (class_exists($class) === false) {
+            return false;
         }
-    }    
+        
+        $interfaces = class_implements($class);  
+               
+        if (is_array($interfaces)) {
+            $setterInjections = array();
+            foreach ($interfaces as $interface) {            
+                $definition = $this->container->getDefinition($interface);
+                if ($definition === null) {
+                    continue;
+                }       
+                
+                $dependencies = $definition->getSetterInjections();
+                if (empty($dependencies)) {
+                    continue;
+                }     
+                
+                $setterInjections = array_merge($setterInjections, $dependencies);                
+            }
+            
+            if (!empty($setterInjections)) {
+                $this->container->getDefinition($class)->setSetter($setterInjections); 
+            }
+        }
+    }
     
     public function run() 
     {     

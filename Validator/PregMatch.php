@@ -18,7 +18,7 @@ class PregMatch extends ValidatorAbstract
         return $this;
     }
     
-    public function validate($value)
+    public function isValid($value)
     {
         $result = preg_match($this->pattern, $value);
         $result = (bool) $result;

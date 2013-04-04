@@ -4,12 +4,17 @@ namespace Vision\Routing\Config;
 use Vision\Routing\Route;
 use Vision\Routing\RouteCollection;
 
+use RuntimeException;
+
 abstract class AbstractConfig
 {
     protected $routes = array();
     
     public function addRoute($alias, Route $route)
     {
+        if (isset($this->routes[$alias])) {
+            throw new RuntimeException(sprintf('Route alias "%s" is already defined', $alias));
+        }
         $this->routes[$alias] = $route;
         return $this;
     }

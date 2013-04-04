@@ -11,18 +11,20 @@ class Fieldset extends AbstractCompositeType {
     protected $tag = 'fieldset';
         
     protected $legend = null;
+    
+    public function init()
+    {
+        $this->addDecorator(new Decorator\Ul);
+    }
         
     public function getContent() 
     {
-        $content = '';
+        $content = parent::getContent();
         if ($this->legend !== null) {
             $legend = new HtmlElement('legend');
             $legend->setContent($this->legend);
-            $content .= $legend;
+            $content = $legend . $content;
         }
-		foreach ($this->elements as $element) {
-			$content .= (string) $element;
-		}
         return $content;
     }
 

@@ -1,9 +1,10 @@
 <?php
 namespace Vision\Helper\Navigation;
 
-use Vision\Http\Request;
+use Vision\Http\RequestInterface;
 use Vision\Html\Element as HtmlElement;
 use SplFileObject;
+use RuntimeException;
 
 class NavigationService 
 {
@@ -11,18 +12,102 @@ class NavigationService
     
     private $currentPath = null;
     
-    protected $mapper;
+    protected $rootId = null;
     
-    protected $request;
+    protected $languageId = null;
     
-	public function __construct($mapper, Request $request) 
+    protected $mapper = null;
+    
+    protected $request = null;
+    
+    protected $renderer = null;
+    
+	public function __construct($mapper, $renderer) 
     {
-		$this->mapper = $mapper;
-        $this->request = $request;
-        $this->currentPath = $this->request->getPath();
+		$this->setMapper($mapper);
+        $this->setRenderer($renderer);
 	}	
-	
-	public function getTreeById($id) 
+
+    public function __toString()
+    {
+        $tree = $this->prepareTree();
+        $this->renderer->setRequest($this->request);
+        $tree = $this->renderer->render($tree);
+        return (string) $tree;
+    }
+    
+    public function setRequest(RequestInterface $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+        
+    public function setRootId($id)
+    {
+        $this->rootId = (int) $id;
+        return $this;
+    }
+    
+    public function setLanguageId($id)
+    {
+        $this->languageId = (int) $id;
+        return $this;
+    }
+    
+    public function setMapper($mapper)
+    {
+        $this->mapper = $mapper;
+        return $this;
+    }
+    
+    public function setRenderer(NavigationRendererInterface $renderer)
+    {
+        $this->renderer = $renderer;
+        return $this;
+    }
+    
+    protected function prepareTree()
+    {
+        /*
+        $cache = file_get_contents('XYZ.cache');
+        
+        if ($cache !== false) {
+            return unserialize($cache);
+        }
+        */
+        
+        if ($this->rootId === null) {
+            throw RuntimeException('A root id must be set.');
+        }
+        
+        if ($this->languageId === null) {
+            throw RuntimeException('A language id id must be set.');
+        }       
+
+        $flatTree = $this->mapper->loadByIdAndLanguageId($this->rootId, $this->languageId);
+        
+        if ($flatTree === null) {
+            throw RuntimeException('No tree found.');
+        }
+        
+        $tree = $this->convertFlatToHierarchical($flatTree);
+        
+        if (!array_key_exists($this->rootId, $tree)) {
+            throw RuntimeException('Something went wrong.');
+        }
+        
+        $tree = array($this->rootId => $tree[$this->rootId]);
+        
+        /*
+        $cache = serialize($tree);        
+        $file = new SplFileObject('XYZ.cache', 'w');
+        $file->fwrite($cache);
+        */ 
+        
+        return $tree;        
+    }
+    
+	public function getTreeById($id, $languageId = 1) 
     {    
         /*$hash = md5(__NAMESPACE__ . $id);
         
@@ -32,7 +117,7 @@ class NavigationService
             return $file;
         }*/
     
-		$flatTree = $this->mapper->loadById($id);
+		$flatTree = $this->mapper->loadById($id, $languageId);
 		$tree = $this->convertToArrayTree($flatTree);
 		$tree = $tree[$id];             
 		$tree = $this->render($tree);	
@@ -44,6 +129,22 @@ class NavigationService
 		return $tree;
 	}
 	
+    
+    protected function convertFlatToHierarchical(array $data)
+    {
+        foreach ($data as $id => $row) {
+            if ($row instanceof Node) {
+                if (array_key_exists($row->getParent(), $data)) {
+                    $data[$row->getParent()]->setChild($id, $data[$id]);		
+                }
+            } else {
+                throw RuntimeException(sprintf('Tree element must be an instance of Node'));
+            }
+		}		
+		return $data;
+    }
+    
+    // old
 	public function convertToArrayTree(array $tree) 
     {
 		foreach ($tree as $id => $row) {
@@ -52,7 +153,7 @@ class NavigationService
 					$tree[$row->getParent()]->setChild($id, $tree[$id]);		
 				}
 			} else {
-				throw \Exception(sprintf('Tree element must be an instance of Node'));
+				throw RuntimeException(sprintf('Tree element must be an instance of Node'));
 			}
 		}		
 		return $tree;
@@ -104,44 +205,36 @@ class NavigationService
     
     private function renderListItem(Node $node) 
     {    
-        $li = new HtmlElement('li');
+        if ($node->isVisible()) {
+            $li = new HtmlElement('li');
 
-        if ($node->getShowLink()) {
-            $a = new HtmlElement('a');
-            $a->setAttribute('href', $this->request->getBaseUrl() . $node->getPath())
-              ->setContent($node->getName());                
-            $li->setContent($a);
-        } else {
-            $li->setContent($node->getName());
-        }
-                
-        $attributes = $node->getAttributes();
-        
-        if (!empty($attributes)) {
-            $li->setAttributes($attributes);
-        }
-        
-        if ($this->matchWithCurrentPath($node->getPath())) {
-            if ($li->getAttribute('class') !== null) {
-                $li->setAttribute('class', $li->getAttribute('class') . ' active');
+            if ($node->getShowLink()) {
+                $a = new HtmlElement('a');
+                $a->setAttribute('href', $this->request->getBasePath() . $node->getPath())
+                  ->setContent($node->getName());                
+                $li->setContent($a);
             } else {
-                $li->setAttribute('class', 'active');
+                $li->setContent($node->getName());
             }
-        }        
-        
-        $li->setContent($li->getContent() . $this->renderList($node));
-        
-        return $li;
-    }
-
-    public function matchWithCurrentPath($path) 
-    {
-        if ($path === $this->currentPath) {
-            return true;
-        } elseif (strlen($path) > 1 && strpos($this->currentPath, $path) !== false) {
-            return true;
-        } else {
-            return false;
+                    
+            $attributes = $node->getAttributes();
+            
+            if (!empty($attributes)) {
+                $li->setAttributes($attributes);
+            }
+            
+            if ($this->matchWithCurrentPath($node->getPath())) {
+                if ($li->getAttribute('class') !== null) {
+                    $li->setAttribute('class', $li->getAttribute('class') . ' active');
+                } else {
+                    $li->setAttribute('class', 'active');
+                }
+            }        
+            
+            $li->setContent($li->getContent() . $this->renderList($node));
+            
+            return $li;
         }
+        return null;       
     }
 }
