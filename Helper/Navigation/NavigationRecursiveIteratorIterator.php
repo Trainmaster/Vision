@@ -25,8 +25,8 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
     
     public function endChildren()
     {   
-        $this->context .= Html::create('ul')->renderEndTag();
-        if ($this->getDepth() > 1) {
+        $this->context .= Html::create('ul')->renderEndTag();        
+        if ($this->getDepth()  > 1) {
             $this->context .= Html::create('li')->renderEndTag(); 
         }
     }

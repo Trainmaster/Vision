@@ -6,7 +6,6 @@ use PDOException;
 
 class NavigationMapper
 {
-    
     protected $pdo;
     
 	public function __construct(PDO $pdo)

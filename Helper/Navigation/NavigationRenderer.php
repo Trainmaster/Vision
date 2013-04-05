@@ -10,8 +10,6 @@ class NavigationRenderer implements NavigationRendererInterface
 {    
     protected $request = null;
     
-    protected $pathInfo = null;
-    
     public function setRequest($request)
     {
         $this->request = $request;
@@ -19,55 +17,67 @@ class NavigationRenderer implements NavigationRendererInterface
     
     public function render($tree)
     {
-        $this->pathInfo = $this->request->getPathInfo();
-        $this->basePath = $this->request->getBasePath();
-    
         $html = '';
+        
+        $basePath = $this->request->getBasePath();
+        $pathInfo = $this->request->getPathInfo();
         
         $nodeIterator = new NodeIterator($tree);
 
         $iterator = new NavigationRecursiveIteratorIterator($nodeIterator, RecursiveIteratorIterator::SELF_FIRST);
+        
         $iterator->setContext($html);
         
-        foreach ($iterator as $node) {          
+        foreach ($iterator as $node) {        
             
-            $path = $node->getPath();
-            
+            $depth = $iterator->getDepth();
+            $path = $node->getPath();  
+
             if ($node->isVisible() && $node->showLink()) {
                 $element = Html::create('a');
-                $element->setAttribute('href', $this->basePath . $path)
+                $element->setAttribute('href', $basePath . $path)
                         ->setContent($node->getName());
             } elseif ($node->isVisible() && $node->showLink() === false) {
                 $element = Html::create('span');
                 $element->setContent($node->getName());
+            } else {
+                $element = null;
             }
-
-            if (isset($element)) {
+            
+            if ($depth > 0) {            
                 $li = Html::create('li')->setContent($element);
                 
-                if ($this->matchWithPathInfo($path)) {
+                $attributes = $node->getAttributes();
+            
+                if (!empty($attributes)) {
+                    $li->setAttributes($attributes);
+                }
+
+                if ($this->matchPathWithPathInfo($path, $pathInfo)) {
                     $li->addClass('active');
                 }
                 
                 if ($iterator->callHasChildren()) {
-                    var_dump(true);
                     $html .= $li->renderStartTag() . $li->getContent();
                 } else {
                     $html .= $li;
-                }                
-                //var_dump($iterator->endChildren());               
-            }
+                }
+                
+                unset($element);
+            } else {
+                $html .= $element;
+            }            
         }
         
         return $html;
     }
     
     
-    public function matchWithPathInfo($path) 
+    public function matchPathWithPathInfo($path, $pathInfo) 
     {               
-        if ($path === $this->pathInfo) {
+        if ($path === $pathInfo) {
             return true;
-        } elseif (strlen($path) > 1 && strpos($this->pathInfo, $path) !== false) {
+        } elseif (strlen($path) > 1 && strpos($pathInfo, $path) !== false) {
             return true;
         }
         return false;
