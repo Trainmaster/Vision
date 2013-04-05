@@ -108,12 +108,12 @@ class NavigationService
         foreach ($data as $id => $row) {
             if ($row instanceof Node) {
                 if (array_key_exists($row->getParent(), $data)) {
-                    $data[$row->getParent()]->setChild($id, $data[$id]);		
+                    $data[$row->getParent()]->setChild($id, $data[$id]);        
                 }
             } else {
                 throw RuntimeException(sprintf('Tree element must be an instance of Node'));
             }
-		}		
-		return $data;
+        }       
+        return $data;
     }
 }
