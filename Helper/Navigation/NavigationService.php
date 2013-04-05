@@ -1,4 +1,12 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+ 
 namespace Vision\Helper\Navigation;
 
 use Vision\Http\RequestInterface;
@@ -6,41 +14,24 @@ use Vision\Html\Element as HtmlElement;
 use SplFileObject;
 use RuntimeException;
 
+/**
+ * @author Frank Liepert
+ */
 class NavigationService 
 {     
-    /**
-     * Node ID as root.
-     *
-     * @var null|int
-     */
+    /** @type null|int $rootId*/
     protected $rootId = null;
     
-    /**
-     * Language ID.
-     *
-     * @var null|int
-     */
+    /** @type null|int $languageId */
     protected $languageId = null;
     
-    /**
-     * Reference to NavigationMapper instance.
-     *
-     * @var NavigationMapper
-     */
+    /** @type NavigationMapper $mapper */
     protected $mapper = null;
     
-    /**
-     * Reference to Request instance.
-     *
-     * @var RequestInterface
-     */
+    /** @type RequestInterface $request */
     protected $request = null;
     
-    /**
-     * Reference to NavigationRenderer instance.
-     *
-     * @var NavigationRenderer
-     */
+    /** @type NavigationRenderer $renderer */
     protected $renderer = null;
      
     /**
