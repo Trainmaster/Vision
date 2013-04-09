@@ -1,6 +1,16 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Helper\Navigation;
 
+/**
+ * @author Frank Liepert
+ */
 class Node
 {
     protected $navigationId = null;
@@ -68,9 +78,9 @@ class Node
         return $this->parent;
     }
     
-    public function setChild($id, $child)
+    public function addChild($child)
     {
-        $this->children[$id] = $child;
+        $this->children[] = $child;
     }
     
     public function getChildren()
