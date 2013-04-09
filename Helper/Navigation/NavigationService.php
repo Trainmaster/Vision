@@ -19,7 +19,7 @@ use RuntimeException;
  */
 class NavigationService 
 {     
-    /** @type null|int $rootId*/
+    /** @type null|int $rootId */
     protected $rootId = null;
     
     /** @type null|int $languageId */
@@ -160,7 +160,7 @@ class NavigationService
             throw RuntimeException('Something went wrong.');
         }
         
-        $tree = array($this->rootId => $tree[$this->rootId]);
+        $tree = array($tree[$this->rootId]);
         
         /*
         $cache = serialize($tree);        
@@ -176,17 +176,17 @@ class NavigationService
      * 
      * @param array $data 
      * 
-     * @return NavigationService Provides a fluent interface.
+     * @return array $data
      */
     protected function convertFlatToHierarchical(array $data)
     {
         foreach ($data as $id => $row) {
             if ($row instanceof Node) {
                 if (array_key_exists($row->getParent(), $data)) {
-                    $data[$row->getParent()]->setChild($id, $data[$id]);        
+                    $data[$row->getParent()]->addChild($data[$id]);        
                 }
             } else {
-                throw RuntimeException(sprintf('Tree element must be an instance of Node'));
+                throw RuntimeException(sprintf('Array element must be an instance of Node.'));
             }
         }       
         return $data;
