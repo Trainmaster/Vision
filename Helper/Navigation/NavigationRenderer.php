@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Helper\Navigation;
 
 use RecursiveArrayIterator;
@@ -6,8 +13,14 @@ use RecursiveIteratorIterator;
 
 use Vision\Html\ElementFactory as Html;
 
+/**
+ * @author Frank Liepert
+ */
 class NavigationRenderer implements NavigationRendererInterface
 {    
+    /**
+     * @type null|Request $request
+     */
     protected $request = null;
     
     public function setRequest($request)
@@ -15,7 +28,12 @@ class NavigationRenderer implements NavigationRendererInterface
         $this->request = $request;
     }
     
-    public function render($tree)
+    public function getRequest()
+    {
+        return $this->request;
+    }
+    
+    public function render(array $tree)
     {
         $html = '';
         
@@ -27,12 +45,13 @@ class NavigationRenderer implements NavigationRendererInterface
         $iterator = new NavigationRecursiveIteratorIterator($nodeIterator, RecursiveIteratorIterator::SELF_FIRST);
         
         $iterator->setContext($html);
+        $iterator->setMaxDepth(1);
+        $iterator->setRenderer($this);
         
-        foreach ($iterator as $node) {        
-            
-            $depth = $iterator->getDepth();
+        foreach ($iterator as $node) {    
+            $depth = $iterator->getDepth();            
             $path = $node->getPath();  
-
+            
             if ($node->isVisible() && $node->showLink()) {
                 $element = Html::create('a');
                 $element->setAttribute('href', $basePath . $path)
@@ -53,11 +72,11 @@ class NavigationRenderer implements NavigationRendererInterface
                     $li->setAttributes($attributes);
                 }
 
-                if ($this->matchPathWithPathInfo($path, $pathInfo)) {
+                if (isset($node->match)) {
                     $li->addClass('active');
                 }
                 
-                if ($iterator->callHasChildren()) {
+                if ($iterator->hasChildren()) {
                     $html .= $li->renderStartTag() . $li->getContent();
                 } else {
                     $html .= $li;
@@ -66,7 +85,7 @@ class NavigationRenderer implements NavigationRendererInterface
                 unset($element);
             } else {
                 $html .= $element;
-            }            
+            }
         }
         
         return $html;
