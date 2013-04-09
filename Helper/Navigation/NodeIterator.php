@@ -1,11 +1,23 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Helper\Navigation;
 
 use RecursiveIterator;
 
+/**
+ * @author Frank Liepert
+ */
 class NodeIterator implements RecursiveIterator
 {
     private $nodes;
+    
+    private $position = 0;
     
     public function __construct($nodes) 
     {
@@ -14,36 +26,36 @@ class NodeIterator implements RecursiveIterator
     
     public function hasChildren()
     {   
-        return count($this->current()->getChildren()) > 0;
+        return $this->nodes[$this->position]->hasChildren();
     }
     
     public function getChildren()
     {
-        return new self($this->current()->getChildren());
+        return new self($this->nodes[$this->position]->getChildren());
     }   
     
     public function current()
     {
-        return current($this->nodes);
+        return $this->nodes[$this->position];
     }
     
     public function key()
     {
-        return key($this->nodes);
+        return $this->position;
     }
     
     public function next()
     {
-        next($this->nodes);
+        $this->position++;
     }
     
     public function rewind()
     {
-        reset($this->nodes);
+        $this->position = 0;
     }   
     
     public function valid()
     {
-        return isset($this->nodes[$this->key()]);
+        return isset($this->nodes[$this->position]);
     }
 }
