@@ -3,9 +3,9 @@ namespace Vision\Validator;
 
 class InputInteger extends ValidatorAbstract 
 {
-    private $min = null;
+    protected $min = null;
     
-    private $max = null;
+    protected $max = null;
     
     public function setMin($min)
     {
@@ -32,10 +32,13 @@ class InputInteger extends ValidatorAbstract
         }
         
         $result = filter_var($value, FILTER_VALIDATE_INT, $options);
-        if ($result) {	
+        
+        if ($result) {  
             return true;
-        }        
+        }    
+        
         $this->setMessage('Integer', 'Value is not an integer');
+        
         return false;
     }
 }
