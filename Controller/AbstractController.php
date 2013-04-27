@@ -1,6 +1,7 @@
 <?php
 namespace Vision\Controller;
 
+use Vision\Crypt\Random;
 use Vision\Http\RequestInterface;
 use Vision\Http\RequestAwareInterface;
 use Vision\Http\ResponseInterface;
@@ -28,8 +29,8 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     public function preFilter()
     {    
         if (!isset($this->session['token'])) {
-            $random = new \Vision\Crypt\Random;
-            $token = $random->generateString(128);
+            $random = new Random;
+            $token = $random->generateHex(128);
             $this->session['token'] = $token;
         }
     }

@@ -17,16 +17,21 @@ class Select extends MultiOptionControlAbstract
     
     public function __toString() 
     {
-        $content = null;
-
-        foreach ($this->options as $key => $value) {
-            $option = ElementFactory::create('option');
-            $option->setContent($key);
+        $html = '';
+        
+        $option = ElementFactory::create('option');
+                
+        foreach ($this->options as $value => $content) {
+            $option->removeAttribute('selected');
             $option->setAttribute('value', $value);
-            $content .= $option;  
+            $option->setContent($content);
+            if ($this->checkForPreSelection($value)) {
+                $option->setAttribute('selected', 'selected');
+            }
+            $html .= $option;  
         }            
         
-        $this->content = $content;
+        $this->content = $html;
         
         return parent::__toString();
     }
@@ -34,22 +39,22 @@ class Select extends MultiOptionControlAbstract
     public function setSize($size) 
     {
         $this->setAttribute('size', (int) $size);
-		return $this;
-	}
-	
-	public function getSize() 
+        return $this;
+    }
+    
+    public function getSize() 
     {
-		return $this->getAttribute('size');
-	}
-	
-	public function setMultiple($multiple) 
+        return $this->getAttribute('size');
+    }
+    
+    public function setMultiple($multiple) 
     {
-		$this->setAttribute('multiple', null);
-		return $this;
-	}
-	
-	public function getMultiple() 
+        $this->setAttribute('multiple', null);
+        return $this;
+    }
+    
+    public function getMultiple() 
     {
-		return $this->getAttribute('multiple');
-	}
+        return $this->getAttribute('multiple');
+    }
 }

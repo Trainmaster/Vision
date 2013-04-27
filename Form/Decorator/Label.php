@@ -4,8 +4,8 @@ namespace Vision\Form\Decorator;
 use Vision\Html\ElementFactory;
 
 class Label extends HtmlTag 
-{	
-    protected $placement = self::PREPEND;	
+{   
+    protected $placement = self::PREPEND;   
     
     public function __construct()
     {
@@ -13,8 +13,8 @@ class Label extends HtmlTag
         $this->decorator = $label;
     }
     
-	public function render($content) 
-    {		
+    public function render($content) 
+    {       
         $this->decorator->setAttribute('for', $this->element->getId());
         $this->decorator->setContent($this->element->getLabel());
         
@@ -23,5 +23,5 @@ class Label extends HtmlTag
         }
 
         return parent::render($content);
-	}
+    }
 }

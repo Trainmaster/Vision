@@ -16,28 +16,42 @@ class Checkbox extends MultiOptionControlAbstract
     
     public function init() 
     {
-        $this->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li);
+        $label = new Decorator\Label;
+        $label->setPlacement('APPEND');
+        $label->getDecorator()->addClass('label-checkbox');
+        
+        $li = new Decorator\Li;
+        
+        $this->addDecorator($label)
+             ->addDecorator($li);
+        $this->setRequired(false);
     }
     
     public function __toString() 
-    {	
+    {   
         $content = '';
-        foreach ($this->options as $key => $value) {
-            $this->setLabel($key);
-            $this->setAttribute('value', $value);
-            if ($this->getValue() !== null) {
-                if (in_array($value, $this->getValue())) {
-                    $this->setAttribute('checked', 'checked');
-                }
-            }
+        
+        foreach ($this->options as $label => $option) {
+            $this->removeAttribute('checked');
+            $this->setLabel($label);
+            $this->setAttribute('value', $option);            
+            
+            if ($this->checkForPreSelection($option)) {
+                $this->setAttribute('checked', 'checked');
+            }         
+
             $content .= parent::__toString();
         }
+        
         return $content;
-	}
+    }
     
-    public function getValidators() {
-        $this->addValidator(new Validator\InArray(array('haystack' => $this->getOptions())));
+    public function getValidators()
+    {
+        $count = count($this->getOptions());
+        if ($count > 1) {
+            $this->addValidator(new Validator\InArray(array('haystack' => $this->getOptions())));
+        }
         return $this->validators;
     }
 }

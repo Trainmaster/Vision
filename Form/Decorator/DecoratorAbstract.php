@@ -2,16 +2,16 @@
 namespace Vision\Form\Decorator;
 
 abstract class DecoratorAbstract implements DecoratorInterface 
-{	
-	const APPEND = 'APPEND';
+{   
+    const APPEND = 'APPEND';
     
-	const PREPEND = 'PREPEND';	
+    const PREPEND = 'PREPEND';  
     
-	const WRAP = 'WRAP';	
+    const WRAP = 'WRAP';    
     
     protected $element = null;
-		
-	protected $placement = self::PREPEND;	
+        
+    protected $placement = self::PREPEND;   
     
     public function render($content) {}
     
@@ -25,15 +25,15 @@ abstract class DecoratorAbstract implements DecoratorInterface
     {
         return $this->element;
     }
-	
-	public function setPlacement($placement) 
+    
+    public function setPlacement($placement) 
     {
-		$this->placement = strtoupper($placement);
+        $this->placement = strtoupper($placement);
         return $this;
-	}
-	
-	public function getPlacement() 
+    }
+    
+    public function getPlacement() 
     {
-		return $this->placement;
-	}
+        return $this->placement;
+    }
 }

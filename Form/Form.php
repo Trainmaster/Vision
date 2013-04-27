@@ -56,30 +56,47 @@ class Form extends AbstractCompositeType
         return $this->getElement($name);
     }
     
+    public function getValue($name)
+    {
+        $element = $this->getElementByName($name);
+        
+        if ($element) {
+            return $element->getValue();
+        }
+        
+        return $element;
+    }
+    
     /**
-    * Extract value by html array notation.
-    *
-    * @param string $name
-    *
-    * @return string|string
-    */  
-	public function extractValue($name) 
+     * Retrieve array value by html array notation
+     * 
+     * Example: $this->getValueByName(foo[bar][baz]) returns
+     *          the value of $this->data[$foo][$bar][$baz] or NULL.
+     * 
+     * @param string $name 
+     * 
+     * @return mixed|null
+     */
+    public function getValueByName($name)
     {
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
         }
-		$parts = explode('[', $name);
-		$value = $this->data;
-		foreach ($parts as $part) {
-			$part = trim($part, ']');
-			if (isset($value[$part])) {
-				$value = $value[$part];
-			} else {
-				return null;
-			}
-		} 
-		return $value;
-	}
+        
+        $parts = explode('[', $name);
+        $value = $this->data;
+        
+        foreach ($parts as $part) {
+            $part = rtrim($part, ']');
+            if (isset($value[$part])) {
+                $value = $value[$part];
+            } else {
+                return null;
+            }
+        }
+        
+        return $value;
+    }
      
     public function bindData($data)
     {
@@ -100,15 +117,20 @@ class Form extends AbstractCompositeType
         return false;
     }
     
-	public function isValid() 
+    public function isValid() 
     {         
         $isValid = true;    
         
         $iterator = $this->getFormElementsIterator();
         
-        foreach ($iterator as $key => $element) {
+        foreach ($iterator as $element) {
             if ($element instanceof Control\ControlAbstract) {
-                $value = $this->extractValue($element->getName());
+                $value = $this->getValueByName($element->getName());
+                
+                if ($element->isRequired() === false && empty($value)) {
+                    continue;
+                }
+
                 if ($element->isValid($value) === false) {
                     $isValid = false;
                 }
@@ -116,5 +138,5 @@ class Form extends AbstractCompositeType
         }  
 
         return $isValid;
-	}
+    }
 }

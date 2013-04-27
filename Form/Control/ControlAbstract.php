@@ -3,31 +3,32 @@ namespace Vision\Form\Control;
 
 use Vision\Html\Element as HtmlElement;
 use Vision\Filter\FilterInterface;
+use Vision\Validator;
 use Vision\Validator\ValidatorInterface;
 use Vision\Form\Decorator\DecoratorInterface;
 
 abstract class ControlAbstract extends HtmlElement 
 {
-	protected $decorators = array();
+    protected $decorators = array();
 
-	protected $filters = array();
-	
-	protected $validators = array();
-	
-	protected $errors = array();
-    	
+    protected $filters = array();
+    
+    protected $validators = array();
+    
+    protected $errors = array();
+        
     protected $label = null; 
         
-	protected $value = null;
+    protected $value = null;
     
     protected $rawValue = null;
-	
-	final public function __construct($name) 
+    
+    final public function __construct($name) 
     {
-		$this->setName($name);		
+        $this->setName($name);      
         $this->setRequired(true);
         $this->init();
-	}
+    }
     
     abstract public function init();
 
@@ -42,33 +43,33 @@ abstract class ControlAbstract extends HtmlElement
         return $html;
     }
 
-	/**
+    /**
      * Add a decorator
      */
-	public function addDecorator(DecoratorInterface $decorator) 
+    public function addDecorator(DecoratorInterface $decorator) 
     {
         $this->decorators[] = $decorator->setElement($this);
         return $this;
-	}
+    }
     
     /**
      * Add decorators
      */
-	public function addDecorators(array $decorators) 
+    public function addDecorators(array $decorators) 
     {
         foreach ($decorators as $decorator) {
             $this->addDecorator($decorator);
         }
         return $this;
-	}
-	
+    }
+    
     /**
      * Gets all decorators
      */
-	public function getDecorators() 
+    public function getDecorators() 
     {
-		return $this->decorators;
-	}
+        return $this->decorators;
+    }
     
     public function resetDecorators()
     {
@@ -86,88 +87,88 @@ abstract class ControlAbstract extends HtmlElement
         }
         return $this;
     }
-	
-	/**
+    
+    /**
      * Add filter
-     */	
-	public function addFilter(FilterInterface $filter) 
+     */ 
+    public function addFilter(FilterInterface $filter) 
     {
         $this->filters[] = $filter;
-		return $this;
-	}
-	
-	/**
+        return $this;
+    }
+    
+    /**
      * Add multiple filters at once.
-     */	
-	public function addFilters(array $filters) 
+     */ 
+    public function addFilters(array $filters) 
     {
-		foreach ($filters as $filter) {
-			$this->addFilter($filter);
-		}
-		return $this;
-	}
-	
-	/**
+        foreach ($filters as $filter) {
+            $this->addFilter($filter);
+        }
+        return $this;
+    }
+    
+    /**
      * Get all filters.
      */
-	public function getFilters() 
+    public function getFilters() 
     {
-		return $this->filters;
-	}
-	
+        return $this->filters;
+    }
+    
     /**
      * Add validator.
-     */	
-	public function addValidator(ValidatorInterface $validator) 
+     */ 
+    public function addValidator(ValidatorInterface $validator) 
     {
-		$this->validators[] = $validator;
-		return $this;
-	}
+        $this->validators[] = $validator;
+        return $this;
+    }
     
-	/**
+    /**
      * Add multiple validators at once.
-     */	
-	public function addValidators(array $validators) 
+     */ 
+    public function addValidators(array $validators) 
     {
-		foreach ($validators as $validator) {
-			$this->addValidator($validator);
-		}
-		return $this;
-	}
-	
-	/**
+        foreach ($validators as $validator) {
+            $this->addValidator($validator);
+        }
+        return $this;
+    }
+    
+    /**
      * Get all validators.
      */
-	public function getValidators () 
+    public function getValidators () 
     {    
-		return $this->validators;
-	}
-	
-	/**
+        return $this->validators;
+    }
+    
+    /**
      * Set name attribute.
      */
-	public function setName($name) 
+    public function setName($name) 
     {
         $this->setAttribute('name', (string) $name);
         return $this;
 
     }
-	
-	/**
+    
+    /**
      * Gets name attribute.
      */
-	public function getName() 
+    public function getName() 
     {
-		return $this->getAttribute('name');
-	}
+        return $this->getAttribute('name');
+    }
     
     /**
      * Gets id attribute.
      */
-	public function getId() 
+    public function getId() 
     {
-		return $this->getAttribute('id');
-	}    
+        return $this->getAttribute('id');
+    }    
     
     public function setDisabled($disabled) 
     {
@@ -186,106 +187,113 @@ abstract class ControlAbstract extends HtmlElement
         }
         return $this;
     }        
-	
-	/**
+    
+    /**
      * Sets required flag
      */
-	public function setRequired($required) 
+    public function setRequired($required) 
     {
-		$this->required = (bool) $required;
+        $this->required = (bool) $required;
         $attribute = $this->getAttribute('required');
         if ($required === true) {
             $this->setAttribute('required');
         } elseif ($attribute === null) {
             $this->removeAttribute('required');
         }
-		return $this;
-	}
-	
-	/**
+        return $this;
+    }
+    
+    public function setPlaceholder($placeholder)
+    {
+        $this->setAttribute('placeholder', $placeholder);
+        return $this;
+    }
+    
+    public function getPlaceholder()
+    {
+        return $this->placeholder;
+    }
+    
+    /**
      * Gets required flag
      */
-	public function isRequired() 
+    public function isRequired() 
     {
-		return $this->required;
-	}
+        return $this->required;
+    }
     
-	/**
+    /**
      * Sets value.
      */
-	public function setValue($value) 
+    public function setValue($value) 
     {   
         $this->setAttribute('value', $value);
-		$this->value = $value;
-		return $this;
-	}
-	
-	/**
+        $this->value = $value;
+        return $this;
+    }
+    
+    /**
      * Gets value.
      */
-	public function getValue() 
+    public function getValue() 
     {
-		return $this->value;
-	}	
-    	
-	/**
+        return $this->value;
+    }   
+        
+    /**
      * Get raw value
      */
-	public function getRawValue() 
+    public function getRawValue() 
     {
-		return $this->rawValue;
-	}
+        return $this->rawValue;
+    }
 
-	/**
+    /**
      * Set label
      */
-	public function setLabel($label) 
+    public function setLabel($label) 
     {
-		$this->label = (string) $label;
-		return $this;
-	}
-	
-	/**
+        $this->label = (string) $label;
+        return $this;
+    }
+    
+    /**
      * Get label
      */
-	public function getLabel() 
+    public function getLabel() 
     {
-		return $this->label;
-	}
+        return $this->label;
+    }
     
-	/**
+    /**
      * Check if value is valid
      */
-	public function isValid($value) 
+    public function isValid($value) 
     {    
         $isValid = true;
         
-        if ($value === null) {
-            return $isValid;
-        }
-        
         $this->rawValue = $value;
         
-        if ($this->isRequired()) {		
-			array_unshift($this->validators, new \Vision\Validator\NotEmptyString);
-		}
+        if ($this->isRequired()) {              
+            array_unshift($this->validators, new Validator\InputNotEmptyString);
+        }
         
         foreach ($this->filters as $filter) {
-			$value = $filter->filter($value);
-		}
+            $value = $filter->filter($value);
+        }
         
         $validators = $this->getValidators();
         
-		foreach ($validators as $validator) {
+        foreach ($validators as $validator) {
             if ($validator->isValid($value) === false) {   
-                $isValid = false;				
-			}             
-		}  
+                $isValid = false;               
+            }             
+        }  
         
         if ($isValid === true) {
             $this->setValue($value);
         }
         
         return $isValid;
-	}
+    }
 }

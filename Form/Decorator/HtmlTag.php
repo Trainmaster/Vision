@@ -7,20 +7,20 @@ class HtmlTag extends DecoratorAbstract
 {
     protected $decorator = null;
     
-    protected $placement = self::PREPEND;		    
+    protected $placement = self::PREPEND;           
     
     public function getDecorator()
     {
         return $this->decorator;
     }
 
-	public function render($content) 
-    {		
+    public function render($content) 
+    {       
         $html = '';
-		switch ($this->placement) {   
+        switch ($this->placement) {   
             case self::PREPEND:
-				$html = $this->decorator . $content;
-				break;
+                $html = $this->decorator . $content;
+                break;
                 
             case self::WRAP:
                 if ($this->decorator->isVoid()) {
@@ -30,14 +30,14 @@ class HtmlTag extends DecoratorAbstract
                 $html = (string) $this->decorator;
                 break;
                 
-			case self::APPEND:
-				$html = $content . $this->decorator;
-				break;
+            case self::APPEND:
+                $html = $content . $this->decorator;
+                break;
                 
             default:
                 return $content;
-		}
+        }
 
-		return $html;	
-	}
+        return $html;   
+    }
 }

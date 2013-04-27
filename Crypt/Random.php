@@ -7,7 +7,7 @@ class Random
     {        
         $length = (int) $length;
         
-        if (strlen($length) <= 0) {
+        if ($length <= 0) {
             return false;
         }
         
@@ -20,7 +20,7 @@ class Random
             }
         }
         
-        if (defined(MCRYPT_DEV_URANDOM)) {
+        if (function_exists('mcrypt_create_iv') && defined(MCRYPT_DEV_URANDOM)) {
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
             if ($bytes !== false) {
                 return $bytes;
@@ -30,13 +30,20 @@ class Random
         return false;
     }
     
-    public function generateString($length)
+    public function generateHex($length)
     {
         $length = (int) $length;
+        
+        if ($length <= 0) {
+            return false;
+        }
+        
         $bytes = $this->generateBytes($length / 2);
         
         if ($bytes !== false) {
             return bin2hex($bytes);
         }
+        
+        return false;
     }
 }

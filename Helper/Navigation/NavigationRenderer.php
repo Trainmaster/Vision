@@ -23,11 +23,19 @@ class NavigationRenderer implements NavigationRendererInterface
      */
     protected $request = null;
     
+    /**
+     * @param RequestInterface $request 
+     * 
+     * @return void
+     */
     public function setRequest($request)
     {
         $this->request = $request;
     }
     
+    /**
+     * @return $this->request
+     */
     public function getRequest()
     {
         return $this->request;

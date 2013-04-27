@@ -3,6 +3,7 @@ namespace Vision\Http;
 
 use Vision\Http\RequestHandler;
 use Vision\DataStructures\ArrayProxyObject;
+use Vision\DataStructures\SuperglobalProxyObject;
 use RuntimeException;
 
 /**
@@ -32,8 +33,8 @@ class Request extends AbstractMessage implements RequestInterface
         
     public function __construct()
     {
-        $this->get = new ArrayProxyObject($_GET);
-        $this->post = new ArrayProxyObject($_POST);
+        $this->get = new SuperglobalProxyObject($_GET);
+        $this->post = new SuperglobalProxyObject($_POST);
         $this->files = new ArrayProxyObject($_FILES);
         $this->cookie = new ArrayProxyObject($_COOKIE);
         $this->server = new ArrayProxyObject($_SERVER);
