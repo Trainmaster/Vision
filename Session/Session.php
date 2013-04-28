@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Session;
 
 use ArrayObject;
@@ -8,7 +15,7 @@ class Session extends ArrayObject
     protected $extension = null;
     
     public function __construct($extension) 
-    {		
+    {       
         register_shutdown_function(array($this, '__destruct'));
         $this->setExtension($extension);
         $this->extension->start();

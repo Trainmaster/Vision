@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Session\Extension;
 
 use RuntimeException;
@@ -15,7 +22,7 @@ class NativeExtension
         
         if (session_start()) {
             $this->started = true;
-		} else {
+        } else {
             throw RuntimeException('Session could not be started.');
         }
     }
