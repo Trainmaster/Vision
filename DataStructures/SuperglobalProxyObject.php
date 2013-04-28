@@ -9,6 +9,8 @@
 namespace Vision\DataStructures;
 
 /**
+ * SuperglobalProxyObject
+ *
  * @author Frank Liepert
  */
 class SuperglobalProxyObject extends ArrayProxyObject
