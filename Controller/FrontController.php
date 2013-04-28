@@ -1,11 +1,4 @@
 <?php
-/**
- * Vision PHP-Framework
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
@@ -16,11 +9,6 @@ use Exception;
 use RuntimeException;
 use UnexpectedValueException;
 
-/**
- * FrontController
- *
- * @author Frank Liepert
- */
 class FrontController 
 {
     protected $container = null;
@@ -31,13 +19,6 @@ class FrontController
     
     protected $router = null;
         
-    /**
-     *
-     *
-     *
-     *
-     *
-     */
     public function __construct(RequestInterface $request, ResponseInterface $response, 
                                 Router $router, ContainerInterface $container) 
     {
@@ -47,47 +28,21 @@ class FrontController
         $this->container = $container;
     }
 
-    /**
-     * 
-     * 
-     * 
-     * @return <type>
-     */
     public function getRequest()
     {
         return $this->request;
     }
     
-    /**
-     * 
-     * 
-     * 
-     * @return <type>
-     */
     public function getResponse()
     {
         return $this->response;
     }
     
-    /**
-     * 
-     * 
-     * 
-     * @return <type>
-     */
     public function getRouter()
     {
         return $this->router;
     }
     
-    /**
-     * 
-     * 
-     * @param <type> $class 
-     * @param <type> $method 
-     * 
-     * @return <type>
-     */
     public function invokeController($class, $method)
     {
         $definition = $this->container->getDefinition($class);
@@ -107,13 +62,6 @@ class FrontController
         return false;
     }
     
-    /**
-     * 
-     * 
-     * @param <type> $definition 
-     * 
-     * @return <type>
-     */
     public function resolveAbstractDependencies($definition)
     {    
         $class = $definition->getClass();
@@ -150,12 +98,6 @@ class FrontController
         }
     }
     
-    /**
-     * 
-     * 
-     * 
-     * @return <type>
-     */
     public function run() 
     {     
         try {
@@ -183,13 +125,6 @@ class FrontController
         }       
     }
     
-    /**
-     * 
-     * 
-     * @param <type> $e 
-     * 
-     * @return <type>
-     */
     public function handleException(Exception $e) 
     {
         if ($this->container->isDefined('ExceptionController')) {

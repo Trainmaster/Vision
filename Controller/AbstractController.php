@@ -1,11 +1,4 @@
 <?php
-/**
- * Vision PHP-Framework
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
 namespace Vision\Controller;
 
 use Vision\Crypt\Random;
@@ -19,17 +12,10 @@ use Vision\Http\Url;
 use Vision\Http\UrlAwareInterface;
 use Vision\Templating\TemplateEngineAwareInterface;
 
-/**
- * AbstractController
- *
- * @author Frank Liepert
- */
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface, 
                                              TemplateEngineAwareInterface, SessionAwareInterface,
                                              UrlAwareInterface
-{
-    protected $data = array();
-    
+{      
     protected $request = null;
     
     protected $response = null;
