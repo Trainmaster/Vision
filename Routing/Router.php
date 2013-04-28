@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Routing;
 
 use Vision\Controller\ControllerParserInterface;
@@ -31,7 +38,7 @@ class Router extends Config\AbstractConfig
     }
 
     public function resolve() 
-    {	        
+    {           
         $match = false;
         
         $pathInfo = $this->request->getPathInfo();
@@ -70,34 +77,22 @@ class Router extends Config\AbstractConfig
                 
                 $pattern = $route->getPath();  
                 
-                preg_match_all('#\{([\w\d_=]+)\}#u', $pattern, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);	
-                
-                //print '<pre>';                
-                // print $pattern;
+                preg_match_all('#\{([\w\d_=]+)\}#u', $pattern, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE); 
                 
                 if (!empty($matches)) {
-                    
-                    //print_r ($matches);
                     $start = 0;
                     $length = 0;
-                    //$regex = '';
                     foreach ($matches as $key => $value) {
                         $regex = '';
                         $length = $value[0][1] - $start;
-                        
-                        //$regex .= preg_quote(substr($pattern, $start, $length), '#');                        
-                        
-                        //print $regex;
                         
                         if ($length > 1) {
                             //$regex .= '?';
                         }
                         
                         if (isset($requirements[$value[1][0]])) {
-                            // question mark at regex end
                             $regex .= sprintf('(?<%s>%s)', $value[1][0], $requirements[$value[1][0]]);
                         } else {
-                            // question mark at regex end
                             $regex .= sprintf('(?<%s>%s)', $value[1][0], $this->defaultParameterPattern);
                         }
                         
@@ -105,20 +100,14 @@ class Router extends Config\AbstractConfig
                         $tokens[] = $value[1][0];
                         
                         $replacements[$value[0][0]] = $regex;
-                        //print $regex;
                     }                    
-                    // $pattern = $regex;
-                }		
+                }       
                 
                 foreach ($replacements as $k => $v) {
                     $pattern = str_replace($k, $v, $pattern);
                 }
-                
-                //print $pattern;
-                //print_r ($replacements);
-                //print_r ($tokens);
-                
-                $pattern = '#^'.$pattern.'$#u';	
+
+                $pattern = '#^'.$pattern.'$#u'; 
 
                 if (preg_match($pattern, $pathInfo, $matches)) {
                     foreach ($tokens as $token) {
@@ -136,7 +125,7 @@ class Router extends Config\AbstractConfig
             $defaults = $route->getDefaults();
             if (!empty($defaults)) {
                 foreach ($defaults as $key => $value) {
-                    $this->request->get->$key = $value;
+                    $this->request->get[$key] = $value;
                 }
             }
             return $this->parser->parse($route->getController());
