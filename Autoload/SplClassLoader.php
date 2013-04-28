@@ -1,10 +1,22 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 namespace Vision\Autoload;
 
 use RuntimeException;
 
+/**
+ * SplClassLoader
+ *
+ * @author Frank Liepert
+ */
 class SplClassLoader 
-{	
+{   
     protected $fileExtension = '.php';
     
     protected $namespace = null;
