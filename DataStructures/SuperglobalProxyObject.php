@@ -27,8 +27,6 @@ class SuperglobalProxyObject extends ArrayProxyObject
      */
     public function getValueByName($name)
     {
-        print $name;
-        print_r ($this->data);
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
         }
