@@ -10,11 +10,13 @@ abstract class AbstractConfig
     protected $parameters = array();
     
     public function addDefinition($alias, Definition $definition) 
-    {	        
+    {           
+        $class = $this->resolveParameter($definition->getClass());
+        $definition->setClass($class);        
         if ($alias !== null) {
             $this->definitions[$this->resolveParameter($alias)] = $definition;
         } else {
-            $this->definitions[$this->resolveParameter($definition->getClass())] = $definition;
+            $this->definitions[$class] = $definition;
         }
         return $definition;
     }
@@ -27,9 +29,14 @@ abstract class AbstractConfig
         return null;
     }
     
+    public function getDefinitions()
+    {
+        return $this->definitions;
+    }
+    
     public function addParameter($key, $value)
     {
-        $this->parameters[$key] = $value;
+        $this->parameters[$key] = $this->resolveParameter($value);
         return $this;
     }
     
@@ -49,25 +56,20 @@ abstract class AbstractConfig
         return null;
     }
     
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+    
     protected function resolveParameter($dependency)
     {
         $i = substr_count($dependency, '%');        
-        if ($i >= 2 && $i % 2 === 0) {		
+        if ($i >= 2 && $i % 2 === 0) {      
             $di = $this;
             $dependency = preg_replace_callback("#%([\w.-]+)%#", function($match) use (&$di) {
                 return $di->getParameter($match[1]) !== null ? $di->getParameter($match[1]) : $match[1];
             }, $dependency);            
         }
         return $dependency;
-    }
-    
-    protected function resolveReference($dependency)
-    {
-        
-        if (strpos($dependency, '@') === 0) {
-            $dependency = substr($dependency, 1);
-            return $this->get($dependency);
-        }
-        return $dependency;
-    }
+    }    
 }

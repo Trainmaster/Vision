@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Http;
 
 use Vision\Http\RequestHandler;
@@ -34,6 +41,7 @@ class Request extends AbstractMessage implements RequestInterface
     public function __construct()
     {
         $this->get = new SuperglobalProxyObject($_GET);
+        print_r($_GET);
         $this->post = new SuperglobalProxyObject($_POST);
         $this->files = new ArrayProxyObject($_FILES);
         $this->cookie = new ArrayProxyObject($_COOKIE);

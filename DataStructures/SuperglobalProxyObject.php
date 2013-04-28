@@ -5,8 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
- 
+ */ 
 namespace Vision\DataStructures;
 
 /**
@@ -22,10 +21,12 @@ class SuperglobalProxyObject extends ArrayProxyObject
      * 
      * @param string $name 
      * 
-     * @return mixed|null
+     * @return mixed
      */
     public function getValueByName($name)
     {
+        print $name;
+        print_r ($this->data);
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
         }

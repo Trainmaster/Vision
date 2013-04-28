@@ -6,8 +6,8 @@ use Vision\Http\RequestInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
 use Exception;
-use UnexpectedValueException;
 use RuntimeException;
+use UnexpectedValueException;
 
 class FrontController 
 {
@@ -18,8 +18,9 @@ class FrontController
     protected $response = null;   
     
     protected $router = null;
-	    
-    public function __construct(RequestInterface $request, ResponseInterface $response, Router $router, ContainerInterface $container) 
+        
+    public function __construct(RequestInterface $request, ResponseInterface $response, 
+                                Router $router, ContainerInterface $container) 
     {
         $this->request = $request; 
         $this->response = $response;
@@ -43,36 +44,47 @@ class FrontController
     }
     
     public function invokeController($class, $method)
-    {        
-        if ($this->container->isDefined($class)) {
-            // To do: What if $class is not defined in container? wireUp... will result in an error
-            // print_r (get_declared_classes());
-            $this->wireUpInterfaceAwareDependencies($class);
-            $instance = $this->container->get($class);   
-            $instance->preFilter();
-            if (method_exists($instance, $method)) {
-                return $instance->$method();
-            }
+    {
+        $definition = $this->container->getDefinition($class);
+        
+        if ($definition === null) {
+            return false;
         }
+
+        $this->resolveAbstractDependencies($definition);
+        $instance = $this->container->get($class);   
+        $instance->preFilter();        
+        
+        if (method_exists($instance, $method)) {
+            return $instance->$method();
+        }
+
+        return false;
     }
     
-    public function wireUpInterfaceAwareDependencies($class)
+    public function resolveAbstractDependencies($definition)
     {    
+        $class = $definition->getClass();
+        
         if (class_exists($class) === false) {
-            return false;
+            return false;           
         }
         
         $interfaces = class_implements($class);  
-               
+        
+        $parents = class_parents($class);
+
         if (is_array($interfaces)) {
             $setterInjections = array();
             foreach ($interfaces as $interface) {            
-                $definition = $this->container->getDefinition($interface);
-                if ($definition === null) {
+                $def = $this->container->getDefinition($interface);
+                
+                if ($def === null) {
                     continue;
                 }       
                 
-                $dependencies = $definition->getSetterInjections();
+                $dependencies = $def->getSetterInjections();
+                
                 if (empty($dependencies)) {
                     continue;
                 }     
@@ -81,7 +93,7 @@ class FrontController
             }
             
             if (!empty($setterInjections)) {
-                $this->container->getDefinition($class)->setSetter($setterInjections); 
+                $definition->setSetter($setterInjections); 
             }
         }
     }
@@ -110,11 +122,15 @@ class FrontController
             }
         } catch (Exception $e) {
             return $this->handleException($e);
-        }		
+        }       
     }
     
     public function handleException(Exception $e) 
     {
+        if ($this->container->isDefined('ExceptionController')) {
+            $this->container->getDefinition('ExceptionController')->setter('setException', array($e));
+            return $this->invokeController('ExceptionController', 'indexAction');
+        }
         $this->response->body(highlight_string($e));
     }
 }

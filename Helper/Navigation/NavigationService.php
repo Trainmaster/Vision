@@ -141,23 +141,23 @@ class NavigationService
         */
         
         if ($this->rootId === null) {
-            throw RuntimeException('A root id must be set.');
+            throw new RuntimeException('A root id must be set.');
         }
         
         if ($this->languageId === null) {
-            throw RuntimeException('A language id id must be set.');
+            throw new RuntimeException('A language id id must be set.');
         }       
 
         $flatTree = $this->mapper->loadByIdAndLanguageId($this->rootId, $this->languageId);
         
         if ($flatTree === null) {
-            throw RuntimeException('No tree found.');
+            throw new RuntimeException('No tree found.');
         }
         
         $tree = $this->convertFlatToHierarchical($flatTree);
         
         if (!array_key_exists($this->rootId, $tree)) {
-            throw RuntimeException('Something went wrong.');
+            throw new RuntimeException('Something went wrong.');
         }
         
         $tree = array($tree[$this->rootId]);
@@ -186,7 +186,7 @@ class NavigationService
                     $data[$row->getParent()]->addChild($data[$id]);        
                 }
             } else {
-                throw RuntimeException(sprintf('Array element must be an instance of Node.'));
+                throw new RuntimeException(sprintf('Array element must be an instance of Node.'));
             }
         }       
         return $data;

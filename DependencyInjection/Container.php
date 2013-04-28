@@ -6,21 +6,38 @@ use RuntimeException;
 use InvalidArgumentException;
 
 class Container extends Config\AbstractConfig implements ContainerInterface
-{    
+{
+    /**
+     * @param void
+     */
+    public function __construct()
+    {
+        $this->objects['dic'] = $this;
+    }
+    
+    /**
+     * @type array $objects
+     */
     protected $objects = array();
     
+    /**
+     * @param string $alias 
+     * 
+     * @return bool
+     */
     public function isDefined($alias)
     {
         if (isset($this->definitions[$alias])) {
             return true;
-        } else {
-            throw new RuntimeException(sprintf(
-                'No definition for "%s". Please check the container configuration.', 
-                $alias
-            ));
         }
+        return false;
     }
     
+    /**
+     * @param string $alias 
+     * 
+     * @return mixed
+     */
     public function get($alias)
     {
         if ($this->isDefined($alias)) {
@@ -35,14 +52,24 @@ class Container extends Config\AbstractConfig implements ContainerInterface
                 $this->objects[$alias] = $instance;
                 return $instance;
             }
+        } else {
+            throw new RuntimeException(sprintf(
+                'No definition for "%s". Please double-check the container configuration file(s).', 
+                $alias
+            ));
         }
     }
     
+    /**
+     * @param Definition $definition 
+     * 
+     * @return mixed
+     */
     protected function createObject(Definition $definition)
-    {	                
-        $reflection = new ReflectionClass($this->resolveDependency($definition->getClass()));
+    {                   
+        $reflection = new ReflectionClass($definition->getClass());
         
-        if ($reflection->isInterface() || $reflection->isAbstract()) {
+        if ($reflection->isInstantiable() === false) {
             return false;
         }
 
@@ -55,25 +82,28 @@ class Container extends Config\AbstractConfig implements ContainerInterface
 
         $propertyInjections = $definition->getPropertyInjections();
         if (!empty($propertyInjections)) {
-            foreach ($propertyInjections as $property) {
-                foreach ($property as $propertyName => $dependencies) {
-                    $reflection->getProperty($propertyName)->setValue($instance, $this->resolveDependencies($dependencies));
-                }
+            foreach ($propertyInjections as $property => $value) {
+                $reflection->getProperty($property)->setValue($instance, $this->resolveDependency($value));
             }
         }
         
         $setterInjections = $definition->getSetterInjections();
-        if (!empty($setterInjections)) {	
+        if (!empty($setterInjections)) {    
             foreach ($setterInjections as $setter) {
                 foreach ($setter as $method => $dependencies) {
                     $reflection->getMethod($method)->invokeArgs($instance, $this->resolveDependencies($dependencies));
                 }
-            }				
-        }	
+            }               
+        }   
         
-        return $instance;		
+        return $instance;       
     }
     
+    /**
+     * @param string $dependency 
+     * 
+     * @return mixed
+     */
     protected function resolveDependency($dependency)
     {    
         if (is_string($dependency)) {
@@ -87,11 +117,30 @@ class Container extends Config\AbstractConfig implements ContainerInterface
         return $dependency;
     }
     
+    /**
+     * @param array $dependencies 
+     * 
+     * @return array
+     */
     protected function resolveDependencies(array $dependencies)
     {
         foreach ($dependencies as &$dependency) {
             $dependency = $this->resolveDependency($dependency);
         }     
         return $dependencies;
-    }   
+    }
+
+    /**
+     * @param string $dependency 
+     * 
+     * @return mixed
+     */
+    protected function resolveReference($dependency)
+    {        
+        if (strpos($dependency, '@') === 0) {
+            $dependency = substr($dependency, 1);
+            return $this->get($dependency);
+        }
+        return $dependency;
+    }
 }

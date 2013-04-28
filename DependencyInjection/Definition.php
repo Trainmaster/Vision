@@ -18,6 +18,11 @@ class Definition
         
     public function __construct($class)
     {
+        $this->setClass($class);
+    }
+    
+    public function setClass($class)
+    {
         $this->class = $class;
     }
     
@@ -43,7 +48,7 @@ class Definition
         return $this;
     }
     
-    public function property($property, array $dependencies) 
+    public function property($property, $value) 
     {
         if (is_string($property) === false) {
             throw new InvalidArgumentException(sprintf(
@@ -51,7 +56,7 @@ class Definition
                 __METHOD__
             ));
         }
-        $this->property[][$property] = $dependencies;
+        $this->property[$property] = $value;
         return $this;
     }
     
