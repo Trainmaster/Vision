@@ -1,8 +1,20 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\View\Html;
 
 use Vision\Html\Element as HtmlElement;
 
+/**
+ * Element
+ *
+ * @author Frank Liepert
+ */ 
 class Element 
 {
     /**
@@ -13,7 +25,7 @@ class Element
     private $element;
     
     /**
-    * Object constructor
+    * Constructor
     *
     * @param \Vision\Html\Element $element
     */
@@ -42,7 +54,7 @@ class Element
     *
     * @return string
     */
-	protected function clean($value)
+    protected function clean($value)
     {
         return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
     }
