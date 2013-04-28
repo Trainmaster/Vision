@@ -1,7 +1,12 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Validator;
-
-class ValidateException extends \Exception {}
 
 abstract class ValidatorAbstract implements ValidatorInterface 
 {
@@ -16,5 +21,5 @@ abstract class ValidatorAbstract implements ValidatorInterface
     public function getMessages()
     {
         return $this->messages;
-    }	
+    }   
 }
