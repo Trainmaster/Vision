@@ -1,10 +1,22 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 namespace Vision\Core;
 
 use Vision\Controller\FrontController;
 use Vision\File\Loader\LoaderInterface;
 use Locale;
 
+/**
+ * AbstractApp
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */
 abstract class AbstractApp
 {
     protected $debug = true;

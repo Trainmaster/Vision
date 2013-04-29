@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
@@ -9,6 +16,11 @@ use Exception;
 use RuntimeException;
 use UnexpectedValueException;
 
+/**
+ * FrontController
+ *
+ * @author Frank Liepert
+ */
 class FrontController 
 {
     protected $container = null;

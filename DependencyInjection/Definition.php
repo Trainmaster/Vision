@@ -1,9 +1,21 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 namespace Vision\DependencyInjection;
 
 use Vision\DependencyInjection\Dependency;
 use InvalidArgumentException;
 
+/**
+ * Definition
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */
 class Definition 
 {
     protected $class = null;

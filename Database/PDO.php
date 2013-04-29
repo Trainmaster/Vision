@@ -15,7 +15,7 @@ class PDO extends \PDO
     *
     * @param mixed $mixed
     *
-    * @return array
+    * @return string|array
     */
     public function createQuestionMarks($mixed)
     {
@@ -27,6 +27,13 @@ class PDO extends \PDO
         return array();
     }
     
+    /**
+     * Useful method for Inserts
+     * 
+     * @param mixed $mixed 
+     * 
+     * @return string
+     */
     public function createMultipleValuesList($mixed)
     {
         if (is_array($mixed)) {

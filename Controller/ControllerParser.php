@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 namespace Vision\Controller;
 
 use InvalidArgumentException;
@@ -17,7 +24,7 @@ class ControllerParser implements ControllerParserInterface
      *
      * @throws InvalidArgumentException if the provided argument is malformed.
      *
-     * @return array('class' => string, 'method' => string)
+     * @return array
      */
     public function parse($controller)
     {
