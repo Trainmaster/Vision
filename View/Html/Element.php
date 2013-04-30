@@ -46,7 +46,7 @@ class Element
         }   
         
         $html .= $this->element->getContent() 
-              . $this->renderEndTag();  
+              .  $this->renderEndTag();  
                   
         return $html;
     }   
@@ -79,7 +79,7 @@ class Element
     {
         $html = '</%s>';
         $tag = $this->element->getTag();
-        return sprintf ($html, $tag);
+        return sprintf($html, $tag);
     }
     
     /**
@@ -114,9 +114,9 @@ class Element
             }
             
             if ($value === null) {
-                $html .= ' '.$this->clean($key);
+                $html .= ' ' . $this->clean($key);
             } else {
-                $html .= ' '.$this->clean($key).'="'.$this->clean($value).'"';
+                $html .= ' ' . $this->clean($key) . '="' . $this->clean($value). '"';
             }
         }
         
