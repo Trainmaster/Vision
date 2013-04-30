@@ -17,70 +17,64 @@ use Vision\Html\Element as HtmlElement;
  */ 
 class Element 
 {
-    /**
-    * HtmlElement
-    *
-    * @var Vision\Html\Element
-    */
+    /** @type HtmlElement $element */
     private $element;
     
     /**
-    * Constructor
-    *
-    * @param \Vision\Html\Element $element
-    */
+     * 
+     * 
+     * @param HtmlElement $element 
+     * 
+     * @return void
+     */
     public function __construct(HtmlElement $element)
     {
         $this->element = $element;
     }
     
     /**
-    * String representation of element
-    *
-    * @return string
-    */
+     * String representation of element
+     * 
+     * @return string
+     */
     public function __toString()
     {
         $html = $this->renderStartTag();        
-        if ($this->element->isVoid() === false) {
-            $html .= $this->element->getContent() 
-                  . $this->renderEndTag();
-        }        
+        
+        if ($this->element->isVoid()) {
+            return $html;            
+        }   
+        
+        $html .= $this->element->getContent() 
+              . $this->renderEndTag();  
+                  
         return $html;
-    }
+    }   
     
     /**
-    * Apply htmlspecialchars()
-    *
-    * @return string
-    */
-    protected function clean($value)
-    {
-        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-    }
-    
-    /**
-    * Render start tag
-    *
-    * @return string
-    */  
+     * Render start tag
+     * 
+     * @return string
+     */
     public function renderStartTag()
     {
         $html = '<%s%s%s>';
         $tag = $this->element->getTag();
         $attributes = $this->renderAttributes();
-        $slash = null;
+        $slash = '';
+        
         if ($this->element->isVoid()) {
             $slash = ' /';
-        }    
+        }  
+        
         return sprintf($html, $tag, $attributes, $slash);
     }
     
     /**
-    * Render end tag
-    *
-    * @return string
-    */   
+     * Render end tag
+     * 
+     * @return string
+     */
     public function renderEndTag()
     {
         $html = '</%s>';
@@ -89,26 +83,43 @@ class Element
     }
     
     /**
-    * Render attributes
-    *
-    * @return string
-    */
-    private function renderAttributes()
+     * Apply htmlspecialchars()
+     * 
+     * @param mixed $value 
+     * 
+     * @return string
+     */
+    protected function clean($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+    }
+    
+    /**
+     * Render attributes
+     * 
+     * @return string
+     */
+    protected function renderAttributes()
     {
         $html = '';
         $attributes = $this->element->getAttributes();
-        if (!empty($attributes)) {       
-            foreach ($attributes as $key => $value) {
-                if (strlen($key) < 1) {
-                    break;
-                }
-                if ($value === null) {
-                    $html .= ' '.$this->clean($key);
-                } else {
-                    $html .= ' '.$this->clean($key).'="'.$this->clean($value).'"';
-                }
+        
+        if (empty($attributes)) {
+            return $html;
+        }
+        
+        foreach ($attributes as $key => $value) {
+            if (strlen($key) < 1) {
+                break;
+            }
+            
+            if ($value === null) {
+                $html .= ' '.$this->clean($key);
+            } else {
+                $html .= ' '.$this->clean($key).'="'.$this->clean($value).'"';
             }
         }
+        
         return $html;
     }       
 }
