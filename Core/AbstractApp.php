@@ -8,9 +8,10 @@
  */
 namespace Vision\Core;
 
+use Locale;
+
 use Vision\Controller\FrontController;
 use Vision\File\Loader\LoaderInterface;
-use Locale;
 
 /**
  * AbstractApp
@@ -38,14 +39,18 @@ abstract class AbstractApp
     
     public function initLocale()
     {
-        if (class_exists('Locale')) {
-            if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-                $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);            
-                if ($locale !== null) {
-                    Locale::setDefault($locale);    
-                }
-            }
+        if (class_exists('Locale') === false) {
+            return false;
         }
+            
+        if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return false;
+        }
+        
+        $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']); 
+        
+        Locale::setDefault($locale);  
+        setlocale(LC_ALL, $locale);        
     }
     
     public function setDebug($debug)

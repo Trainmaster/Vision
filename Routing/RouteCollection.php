@@ -8,9 +8,15 @@
  */ 
 namespace Vision\Routing;
 
-use ArrayIterator, IteratorAggregate;
+use ArrayIterator;
+use IteratorAggregate;
 use RuntimeException;
 
+/**
+ * RouteCollection
+ *
+ * @author Frank Liepert
+ */
 class RouteCollection extends Config\AbstractConfig implements IteratorAggregate
 {    
     public function getIterator()

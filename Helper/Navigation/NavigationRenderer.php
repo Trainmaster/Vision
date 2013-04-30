@@ -8,10 +8,10 @@
  */ 
 namespace Vision\Helper\Navigation;
 
+use Vision\Html\ElementFactory as Html;
+
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
-
-use Vision\Html\ElementFactory as Html;
 
 /**
  * @author Frank Liepert

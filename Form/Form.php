@@ -1,4 +1,11 @@
 <?php 
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Form;
 
 use Vision\Http\RequestInterface;
@@ -6,6 +13,11 @@ use Vision\Html\Element as HtmlElement;
 use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
 use RecursiveIteratorIterator;
 
+/**
+ * Form
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */ 
 class Form extends AbstractCompositeType 
 {    
     protected $tag = 'form';

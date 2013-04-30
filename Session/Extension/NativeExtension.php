@@ -10,6 +10,11 @@ namespace Vision\Session\Extension;
 
 use RuntimeException;
 
+/**
+ * NativeExtension
+ *
+ * @author Frank Liepert
+ */
 class NativeExtension 
 {
     protected $started = false;

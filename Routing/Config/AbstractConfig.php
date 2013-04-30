@@ -13,10 +13,26 @@ use Vision\Routing\RouteCollection;
 
 use RuntimeException;
 
+/**
+ * AbstractConfig
+ *
+ * @author Frank Liepert
+ */
 abstract class AbstractConfig
 {
+    /**
+     * @type array
+     */
     protected $routes = array();
     
+    /**
+     * 
+     * 
+     * @param string $alias 
+     * @param Route $route 
+     * 
+     * @return AbstractConfig
+     */
     public function addRoute($alias, Route $route)
     {
         if (isset($this->routes[$alias])) {
@@ -25,6 +41,14 @@ abstract class AbstractConfig
         $this->routes[$alias] = $route;
         return $this;
     }
+    
+    /**
+     * 
+     * 
+     * @param RouteCollection $collection 
+     * 
+     * @return AbstractConfig
+     */
     public function addRouteCollection(RouteCollection $collection)
     {
         foreach ($collection as $alias => &$route) {
@@ -33,6 +57,13 @@ abstract class AbstractConfig
         return $this;
     }
     
+    /**
+     * 
+     * 
+     * @param string $alias 
+     * 
+     * @return Route|null
+     */
     public function getRoute($alias)
     {
         if (isset($this->routes[$alias])) {
@@ -41,11 +72,24 @@ abstract class AbstractConfig
         return null;
     }
     
+    /**
+     * 
+     * 
+     * @param string $alias 
+     * 
+     * @return boll
+     */
     public function hasRoute($alias)
     {
         return (bool) isset($this->routes[$alias]);
     }
     
+    /**
+     * 
+     * 
+     * 
+     * @return array
+     */
     public function getRoutes()
     {
         return $this->routes;

@@ -10,6 +10,11 @@ namespace Vision\Session;
 
 use ArrayObject;
 
+/**
+ * Session
+ *
+ * @author Frank Liepert
+ */
 class Session extends ArrayObject
 {    
     protected $extension = null;

@@ -8,6 +8,11 @@
  */ 
 namespace Vision\Routing;
 
+/**
+ * Route
+ *
+ * @author Frank Liepert
+ */
 class Route
 {
     protected $hasPlaceholder = false;

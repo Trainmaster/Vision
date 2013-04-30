@@ -8,9 +8,9 @@
  */ 
 namespace Vision\Helper\Navigation;
 
-use RecursiveIteratorIterator;
-
 use Vision\Html\ElementFactory as Html;
+
+use RecursiveIteratorIterator;
 
 /**
  * @author Frank Liepert

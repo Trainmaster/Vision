@@ -11,6 +11,11 @@ namespace Vision\Routing;
 use Vision\Controller\ControllerParserInterface;
 use Vision\Http\RequestInterface;
 
+/**
+ * Router
+ *
+ * @author Frank Liepert
+ */
 class Router extends Config\AbstractConfig
 {
     protected $defaultParameterPattern = '[\w.~-]+';

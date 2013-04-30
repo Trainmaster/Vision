@@ -1,4 +1,5 @@
-<?php/**
+<?php
+/**
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>

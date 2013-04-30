@@ -11,6 +11,11 @@ namespace Vision\Routing\Config;
 use Vision\Routing\Router;
 use Vision\File\Loader\ScopeFileLoader;
 
+/**
+ * NativeLoader
+ *
+ * @author Frank Liepert
+ */
 class NativeLoader extends ScopeFileLoader
 {   
     protected $scopeName = 'router';
