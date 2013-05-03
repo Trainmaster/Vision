@@ -9,7 +9,10 @@
 namespace Vision\Database;
 
 class PDO extends \PDO 
-{   
+{
+    /** @type bool */
+    protected $hasActiveTransaction = false;
+    
     /**
     * Workaround for WHERE IN() queries
     *
@@ -48,5 +51,42 @@ class PDO extends \PDO
             $list = array_fill(0, $count, $list);  
             return implode(',', $list);
         }
+    }
+    
+    /**
+     * Support for nested transactions
+     * 
+     * @return bool
+     */
+    public function beginTransaction()
+    {
+        if ($this->hasActiveTransaction) {
+            return false;
+        } else {
+            $this->hasActiveTransaction = parent::beginTransaction();
+            return $this->hasActiveTransaction;
+        }
+    }
+
+    /**
+     * Support for nested transactions
+     * 
+     * @return bool
+     */
+    public function commit()
+    {        
+        $this->hasActiveTransaction = false;
+        return parent::commit();
+    }
+
+    /**
+     * Support for nested transactions
+     * 
+     * @return bool
+     */
+    public function rollback()
+    {        
+        $this->hasActiveTransaction = false;
+        return parent::rollback();
     }
 }
