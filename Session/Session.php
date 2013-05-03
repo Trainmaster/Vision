@@ -8,14 +8,14 @@
  */ 
 namespace Vision\Session;
 
-use ArrayObject;
+use Vision\DataStructures\ArrayProxyObject;
 
 /**
  * Session
  *
  * @author Frank Liepert
  */
-class Session extends ArrayObject
+class Session extends ArrayProxyObject
 {    
     protected $extension = null;
     
@@ -30,6 +30,11 @@ class Session extends ArrayObject
     public function __destruct()    
     {
         $this->extension->save($this);
+    }
+    
+    public function __toString()
+    {
+        return serialize($this->getArrayCopy());
     }
 
     public function clear()
