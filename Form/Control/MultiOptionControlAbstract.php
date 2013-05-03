@@ -15,19 +15,33 @@ namespace Vision\Form\Control;
  */ 
 abstract class MultiOptionControlAbstract extends ControlAbstract 
 {
+    /** @type array $options */
     protected $options = array();
     
+    /** 
+     * @param array $options 
+     * 
+     * @return MultiOptionControlAbstract Provides a fluent interface.
+     */
     public function setOptions(array $options) 
     {
         $this->options = $options;
         return $this;
     }
     
+    /**
+     * @return array
+     */
     public function getOptions() 
     {
         return $this->options;
     }
     
+    /**
+     * @param mixed $val 
+     * 
+     * @return bool
+     */
     public function checkForPreSelection($val)
     {
         $value = $this->getValue();

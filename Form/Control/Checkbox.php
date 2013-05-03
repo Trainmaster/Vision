@@ -1,4 +1,11 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Form\Control;
 
 use Vision\Html\Element as HtmlElement;
@@ -6,14 +13,25 @@ use Vision\Html\ElementFactory;
 use Vision\Form\Decorator;
 use Vision\Validator;
 
+/**
+ * Checkbox
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */ 
 class Checkbox extends MultiOptionControlAbstract 
 {
+    /** @type string $input */
     protected $tag = 'input';
     
+    /** @type array $attributes */
     protected $attributes = array('type' => 'checkbox');
     
+    /** @type bool $isVoid */
     protected $isVoid = true; 
     
+    /**
+     * @return void
+     */
     public function init() 
     {
         $label = new Decorator\Label;
@@ -27,11 +45,14 @@ class Checkbox extends MultiOptionControlAbstract
         $this->setRequired(false);
     }
     
+    /**
+     * @return string
+     */
     public function __toString() 
     {   
         $content = '';
         
-        foreach ($this->options as $label => $option) {
+        foreach ($this->options as $option => $label) {
             $this->removeAttribute('checked');
             $this->setLabel($label);
             $this->setAttribute('value', $option);            
@@ -46,12 +67,17 @@ class Checkbox extends MultiOptionControlAbstract
         return $content;
     }
     
+    /**
+     * @return array
+     */
     public function getValidators()
     {
         $count = count($this->getOptions());
+        
         if ($count > 1) {
             $this->addValidator(new Validator\InArray(array('haystack' => $this->getOptions())));
         }
+        
         return $this->validators;
     }
 }
