@@ -20,26 +20,44 @@ use RecursiveIteratorIterator;
  */ 
 class Form extends AbstractCompositeType 
 {    
+    /** @type string $tag */
     protected $tag = 'form';
     
+    /** @type array $attributes */
     protected $attributes = array(
                                 'action' => '',
                                 'enctype' => 'multipart/form-data',
                                 'method' => 'post'
                             );
-                            
+           
+    /** @type null|array */
     protected $data = null;
     
+    /** @type null|RecursiveIteratorIterator $formElementsIterator */
     protected $formElementsIterator = null;
     
+    /** @type array $values */
+    protected $values = array();
+    
+    /**
+     * @return void
+     */    
     public function init() {}
     
+    /**
+     * @param string $action 
+     * 
+     * @return Form Provides a fluent interface.
+     */
     public function setAction($action)
     {
         $this->setAttribute('action', $action);
         return $this;
     }           
     
+    /**
+     * @return RecursiveIteratorIterator
+     */
     public function getFormElementsIterator()
     {
         if ($this->formElementsIterator === null) {
@@ -50,6 +68,11 @@ class Form extends AbstractCompositeType
         return $this->formElementsIterator;
     }
     
+    /**
+     * @param string $name 
+     * 
+     * @return null|Form\ControlAbstract
+     */
     public function getElement($name) 
     {
         $iterator = $this->getFormElementsIterator();
@@ -63,11 +86,21 @@ class Form extends AbstractCompositeType
         return null;
     }
     
+    /**
+     * @param string $name 
+     * 
+     * @return Form\ControlAbstract|null
+     */
     public function getElementByName($name)
     {
         return $this->getElement($name);
     }
     
+    /**
+     * @param string $name 
+     * 
+     * @return mixed|bool
+     */
     public function getValue($name)
     {
         $element = $this->getElementByName($name);
@@ -76,7 +109,15 @@ class Form extends AbstractCompositeType
             return $element->getValue();
         }
         
-        return $element;
+        return false;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
     
     /**
@@ -87,9 +128,9 @@ class Form extends AbstractCompositeType
      * 
      * @param string $name 
      * 
-     * @return mixed|null
+     * @return null|mixed
      */
-    public function getValueByName($name)
+    protected function getValueByName($name)
     {
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
@@ -110,17 +151,28 @@ class Form extends AbstractCompositeType
         return $value;
     }
      
-    public function bindData($data)
+    /** 
+     * @param array $data 
+     * 
+     * @return Form Provides a fluent interface.
+     */
+    public function bindData(array $data)
     {
         $this->data = $data;
         return $this;
     }
     
+    /**
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
     }
     
+    /**
+     * @return bool
+     */
     public function isSent()
     {
         if (isset($this->data[$this->name])) {
@@ -129,6 +181,9 @@ class Form extends AbstractCompositeType
         return false;
     }
     
+    /**
+     * @return bool
+     */
     public function isValid() 
     {         
         $isValid = true;    
@@ -146,6 +201,8 @@ class Form extends AbstractCompositeType
                 if ($element->isValid($value) === false) {
                     $isValid = false;
                 }
+                
+                $this->values[$element->getName()] = $element->getValue();
             }
         }  
 
