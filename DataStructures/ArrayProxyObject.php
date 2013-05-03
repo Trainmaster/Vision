@@ -31,6 +31,17 @@ class ArrayProxyObject implements ArrayAccess
     {
         $this->data = $data;
     }
+    
+    /**
+     * @param array $data 
+     * 
+     * @return ArrayProxyObject Provides a fluent interface.
+     */
+    public function exchangeArray(array $data)
+    {
+        $this->data = $data;
+        return $this;
+    }
 
     /**
      * @param int|string $offset 
