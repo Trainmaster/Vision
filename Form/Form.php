@@ -25,10 +25,10 @@ class Form extends AbstractCompositeType
     
     /** @type array $attributes */
     protected $attributes = array(
-                                'action' => '',
-                                'enctype' => 'multipart/form-data',
-                                'method' => 'post'
-                            );
+        'action' => '',
+        'enctype' => 'multipart/form-data',
+        'method' => 'post'
+    );
            
     /** @type null|array */
     protected $data = null;
@@ -58,7 +58,7 @@ class Form extends AbstractCompositeType
     /**
      * @return RecursiveIteratorIterator
      */
-    public function getFormElementsIterator()
+    public function getIterator()
     {
         if ($this->formElementsIterator === null) {
             $formElementsIterator = new Iterator\FormElementsIterator($this->elements);             
@@ -75,7 +75,7 @@ class Form extends AbstractCompositeType
      */
     public function getElement($name) 
     {
-        $iterator = $this->getFormElementsIterator();
+        $iterator = $this->getIterator();
         
         foreach ($iterator as $key => $element) {       
             if ($element->getName() === $name) {
@@ -110,6 +110,27 @@ class Form extends AbstractCompositeType
         }
         
         return false;
+    }
+    
+    /**
+     * 
+     * 
+     * @param array $data 
+     * 
+     * @return Form Provides a fluent interface.
+     */
+    public function setValues(array $data)
+    {
+        $iterator = $this->getIterator();
+        
+        foreach ($iterator as $element) {
+            $name = $element->getName();
+            if (isset($data[$name])) {
+                $element->setValue($data[$name]);
+            }
+        }
+        
+        return $this;
     }
     
     /**
@@ -188,7 +209,7 @@ class Form extends AbstractCompositeType
     {         
         $isValid = true;    
         
-        $iterator = $this->getFormElementsIterator();
+        $iterator = $this->getIterator();
         
         foreach ($iterator as $element) {
             if ($element instanceof Control\ControlAbstract) {
