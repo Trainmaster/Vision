@@ -17,6 +17,7 @@ use RuntimeException;
  */
 class NativeExtension 
 {
+    /** @type bool $started */
     protected $started = false;
         
     public function start()
@@ -27,6 +28,7 @@ class NativeExtension
         
         if (session_start()) {
             $this->started = true;
+            return true;
         } else {
             throw RuntimeException('Session could not be started.');
         }
