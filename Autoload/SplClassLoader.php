@@ -79,7 +79,7 @@ class SplClassLoader
     {
         $hasNamespace = strpos($class, $this->namespace . $this->namespaceSeparator);
         if ($hasNamespace === 0) {
-            $class = strtr($class, $this->namespaceSeparator, DIRECTORY_SEPARATOR);
+            $class = str_replace($this->namespaceSeparator, DIRECTORY_SEPARATOR, $class);
             
             $fileName = $this->path . DIRECTORY_SEPARATOR . $class . $this->fileExtension;
 
