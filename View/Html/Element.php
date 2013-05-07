@@ -18,7 +18,7 @@ use Vision\Html\Element as HtmlElement;
 class Element 
 {
     /** @type HtmlElement $element */
-    private $element;
+    protected $element;
     
     /**
      * 
@@ -60,6 +60,11 @@ class Element
     {
         $html = '<%s%s%s>';
         $tag = $this->element->getTag();
+        
+        if (empty($tag)) {
+            return '';
+        }        
+        
         $attributes = $this->renderAttributes();
         $slash = '';
         
@@ -79,6 +84,11 @@ class Element
     {
         $html = '</%s>';
         $tag = $this->element->getTag();
+        
+        if (empty($tag)) {
+            return '';
+        }   
+        
         return sprintf($html, $tag);
     }
     
