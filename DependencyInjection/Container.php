@@ -19,6 +19,9 @@ use InvalidArgumentException;
  */
 class Container extends Config\AbstractConfig implements ContainerInterface
 {
+    /** @type array $objects */
+    protected $objects = array();
+    
     /**
      * @param void
      */
@@ -26,11 +29,6 @@ class Container extends Config\AbstractConfig implements ContainerInterface
     {
         $this->objects['dic'] = $this;
     }
-    
-    /**
-     * @type array $objects
-     */
-    protected $objects = array();
     
     /**
      * @param string $alias 

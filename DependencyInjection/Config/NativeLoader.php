@@ -18,8 +18,16 @@ use Vision\File\Loader\ScopeFileLoader;
  */
 class NativeLoader extends ScopeFileLoader
 {   
+    /** @type string $scopeName */
     protected $scopeName = 'container';
     
+    /**
+     * 
+     * 
+     * @param DI\Container $container 
+     * 
+     * @return void
+     */
     public function __construct(DI\Container $container)
     {
         $this->scope = $container;

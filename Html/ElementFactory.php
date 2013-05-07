@@ -15,9 +15,7 @@ use InvalidArgumentException;
  */
 class ElementFactory
 {
-    /**
-     * @type array $voidElements
-     */
+    /** @type array $voidElements */
     protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed', 
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta', 
                                             'param', 'source', 'track', 'wbr');
@@ -26,12 +24,12 @@ class ElementFactory
      * 
      * @throws InvalidArgumentException
      *
-     * @return Element $element
+     * @return \Vision\Html\Element $element
      */
     public static function create($tag)
     {
         if (is_string($tag) === false) {
-            throw new InvalidArgumentException('String must be provided');
+            throw new InvalidArgumentException('String must be provided.');
         }
                
         $tag = trim($tag);

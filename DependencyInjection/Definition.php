@@ -9,6 +9,7 @@
 namespace Vision\DependencyInjection;
 
 use Vision\DependencyInjection\Dependency;
+
 use InvalidArgumentException;
 
 /**
@@ -18,48 +19,86 @@ use InvalidArgumentException;
  */
 class Definition 
 {
+    /** @type null|string $class */
     protected $class = null;
     
+    /** @type bool $shared */
     protected $shared = true;
     
+    /** @type array $constructor */
     protected $constructor = array();
     
+    /** @type array $property */
     protected $property = array();
     
+    /** @type array $setter */
     protected $setter = array();
         
+    /**
+     * @param string $class 
+     * 
+     * @return void
+     */
     public function __construct($class)
     {
         $this->setClass($class);
-    }
+    }    
     
+    /**
+     * @param string $class  
+     * 
+     * @return Definition Provides a fluent interface.
+     */
     public function setClass($class)
     {
         $this->class = $class;
+        return $this;
     }
     
+    /**
+     * @return string
+     */
     public function getClass() 
     {
         return $this->class;
     }
     
+    /**
+     * @param bool $shared 
+     * 
+     * @return Definition Provides a fluent interface.
+     */
     public function setShared($shared)
     {
         $this->shared = (bool) $shared;
         return $this;
     }
     
+    /**
+     * @return bool
+     */
     public function isShared()
     {
         return $this->shared;
     }
     
+    /**
+     * @param array $constructor 
+     * 
+     * @return Definition Provides a fluent interface.
+     */
     public function constructor(array $constructor) 
     {   
         $this->constructor = $constructor;
         return $this;
     }
     
+    /**
+     * @param string $property 
+     * @param mixed $value 
+     * 
+     * @return Definition Provides a fluent interface.
+     */
     public function property($property, $value) 
     {
         if (is_string($property) === false) {
@@ -72,6 +111,12 @@ class Definition
         return $this;
     }
     
+    /**
+     * @param string $setter 
+     * @param array $dependencies 
+     * 
+     * @return Definition Provides a fluent interface.
+     */
     public function setter($setter, array $dependencies) 
     {
         if (is_string($setter) === false) {
@@ -84,22 +129,36 @@ class Definition
         return $this;
     } 
     
+    /**
+     * @param array $setter 
+     * 
+     * @return Definition Provides a fluent interface.
+     */
     public function setSetter(array $setter)
     {
         $this->setter = $setter;
         return $this;
     }
     
+    /**
+     * @return array
+     */
     public function getConstructorInjections() 
     {   
         return $this->constructor;
     }
     
+    /**
+     * @return array
+     */
     public function getPropertyInjections() 
     {
         return $this->property;
     }
     
+    /**
+     * @return array
+     */
     public function getSetterInjections() 
     {
         return $this->setter;

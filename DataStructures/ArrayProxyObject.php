@@ -17,9 +17,7 @@ use ArrayAccess;
  */
 class ArrayProxyObject implements ArrayAccess
 {
-    /**
-     * @type array $data
-     */
+    /** @type array $data */
     protected $data = array();
         
     /**
@@ -35,7 +33,7 @@ class ArrayProxyObject implements ArrayAccess
     /**
      * @param array $data 
      * 
-     * @return ArrayProxyObject Provides a fluent interface.
+     * @return \Vision\DataStructures\ArrayProxyObject Provides a fluent interface.
      */
     public function exchangeArray(array $data)
     {

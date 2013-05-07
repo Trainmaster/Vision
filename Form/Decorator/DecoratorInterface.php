@@ -23,6 +23,5 @@ interface DecoratorInterface
     
     public function setPlacement($placement);
     
-    public function getPlacement();
-	
+    public function getPlacement();	
 }

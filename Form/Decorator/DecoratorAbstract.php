@@ -11,7 +11,7 @@ namespace Vision\Form\Decorator;
 /**
  * DecoratorAbstract
  *
- * @author Frank Liepert <contact@frank-liepert.de>
+ * @author Frank Liepert
  */ 
 abstract class DecoratorAbstract implements DecoratorInterface 
 {   
