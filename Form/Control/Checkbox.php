@@ -72,10 +72,11 @@ class Checkbox extends MultiOptionControlAbstract
      */
     public function getValidators()
     {
-        $count = count($this->getOptions());
+        $options = $this->getOptions();
+        $count = count($options);
         
         if ($count > 1) {
-            $this->addValidator(new Validator\InArray(array('haystack' => $this->getOptions())));
+            $this->addValidator(new Validator\InArray(array('haystack' => $options)));
         }
         
         return $this->validators;
