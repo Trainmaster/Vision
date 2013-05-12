@@ -78,7 +78,7 @@ abstract class AbstractConfig
         $i = substr_count($dependency, '%');        
         if ($i % 2 === 0 && $i >= 2) {      
             $di = $this;
-            $dependency = preg_replace_callback("#%([\w.-]+)%#u", function($match) use (&$di) {
+            $dependency = preg_replace_callback("#%([\w.-]+)%#", function($match) use (&$di) {
                 return $di->getParameter($match[1]) !== null ? $di->getParameter($match[1]) : $match[1];
             }, $dependency);            
         }
