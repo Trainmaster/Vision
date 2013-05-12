@@ -49,8 +49,11 @@ abstract class AbstractApp
         
         $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']); 
         
-        Locale::setDefault($locale);  
-        setlocale(LC_ALL, $locale);        
+        if ($locale === null) {
+            return false;
+        }
+        
+        Locale::setDefault($locale);       
     }
     
     public function setDebug($debug)
