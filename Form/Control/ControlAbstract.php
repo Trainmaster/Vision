@@ -294,9 +294,7 @@ abstract class ControlAbstract extends HtmlElement
             $value = $filter->filter($value);
         }
         
-        $validators = $this->getValidators();
-        
-        foreach ($validators as $validator) {
+        foreach ($this->validators as $validator) {
             if ($validator->isValid($value) === false) {   
                 $isValid = false;               
             }             
