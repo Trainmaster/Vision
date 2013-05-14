@@ -157,6 +157,25 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
+     * @param array $errors 
+     * 
+     * @return ControlAbstract Provides a fluent interface.
+     */
+    public function setErrors(array $errors)
+    {
+        $this->errors = $errors;
+        return $this;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+    
+    /**
      * Set name attribute.
      */
     public function setName($name) 
@@ -294,11 +313,19 @@ abstract class ControlAbstract extends HtmlElement
             $value = $filter->filter($value);
         }
         
-        foreach ($this->validators as $validator) {
-            if ($validator->isValid($value) === false) {   
+        $errors = array();
+        
+        foreach ($this->validators as $validator) {            
+            if ($validator->isValid($value) === false) {
+                $key = get_class($validator);
+                $errors[$key] = $validator->getErrors();
                 $isValid = false;               
             }             
-        }  
+        }
+        
+        if (!empty($errors)) {
+            $this->setErrors($errors);
+        }
         
         if ($isValid === true) {
             $this->setValue($value);
