@@ -101,7 +101,10 @@ class Element
      */
     protected function clean($value)
     {
-        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+        if (is_string($value) || is_int($value)) {
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);            
+        }
+        return null;
     }
     
     /**
