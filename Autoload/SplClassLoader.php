@@ -13,7 +13,7 @@ use RuntimeException;
 /**
  * SplClassLoader
  *
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class SplClassLoader 
 {   
