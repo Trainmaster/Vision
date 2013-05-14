@@ -36,6 +36,9 @@ class Form extends AbstractCompositeType
     /** @type null|RecursiveIteratorIterator $formElementsIterator */
     protected $formElementsIterator = null;
     
+    /** @type array $errors */
+    protected $errors = array();
+    
     /** @type array $values */
     protected $values = array();
     
@@ -192,6 +195,14 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+    
+    /**
      * @return bool
      */
     public function isSent()
@@ -220,6 +231,7 @@ class Form extends AbstractCompositeType
                 }
 
                 if ($element->isValid($value) === false) {
+                    $this->errors[$element->getName()] = $element->getErrors();
                     $isValid = false;
                 }
                 
