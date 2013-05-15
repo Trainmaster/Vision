@@ -42,7 +42,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         $this->get = new SuperglobalProxyObject($_GET);
         $this->post = new SuperglobalProxyObject($_POST);
-        $this->files = new ArrayProxyObject($_FILES);
+        $this->files = new SuperglobalProxyObject($_FILES);
         $this->cookie = new ArrayProxyObject($_COOKIE);
         $this->server = new ArrayProxyObject($_SERVER);
         
