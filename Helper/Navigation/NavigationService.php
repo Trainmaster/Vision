@@ -134,7 +134,7 @@ class NavigationService
     protected function prepareTree()
     {
         /*
-        $cache = file_get_contents('XYZ.cache');        
+        $cache = file_get_contents('example.cache');        
         if ($cache !== false) {
             return unserialize($cache);
         }
@@ -145,7 +145,7 @@ class NavigationService
         }
         
         if ($this->languageId === null) {
-            throw new RuntimeException('A language id id must be set.');
+            throw new RuntimeException('A language id must be set.');
         }       
 
         $flatTree = $this->mapper->loadByIdAndLanguageId($this->rootId, $this->languageId);
@@ -164,7 +164,7 @@ class NavigationService
         
         /*
         $cache = serialize($tree);        
-        $file = new SplFileObject('XYZ.cache', 'w');
+        $file = new SplFileObject('example.cache', 'w');
         $file->fwrite($cache);
         */ 
         
