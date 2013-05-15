@@ -8,40 +8,31 @@
  */ 
 namespace Vision\Helper\Navigation;
 
+use Vision\Database\Mapper\PDOMapper;
+
 use PDO;
-use PDOException;
 
 /**
  * @author Frank Liepert
  */
-class NavigationMapper
+class NavigationMapper extends PDOMapper
 {
     /**
-     * @type null|PDO $pdo 
-     */
-    protected $pdo = null;
-    
-    /**
-     * @param PDO $pdo 
-     * 
-     * @return void
-     */
-    public function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-        
-    /**
-     * @param string|int $id 
-     * @param string|int $languageId 
+     * @param int $id 
+     * @param int $languageId 
      * 
      * @return array $result
      */
     public function loadByIdAndLanguageId($id, $languageId)
     {   
-        $sql = 'SELECT  nn.node_id, nn.show_link, nn.is_visible, nn.weight, nn.attributes,
+        $sql = 'SELECT  nn.node_id, 
+                        nn.show_link, 
+                        nn.is_visible, 
+                        nn.weight, 
+                        nn.attributes,
                         nt2.ancestor AS parent, 
-                        ni18n.name, ni18n.path
+                        ni18n.name, 
+                        ni18n.path
                 FROM navigation_tree as nt1
                     INNER JOIN navigation_node as nn
                         ON nn.node_id = nt1.descendant
@@ -52,7 +43,8 @@ class NavigationMapper
                         ON ni18n.node_id = nn.node_id
                         AND ni18n.language_id = :language_id
                 WHERE nt1.ancestor = :ancestor
-                ORDER BY nn.weight ASC, ni18n.name ASC';
+                ORDER BY nn.weight ASC, 
+                         ni18n.name ASC';
                 
         $pstmt = $this->pdo->prepare($sql);
         $pstmt->bindParam(':ancestor', $id, PDO::PARAM_INT);
