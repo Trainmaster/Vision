@@ -9,8 +9,8 @@
 namespace Vision\Helper\Navigation;
 
 use Vision\Html\ElementFactory as Html;
+use Vision\Http\RequestInterface;
 
-use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 
 /**
@@ -28,7 +28,7 @@ class NavigationRenderer implements NavigationRendererInterface
      * 
      * @return void
      */
-    public function setRequest($request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
     }
@@ -41,17 +41,19 @@ class NavigationRenderer implements NavigationRendererInterface
         return $this->request;
     }
     
+    /**
+     * @param array $tree 
+     * 
+     * @return string
+     */
     public function render(array $tree)
     {
-        $html = '';
-        
+        $html = '';        
         $basePath = $this->request->getBasePath();
         $pathInfo = $this->request->getPathInfo();
         
         $nodeIterator = new NodeIterator($tree);
-
-        $iterator = new NavigationRecursiveIteratorIterator($nodeIterator, RecursiveIteratorIterator::SELF_FIRST);
-        
+        $iterator = new NavigationRecursiveIteratorIterator($nodeIterator, RecursiveIteratorIterator::SELF_FIRST);        
         $iterator->setContext($html);
         $iterator->setMaxDepth(1);
         $iterator->setRenderer($this);
@@ -100,6 +102,12 @@ class NavigationRenderer implements NavigationRendererInterface
     }
     
     
+    /**
+     * @param string $path 
+     * @param string $pathInfo 
+     * 
+     * @return bool
+     */
     public function matchPathWithPathInfo($path, $pathInfo) 
     {               
         if ($path === $pathInfo) {

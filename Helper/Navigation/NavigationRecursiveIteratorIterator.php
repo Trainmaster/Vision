@@ -17,22 +17,39 @@ use RecursiveIteratorIterator;
  */
 class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
 {   
+    /**
+     * @param mixed $context 
+     * 
+     * @return \Vision\Helper\Navigation\NavigationRecursiveIteratorIterator Provides a fluent interface.
+     */
     public function setContext(&$context)
     {
         $this->context = &$context;
+        return $this;
     }
     
+    /**
+     * @return mixed
+     */
     public function getContext()
     {
         return $this->context;
     }    
     
-    public function setRenderer($renderer)
+    /**
+     * @param \Vision\Helper\Navigation\NavigationRendererInterface $renderer 
+     * 
+     * @return \Vision\Helper\Navigation\NavigationRecursiveIteratorIterator Provides a fluent interface.
+     */
+    public function setRenderer(NavigationRendererInterface $renderer)
     {
         $this->renderer = $renderer;
         return $this;
     }
     
+    /**
+     * @return bool
+     */
     public function callHasChildren()
     {  
         if ($this->getDepth() > 0) {
@@ -50,12 +67,18 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
         return parent::callHasChildren();
     }
 
+    /**
+     * @return void
+     */
     public function beginChildren() 
     {   
         $class = 'level-' . $this->getDepth();
         $this->context .= Html::create('ul')->addClass($class)->renderStartTag();
     }
     
+    /**
+     * @return void
+     */
     public function endChildren()
     {   
         $this->context .= Html::create('ul')->renderEndTag();        
@@ -65,12 +88,18 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
         $this->decreaseMaxDepth();
     }
     
+    /**
+     * @return void
+     */
     public function increaseMaxDepth()
     {
         $max = $this->getMaxDepth(); 
         $this->setMaxDepth(++$max); 
     }
     
+    /**
+     * @return void
+     */
     public function decreaseMaxDepth()
     {
         $max = $this->getMaxDepth(); 

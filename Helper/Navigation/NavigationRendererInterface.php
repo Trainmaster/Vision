@@ -15,8 +15,6 @@ interface NavigationRendererInterface
 {
     /**
      * @param array $tree 
-     * 
-     * @return string
      */
     public function render(array $tree);
 }
