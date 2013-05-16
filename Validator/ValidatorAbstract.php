@@ -10,16 +10,25 @@ namespace Vision\Validator;
 
 abstract class ValidatorAbstract implements ValidatorInterface 
 {
-    protected $messages = array();
+    /** @type array $errors */
+    protected $errors = array();
     
-    public function setMessage($key, $message)
+    /**
+     * @param string $error 
+     * 
+     * @return ValidatorAbstract Provides a fluent interface.
+     */    
+    public function addError($error)
     {
-        $this->messages[$key] = (string) $message;
+        $this->errors[] = $error;
         return $this;
     }
     
-    public function getMessages()
+    /**
+     * @return array
+     */
+    public function getErrors()
     {
-        return $this->messages;
+        return $this->errors;
     }   
 }
