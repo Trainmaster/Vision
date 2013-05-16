@@ -20,6 +20,8 @@ class FileInfo extends SplFileInfo
     /**
      * @api
      * 
+     * @todo Possible candidate for trait
+     *
      * @return bool
      */
     public function isLoadable() 
@@ -28,5 +30,17 @@ class FileInfo extends SplFileInfo
             return true;
         }                
         return false;
+    }
+    
+    /**
+     * @api
+     * 
+     * @todo Possible candidate for trait
+     *
+     * @return bool
+     */
+    public function isUploadedFile()
+    {
+        return is_uploaded_file($this);
     }
 }
