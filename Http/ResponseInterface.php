@@ -14,6 +14,16 @@ namespace Vision\Http;
  * @author Frank Liepert
  */
 interface ResponseInterface
-{    
+{
+    /**
+     * @api
+     *
+     * @param string $body 
+     */
+    public function body($body);
+    
+    /**
+     * @api
+     */
     public function send();
 }
