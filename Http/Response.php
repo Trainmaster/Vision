@@ -70,26 +70,13 @@ class Response extends AbstractMessage implements ResponseInterface
     {
         $this->headers[(string) $name] = (string) $value;
         return $this;
-    }
-    
-    protected function sendHeaders() 
-    {
-        foreach ($this->headers as $key => $value) {
-            header($key.': '.$value);
-        }
-        return $this;
-    }
+    }   
     
     public function body($body) 
     {
-        $this->body .= (string) $body;
+        $this->body .= $body;
         return $this;
-    }
-    
-    public function sendBody()
-    {
-        echo $this->body;
-    }
+    }   
     
     public function setStatusCode($statusCode)
     {          
@@ -103,19 +90,7 @@ class Response extends AbstractMessage implements ResponseInterface
     public function getStatusCode()
     {
         return $this->statusCode;
-    }
-    
-    protected function sendStatusLine()
-    {
-        $statusLine = sprintf(
-            'HTTP/%s %s %s', 
-            $this->getVersion(), 
-            $this->getStatusCode(), 
-            $this->getReasonPhrase()
-        );
-        header($statusLine);
-        return $this;
-    }
+    }  
     
     public function setReasonPhrase($reasonPhrase) 
     {
@@ -136,5 +111,31 @@ class Response extends AbstractMessage implements ResponseInterface
         $this->sendStatusLine()
              ->sendHeaders()
              ->sendBody();
+    }
+    
+    protected function sendStatusLine()
+    {
+        $statusLine = sprintf(
+            'HTTP/%s %s %s', 
+            $this->getVersion(), 
+            $this->getStatusCode(), 
+            $this->getReasonPhrase()
+        );
+        header($statusLine);
+        return $this;
+    }
+    
+    protected function sendHeaders() 
+    {
+        foreach ($this->headers as $key => $value) {
+            header($key . ': ' . $value);
+        }
+        return $this;
+    }
+    
+    protected function sendBody()
+    {
+        echo $this->body;
+        return $this;
     }
 }
