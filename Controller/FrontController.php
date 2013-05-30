@@ -60,11 +60,23 @@ class FrontController
         $definition = $this->container->getDefinition($class);
         
         if ($definition === null) {
-            return false;
+            throw new RuntimeException(sprintf(
+                'No definition for controller "%s". Please double-check the container configuration.',
+                $class
+            ));
         }
 
         $this->resolveAbstractDependencies($definition);
-        $instance = $this->container->get($class);   
+        $instance = $this->container->get($class);
+        
+        if (!$instance instanceof ControllerInterface) {
+            throw new UnexpectedValueException(sprintf(
+                '%s must implement interface %s.',
+                $class,
+                __NAMESPACE__ . '\ControllerInterface'
+            ));
+        }
+        
         $instance->preFilter();        
         
         if (method_exists($instance, $method)) {
