@@ -33,7 +33,7 @@ class ArrayProxyObject implements ArrayAccess
     /**
      * @param array $data 
      * 
-     * @return \Vision\DataStructures\ArrayProxyObject Provides a fluent interface.
+     * @return ArrayProxyObject Provides a fluent interface.
      */
     public function exchangeArray(array $data)
     {
