@@ -26,7 +26,7 @@ use Vision\Templating\TemplateEngineAwareInterface;
  */
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface, 
                                              TemplateEngineAwareInterface, SessionAwareInterface,
-                                             UrlAwareInterface
+                                             UrlAwareInterface, ControllerInterface
 {      
     protected $request = null;
     
