@@ -41,6 +41,19 @@ class Form extends AbstractCompositeType
     
     /** @type array $values */
     protected $values = array();
+        
+    /** @type int $tabindex */
+    protected $tabindex = 0;
+    
+    /**
+     * @api
+     * 
+     * @return integer
+     */
+    public function increment()
+    {
+        return ++$this->tabindex;
+    }
     
     /**
      * @return void
