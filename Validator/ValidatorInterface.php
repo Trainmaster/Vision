@@ -10,9 +10,9 @@ namespace Vision\Validator;
 
 interface ValidatorInterface 
 {
-    public function isValid($mixed);
+    public function isValid($value);
     
-    public function setMessage($key, $value);
+    public function addError($error);
     
-    public function getMessages();  
+    public function getErrors();  
 }
