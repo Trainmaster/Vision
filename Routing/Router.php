@@ -18,115 +18,110 @@ use Vision\Http\RequestInterface;
  */
 class Router extends Config\AbstractConfig
 {
+    /** @type string $defaultParameterPattern */
     protected $defaultParameterPattern = '[\w.~-]+';
     
+    /** @type null|ControllerParserInterface $parser */
     protected $parser = null;
     
+    /** @type null|RequestInterface $request */
     protected $request = null;
     
-    public function __construct($parser, $request)
+    /**
+     * @param ControllerParserInterface $parser 
+     * @param RequestInterface $request 
+     * 
+     * @return void
+     */
+    public function __construct(ControllerParserInterface $parser, RequestInterface $request)
     {        
-        $this->setParser($parser);
-        $this->setRequest($request);
-    }
-    
-    public function setRequest(RequestInterface $request)
-    {
-        $this->request = $request;
-        return $this;
-    }
-    
-    public function setParser(ControllerParserInterface $parser)
-    {
         $this->parser = $parser;
+        $this->request = $request;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $pattern 
+     * 
+     * @return Router Provides a fluent interface.
+     */
+    public function setDefaultParameterPattern($pattern)
+    {
+        $this->defaultParameterPattern = $pattern;
         return $this;
     }
 
+    /**
+     * @api
+     * 
+     * @todo Needs further refactoring (route compiling etc.)
+     * 
+     * @return mixed
+     */
     public function resolve() 
     {           
-        $match = false;
-        
-        $pathInfo = $this->request->getPathInfo();
+        $matched = false;
+        $httpMethod = $this->request->getMethod();
+        $pathInfo = $this->request->getPathInfo();        
 
         foreach ($this->routes as $route) {
-
-            if ($route->hasPlaceholder() === false) {
-
-                if ($route->getPath() === $pathInfo) {   
-                
-                    // <-- repetition
-                    $requirements = $route->getRequirements();
-                    if (isset($requirements['HTTP_METHOD'])) {
-                        if (strcasecmp($this->request->getMethod(), $requirements['HTTP_METHOD']) !== 0) {
-                            continue;
-                        }
-                    }
-                    // --> repetition
-                    
-                    $match = true;
+            $requirements = $route->getRequirements();
+            
+            if (isset($requirements['HTTP_METHOD'])) {
+                if (strcasecmp($httpMethod, $requirements['HTTP_METHOD']) !== 0) {
+                    continue;
+                }
+            }
+            
+            if ($route->isStatic()) {
+                if ($route->getPath() === $pathInfo) {                       
+                    $matched = true;
                     break;
                 }
             } else {
                 $matches = array();
+                $tokens = array();                    
+                $pattern = $route->getPath();
                 
-                $tokens = array();   
-                
-                // <-- repetition
-                $requirements = $route->getRequirements();                
-                if (isset($requirements['HTTP_METHOD'])) {
-                    if (strcasecmp($this->request->getMethod(), $requirements['HTTP_METHOD']) !== 0) {
-                        continue;
-                    }
-                }
-                // --> repetition
-                
-                $pattern = $route->getPath();  
-                
-                preg_match_all('#\{([\w\d_=]+)\}#u', $pattern, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE); 
+                preg_match_all('#\{([\w\d_=]+)\}#u', $pattern, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
                 
                 if (!empty($matches)) {
                     $start = 0;
                     $length = 0;
-                    foreach ($matches as $key => $value) {
+
+                    foreach ($matches as $match) {
                         $regex = '';
-                        $length = $value[0][1] - $start;
+                        $length = $match[0][1] - $start;
                         
-                        if ($length > 1) {
-                            //$regex .= '?';
-                        }
-                        
-                        if (isset($requirements[$value[1][0]])) {
-                            $regex .= sprintf('(?<%s>%s)', $value[1][0], $requirements[$value[1][0]]);
+                        if (isset($requirements[$match[1][0]])) {
+                            $regex .= sprintf('(?<%s>%s)', $match[1][0], $requirements[$match[1][0]]);
                         } else {
-                            $regex .= sprintf('(?<%s>%s)', $value[1][0], $this->defaultParameterPattern);
+                            $regex .= sprintf('(?<%s>%s)', $match[1][0], $this->defaultParameterPattern);
                         }
                         
-                        $start = $value[0][1] + strlen($value[0][0]);
-                        $tokens[] = $value[1][0];
+                        $start = $match[0][1] + strlen($match[0][0]);
+                        $tokens[] = $match[1][0];
                         
-                        $replacements[$value[0][0]] = $regex;
-                    }                    
-                }       
-                
-                foreach ($replacements as $k => $v) {
-                    $pattern = str_replace($k, $v, $pattern);
+                        $pattern = str_replace($match[0][0], $regex, $pattern);
+                    }
                 }
-
-                $pattern = '#^'.$pattern.'$#u'; 
-
+                
+                $pattern = '#^' . $pattern . '$#u';
+                
                 if (preg_match($pattern, $pathInfo, $matches)) {
                     foreach ($tokens as $token) {
                         if (isset($matches[$token])) {
                             $this->request->get[$token] = $matches[$token];
                         }
                     }
-                    $match = true;
+                    $matched = true;
                     break;
                 }
             }
         }
         
-        if ($match === true) {
+        if ($matched) {
             $defaults = $route->getDefaults();
             if (!empty($defaults)) {
                 foreach ($defaults as $key => $value) {

@@ -2,7 +2,9 @@
 namespace Vision\Validator;
 
 class PregMatch extends ValidatorAbstract
-{	
+{   
+    const NO_MATCH_FOUND = 'No match was found.';
+    
     protected $pattern;
 
     public function __construct(array $options = array())
@@ -22,10 +24,13 @@ class PregMatch extends ValidatorAbstract
     {
         $result = preg_match($this->pattern, $value);
         $result = (bool) $result;
-        if ($result === false) {
-            $this->setMessage('PREG_MATCH', 'Value does not match RegExp.');
-            return false;
+        
+        if ($result) {
+            return true;
         }
-        return true;
+        
+        $this->addError(self::NO_MATCH_FOUND);
+        
+        return false;
     }
 }
