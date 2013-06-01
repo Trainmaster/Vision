@@ -13,11 +13,15 @@ use Vision\Database\Mapper\PDOMapper;
 use PDO;
 
 /**
- * @author Frank Liepert
+ * NavigationMapper
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class NavigationMapper extends PDOMapper
 {
     /**
+     * @api
+     *
      * @param int $id 
      * @param int $languageId 
      * 

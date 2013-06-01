@@ -13,14 +13,18 @@ use Vision\Html\ElementFactory as Html;
 use RecursiveIteratorIterator;
 
 /**
+ * NavigationRecursiveIteratorIterator
+ *
  * @author Frank Liepert
  */
 class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
 {   
     /**
+     * @api
+     *
      * @param mixed $context 
      * 
-     * @return \Vision\Helper\Navigation\NavigationRecursiveIteratorIterator Provides a fluent interface.
+     * @return NavigationRecursiveIteratorIterator Provides a fluent interface.
      */
     public function setContext(&$context)
     {
@@ -29,6 +33,8 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
     }
     
     /**
+     * @api
+     *
      * @return mixed
      */
     public function getContext()
@@ -37,9 +43,11 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
     }    
     
     /**
-     * @param \Vision\Helper\Navigation\NavigationRendererInterface $renderer 
+     * @api
+     *
+     * @param NavigationRendererInterface $renderer 
      * 
-     * @return \Vision\Helper\Navigation\NavigationRecursiveIteratorIterator Provides a fluent interface.
+     * @return NavigationRecursiveIteratorIterator Provides a fluent interface.
      */
     public function setRenderer(NavigationRendererInterface $renderer)
     {
@@ -89,6 +97,8 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
     }
     
     /**
+     * @api
+     *
      * @return void
      */
     public function increaseMaxDepth()
@@ -98,6 +108,8 @@ class NavigationRecursiveIteratorIterator extends RecursiveIteratorIterator
     }
     
     /**
+     * @apu
+     *
      * @return void
      */
     public function decreaseMaxDepth()
