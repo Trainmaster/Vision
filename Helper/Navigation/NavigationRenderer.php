@@ -17,23 +17,21 @@ use RecursiveIteratorIterator;
  * @author Frank Liepert
  */
 class NavigationRenderer implements NavigationRendererInterface
-{    
-    /**
-     * @type null|Request $request
-     */
+{
+    /** @type null|RequestInterface $request */
     protected $request = null;
     
     /**
      * @param RequestInterface $request 
-     * 
-     * @return void
      */
-    public function setRequest(RequestInterface $request)
+    public function __construct (RequestInterface $request)
     {
         $this->request = $request;
     }
     
     /**
+     * @api
+     *
      * @return $this->request
      */
     public function getRequest()
@@ -42,6 +40,8 @@ class NavigationRenderer implements NavigationRendererInterface
     }
     
     /**
+     * @api
+     *
      * @param array $tree 
      * 
      * @return string

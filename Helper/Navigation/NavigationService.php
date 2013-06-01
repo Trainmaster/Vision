@@ -28,9 +28,6 @@ class NavigationService
     /** @type NavigationMapper $mapper */
     protected $mapper = null;
     
-    /** @type RequestInterface $request */
-    protected $request = null;
-    
     /** @type NavigationRenderer $renderer */
     protected $renderer = null;
      
@@ -52,22 +49,8 @@ class NavigationService
     public function __toString()
     {
         $tree = $this->prepareTree();
-        $this->renderer->setRequest($this->request);
         $tree = $this->renderer->render($tree);
         return (string) $tree;
-    }
-    
-    /**
-     * Setter for $request property.
-     * 
-     * @param RequestInterface $request 
-     * 
-     * @return NavigationService Provides a fluent interface.
-     */
-    public function setRequest(RequestInterface $request)
-    {
-        $this->request = $request;
-        return $this;
     }
         
     /**
