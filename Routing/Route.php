@@ -11,73 +11,141 @@ namespace Vision\Routing;
 /**
  * Route
  *
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Route
 {
-    protected $hasPlaceholder = false;
+    /** @type bool $isStatic */
+    protected $isStatic = true;
     
+    /** @type null|string $path */
     protected $path = null;
     
+    /** @type null|string $controller */
     protected $controller = null;
     
+    /** @type array $requirements */
     protected $requirements = array();
     
+    /** @type array $defaults */
     protected $defaults = array();
     
+    /**
+     * @param string $path 
+     * @param string $controller 
+     * 
+     * @return void
+     */
     public function __construct($path, $controller)
     {        
         $this->setPath($path);
         $this->setController($controller);
     }
     
-    public function hasPlaceholder()
+    /**
+     * @api
+     * 
+     * @return bool
+     */
+    public function isStatic()
     {
-        return $this->hasPlaceholder;
+        return $this->isStatic;
     }
     
+    /**
+     * The character "{" indicates, if the route contains dynamic parts.
+     *
+     * @api
+     *
+     * @param string $path 
+     * 
+     * @return Route Provides a fluent interface.
+     */
     public function setPath($path)
     {
-        if (strpos($path, '{') !== false) {
-            $this->hasPlaceholder = true;
+        if (strpos($path, '{') >= 0) {
+            $this->isStatic = false;
         }
+        
         $this->path = trim($path);
+        
         return $this;
     }
     
+    /**
+     * @api
+     *
+     * @return string
+     */
     public function getPath()
     {
         return $this->path;
     }
 
+    /**
+     * @api
+     *
+     * @param string $controller 
+     * 
+     * @return Route Provides a fluent interface.
+     */
     public function setController($controller)
     {
         $this->controller = trim($controller);
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getController()
     {
         return $this->controller;
     }
     
+    /**
+     * @api
+     * 
+     * @param array $defaults 
+     * 
+     * @return Route Provides a fluent interface.
+     */
     public function setDefaults(array $defaults)
     {
         $this->defaults = $defaults;
         return $this;
     }
 
+    /**
+     * @api
+     * 
+     * @return array
+     */
     public function getDefaults()
     {
         return $this->defaults;
     }
     
+    /**
+     * @api
+     * 
+     * @param array $requirements 
+     * 
+     * @return Route Provides a fluent interface.
+     */
     public function setRequirements(array $requirements)
     {
         $this->requirements = $requirements;
         return $this;
     }
 
+    /**
+     * @api
+     *
+     * @return array
+     */
     public function getRequirements()
     {
         return $this->requirements;
