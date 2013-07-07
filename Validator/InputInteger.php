@@ -3,6 +3,8 @@ namespace Vision\Validator;
 
 class InputInteger extends ValidatorAbstract 
 {
+    const NO_INTEGER = 'The given value could not be validated as integer.';
+    
     protected $min = null;
     
     protected $max = null;
@@ -37,7 +39,7 @@ class InputInteger extends ValidatorAbstract
             return true;
         }    
         
-        $this->setMessage('Integer', 'Value is not an integer');
+        $this->addError(self::NO_INTEGER);
         
         return false;
     }

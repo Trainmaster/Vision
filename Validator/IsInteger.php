@@ -3,12 +3,16 @@ namespace Vision\Validator;
 
 class IsInteger extends ValidatorAbstract 
 {
+    const NO_INTEGER = 'The given value is not an integer.';
+    
     public function isValid($value) 
     {
-        if (is_int($value) === true) {	
+        if (is_int($value)) {  
             return true;
         }        
-        $this->setMessage('Integer', 'Value is not an integer');
+        
+        $this->addError(self::NO_INTEGER);
+        
         return false;
     }
 }
