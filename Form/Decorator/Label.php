@@ -18,7 +18,7 @@ class Label extends HtmlTag
         $this->decorator->setAttribute('for', $this->element->getId());
         $this->decorator->setContent($this->element->getLabel());
         
-        if ($this->element->isRequired()) {
+        if ($this->element->isRequired() && $this->element->getLabel()) {
             $this->decorator->setContent($this->decorator->getContent() . '<span class="required">*</span>');
         }
 
