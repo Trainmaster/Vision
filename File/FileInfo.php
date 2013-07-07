@@ -35,8 +35,6 @@ class FileInfo extends SplFileInfo
     /**
      * @api
      * 
-     * @todo Possible candidate for trait
-     *
      * @return bool
      */
     public function isUploadedFile()
