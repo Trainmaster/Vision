@@ -8,13 +8,20 @@
  */
 namespace Vision\Database;
 
+/**
+ * PDO
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */
 class PDO extends \PDO 
 {
-    /** @type bool */
+    /** @type bool $hasActiveTransaction */
     protected $hasActiveTransaction = false;
     
     /**
     * Workaround for WHERE IN() queries
+    *
+    * @api
     *
     * @param mixed $mixed
     *
@@ -27,12 +34,33 @@ class PDO extends \PDO
             $questionMarks = str_repeat('?,', $count) . '?';   
             return $questionMarks;
         }
+        
         return array();
+    }
+    
+    /**
+     * Another workaround for WHERE IN() queries with array.
+     *
+     * Example: Passing an array with three elements it will return "IN (?, ?, ?)" 
+     *
+     * @api
+     * 
+     * @param array $data 
+     * 
+     * @return string
+     */
+    public function IN(array $data)
+    {
+        $string = $this->createQuestionMarks($data);
+        $string = 'IN (' . $string . ')';
+        return $string;
     }
     
     /**
      * Useful method for Inserts
      * 
+     * @api
+     *
      * @param mixed $mixed 
      * 
      * @return string
@@ -55,7 +83,9 @@ class PDO extends \PDO
     
     /**
      * Support for nested transactions
-     * 
+     *
+     * @api
+     *
      * @return bool
      */
     public function beginTransaction()
@@ -70,7 +100,9 @@ class PDO extends \PDO
 
     /**
      * Support for nested transactions
-     * 
+     *
+     * @api
+     *
      * @return bool
      */
     public function commit()
@@ -81,7 +113,9 @@ class PDO extends \PDO
 
     /**
      * Support for nested transactions
-     * 
+     *
+     * @api
+     *
      * @return bool
      */
     public function rollback()
