@@ -22,8 +22,6 @@ class NativeLoader extends ScopeFileLoader
     protected $scopeName = 'container';
     
     /**
-     * 
-     * 
      * @param DI\Container $container 
      * 
      * @return void

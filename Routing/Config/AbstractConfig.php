@@ -16,17 +16,15 @@ use RuntimeException;
 /**
  * AbstractConfig
  *
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 abstract class AbstractConfig
 {
-    /**
-     * @type array
-     */
+    /** @type array $routes */
     protected $routes = array();
     
     /**
-     * 
+     * @api
      * 
      * @param string $alias 
      * @param Route $route 
@@ -36,29 +34,35 @@ abstract class AbstractConfig
     public function addRoute($alias, Route $route)
     {
         if (isset($this->routes[$alias])) {
-            throw new RuntimeException(sprintf('Route alias "%s" is already defined', $alias));
+            throw new RuntimeException(sprintf(
+                'Route alias "%s" has already been defined.', 
+                $alias
+            ));
         }
+        
         $this->routes[$alias] = $route;
+        
         return $this;
     }
     
     /**
-     * 
+     * @api
      * 
      * @param RouteCollection $collection 
      * 
-     * @return AbstractConfig
+     * @return AbstractConfig Provides a fluent interface.
      */
     public function addRouteCollection(RouteCollection $collection)
     {
-        foreach ($collection as $alias => &$route) {
+        foreach ($collection as $alias => $route) {
             $this->addRoute($alias, $route);
         }
+        
         return $this;
     }
     
     /**
-     * 
+     * @api
      * 
      * @param string $alias 
      * 
@@ -69,15 +73,16 @@ abstract class AbstractConfig
         if (isset($this->routes[$alias])) {
             return $this->routes[$alias];
         }
+        
         return null;
     }
     
     /**
-     * 
+     * @api
      * 
      * @param string $alias 
      * 
-     * @return boll
+     * @return bool
      */
     public function hasRoute($alias)
     {
@@ -85,8 +90,7 @@ abstract class AbstractConfig
     }
     
     /**
-     * 
-     * 
+     * @api
      * 
      * @return array
      */

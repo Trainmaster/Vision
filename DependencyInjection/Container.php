@@ -10,7 +10,6 @@ namespace Vision\DependencyInjection;
 
 use ReflectionClass;
 use RuntimeException;
-use InvalidArgumentException;
 
 /**
  * Container
@@ -46,7 +45,9 @@ class Container extends Config\AbstractConfig implements ContainerInterface
     /**
      * @param string $alias 
      * 
-     * @return mixed
+     * @return object
+     *
+     * @throws RuntimeException
      */
     public function get($alias)
     {

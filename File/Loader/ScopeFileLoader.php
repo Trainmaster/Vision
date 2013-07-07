@@ -15,14 +15,10 @@ namespace Vision\File\Loader;
  */
 class ScopeFileLoader extends AbstractFileLoader
 {
-    /**
-     * @type null|string
-     */
+    /** @type null|string */
     protected $scope = null;
     
-    /**
-     * @type null|string
-     */
+    /** @type null|string */
     protected $scopeName = null;
     
     /**

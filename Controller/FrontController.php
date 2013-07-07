@@ -19,16 +19,20 @@ use UnexpectedValueException;
 /**
  * FrontController
  *
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class FrontController 
 {
+    /** @type ContainerInterface $container */
     protected $container = null;
     
+    /** @type RequestInterface $request */
     protected $request = null;
     
+    /** @type ResponseInterface $response */
     protected $response = null;   
     
+    /** @type Router $router */
     protected $router = null;
         
     public function __construct(RequestInterface $request, ResponseInterface $response, 
@@ -39,17 +43,35 @@ class FrontController
         $this->router = $router;
         $this->container = $container;
     }
-
+ 
+    /**
+     * 
+     * @api
+     * 
+     * @return RequestInterface
+     */
     public function getRequest()
     {
         return $this->request;
     }
     
+    /**
+     * 
+     * @api
+     * 
+     * @return ResponseInterface
+     */
     public function getResponse()
     {
         return $this->response;
     }
     
+    /**
+     * 
+     * @api
+     * 
+     * @return Router
+     */
     public function getRouter()
     {
         return $this->router;
@@ -61,7 +83,7 @@ class FrontController
         
         if ($definition === null) {
             throw new RuntimeException(sprintf(
-                'No definition for controller "%s". Please double-check the container configuration.',
+                'No definition for controller "%s". Please double-check the container configuration file(s).',
                 $class
             ));
         }
