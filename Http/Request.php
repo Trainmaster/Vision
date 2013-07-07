@@ -8,8 +8,6 @@
  */ 
 namespace Vision\Http;
 
-use Vision\Http\RequestHandler;
-use Vision\DataStructures\ArrayProxyObject;
 use Vision\DataStructures\SuperglobalProxyObject;
 use RuntimeException;
 
@@ -38,21 +36,28 @@ class Request extends AbstractMessage implements RequestInterface
     
     protected $pathInfo = null;
         
+    /**
+     * @return void
+     */
     public function __construct()
     {
         $this->get = new SuperglobalProxyObject($_GET);
         $this->post = new SuperglobalProxyObject($_POST);
         $this->files = new SuperglobalProxyObject($_FILES);
-        $this->cookie = new ArrayProxyObject($_COOKIE);
-        $this->server = new ArrayProxyObject($_SERVER);
+        $this->cookie = new SuperglobalProxyObject($_COOKIE);
+        $this->server = new SuperglobalProxyObject($_SERVER);
         
-        $this->initMethod();
-        
+        $this->initMethod();        
         $this->initBasePath();               
         $this->initPathInfo();
         $this->initPath(); 
     }
     
+    /**
+     * @param string $key 
+     * 
+     * @return mixed|null
+     */
     public function __get($key)
     {
         if (isset($this->$key)) {
@@ -61,20 +66,86 @@ class Request extends AbstractMessage implements RequestInterface
         return null;
     }
     
+    /**
+     * @param string $key 
+     * @param mixed $value 
+     * 
+     * @return Request Provides a fluent interface.
+     */
     public function __set($key, $value)
     {
         if (in_array($key, array('get', 'post', 'files', 'cookie', 'server'))) {
             throw new RuntimeException('You may not override the default request properties "get, post, files, cookie, server"');
         }
+        
         $this->$key = $value;
+        
         return $this;
     }
+        
+    /**
+     * Check, if the current request method is POST.
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isPost()
+    {
+        return $this->method === 'POST' ? true : false;
+    }
     
+    /**
+     * Check, if the current request method is GET.
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isGet()
+    {
+        return $this->method === 'GET' ? true : false;
+    }
+    
+    /**
+     * Check, if the current request method is HEAD. 
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isHead()
+    {
+        return $this->method === 'HEAD' ? true : false;
+    }
+    
+    /**
+     * Check, if the current request method is PUT.  
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isPut()
+    {
+        return $this->method === 'PUT' ? true : false;
+    }
+    
+    /**
+     * Returns the current request method.
+     *
+     * @api
+     *
+     * @return string
+     */
     public function getMethod()
     {
         return $this->method;
     }
     
+    /**
+     * @return Request Provides a fluent interface.
+     */
     public function initMethod()
     {
         if (isset($this->server['REQUEST_METHOD'])) {
@@ -84,31 +155,13 @@ class Request extends AbstractMessage implements RequestInterface
         return $this;
     }
     
-    public function isPost()
-    {
-        return $this->method === 'POST' ? true : false;
-    }
-    
-    public function isGet()
-    {
-        return $this->method === 'GET' ? true : false;
-    }
-    
-    public function isHead()
-    {
-        return $this->method === 'HEAD' ? true : false;
-    }
-    
-    public function isPut()
-    {
-        return $this->method === 'PUT' ? true : false;
-    }
-    
     /**
-     * Get base path of current url
+     * Get base path of current url.
      *
      * Example: http://www.example.com/foo/index.php/bar
      * Result: "/foo"
+     *
+     * @api
      *
      * @return string
      */
@@ -117,6 +170,9 @@ class Request extends AbstractMessage implements RequestInterface
         return $this->basePath;
     }
     
+    /**
+     * @return Request Provides a fluent interface.
+     */
     protected function initBasePath()
     {
         if (isset($this->server['SCRIPT_NAME'])) {
@@ -135,10 +191,12 @@ class Request extends AbstractMessage implements RequestInterface
     }   
     
     /**
-     * Get path info of current url
+     * Get path info of current url.
      *
      * Example: http://www.example.com/foo/index.php/bar
      * Result: "/bar"
+     *
+     * @api
      *
      * @return string
      */
@@ -147,6 +205,9 @@ class Request extends AbstractMessage implements RequestInterface
         return $this->pathInfo;
     }
     
+    /**
+     * @return Request Provides a fluent interface.
+     */
     protected function initPathInfo()
     {
         if (isset($this->server['PATH_INFO'])) {
@@ -163,10 +224,12 @@ class Request extends AbstractMessage implements RequestInterface
     }
     
     /**
-     * Get path of current url
+     * Get path of current url.
      *
      * Example: http://www.example.com/foo/index.php/bar
      * Result: "/foo/index.php/bar"
+     *
+     * @api
      *
      * @return string
      */
@@ -175,6 +238,9 @@ class Request extends AbstractMessage implements RequestInterface
         return $this->path;
     }
     
+    /**
+     * @return Request Provides a fluent interface.
+     */
     protected function initPath()
     {
         $path = $this->getBasePath() . $this->getPathInfo();
