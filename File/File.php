@@ -31,16 +31,4 @@ class File extends SplFileObject
         }                
         return false;
     }
-    
-    /**
-     * @api
-     *
-     * @todo Possible candidate for trait
-     *
-     * @return bool
-     */
-    public function isUploadedFile()
-    {
-        return is_uploaded_file($this);
-    }
 }
