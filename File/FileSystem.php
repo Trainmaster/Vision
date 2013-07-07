@@ -63,17 +63,40 @@ class FileSystem
     /**
      * @api
      * 
-     * @param string $source 
      * @param string $dest 
      * 
      * @return bool
      */
-    public function move($source, $dest)
+    public function isWritable($dest)
     {
-        if (is_uploaded_file($source)) {
-            return move_uploaded_file($source, $dest);
+        if (is_file($dest)) {
+            return is_writable($dest);
         }
-        return rename($source, $dest);
+        
+        $dir = pathinfo($dest, PATHINFO_DIRNAME);
+        
+        return is_writable($dir);
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $src 
+     * @param string $dest 
+     * 
+     * @return bool
+     */
+    public function move($src, $dest)
+    {
+        if ($this->isWritable($dest) === false) {
+            return false;
+        }
+        
+        if (is_uploaded_file($src)) {
+            return move_uploaded_file($src, $dest);
+        }
+        
+        return rename($src, $dest);
     }
     
     /**
