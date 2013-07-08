@@ -15,16 +15,22 @@ use InvalidArgumentException;
  */
 class ElementFactory
 {
-    /** @type array $voidElements */
+    /** 
+     * @type array $voidElements 
+     *
+     * @link http://www.w3.org/TR/html-markup/syntax.html#syntax-elements
+     */
     protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed', 
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta', 
                                             'param', 'source', 'track', 'wbr');
     /**
+     * @api
+     *
      * @param string $tag 
      * 
      * @throws InvalidArgumentException
      *
-     * @return \Vision\Html\Element $element
+     * @return Element $element
      */
     public static function create($tag)
     {
