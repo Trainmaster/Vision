@@ -8,10 +8,11 @@
  */
 namespace Vision\Html;
 
-use Vision\View\Html\Element as HtmlElementView;
+use InvalidArgumentException;
+use LogicException;
 
 /**
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Element 
 {
@@ -21,9 +22,16 @@ class Element
     protected $attributes = array();
     
     /**
-     * @type null|string $content
+     * @type array $contents
      */
-    protected $content = null;
+    protected $contents = array();
+    
+    /**
+     * @type array $voidElements
+     */
+    protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed', 
+                                            'hr', 'img', 'input', 'keygen', 'link', 'meta', 
+                                            'param', 'source', 'track', 'wbr');
     
     /**
      * @type bool $isVoid
@@ -31,14 +39,9 @@ class Element
     protected $isVoid = false;
     
     /**
-     * @type null|string $tag
+     * @type string $tag
      */
     protected $tag = null;
-    
-    /**
-     * @type null|HtmlElementView $view
-     */
-    protected $view = null;
     
     /**
      * @param string $tag 
@@ -47,105 +50,205 @@ class Element
      */
     public function __construct($tag) 
     {
-        $this->setTag($tag);
+        if (empty($tag)) {
+            throw new InvalidArgumentException('Tag name must not be empty.');
+        }
+        
+        $tag = trim($tag);
+        $tag = strtolower($tag);
+        $this->tag = $tag;
+        
+        if (in_array($tag, self::$voidElements)) {
+            $this->isVoid = true;
+        }       
     } 
     
     /**
+     * @api
+     *
+     * String representation of this element.
+     * 
      * @return string
      */
-    public function __toString() 
+    public function __toString()
     {
-        $this->initView();
-        return $this->view->__toString();
+        $html = $this->renderStartTag();        
+        
+        if ($this->isVoid) {
+            return $html;            
+        }   
+        
+        $html .= $this->renderContents() 
+              .  $this->renderEndTag();  
+                  
+        return $html;
     }
     
     /**
+     * @api
+     *
      * @return string
      */
     public function renderStartTag()
-    {
-        $this->initView();
-        return $this->view->renderStartTag();
+    {       
+        $tag = $this->tag;
+        
+        if (empty($tag)) {
+            return '';
+        }   
+        
+        $html = '<%s%s%s>';
+        
+        $attributes = $this->renderAttributes();
+        $slash = '';
+        
+        if ($this->isVoid) {
+            $slash = ' /';
+        }  
+        
+        return sprintf($html, $tag, $attributes, $slash);
     }
     
     /**
+     * Render contents
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function renderContents()
+    {
+        $html = '';
+        $contents = $this->contents;
+        
+        if (!empty($contents)) {
+            foreach ($contents as $content) {
+                $html .= $content;
+            }
+        }
+        
+        return $html;
+    }
+    
+    /**
+     * Render end tag 
+     *
+     * @api
+     *
      * @return string
      */
     public function renderEndTag()
-    {
-        $this->initView();
-        return $this->view->renderEndTag();
-    }    
-    
-    /**
-     * @return void
-     */
-    public function initView()
-    {
-        if ($this->view === null) {
-            $this->view = new HtmlElementView($this);
+    {        
+        $tag = $this->tag;
+        
+        if (empty($tag) || $this->isVoid) {
+            return '';
         }
-        return $this;
+
+        $html = '</%s>';        
+        
+        return sprintf($html, $tag);
     }
     
     /**
-     * @param string $tag 
+     * Apply htmlspecialchars()
      * 
-     * @return Element Provides a fluent interface.
+     * @param mixed $value 
+     * 
+     * @return string
      */
-    public function setTag($tag) 
-    {       
-        $this->tag = (string) $tag;
-        return $this;
+    protected function clean($value)
+    {
+        if (is_string($value) 
+            || is_int($value)
+            || is_float($value)
+            || is_bool($value)
+            || (is_object($value) and method_exists($value, '__toString'))) {
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);            
+        }
+        
+        return null;
     }
     
     /**
+     * Render attributes
+     * 
+     * @return string
+     */
+    protected function renderAttributes()
+    {
+        $html = '';
+        $attributes = $this->attributes;
+        
+        if (empty($attributes)) {
+            return $html;
+        }
+        
+        foreach ($attributes as $key => $value) {
+            if (strlen($key) < 1) {
+                break;
+            }
+            
+            if ($value === null) {
+                $html .= ' ' . $this->clean($key);
+            } else {
+                $html .= ' ' . $this->clean($key) . '="' . $this->clean($value). '"';
+            }
+        }
+        
+        return $html;
+    }
+
+    /**
+     * @api
+     *
      * @return string
      */
     public function getTag() 
     {
         return $this->tag;
     }
-    
+
     /**
-     * @param bool $isVoid 
-     * 
-     * @return Element Provides a fluent interface.
-     */
-    public function setVoid($isVoid) 
-    {
-        $this->isVoid = (bool) $isVoid;
-        return $this;    
-    }
-    
-    /**
+     * @api
+     *  
      * @return bool
      */
     public function isVoid() 
     {
         return $this->isVoid;    
     }
-    
+
     /**
+     * @api
+     *
      * @param string $content 
      * 
      * @return Element Provides a fluent interface.
      */
-    public function setContent($content) 
+    public function addContent($content) 
     {
-        $this->content = (string) $content;
+        if ($this->isVoid) {
+            throw LogicException('Void elements are not allowed to have contents.');
+        }
+        
+        $this->contents[] = $content;
         return $this;
     }
     
     /**
+     * @api
+     *
      * @return string
      */
-    public function getContent() 
+    public function getContents() 
     {
-        return $this->content;
+        return $this->contents;
     }
 
     /**
+     * @api
+     *
      * @param string $key 
      * @param string $value  
      * 
@@ -158,6 +261,8 @@ class Element
     }
     
     /**
+     * @api
+     *
      * @param array $attributes 
      * 
      * @return Element Provides a fluent interface.
@@ -167,10 +272,13 @@ class Element
         foreach($attributes as $key => $value) {
             $this->setAttribute($key, $value);
         }
+        
         return $this;
     }
     
     /**
+     * @api
+     *
      * @param string $key 
      * 
      * @return null|Element
@@ -180,10 +288,13 @@ class Element
         if (isset($this->attributes[$key])) {
             return $this->attributes[$key];
         }
+        
         return null;
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getAttributes() 
@@ -192,6 +303,8 @@ class Element
     }
     
     /**
+     * @api
+     * 
      * @param string $key 
      * 
      * @return bool
@@ -202,30 +315,13 @@ class Element
             unset($this->attributes[$key]);
             return true;
         }
+        
         return false;
     }
     
     /**
-     * @param string $id 
-     * 
-     * @return Element Provides a fluent interface.
-     */
-    public function setId($id)
-    {
-        $id = str_replace('_', '-', $id);
-        $this->setAttribute('id', $id);
-        return $this;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->getAttribute('id');
-    }
-    
-    /**
+     * @api
+     *
      * @param string $class 
      * 
      * @return Element Provides a fluent interface.
@@ -233,14 +329,18 @@ class Element
     public function addClass($class) 
     {
         $attribute = $this->getAttribute('class');
-        if ($attribute !== null) {
+        
+        if ($attribute) {
             $class = $attribute . ' ' . $class;   
         }
+        
         $this->setAttribute('class', $class);
         return $this;
     }
     
     /**
+     * @api
+     *
      * @param string $class 
      * 
      * @return Element Provides a fluent interface.
@@ -248,8 +348,12 @@ class Element
     public function removeClass($class) 
     {
         $attribute = $this->getAttribute('class');
-        $class = str_replace($class, '', $attribute);
-        $this->setAttribute('class', $class);
+        
+        if ($attribute) {
+            $class = str_replace($class, '', $attribute);
+            $this->setAttribute('class', $class);
+        }
+        
         return $this;
     }
 }
