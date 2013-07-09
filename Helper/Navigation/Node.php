@@ -9,7 +9,9 @@
 namespace Vision\Helper\Navigation;
 
 /**
- * @author Frank Liepert
+ * Node
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Node
 {
@@ -33,6 +35,11 @@ class Node
     {
         $this->setNavigationId($navigationId);
     }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function setNavigationId($navigationId)
     {
@@ -41,6 +48,11 @@ class Node
     }
     
     public function getNavigationId()
+    {
+        return $this->navigationId;
+    }
+    
+    public function getId()
     {
         return $this->navigationId;
     }
@@ -78,7 +90,7 @@ class Node
         return $this->parent;
     }
     
-    public function addChild($child)
+    public function addChild(self $child)
     {
         $this->children[] = $child;
     }
@@ -91,6 +103,11 @@ class Node
     public function hasChildren()
     {
         return (bool) !empty($this->children);
+    }
+    
+    public function resetChildren()
+    {
+        return $this->children = array();
     }
     
     public function setName($name)

@@ -13,12 +13,10 @@ use RecursiveIterator;
 /**
  * @author Frank Liepert
  */
-class NodeIterator implements RecursiveIterator
+class NodeIterator implements RecursiveIterator 
 {
     private $nodes;
-    
-    private $position = 0;
-    
+
     public function __construct($nodes) 
     {
         $this->nodes = $nodes;
@@ -31,11 +29,11 @@ class NodeIterator implements RecursiveIterator
     
     public function getChildren()
     {
-        return new self($this->nodes[$this->position]->getChildren());
+        return new self($this->current()->getChildren());
     }   
     
     public function current()
-    {
+    {   
         return $this->nodes[$this->position];
     }
     
@@ -45,7 +43,8 @@ class NodeIterator implements RecursiveIterator
     }
     
     public function next()
-    {
+    {    
+        
         $this->position++;
     }
     
