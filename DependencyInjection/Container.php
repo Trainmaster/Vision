@@ -22,6 +22,8 @@ class Container extends Config\AbstractConfig implements ContainerInterface
     protected $objects = array();
     
     /**
+     * Constructor
+     *
      * @param void
      */
     public function __construct()
@@ -30,6 +32,8 @@ class Container extends Config\AbstractConfig implements ContainerInterface
     }
     
     /**
+     * @api
+     *
      * @param string $alias 
      * 
      * @return bool
@@ -43,6 +47,8 @@ class Container extends Config\AbstractConfig implements ContainerInterface
     }
     
     /**
+     * @api
+     *
      * @param string $alias 
      * 
      * @return object
@@ -65,7 +71,7 @@ class Container extends Config\AbstractConfig implements ContainerInterface
             }
         } else {
             throw new RuntimeException(sprintf(
-                'No definition for "%s". Please double-check the container configuration file(s).', 
+                'No definition for %s. Double-check the container configuration file(s).', 
                 $alias
             ));
         }
