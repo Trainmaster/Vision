@@ -114,7 +114,7 @@ class Navigation
     public function limitDepth($limitDepth)
     {
         if ($limitDepth < -1 || $limitDepth === 0) {
-            throw new InvalidArgumentException('Valid values: -1 or > 1');
+            throw new InvalidArgumentException('Valid values: -1 or > 0');
         }
         
         $this->renderer->limitDepth($limitDepth);
@@ -133,7 +133,7 @@ class Navigation
     public function expandBy($expandBy)
     {
         if ($expandBy < -1 || $expandBy === 0) {
-            throw new InvalidArgumentException('Valid values: -1 or > 1');
+            throw new InvalidArgumentException('Valid values: -1 or > 0');
         }
         
         $this->renderer->expandBy($expandBy);
