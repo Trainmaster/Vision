@@ -98,7 +98,7 @@ class NavigationRenderer implements NavigationRendererInterface
     /**
      * @api
      *
-     * @param array $tree A multidimensional tree of Nodes.
+     * @param array $tree 
      * 
      * @return string
      */
@@ -122,12 +122,11 @@ class NavigationRenderer implements NavigationRendererInterface
             $iterator->setMaxDepth($fromDepth + $limitDepth - 1);
         }
 
+        $html = '';
+
         foreach ($iterator as $node) {
-            
             $depth = $iterator->getDepth();
             $maxDepth = $iterator->getMaxDepth();
-            
-            $url = $node->getPath();
 
             if (isset($node->isActive)) {
                 $actives[$node->getNavigationId()] = $depth;
@@ -138,6 +137,7 @@ class NavigationRenderer implements NavigationRendererInterface
             }
             
             if ($maxDepth >= 0 && $depth > $maxDepth) {
+                $iterator->current()->resetChildren();
                 continue;
             }
             
@@ -145,31 +145,26 @@ class NavigationRenderer implements NavigationRendererInterface
                 continue;
             }
 
-            if ($link && $fromDepth > 0 && !array_key_exists($node->getParent(), $actives)) {
-                $iterator->current()->resetChildren();
-                continue;
-            }
+            $parent = $node->getParent();
+            $parentIsActive = array_key_exists($parent, $actives);
             
+            if (!$parentIsActive) {
+                if ((!empty($actives) && ($depth > 0 || $depth > max($actives)))
+                    || ($link && $fromDepth > 0)) {
+                    $iterator->current()->resetChildren();
+                    continue;
+                }
+            }
+
             if (empty($actives)) {
                 $iterator->setMaxDepth($depth);
-                $iterator->current()->resetChildren();
-            } elseif ($depth > max($actives) && !array_key_exists($node->getParent(), $actives)) {
-                continue;
+                $iterator->current()->resetChildren();    
             }
             
-            if ($depth > $lastDepth) {
-                if (isset($ul)) {
-                    $content = $ul;
-                }
-                
-                $ul = new Element('ul');
-                
-                if (isset($content)) {
-                    $ul->addContent($content);
-                    $content = null;
-                }
-
-                $ul->addClass('level-' . $depth);
+            if ($depth < $lastDepth) {
+                $html .= '</ul></li>';
+            } elseif ($depth > $lastDepth) {
+                $html .= '<ul class="level-' . $depth . '">';
             }
 
             if ($iterator->hasNext()) {
@@ -187,7 +182,9 @@ class NavigationRenderer implements NavigationRendererInterface
             }
 
             if ($node->isVisible()) {
-                if ($node->showLink()) {
+                if ($node->showLink()) {                    
+                    $url = $node->getPath();
+                    
                     $element = new Element('a');
                     
                     if (parse_url($url, PHP_URL_SCHEME)) {
@@ -197,12 +194,11 @@ class NavigationRenderer implements NavigationRendererInterface
                         $href = $basePath . $url;
                     }             
                     
-                    $element->setAttribute('href', $href)
-                            ->addContent($node->getName());
+                    $element->setAttribute('href', $href);
                 } else {
                     $element = new Element('span');
-                    $element->addContent($node->getName());
                 }
+                $element->addContent($node->getName());
             } else {
                 $element = null;
             }
@@ -224,11 +220,26 @@ class NavigationRenderer implements NavigationRendererInterface
                 $li->addClass('active');
             }
             
-            $ul->addContent($li);
+            $html .= $li->renderStartTag()
+                  .  $li->renderContents();
+            
+            if (!$iterator->current()->hasChildren() || $depth === $maxDepth) {
+                $html .= '</li>';
+            }
             
             $lastDepth = $depth;           
         }
 
-        return (isset($ul) ? (string) $ul : '');
+        $diff = $lastDepth - $this->fromDepth;
+        
+        if ($diff > 0) {
+            $html .= str_repeat('</ul></li>', $diff);             
+        }
+        
+        if ($diff >= 0) {
+            $html .= '</ul>'; 
+        }
+        
+        return $html;
     }
 }
