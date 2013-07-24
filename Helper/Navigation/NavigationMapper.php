@@ -64,7 +64,7 @@ class NavigationMapper extends PDOMapper implements NavigationMapperInterface
                  ->setParent($data['parent'])
                  ->setName($data['name'])
                  ->setPath($data['path'])
-                 ->setAttributes($data['attributes']);
+                 ->setAttributes(json_decode($data['attributes'], true));
             $result[$data['node_id']] = $node;          
         }
 

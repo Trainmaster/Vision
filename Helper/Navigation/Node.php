@@ -134,12 +134,7 @@ class Node
     
     public function setAttributes($attributes)
     {
-        if (isset($attributes)) {
-            $attributes = json_decode($attributes, true);
-            if ($attributes !== null) {
-                $this->attributes = $attributes;
-            }       
-        }
+        $this->attributes = $attributes;
         return $this;
     }
     
