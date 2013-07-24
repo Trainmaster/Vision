@@ -192,15 +192,7 @@ abstract class ControlAbstract extends HtmlElement
     {
         return $this->getAttribute('name');
     }
-    
-    /**
-     * Gets id attribute.
-     */
-    public function getId() 
-    {
-        return $this->getAttribute('id');
-    }    
-    
+
     public function setDisabled($disabled) 
     {
         $disabled = (bool) $disabled;

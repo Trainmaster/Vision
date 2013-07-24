@@ -26,7 +26,7 @@ class HtmlTag extends DecoratorAbstract
                 if ($this->decorator->isVoid()) {
                     return $content;
                 }
-                $this->decorator->setContent($content);
+                $this->decorator->addContent($content);
                 $html = (string) $this->decorator;
                 break;
                 

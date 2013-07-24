@@ -9,8 +9,7 @@
 namespace Vision\Form;
 
 use Vision\Http\Request;
-use Vision\Html\Element as HtmlElement;
-use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
+use Vision\Html\Element;
 use Vision\Form\Control\ControlAbstract;
 
 /**
@@ -18,8 +17,8 @@ use Vision\Form\Control\ControlAbstract;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Fieldset extends AbstractCompositeType {
-
+class Fieldset extends AbstractCompositeType
+{
     protected $tag = 'fieldset';
         
     protected $legend = null;
@@ -29,14 +28,16 @@ class Fieldset extends AbstractCompositeType {
         $this->addDecorator(new Decorator\Ul);
     }
         
-    public function getContent() 
+    public function getContents() 
     {
-        $content = parent::getContent();
-        if ($this->legend !== null) {
-            $legend = new HtmlElement('legend');
-            $legend->setContent($this->legend);
+        $content = parent::getContents();
+
+        if ($this->legend) {
+            $legend = new Element('legend');
+            $legend->addContent($this->legend);
             $content = $legend . $content;
         }
+        
         return $content;
     }
 

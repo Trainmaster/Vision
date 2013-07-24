@@ -1,7 +1,7 @@
 <?php
 namespace Vision\Form\Decorator;
 
-use Vision\Html\ElementFactory;
+use Vision\Html\Element;
 
 class Label extends HtmlTag 
 {   
@@ -9,17 +9,17 @@ class Label extends HtmlTag
     
     public function __construct()
     {
-        $label = ElementFactory::create('label');
+        $label = new Element('label');
         $this->decorator = $label;
     }
     
     public function render($content) 
     {       
         $this->decorator->setAttribute('for', $this->element->getId());
-        $this->decorator->setContent($this->element->getLabel());
+        $this->decorator->addContent($this->element->getLabel());
         
         if ($this->element->isRequired() && $this->element->getLabel()) {
-            $this->decorator->setContent($this->decorator->getContent() . '<span class="required">*</span>');
+            $this->decorator->addContent($this->decorator->getContents() . '<span class="required">*</span>');
         }
 
         return parent::render($content);

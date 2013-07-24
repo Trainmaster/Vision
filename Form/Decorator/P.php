@@ -1,7 +1,7 @@
 <?php
 namespace Vision\Form\Decorator;
 
-use Vision\Html\ElementFactory;
+use Vision\Html\Element;
 
 class P extends HtmlTag 
 {		
@@ -9,7 +9,7 @@ class P extends HtmlTag
     
     public function __construct()
     {
-        $paragraph = ElementFactory::create('p');
+        $paragraph = new Element('p');
         
         $this->decorator = $paragraph;
     }

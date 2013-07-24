@@ -47,7 +47,7 @@ abstract class AbstractCompositeType extends HtmlElement
     /**
      * @return string
      */
-    public function getContent() 
+    public function getContents() 
     {
         $content = '';
         

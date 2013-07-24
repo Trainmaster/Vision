@@ -41,7 +41,7 @@ class Textarea extends ControlAbstract
     
     public function setValue($value) 
     {   
-        $this->content = $value;
+        $this->contents[] = $value;
 		$this->value = $value;
 		return $this;
 	}
@@ -49,7 +49,7 @@ class Textarea extends ControlAbstract
     public function isValid($value) 
     {
         if (parent::isValid($value) === true) {
-            $this->content = $this->getValue();
+            $this->contents[] = $this->getValue();
             return true;
         }
         return false;

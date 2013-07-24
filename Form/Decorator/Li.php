@@ -1,7 +1,7 @@
 <?php
 namespace Vision\Form\Decorator;
 
-use Vision\Html\ElementFactory;
+use Vision\Html\Element;
 
 class Li extends HtmlTag 
 {		
@@ -9,7 +9,7 @@ class Li extends HtmlTag
     
     public function __construct()
     {
-        $li = ElementFactory::create('li');
+        $li = new Element('li');
         
         $this->decorator = $li;
     }
