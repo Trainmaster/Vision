@@ -18,10 +18,10 @@ class Route
     /** @type bool $isStatic */
     protected $isStatic = true;
     
-    /** @type null|string $path */
+    /** @type string $path */
     protected $path = null;
     
-    /** @type null|string $controller */
+    /** @type string $controller */
     protected $controller = null;
     
     /** @type array $requirements */
@@ -80,6 +80,15 @@ class Route
     public function getPath()
     {
         return $this->path;
+    }
+    
+    public function getStaticPath()
+    {
+        $pos = strpos($this->path, '{');
+        
+        if ($pos >= 0) {
+            return substr($this->path, 0, $pos - 1);
+        }
     }
 
     /**
