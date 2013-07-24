@@ -12,6 +12,7 @@ use Vision\DependencyInjection\ContainerInterface;
 use Vision\Http\RequestInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
+
 use Exception;
 use RuntimeException;
 use UnexpectedValueException;
@@ -35,6 +36,14 @@ class FrontController
     /** @type Router $router */
     protected $router = null;
         
+    /**
+     * Constructor
+     *
+     * @param RequestInterface $request
+     * @param ReponseInterface $response
+     * @param Router $router
+     * @param ContainerInterface $container
+     */
     public function __construct(RequestInterface $request, ResponseInterface $response, 
                                 Router $router, ContainerInterface $container) 
     {
@@ -45,7 +54,6 @@ class FrontController
     }
  
     /**
-     * 
      * @api
      * 
      * @return RequestInterface
@@ -56,7 +64,6 @@ class FrontController
     }
     
     /**
-     * 
      * @api
      * 
      * @return ResponseInterface
@@ -67,7 +74,6 @@ class FrontController
     }
     
     /**
-     * 
      * @api
      * 
      * @return Router
@@ -77,13 +83,24 @@ class FrontController
         return $this->router;
     }
     
+    /**
+     * Invoke the controller
+     * 
+     * @param string $class 
+     * @param string $method 
+     *
+     * @throws RuntimeException if there is no definition for the given class.
+     * @throws UnexpectedValueException
+     * 
+     * @return mixed
+     */
     public function invokeController($class, $method)
     {
         $definition = $this->container->getDefinition($class);
         
         if ($definition === null) {
             throw new RuntimeException(sprintf(
-                'No definition for controller "%s". Please double-check the container configuration file(s).',
+                'No definition for controller %s. Double-check the container configuration file(s).',
                 $class
             ));
         }
