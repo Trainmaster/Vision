@@ -91,7 +91,7 @@ class Element
      */
     public function renderStartTag()
     {       
-        $tag = $this->tag;
+        $tag = $this->getTag();
         
         if (empty($tag)) {
             return '';
@@ -119,11 +119,15 @@ class Element
     public function renderContents()
     {
         $html = '';
-        $contents = $this->contents;
+        $contents = $this->getContents();
         
         if (!empty($contents)) {
-            foreach ($contents as $content) {
-                $html .= $content;
+            if (is_array($contents)) {            
+                foreach ($contents as $content) {
+                    $html .= $content;
+                }
+            } elseif (is_string($contents)) {
+                $html .= $contents;
             }
         }
         
@@ -139,7 +143,7 @@ class Element
      */
     public function renderEndTag()
     {        
-        $tag = $this->tag;
+        $tag = $this->getTag();
         
         if (empty($tag) || $this->isVoid) {
             return '';
@@ -229,10 +233,20 @@ class Element
     public function addContent($content) 
     {
         if ($this->isVoid) {
-            throw LogicException('Void elements are not allowed to have contents.');
+            throw new LogicException('Void elements are not allowed to have contents.');
         }
         
-        $this->contents[] = $content;
+        if (is_string($content)
+            || is_int($content)
+            || is_float($content)
+            || is_bool($content)
+            || is_null($content)
+            || $content instanceof self) {        
+            $this->contents[] = $content;        
+        } else {
+            throw new InvalidArgumentException('Unsupported argument type.');
+        }
+        
         return $this;
     }
     
@@ -317,6 +331,17 @@ class Element
         }
         
         return false;
+    }
+    
+    public function setId($id)
+    {
+        $this->setAttribute('id', $id);
+        return $this;
+    }
+    
+    public function getId()
+    {
+        return $this->getAttribute('id');
     }
     
     /**
