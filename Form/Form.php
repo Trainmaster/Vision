@@ -11,7 +11,9 @@ namespace Vision\Form;
 use Vision\Http\RequestInterface;
 use Vision\Html\Element as HtmlElement;
 use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
+
 use RecursiveIteratorIterator;
+use InvalidArgumentException;
 
 /**
  * Form
@@ -19,10 +21,7 @@ use RecursiveIteratorIterator;
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
 class Form extends AbstractCompositeType 
-{    
-    /** @type string $tag */
-    protected $tag = 'form';
-    
+{        
     /** @type array $attributes */
     protected $attributes = array(
         'action' => '',
@@ -30,20 +29,23 @@ class Form extends AbstractCompositeType
         'method' => 'post'
     );
            
-    /** @type null|array */
-    protected $data = null;
-    
-    /** @type null|RecursiveIteratorIterator $formElementsIterator */
-    protected $formElementsIterator = null;
+    /** @type array */
+    protected $data = array();
     
     /** @type array $errors */
     protected $errors = array();
     
     /** @type array $values */
     protected $values = array();
-        
+    
+    /** @type string $tag */
+    protected $tag = 'form';
+    
     /** @type int $tabindex */
     protected $tabindex = 0;
+    
+    /** @type RecursiveIteratorIterator|null $formElementsIterator */
+    protected $formElementsIterator = null;
     
     /**
      * @api
@@ -85,15 +87,25 @@ class Form extends AbstractCompositeType
     }
     
     /**
-     * @param string $name 
+     * @api
+     *
+     * @param mixed $name 
      * 
-     * @return null|Form\ControlAbstract
+     * @return mixed
      */
-    public function getElement($name) 
+    public function getElement($mixed) 
     {
+        if (is_string($mixed)) {
+            $name = trim($mixed);
+        } elseif ($mixed instanceof Control\ControlAbstract) {
+            $name = $mixed->getName();
+        } else {
+            throw new InvalidArgumentException('');
+        }
+        
         $iterator = $this->getIterator();
         
-        foreach ($iterator as $key => $element) {       
+        foreach ($iterator as $element) {       
             if ($element->getName() === $name) {
                 return $element;
             }            
@@ -103,9 +115,11 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @param string $name 
      * 
-     * @return Form\ControlAbstract|null
+     * @return Form\ControlAbstract | null
      */
     public function getElementByName($name)
     {
@@ -113,6 +127,8 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @param string $name 
      * 
      * @return mixed|bool
@@ -129,7 +145,7 @@ class Form extends AbstractCompositeType
     }
     
     /**
-     * 
+     * @api
      * 
      * @param array $data 
      * 
@@ -150,6 +166,8 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getValues()
@@ -237,20 +255,27 @@ class Form extends AbstractCompositeType
         
         foreach ($iterator as $element) {
             if ($element instanceof Control\ControlAbstract) {
-                $value = $this->getValueByName($element->getName());
+                $name = $element->getName();
+                $value = $this->getValueByName($name);
                 
-                if ($element->isRequired() === false && empty($value)) {
+                if (!$element->isRequired() && empty($value)) {
                     continue;
                 }
 
-                if ($element->isValid($value) === false) {
-                    $this->errors[$element->getName()] = $element->getErrors();
+                if (!$element->isValid($value)) {
+                    $this->errors[$name] = $element->getErrors();
                     $isValid = false;
                 }
                 
-                $this->values[$element->getName()] = $element->getValue();
+                $this->values[$name] = $element->getValue();
             }
         }  
+        
+        foreach ($this->validators as $validator) {
+            if (!$validator->isValid($this)) {
+                $isValid = false;
+            }
+        }
 
         return $isValid;
     }
