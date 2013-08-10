@@ -10,6 +10,9 @@ namespace Vision\Form;
 
 use Vision\Html\Element as HtmlElement;
 
+use Vision\Form\Decorator\DecoratorInterface;
+use Vision\Validator\ValidatorInterface;
+
 /**
  * AbstractCompositeType
  *
@@ -25,6 +28,9 @@ abstract class AbstractCompositeType extends HtmlElement
     
     /** @type array $decorators */
     protected $decorators = array();
+    
+    /** @type array $validators */
+    protected $validators = array();
     
     /**
      * Constructor
@@ -64,9 +70,9 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
-     * @param <type> $element 
+     * @param mixed $element 
      * 
-     * @return \Vision\Form\AbstractCompositeType Provides a fluent interface.
+     * @return AbstractCompositeType Provides a fluent interface.
      */
     public function addElement($element) 
     {
@@ -77,7 +83,7 @@ abstract class AbstractCompositeType extends HtmlElement
     /**
      * @param array $elements 
      * 
-     * @return \Vision\Form\AbstractCompositeType Provides a fluent interface.
+     * @return AbstractCompositeType Provides a fluent interface.
      */
     public function addElements(array $elements) 
     {
@@ -90,7 +96,7 @@ abstract class AbstractCompositeType extends HtmlElement
     /**
      * @param string $name 
      * 
-     * @return null|mixed
+     * @return mixed
      */
     public function getElement($name) 
     {
@@ -117,16 +123,16 @@ abstract class AbstractCompositeType extends HtmlElement
     }   
 
     /**
-     * @return \Vision\Form\AbstractCompositeType Provides a fluent interface.
+     * @return AbstractCompositeType Provides a fluent interface.
      */
-    public function addDecorator(Decorator\DecoratorInterface $decorator) 
+    public function addDecorator(DecoratorInterface $decorator) 
     {
         $this->decorators[] = $decorator;
         return $this;
     }
     
     /**
-     * @return \Vision\Form\AbstractCompositeType Provides a fluent interface.
+     * @return AbstractCompositeType Provides a fluent interface.
      */
     public function addDecorators(array $decorators) 
     {
@@ -145,11 +151,48 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /** 
-     * @return \Vision\Form\AbstractCompositeType Provides a fluent interface.
+     * @return AbstractCompositeType Provides a fluent interface.
      */
     public function resetDecorators()
     {
         $this->decorators = array();
+        return $this;
+    }    
+    
+    /**
+     * @return AbstractCompositeType Provides a fluent interface.
+     */
+    public function addValidator(ValidatorInterface $validator) 
+    {
+        $this->validators[] = $validator;
+        return $this;
+    }
+    
+    /**
+     * @return AbstractCompositeType Provides a fluent interface.
+     */
+    public function addValidators(array $validators) 
+    {
+        foreach ($validators as $validator) {
+            $this->addValidator($validator);
+        }
+        return $this;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getValidators() 
+    {
+        return $this->validators;
+    }
+    
+    /** 
+     * @return AbstractCompositeType Provides a fluent interface.
+     */
+    public function resetValidators()
+    {
+        $this->validators = array();
         return $this;
     }
 }
