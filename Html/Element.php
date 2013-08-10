@@ -66,7 +66,7 @@ class Element
     /**
      * @api
      *
-     * String representation of this element.
+     * String representation.
      * 
      * @return string
      */

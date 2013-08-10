@@ -19,17 +19,17 @@ use InvalidArgumentException;
  */
 class Definition 
 {
-    /** @type null|string $class */
+    /** @type mixed $class */
     protected $class = null;
     
     /** @type bool $shared */
     protected $shared = true;
     
-    /** @type array $constructor */
-    protected $constructor = array();
-    
     /** @type array $property */
     protected $property = array();
+    
+    /** @type array $constructor */
+    protected $constructor = array();
     
     /** @type array $setter */
     protected $setter = array();
@@ -83,17 +83,6 @@ class Definition
     }
     
     /**
-     * @param array $constructor 
-     * 
-     * @return Definition Provides a fluent interface.
-     */
-    public function constructor(array $constructor) 
-    {   
-        $this->constructor = $constructor;
-        return $this;
-    }
-    
-    /**
      * @param string $property 
      * @param mixed $value 
      * 
@@ -108,6 +97,17 @@ class Definition
             ));
         }
         $this->property[$property] = $value;
+        return $this;
+    }
+    
+    /**
+     * @param array $constructor 
+     * 
+     * @return Definition Provides a fluent interface.
+     */
+    public function constructor(array $constructor) 
+    {   
+        $this->constructor = $constructor;
         return $this;
     }
     
@@ -143,18 +143,18 @@ class Definition
     /**
      * @return array
      */
-    public function getConstructorInjections() 
-    {   
-        return $this->constructor;
+    public function getPropertyInjections() 
+    {
+        return $this->property;
     }
     
     /**
      * @return array
      */
-    public function getPropertyInjections() 
-    {
-        return $this->property;
-    }
+    public function getConstructorInjections() 
+    {   
+        return $this->constructor;
+    }   
     
     /**
      * @return array
