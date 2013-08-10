@@ -89,23 +89,12 @@ class FrontController
      * @param string $class 
      * @param string $method 
      *
-     * @throws RuntimeException if there is no definition for the given class.
      * @throws UnexpectedValueException
      * 
      * @return mixed
      */
     public function invokeController($class, $method)
     {
-        $definition = $this->container->getDefinition($class);
-        
-        if ($definition === null) {
-            throw new RuntimeException(sprintf(
-                'No definition for controller %s. Double-check the container configuration file(s).',
-                $class
-            ));
-        }
-
-        $this->resolveAbstractDependencies($definition);
         $instance = $this->container->get($class);
         
         if (!$instance instanceof ControllerInterface) {
@@ -125,42 +114,13 @@ class FrontController
         return false;
     }
     
-    public function resolveAbstractDependencies($definition)
-    {    
-        $class = $definition->getClass();
-        
-        if (class_exists($class) === false) {
-            return false;           
-        }
-        
-        $interfaces = class_implements($class);  
-        
-        $parents = class_parents($class);
-
-        if (is_array($interfaces)) {
-            $setterInjections = array();
-            foreach ($interfaces as $interface) {            
-                $def = $this->container->getDefinition($interface);
-                
-                if ($def === null) {
-                    continue;
-                }       
-                
-                $dependencies = $def->getSetterInjections();
-                
-                if (empty($dependencies)) {
-                    continue;
-                }     
-                
-                $setterInjections = array_merge($setterInjections, $dependencies);                
-            }
-            
-            if (!empty($setterInjections)) {
-                $definition->setSetter($setterInjections); 
-            }
-        }
-    }
-    
+    /**
+     * 
+     * 
+     * @throws RuntimeException
+     *
+     * @return <type>
+     */
     public function run() 
     {     
         try {
@@ -188,6 +148,13 @@ class FrontController
         }       
     }
     
+    /**
+     * 
+     * 
+     * @param Exception $e 
+     * 
+     * @return mixed
+     */
     public function handleException(Exception $e) 
     {
         if ($this->container->isDefined('ExceptionController')) {
