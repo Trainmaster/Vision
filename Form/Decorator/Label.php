@@ -19,7 +19,7 @@ class Label extends HtmlTag
         $this->decorator->addContent($this->element->getLabel());
         
         if ($this->element->isRequired() && $this->element->getLabel()) {
-            $this->decorator->addContent($this->decorator->getContents() . '<span class="required">*</span>');
+            $this->decorator->addContent('<span class="required">*</span>');
         }
 
         return parent::render($content);
