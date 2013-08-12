@@ -151,20 +151,9 @@ abstract class ControlAbstract extends HtmlElement
     /**
      * Get all validators.
      */
-    public function getValidators () 
+    public function getValidators() 
     {    
         return $this->validators;
-    }
-    
-    /**
-     * @param array $errors 
-     * 
-     * @return ControlAbstract Provides a fluent interface.
-     */
-    public function setErrors(array $errors)
-    {
-        $this->errors = $errors;
-        return $this;
     }
     
     /**
@@ -305,20 +294,14 @@ abstract class ControlAbstract extends HtmlElement
             $value = $filter->filter($value);
         }
         
-        $errors = array();
-        
         foreach ($this->validators as $validator) {            
             if ($validator->isValid($value) === false) {
                 $key = get_class($validator);
-                $errors[$key] = $validator->getErrors();
+                $this->errors[$key] = $validator->getErrors();
                 $isValid = false;               
             }             
         }
-        
-        if (!empty($errors)) {
-            $this->setErrors($errors);
-        }
-        
+
         if ($isValid === true) {
             $this->setValue($value);
         }
