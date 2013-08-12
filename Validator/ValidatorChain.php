@@ -12,25 +12,39 @@ namespace Vision\Validator;
  * ValidatorChain
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- *
  */
 class ValidatorChain
 {
+    /** @type array $validators */
     protected $validators = array();
     
+    /**
+     * @api
+     * 
+     * @param ValidatorInterface $validator 
+     * 
+     * @return ValidatorChain Provides a fluent interface.
+     */
     public function add(ValidatorInterface $validator)
     {
         $this->validators[] = $validator;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param mixed $value 
+     * 
+     * @return bool
+     */
     public function isValid($value)
     {
         $isValid = true;
         
         foreach ($this->validators as $validator) {
             $isValid = $validator->isValid($value);
-            if ($isValid === false) {
+            if (!$isValid) {
                 break;
             }
         }
