@@ -20,7 +20,7 @@ use Vision\Validator\ValidatorInterface;
  */ 
 abstract class AbstractCompositeType extends HtmlElement
 {
-    /** @type null|string $name */
+    /** @type string|null $name */
     protected $name = null;
     
     /** @type array $elements */
