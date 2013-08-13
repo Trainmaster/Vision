@@ -6,9 +6,8 @@
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */ 
-namespace Vision\Helper\Upload\Processor;
+namespace Vision\Extension\Upload\Processor;
 
-use Vision\Helper\Upload\Processor\AbstractProcessor;
 use Vision\File\UploadedFile;
 
 use Imagick;
