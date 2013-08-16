@@ -11,18 +11,23 @@ namespace Vision\Http;
 /**
  * Response
  *
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Response extends AbstractMessage implements ResponseInterface
 {
+    /** @type array $headers */
     protected $headers = array();
     
+    /** @type int $statusCode */
     protected $statusCode = 200;
     
+    /** @type string|null $reasonPhrase */
     protected $reasonPhrase = null;
     
+    /** @type string|null $body */
     protected $body = null;
     
+    /** @type array $statusCodesAndRecommendedReasonPhrases */
     protected $statusCodesAndRecommendedReasonPhrases = array(
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -66,46 +71,93 @@ class Response extends AbstractMessage implements ResponseInterface
         505 => 'HTTP Version not supported'
     );
 
+    /**
+     * @api
+     * 
+     * @param string $name 
+     * @param string $value 
+     * 
+     * @return Response Provides a fluent interface.
+     */
     public function addHeader($name, $value) 
     {
         $this->headers[(string) $name] = (string) $value;
         return $this;
     }   
     
+    /**
+     * @api
+     * 
+     * @param mixed $body 
+     * 
+     * @return Response Provides a fluent interface.
+     */
     public function body($body) 
     {
         $this->body .= $body;
         return $this;
     }   
     
+    /**
+     * @api
+     * 
+     * @param int $statusCode 
+     * 
+     * @return Response Provides a fluent interface.
+     */
     public function setStatusCode($statusCode)
     {          
         $statusCode = (int) $statusCode;
+        
         if (isset($this->statusCodesAndRecommendedReasonPhrases[$statusCode])) {         
             $this->statusCode = $statusCode;            
         }
+        
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return int
+     */
     public function getStatusCode()
     {
         return $this->statusCode;
     }  
     
+    /**
+     * @api
+     * 
+     * @param string $reasonPhrase 
+     * 
+     * @return Response Provides a fluent interface.
+     */
     public function setReasonPhrase($reasonPhrase) 
     {
         $this->reasonPhrase = trim($reasonPhrase);
         return $this;
     }
     
+    
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getReasonPhrase()
     {
         if ($this->reasonPhrase === null) {
             return $this->statusCodesAndRecommendedReasonPhrases[$this->getStatusCode()];
-        }
+        }        
         return $this->reasonPhrase;
     }
     
+    /**
+     * @api
+     * 
+     * @return void
+     */
     public function send()
     {
         $this->sendStatusLine()
@@ -113,6 +165,11 @@ class Response extends AbstractMessage implements ResponseInterface
              ->sendBody();
     }
     
+    /**
+     * @api
+     * 
+     * @return Response Provides a fluent interface.
+     */
     protected function sendStatusLine()
     {
         $statusLine = sprintf(
@@ -121,18 +178,30 @@ class Response extends AbstractMessage implements ResponseInterface
             $this->getStatusCode(), 
             $this->getReasonPhrase()
         );
+        
         header($statusLine);
+        
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return Response Provides a fluent interface.
+     */
     protected function sendHeaders() 
     {
         foreach ($this->headers as $key => $value) {
             header($key . ': ' . $value);
-        }
+        }        
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return Response Provides a fluent interface.
+     */
     protected function sendBody()
     {
         echo $this->body;
