@@ -1,0 +1,21 @@
+{
+    "name" : "vision/vision",
+    "description" : "Vision - a PHP framework"
+    "type" : "library",
+    "license" : "MIT",
+    "require": {
+        "php": ">=5.3.8"
+    },
+    "authors": [
+        {
+            "name": "Frank Liepert",
+            "email": "contact@frank-liepert.de",
+            "role": "Developer"
+        }
+    ]
+    "autoload": {
+        "psr-0": {
+            "Vision\\": "src/"
+        }
+    }
+}    
