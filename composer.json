@@ -1,6 +1,6 @@
 {
     "name" : "vision/vision",
-    "description" : "Vision - a PHP framework"
+    "description" : "Vision - a PHP framework",
     "type" : "library",
     "license" : "MIT",
     "require": {
