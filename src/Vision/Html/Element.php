@@ -16,37 +16,25 @@ use LogicException;
  */
 class Element 
 {
-    /**
-     * @type array $attributes
-     */
+    /** @type array $attributes */
     protected $attributes = array();
     
-    /**
-     * @type array $contents
-     */
+    /** @type array $contents */
     protected $contents = array();
     
-    /**
-     * @type array $voidElements
-     */
+    /** @type array $voidElements */
     protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed', 
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta', 
                                             'param', 'source', 'track', 'wbr');
     
-    /**
-     * @type bool $isVoid
-     */
+    /** @type bool $isVoid */
     protected $isVoid = false;
     
-    /**
-     * @type string $tag
-     */
+    /** @type string $tag */
     protected $tag = null;
     
     /**
      * @param string $tag 
-     * 
-     * @return void
      */
     public function __construct($tag) 
     {
@@ -64,10 +52,6 @@ class Element
     } 
     
     /**
-     * @api
-     *
-     * String representation.
-     * 
      * @return string
      */
     public function __toString()
@@ -110,8 +94,6 @@ class Element
     }
     
     /**
-     * Render contents
-     *
      * @api
      *
      * @return string
@@ -135,8 +117,6 @@ class Element
     }
     
     /**
-     * Render end tag 
-     *
      * @api
      *
      * @return string
@@ -159,7 +139,7 @@ class Element
      * 
      * @param mixed $value 
      * 
-     * @return string
+     * @return string|null
      */
     protected function clean($value)
     {
@@ -167,7 +147,7 @@ class Element
             || is_int($value)
             || is_float($value)
             || is_bool($value)
-            || (is_object($value) and method_exists($value, '__toString'))) {
+            || (is_object($value) && method_exists($value, '__toString'))) {
             return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);            
         }
         
@@ -295,7 +275,7 @@ class Element
      *
      * @param string $key 
      * 
-     * @return null|Element
+     * @return Element|null
      */
     public function getAttribute($key) 
     {
@@ -333,12 +313,24 @@ class Element
         return false;
     }
     
+    /**
+     * @api
+     * 
+     * @param string $id 
+     * 
+     * @return Element Provides a fluent interface.
+     */
     public function setId($id)
     {
         $this->setAttribute('id', $id);
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getId()
     {
         return $this->getAttribute('id');
@@ -353,13 +345,15 @@ class Element
      */
     public function addClass($class) 
     {
-        $attribute = $this->getAttribute('class');
+        $attribute = $this->getAttribute('class');        
+        $class = trim($class);
         
         if ($attribute) {
             $class = $attribute . ' ' . $class;   
         }
         
         $this->setAttribute('class', $class);
+        
         return $this;
     }
     
@@ -373,11 +367,17 @@ class Element
     public function removeClass($class) 
     {
         $attribute = $this->getAttribute('class');
+        $class = trim($class);
         
         if ($attribute) {
             $class = str_replace($class, '', $attribute);
+            
+            if (strpos($class, '  ') !== false) {
+                $class = preg_replace('/\s\s+/', ' ', $class);
+            }
+            
             $this->setAttribute('class', $class);
-        }
+        }       
         
         return $this;
     }
