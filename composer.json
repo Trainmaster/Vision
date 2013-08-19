@@ -12,7 +12,7 @@
             "email": "contact@frank-liepert.de",
             "role": "Developer"
         }
-    ]
+    ],
     "autoload": {
         "psr-0": {
             "Vision\\": "src/"
