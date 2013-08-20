@@ -127,7 +127,7 @@ class NavigationRenderer implements NavigationRendererInterface
         foreach ($iterator as $node) {
             $depth = $iterator->getDepth();
             $maxDepth = $iterator->getMaxDepth();
-
+            
             if (isset($node->isActive)) {
                 $actives[$node->getNavigationId()] = $depth;
             }
@@ -149,16 +149,16 @@ class NavigationRenderer implements NavigationRendererInterface
             $parentIsActive = array_key_exists($parent, $actives);
             
             if (!$parentIsActive) {
-                if ((!empty($actives) && ($depth > 0 || $depth > max($actives)))
+                if ((!empty($actives) && ($depth > 0 || $depth > max($actives)) && $link)
                     || ($link && $fromDepth > 0)) {
                     $iterator->current()->resetChildren();
                     continue;
                 }
             }
-
-            if (empty($actives)) {
+            
+            if (empty($actives) && $link) {
                 $iterator->setMaxDepth($depth);
-                $iterator->current()->resetChildren();    
+                $iterator->current()->resetChildren(); 
             }
             
             if ($depth < $lastDepth) {
@@ -206,14 +206,14 @@ class NavigationRenderer implements NavigationRendererInterface
             $li = new Element('li');
             $li->addContent($element);
             
-            if (isset($class)) {
-                $li->addClass($class);
-            }
-                
             $attributes = $node->getAttributes();
         
             if (!empty($attributes)) {
                 $li->setAttributes($attributes);
+            }
+            
+            if (isset($class)) {
+                $li->addClass($class);
             }
 
             if (isset($node->isActive)) {
