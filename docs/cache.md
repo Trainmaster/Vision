@@ -4,7 +4,7 @@ The cache currently ships with a file-based caching adapter. More to come.
 
 
 ## Adapter
-* ´Vision\Cache\Adapter\File`: File-based
+* `Vision\Cache\Adapter\File`: File-based
 
 ## Usage
 ```php
