@@ -16,7 +16,7 @@ namespace Vision\Crypt;
 class Random
 {
     /**
-     * 
+     * @api
      * 
      * @param int $length 
      * 
@@ -50,7 +50,7 @@ class Random
     }
     
     /**
-     * 
+     * @api
      * 
      * @param int $length 
      * 

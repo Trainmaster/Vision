@@ -15,29 +15,12 @@ namespace Vision\Crypt;
  */
 class Bcrypt
 {
-    /**
-     * @type int
-     */
+    /** @type int MIN_SALT_LENGTH */
     const MIN_SALT_LENGTH = 16;
-    
-    /**
-     * @param string $string 
-     * 
-     * @return string|null
-     */
-    public function generateSalt($string)
-    {
-        $string = (string) $string;
         
-        if (strlen($string) >= self::MIN_SALT_LENGTH) {
-            $salt = substr(str_replace('+', '.', base64_encode($string)), 0, 22);
-            return $salt;
-        }
-        
-        return null;
-    }
-    
     /**
+     * @api
+     *
      * @param string $password 
      * @param int $cost  
      * @param string $salt  
@@ -52,7 +35,7 @@ class Bcrypt
             return false;
         }
         
-        $salt = $this->generateSalt($salt);
+        $salt = $this->processSalt($salt);
         
         if ($salt === null) {
             return false;
@@ -70,6 +53,8 @@ class Bcrypt
     }
     
     /**
+     * @api
+     *
      * @param string $password 
      * @param string $hash 
      * 
@@ -82,5 +67,22 @@ class Bcrypt
         }
         
         return false;   
+    }
+    
+    /**
+     * @param string $string 
+     * 
+     * @return string|null
+     */
+    protected function processSalt($string)
+    {
+        $string = (string) $string;
+        
+        if (strlen($string) >= self::MIN_SALT_LENGTH) {
+            $salt = substr(str_replace('+', '.', base64_encode($string)), 0, 22);
+            return $salt;
+        }
+        
+        return null;
     }
 }
