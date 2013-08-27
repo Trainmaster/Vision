@@ -1,6 +1,10 @@
 # Cache
 
-The cache currently ships with a file-based caching mechanism. More to come.
+The cache currently ships with a file-based caching adapter. More to come.
+
+
+## Adapter
+* ´Vision\Cache\Adapter\File`: File-based
 
 ## Usage
 ```php
