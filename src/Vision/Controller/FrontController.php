@@ -12,6 +12,7 @@ use Vision\DependencyInjection\ContainerInterface;
 use Vision\Http\RequestInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
+use Vision\Routing\AbstractCompiledRoute;
 
 use Exception;
 use RuntimeException;
@@ -126,10 +127,12 @@ class FrontController
         try {
             $response = null;
             
-            $controller = $this->router->resolve();           
+            $route = $this->router->resolve();    
             
-            if ($controller !== null) {
-                $response = $this->invokeController($controller['class'], $controller['method']);
+            if ($route instanceof AbstractCompiledRoute) {
+                $class = $route->getClass();
+                $method = $route->getMethod();
+                $response = $this->invokeController($class, $method);
             } else {
                 throw new RuntimeException('No matching route.');
             }
