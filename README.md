@@ -12,4 +12,5 @@ Vision requires PHP >= 5.3.8.
 
 *  [Autoload](/docs/autoload.md)
 *  [Cache](/docs/cache.md)
+*  [Crypt](/docs/crypt.md)
 *  [Dependency Injection](/docs/dependency-injection.md)
