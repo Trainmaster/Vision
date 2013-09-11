@@ -8,7 +8,8 @@
  */ 
 namespace Vision\Routing;
 
-use Vision\Controller\ControllerParserInterface;
+use Vision\Cache\CacheInterface;
+use Vision\File\Loader\LoaderInterface;
 use Vision\Http\RequestInterface;
 
 /**
@@ -16,121 +17,252 @@ use Vision\Http\RequestInterface;
  *
  * @author Frank Liepert
  */
-class Router extends Config\AbstractConfig
+class Router
 {
-    /** @type string $defaultParameterPattern */
-    protected $defaultParameterPattern = '[\w.~-]+';
+    /** @type CacheInterface|null $cache */
+    protected $cache = null;
     
-    /** @type null|ControllerParserInterface $parser */
-    protected $parser = null;
+    /** @type RouteCompiler|null $compiler */
+    protected $compiler = null;
     
-    /** @type null|RequestInterface $request */
+    /** @type LoaderInterface|null $loader */
+    protected $loader = null;
+    
+    /** @type RequestInterface|null $request */
     protected $request = null;
     
+    /** @type array $resources */
+    protected $resources = array();
+    
+    /** @type RequestInterface|null $request */
+    protected $routes = null;
+    
     /**
-     * @param ControllerParserInterface $parser 
      * @param RequestInterface $request 
-     * 
-     * @return void
      */
-    public function __construct(ControllerParserInterface $parser, RequestInterface $request)
+    public function __construct(RequestInterface $request)
     {        
-        $this->parser = $parser;
         $this->request = $request;
+        $this->routes = new CompiledRouteCollection;
     }
     
     /**
-     * @api
+     * @api 
      * 
-     * @param string $pattern 
+     * @param CacheInterface $cache 
      * 
      * @return Router Provides a fluent interface.
      */
-    public function setDefaultParameterPattern($pattern)
+    public function setCache(CacheInterface $cache)
     {
-        $this->defaultParameterPattern = $pattern;
+        $this->cache = $cache;
+        return $this;
+    }    
+    
+    /**
+     * @api 
+     * 
+     * @param LoaderInterface $loader 
+     * 
+     * @return Router Provides a fluent interface.
+     */
+    public function setLoader(LoaderInterface $loader)
+    {
+        $this->loader = $loader;
         return $this;
     }
-
+    
     /**
      * @api
      * 
-     * @todo Needs further refactoring (route compiling etc.)
+     * @param string $alias 
+     * @param AbstractCompiledRoute $route 
+     * 
+     * @return Router Provides a fluent interface.
+     */
+    public function addRoute($alias, AbstractCompiledRoute $route)
+    {
+        $this->routes->add($alias, $route);
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param array $routes
+     * 
+     * @return Router Provides a fluent interface.
+     */
+    public function addRoutes(array $routes)
+    {
+        foreach ($routes as $alias => $route) {
+            $this->addRoute($alias, $route);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @return CompiledRouteCollection
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $resource
+     * 
+     * @return Router Provides a fluent interface.
+     */
+    public function addResource($resource)
+    {
+        $this->resources[] = (string) $resource;
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @return array
+     */
+    public function getResources()
+    {
+        return $this->resources;
+    }
+    
+    /**
+     * @api
      * 
      * @return mixed
      */
     public function resolve() 
     {           
-        $matched = false;
-        $httpMethod = $this->request->getMethod();
-        $pathInfo = $this->request->getPathInfo();        
-
-        foreach ($this->routes as $route) {
+        $match = false;
+        $method = $this->request->getMethod();
+        $pathInfo = $this->request->getPathInfo();  
+        
+        if (!$this->processCache()) {            
+            $this->loadResources();
+        }             
+        
+        foreach ($this->routes as $route) {        
+            if ($route instanceof StaticRoute) {
+                $path = $route->getPath();
+                if ($pathInfo === $path) {
+                    $match = true;
+                }
+            } elseif ($route instanceof RegexRoute) {
+                $regex = $route->getRegex();
+                if (preg_match($regex, $pathInfo, $matches)) {                       
+                    $match = true;
+                }
+            }
+            
+            if (!$match) {
+                continue;
+            }
+            
             $requirements = $route->getRequirements();
             
             if (isset($requirements['HTTP_METHOD'])) {
-                if (strcasecmp($httpMethod, $requirements['HTTP_METHOD']) !== 0) {
+                if (strcasecmp($method, $requirements['HTTP_METHOD']) !== 0) {
+                    $match = false;
                     continue;
                 }
             }
             
-            if ($route->isStatic()) {
-                if ($route->getPath() === $pathInfo) {                       
-                    $matched = true;
-                    break;
-                }
-            } else {
-                $matches = array();
-                $tokens = array();                    
-                $pattern = $route->getPath();
-                
-                preg_match_all('#\{([\w\d_=]+)\}#u', $pattern, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
-                
-                if (!empty($matches)) {
-                    $start = 0;
-                    $length = 0;
-
-                    foreach ($matches as $match) {
-                        $regex = '';
-                        $length = $match[0][1] - $start;
-                        
-                        if (isset($requirements[$match[1][0]])) {
-                            $regex .= sprintf('(?<%s>%s)', $match[1][0], $requirements[$match[1][0]]);
-                        } else {
-                            $regex .= sprintf('(?<%s>%s)', $match[1][0], $this->defaultParameterPattern);
-                        }
-                        
-                        $start = $match[0][1] + strlen($match[0][0]);
-                        $tokens[] = $match[1][0];
-                        
-                        $pattern = str_replace($match[0][0], $regex, $pattern);
-                    }
-                }
-                
-                $pattern = '#^' . $pattern . '$#u';
-                
-                if (preg_match($pattern, $pathInfo, $matches)) {
-                    foreach ($tokens as $token) {
-                        if (isset($matches[$token])) {
-                            $this->request->get[$token] = $matches[$token];
-                        }
-                    }
-                    $matched = true;
-                    break;
-                }
-            }
+            break;
         }
         
-        if ($matched) {
+        if ($match) {
             $defaults = $route->getDefaults();
             if (!empty($defaults)) {
                 foreach ($defaults as $key => $value) {
                     $this->request->get[$key] = $value;
                 }
             }
-            return $this->parser->parse($route->getController());
+            return $route;
         }
         
         return null;
     }
+    
+    /**
+     * Initializes the route compiler if needed.
+     * 
+     * @return Router Provides a fluent interface.
+     */
+    protected function initRouteCompiler()
+    {
+        $this->compiler = new RouteCompiler;
+        return $this;
+    }
+    
+    /**
+     * @throws \InvalidArgumentException If a configuration file does not return a RouteCollection.
+     *
+     * @return bool
+     */
+    protected function loadResources()
+    {
+        if (empty($this->resources) || !isset($this->loader)) {
+            return false;
+        } 
+        
+        $this->initRouteCompiler();
+        
+        foreach ($this->resources as $resource) {
+            $collection = $this->loader->load($resource);
+            
+            if (!($collection instanceof RouteCollection)){
+                throw new \InvalidArgumentException(sprintf(
+                    'The file %s must return an instance of %s.',
+                    $resource,
+                    __NAMESPACE__ . '\RouteCollection'
+                ));
+            }            
+            
+            foreach ($collection as $key => $route) {
+                $compiledRoute = $this->compiler->compile($route);
+                $this->addRoute($key, $compiledRoute);
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * @return bool
+     */
+    protected function processCache()
+    {
+        if (!isset($this->cache)) {
+            return false;
+        } 
+        
+        $id = $this->getCacheKey();
+        $routes = $this->cache->get($id);
+        
+        if ($routes instanceof CompiledRouteCollection) {
+            $this->routes = $routes;
+        } else {
+            $this->loadResources();
+            $this->cache->set($id, $this->routes);
+        }
+        
+        return true;
+    }
+    
+    /**
+     * @return string
+     */
+    protected function getCacheKey()    
+    {
+        return md5(__CLASS__ . serialize($this->resources));
+    }    
 }

@@ -8,42 +8,33 @@
  */ 
 namespace Vision\Routing;
 
-use ArrayIterator;
-use IteratorAggregate;
-use RuntimeException;
-
 /**
  * RouteCollection
  *
  * @author Frank Liepert
  */
-class RouteCollection extends Config\AbstractConfig implements IteratorAggregate
-{    
+class RouteCollection implements \IteratorAggregate
+{
+    /** @type array $routes */
+    protected $routes = array();
+    
+    /**
+     * @api
+     * 
+     * @return ArrayIterator
+     */
     public function getIterator()
     {
-        return new ArrayIterator($this->routes);
+        return new \ArrayIterator($this->routes);
     }
     
-    public function add($alias, Route $route)
-    {
-        return parent::addRoute($alias, $route);
-    }
-    
-    public function get($alias)
-    {
-        return parent::getRoute($alias);
-    }
-    
-    public function has($alias)
-    {
-        return parent::hasRoute($alias);
-    }
-    
-    public function getAll()
-    {
-        return parent::getAllRoutes();
-    }
-    
+    /**
+     * @api
+     * 
+     * @param array $defaults 
+     * 
+     * @return RouteCollection Provides a fluent interface.
+     */
     public function applyDefaults(array $defaults)
     {
         foreach ($this->routes as &$route) {
@@ -51,7 +42,14 @@ class RouteCollection extends Config\AbstractConfig implements IteratorAggregate
         }
         return $this;
     }
-    
+
+    /**
+     * @api
+     * 
+     * @param string $prefix 
+     * 
+     * @return RouteCollection Provides a fluent interface.
+     */    
     public function applyPrefix($prefix)
     {
         foreach ($this->routes as &$route) {
@@ -60,11 +58,95 @@ class RouteCollection extends Config\AbstractConfig implements IteratorAggregate
         return $this;
     }   
 
+    /**
+     * @api
+     * 
+     * @param array $requirements 
+     * 
+     * @return RouteCollection Provides a fluent interface.
+     */
     public function applyRequirements(array $requirements)
     {
         foreach ($this->routes as &$route) {
             $route->setRequirements($route->getRequirements() + $requirements);
         }
         return $this;
+    }
+   
+    
+    /**
+     * @api
+     * 
+     * @param string $alias 
+     * @param Route $route 
+     * 
+     * @return RouteCollection Provides a fluent interface.
+     */
+    public function add($alias, Route $route)
+    {
+        if (isset($this->routes[$alias])) {
+            throw new \RuntimeException(sprintf(
+                'Route alias "%s" has already been defined.', 
+                $alias
+            ));
+        }
+        
+        $this->routes[$alias] = $route;
+        
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param RouteCollection $collection 
+     * 
+     * @return RouteCollection Provides a fluent interface.
+     */
+    public function addRouteCollection(RouteCollection $collection)
+    {
+        foreach ($collection as $alias => $route) {
+            $this->add($alias, $route);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $alias 
+     * 
+     * @return Route|null
+     */
+    public function get($alias)
+    {
+        if (isset($this->routes[$alias])) {
+            return $this->routes[$alias];
+        }
+        
+        return null;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $alias 
+     * 
+     * @return bool
+     */
+    public function has($alias)
+    {
+        return (bool) isset($this->routes[$alias]);
+    }
+    
+    /**
+     * @api
+     * 
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->routes;
     }
 }

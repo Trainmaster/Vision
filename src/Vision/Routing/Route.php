@@ -12,23 +12,14 @@ namespace Vision\Routing;
  * Route
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */
-class Route
+ */ 
+class Route extends AbstractRoute
 {
-    /** @type bool $isStatic */
-    protected $isStatic = true;
-    
-    /** @type string $path */
-    protected $path = null;
-    
     /** @type string $controller */
     protected $controller = null;
     
-    /** @type array $requirements */
-    protected $requirements = array();
-    
-    /** @type array $defaults */
-    protected $defaults = array();
+    /** @type string $path */
+    protected $path = null;
     
     /**
      * @param string $path 
@@ -44,59 +35,10 @@ class Route
     
     /**
      * @api
-     * 
-     * @return bool
-     */
-    public function isStatic()
-    {
-        return $this->isStatic;
-    }
-    
-    /**
-     * The character "{" indicates, if the route contains dynamic parts.
-     *
-     * @api
-     *
-     * @param string $path 
-     * 
-     * @return Route Provides a fluent interface.
-     */
-    public function setPath($path)
-    {
-        if (strpos($path, '{') >= 0) {
-            $this->isStatic = false;
-        }
-        
-        $this->path = trim($path);
-        
-        return $this;
-    }
-    
-    /**
-     * @api
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-    
-    public function getStaticPath()
-    {
-        $pos = strpos($this->path, '{');
-        
-        if ($pos >= 0) {
-            return substr($this->path, 0, $pos - 1);
-        }
-    }
-
-    /**
-     * @api
      *
      * @param string $controller 
      * 
-     * @return Route Provides a fluent interface.
+     * @return AbstractRoute Provides a fluent interface.
      */
     public function setController($controller)
     {
@@ -117,46 +59,23 @@ class Route
     /**
      * @api
      * 
-     * @param array $defaults 
+     * @param string $path 
      * 
      * @return Route Provides a fluent interface.
      */
-    public function setDefaults(array $defaults)
+    public function setPath($path)
     {
-        $this->defaults = $defaults;
+        $this->path = trim($path);
         return $this;
-    }
-
-    /**
-     * @api
-     * 
-     * @return array
-     */
-    public function getDefaults()
-    {
-        return $this->defaults;
     }
     
     /**
      * @api
-     * 
-     * @param array $requirements 
-     * 
-     * @return Route Provides a fluent interface.
-     */
-    public function setRequirements(array $requirements)
-    {
-        $this->requirements = $requirements;
-        return $this;
-    }
-
-    /**
-     * @api
      *
-     * @return array
+     * @return string
      */
-    public function getRequirements()
+    public function getPath()
     {
-        return $this->requirements;
+        return $this->path;
     }
 }
