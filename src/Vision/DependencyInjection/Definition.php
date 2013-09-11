@@ -10,8 +10,6 @@ namespace Vision\DependencyInjection;
 
 use Vision\DependencyInjection\Dependency;
 
-use InvalidArgumentException;
-
 /**
  * Definition
  *
@@ -31,13 +29,11 @@ class Definition
     /** @type array $constructor */
     protected $constructor = array();
     
-    /** @type array $setter */
-    protected $setter = array();
+    /** @type array $method */
+    protected $method = array();
         
     /**
      * @param string $class 
-     * 
-     * @return void
      */
     public function __construct($class)
     {
@@ -45,17 +41,29 @@ class Definition
     }    
     
     /**
+     * @api
+     *
      * @param string $class  
-     * 
+     *
+     * @throws InvalidArgumentException
+     *
      * @return Definition Provides a fluent interface.
      */
     public function setClass($class)
     {
+        if (!is_string($class)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be a string.',
+                __METHOD__
+            ));
+        }
         $this->class = $class;
         return $this;
     }
     
     /**
+     * @api
+     *
      * @return string
      */
     public function getClass() 
@@ -64,6 +72,8 @@ class Definition
     }
     
     /**
+     * @api
+     *
      * @param bool $shared 
      * 
      * @return Definition Provides a fluent interface.
@@ -75,6 +85,8 @@ class Definition
     }
     
     /**
+     * @api
+     *
      * @return bool
      */
     public function isShared()
@@ -83,15 +95,19 @@ class Definition
     }
     
     /**
+     * @api
+     *
      * @param string $property 
-     * @param mixed $value 
-     * 
+     * @param mixed $value
+     *
+     * @throws InvalidArgumentException
+     *
      * @return Definition Provides a fluent interface.
      */
     public function property($property, $value) 
     {
-        if (is_string($property) === false) {
-            throw new InvalidArgumentException(sprintf(
+        if (!is_string($property)) {
+            throw new \InvalidArgumentException(sprintf(
                 'Argument 1 passed to %s must be a string.',
                 __METHOD__
             ));
@@ -101,6 +117,8 @@ class Definition
     }
     
     /**
+     * @api
+     *
      * @param array $constructor 
      * 
      * @return Definition Provides a fluent interface.
@@ -112,35 +130,43 @@ class Definition
     }
     
     /**
-     * @param string $setter 
+     * @api
+     *
+     * @param string $method 
      * @param array $dependencies 
-     * 
+     *
+     * @throws InvalidArgumentException
+     *
      * @return Definition Provides a fluent interface.
      */
-    public function setter($setter, array $dependencies) 
+    public function method($method, array $dependencies) 
     {
-        if (is_string($setter) === false) {
-            throw new InvalidArgumentException(sprintf(
+        if (!is_string($method)) {
+            throw new \InvalidArgumentException(sprintf(
                 'Argument 1 passed to %s must be a string.',
                 __METHOD__
             ));
         }
-        $this->setter[][$setter] = $dependencies;
+        $this->method[][$method] = $dependencies;
         return $this;
     } 
     
     /**
-     * @param array $setter 
+     * @api
+     *
+     * @param array $method 
      * 
      * @return Definition Provides a fluent interface.
      */
-    public function setSetter(array $setter)
+    public function setMethod(array $method)
     {
-        $this->setter = $setter;
+        $this->method = $method;
         return $this;
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getPropertyInjections() 
@@ -149,6 +175,8 @@ class Definition
     }
     
     /**
+     * @api
+     *   
      * @return array
      */
     public function getConstructorInjections() 
@@ -157,10 +185,12 @@ class Definition
     }   
     
     /**
+     * @api
+     *
      * @return array
      */
-    public function getSetterInjections() 
+    public function getMethodInjections() 
     {
-        return $this->setter;
+        return $this->method;
     } 
 }
