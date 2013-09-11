@@ -28,13 +28,13 @@ class File implements AdapterInterface
      * @param array $options  
      */
     public function __construct(array $options = array())
-    {        
-        if (isset($options['encoding'])) {
-            $this->encoding = $options['encoding'];
-        }
-        
+    {
         if (isset($options['cache_dir'])) {
             $this->cacheDir = $options['cache_dir'];
+        }
+        
+        if (isset($options['encoding'])) {
+            $this->encoding = $options['encoding'];
         }
     }
     
@@ -59,7 +59,8 @@ class File implements AdapterInterface
         }
 
         $filename = $this->prepareFilename($key);
-        file_put_contents($filename, $data);
+               
+        file_put_contents($filename, $data, LOCK_EX);
         
         return $this;
     }
@@ -102,8 +103,12 @@ class File implements AdapterInterface
      */
     protected function prepareFilename($filename)
     {
+        if (!is_dir($this->cacheDir)) {
+            mkdir($this->cacheDir, 0600);
+        }
+        
         if (isset($this->cacheDir)) {
-            $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
+            $filename = $this->cacheDir . $filename;
         }
 
         return $filename;        
