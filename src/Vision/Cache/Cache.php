@@ -13,7 +13,7 @@ namespace Vision\Cache;
  *
  * @author Frank Liepert
  */
-class Cache
+class Cache implements CacheInterface
 {
     /**
      * @param Adapter\AdapterInterface $adapter 
