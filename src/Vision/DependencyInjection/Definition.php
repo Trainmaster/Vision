@@ -47,7 +47,7 @@ class Definition
      *
      * @throws InvalidArgumentException
      *
-     * @return Definition Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setClass($class)
     {
@@ -76,7 +76,7 @@ class Definition
      *
      * @param bool $shared 
      * 
-     * @return Definition Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setShared($shared)
     {
@@ -102,7 +102,7 @@ class Definition
      *
      * @throws InvalidArgumentException
      *
-     * @return Definition Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function property($property, $value) 
     {
@@ -121,7 +121,7 @@ class Definition
      *
      * @param array $constructor 
      * 
-     * @return Definition Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function constructor(array $constructor) 
     {   
@@ -137,7 +137,7 @@ class Definition
      *
      * @throws InvalidArgumentException
      *
-     * @return Definition Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function method($method, array $dependencies) 
     {
@@ -156,7 +156,7 @@ class Definition
      *
      * @param array $method 
      * 
-     * @return Definition Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setMethod(array $method)
     {
