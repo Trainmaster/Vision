@@ -14,10 +14,6 @@ use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
 use Vision\Routing\AbstractCompiledRoute;
 
-use Exception;
-use RuntimeException;
-use UnexpectedValueException;
-
 /**
  * FrontController
  *
@@ -25,21 +21,19 @@ use UnexpectedValueException;
  */
 class FrontController 
 {
-    /** @type ContainerInterface $container */
+    /** @type null|ContainerInterface $container */
     protected $container = null;
     
-    /** @type RequestInterface $request */
+    /** @type null|RequestInterface $request */
     protected $request = null;
     
-    /** @type ResponseInterface $response */
+    /** @type null|ResponseInterface $response */
     protected $response = null;   
     
-    /** @type Router $router */
+    /** @type null|Router $router */
     protected $router = null;
         
     /**
-     * Constructor
-     *
      * @param RequestInterface $request
      * @param ReponseInterface $response
      * @param Router $router
@@ -85,12 +79,10 @@ class FrontController
     }
     
     /**
-     * Invoke the controller
-     * 
      * @param string $class 
      * @param string $method 
      *
-     * @throws UnexpectedValueException
+     * @throws \UnexpectedValueException
      * 
      * @return mixed
      */
@@ -99,7 +91,7 @@ class FrontController
         $instance = $this->container->get($class);
         
         if (!$instance instanceof ControllerInterface) {
-            throw new UnexpectedValueException(sprintf(
+            throw new \UnexpectedValueException(sprintf(
                 '%s must implement interface %s.',
                 $class,
                 __NAMESPACE__ . '\ControllerInterface'
@@ -116,9 +108,10 @@ class FrontController
     }
     
     /**
+     * @api
      * 
-     * 
-     * @throws RuntimeException
+     * @throws \RuntimeException
+     * @throws \UnexpectedValueException
      *
      * @return <type>
      */
@@ -134,31 +127,31 @@ class FrontController
                 $method = $route->getMethod();
                 $response = $this->invokeController($class, $method);
             } else {
-                throw new RuntimeException('No matching route.');
+                throw new \RuntimeException('No matching route.');
             }
             
             if ($response instanceof ResponseInterface) {
                 $this->response = $response;
             } else {
-                throw new UnexpectedValueException(sprintf(
+                throw new \UnexpectedValueException(sprintf(
                     'The method "%s::%s" must return a response object.',
-                    $controller['class'],
-                    $controller['method']
+                    $class,
+                    $method
                 ));
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->handleException($e);
         }       
     }
     
     /**
+     * @internal
      * 
-     * 
-     * @param Exception $e 
+     * @param \Exception $e 
      * 
      * @return mixed
      */
-    public function handleException(Exception $e) 
+    protected function handleException(\Exception $e) 
     {
         if ($this->container->isDefined('ExceptionController')) {
             $this->container->getDefinition('ExceptionController')->setter('setException', array($e));
