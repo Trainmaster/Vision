@@ -19,15 +19,15 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     const STRING_TOO_LONG = 'The given string "%s" is too long. The maximum length is "%s"';
     
     /** @type int $max */
-	protected $max = null;
+    protected $max = null;
 
     /**
      * @param int $min 
      */
-	public function __construct($max) 
-	{
+    public function __construct($max) 
+    {
         $this->max = (int) $max;
-	}
+    }
     
     /**
      * @param string $value 
@@ -56,18 +56,18 @@ class MaxStringLength extends AbstractMultibyteStringValidator
      * 
      * @return bool
      */
-	public function isValid($value) 
-	{			
+    public function isValid($value) 
+    {           
         $this->value = $value;
         
         $this->checkEncoding();
 
-		if (mb_strlen($value) <= $this->max) {
-			return true;
-		}
+        if (mb_strlen($value) <= $this->max) {
+            return true;
+        }
         
-		$this->addError(sprintf(self::STRING_TOO_LONG, $value, $this->max));
+        $this->addError(sprintf(self::STRING_TOO_LONG, $value, $this->max));
         
-		return false;
-	}
+        return false;
+    }
 }
