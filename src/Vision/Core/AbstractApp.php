@@ -28,12 +28,9 @@ abstract class AbstractApp
     
     protected $loader = null;
     
-    protected $configDir = null;
-    
-    public function __construct(FrontController $frontController, LoaderInterface $loader)
+    public function __construct(FrontController $frontController)
     {
         $this->frontController = $frontController;
-        $this->loader = $loader;
         $this->initLocale();
     }
     
@@ -78,17 +75,8 @@ abstract class AbstractApp
         return $this->environment;
     }
     
-    public function setConfigDir($configDir)
-    {
-        $this->configDir = $configDir;
-        return $this;
-    }
-    
     public function run()
     {   
-        if ($this->configDir !== null) {
-            $this->loader->load($this->configDir . DIRECTORY_SEPARATOR . 'routes.php');
-        }
         $this->frontController->run();
         $response = $this->frontController->getResponse();
         $response->send();
