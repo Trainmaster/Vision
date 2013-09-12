@@ -150,7 +150,7 @@ class Router
             $this->loadResources();
         }             
         
-        foreach ($this->routes as $route) {        
+        foreach ($this->routes as $route) {
             if ($route instanceof StaticRoute) {
                 $path = $route->getPath();
                 if ($pathInfo === $path) {
