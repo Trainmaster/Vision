@@ -1,7 +1,7 @@
 <?php
 namespace Vision\Validator;
 
-class IsInteger extends ValidatorAbstract 
+class IsInteger extends AbstractValidator 
 {
     const NO_INTEGER = 'The given value is not an integer.';
     

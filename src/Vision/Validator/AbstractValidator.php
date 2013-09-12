@@ -9,11 +9,11 @@
 namespace Vision\Validator;
 
 /**
- * ValidatorAbstract
+ * AbstractValidator
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-abstract class ValidatorAbstract implements ValidatorInterface 
+abstract class AbstractValidator implements ValidatorInterface 
 {
     /** @type array $errors */
     protected $errors = array();

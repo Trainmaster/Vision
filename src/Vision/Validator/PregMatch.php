@@ -1,7 +1,7 @@
 <?php
 namespace Vision\Validator;
 
-class PregMatch extends ValidatorAbstract
+class PregMatch extends AbstractValidator
 {   
     const NO_MATCH_FOUND = 'No match was found.';
     

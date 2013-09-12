@@ -1,7 +1,7 @@
 <?php
 namespace Vision\Validator;
 
-class InputNotEmptyString extends ValidatorAbstract 
+class InputNotEmptyString extends AbstractValidator 
 {   
     const NO_EMPTY_STRING = 'The given string is not empty.';
     

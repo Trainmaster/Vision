@@ -13,10 +13,10 @@ namespace Vision\Validator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-abstract class AbstractMultibyteStringValidator extends ValidatorAbstract
+abstract class AbstractMultibyteStringValidator extends AbstractValidator
 {
     /**
-     * @api
+     * @internal
      * 
      * @return void
      */
