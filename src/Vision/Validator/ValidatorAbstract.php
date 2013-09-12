@@ -21,7 +21,7 @@ abstract class ValidatorAbstract implements ValidatorInterface
     /**
      * @param string $error 
      * 
-     * @return ValidatorAbstract Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */    
     public function addError($error)
     {
