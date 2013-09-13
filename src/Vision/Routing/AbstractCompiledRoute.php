@@ -65,4 +65,14 @@ abstract class AbstractCompiledRoute extends AbstractRoute
     {
         return $this->method;
     }
+    
+    /**
+     * @api
+     * 
+     * @return string
+     */
+    public function getHttpMethod()
+    {
+        return isset($this->requirements['HTTP_METHOD']) ? $this->requirements['HTTP_METHOD'] : null;
+    }
 }
