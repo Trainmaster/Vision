@@ -9,7 +9,7 @@
 namespace Vision\Form\Control;
 
 use Vision\Form\Decorator;
-use Vision\Html\ElementFactory;
+use Vision\Html\Element;
 
 /**
  * Select
@@ -29,21 +29,17 @@ class Select extends MultiOptionControlAbstract
     
     public function __toString() 
     {
-        $html = '';
-        
-        $option = ElementFactory::create('option');
-                
         foreach ($this->options as $value => $content) {
-            $option->removeAttribute('selected');
+            $option = new Element('option');
             $option->setAttribute('value', $value);
-            $option->setContent($content);
+            $option->addContent($content);
+            
             if ($this->checkForPreSelection($value)) {
                 $option->setAttribute('selected', 'selected');
             }
-            $html .= $option;  
-        }            
-        
-        $this->content = $html;
+            
+            $this->addContent($option);
+        }
         
         return parent::__toString();
     }
