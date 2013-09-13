@@ -14,72 +14,77 @@ use RuntimeException;
 /**
  * Request
  *
- * @author Frank Liepert
+ * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Request extends AbstractMessage implements RequestInterface
 {
-    private $get = null;
+    /** @type null|SuperglobalProxyObject $GET */
+    protected $GET = null;
     
-    private $post = null;
+    /** @type null|SuperglobalProxyObject $POST */
+    protected $POST = null;
 
-    private $files = null;
+    /** @type null|SuperglobalProxyObject $FILES */
+    protected $FILES = null;
     
-    private $cookie = null;
+    /** @type null|SuperglobalProxyObject $COOKIE */
+    protected $COOKIE = null;
     
-    private $server = null;
+    /** @type null|SuperglobalProxyObject $SERVER */
+    protected $SERVER = null;
 
+    /** @type null|string $method */
     protected $method = null;
     
+    /** @type null|string $basePath */
     protected $basePath = null;
     
+    /** @type null|string $path */
     protected $path = null;   
     
+    /** @type null|string $pathInfo */
     protected $pathInfo = null;
         
     /**
-     * @return void
+     * Constructor
      */
     public function __construct()
     {
-        $this->get = new SuperglobalProxyObject($_GET);
-        $this->post = new SuperglobalProxyObject($_POST);
-        $this->files = new SuperglobalProxyObject($_FILES);
-        $this->cookie = new SuperglobalProxyObject($_COOKIE);
-        $this->server = new SuperglobalProxyObject($_SERVER);
-        
-        $this->initMethod();        
-        $this->initBasePath();               
-        $this->initPathInfo();
-        $this->initPath(); 
+        $this->initSuperglobals()
+             ->initMethod()     
+             ->initBasePath()               
+             ->initPathInfo()
+             ->initPath();        
     }
     
     /**
      * @param string $key 
      * 
-     * @return mixed|null
+     * @return mixed
      */
     public function __get($key)
     {
+        $key = strtoupper($key);
+        
         if (isset($this->$key)) {
             return $this->$key;
         }
+        
         return null;
     }
     
     /**
-     * @param string $key 
-     * @param mixed $value 
+     * @api
      * 
-     * @return Request Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
-    public function __set($key, $value)
+    public function initSuperglobals()
     {
-        if (in_array($key, array('get', 'post', 'files', 'cookie', 'server'))) {
-            throw new RuntimeException('You may not override the default request properties "get, post, files, cookie, server"');
-        }
-        
-        $this->$key = $value;
-        
+        $this->GET = new SuperglobalProxyObject($_GET);
+        $this->POST = new SuperglobalProxyObject($_POST);
+        $this->FILES = new SuperglobalProxyObject($_FILES);        
+        $this->COOKIE = new SuperglobalProxyObject($_COOKIE);
+        $this->SERVER = new SuperglobalProxyObject($_SERVER);        
         return $this;
     }
         
@@ -132,6 +137,18 @@ class Request extends AbstractMessage implements RequestInterface
     }
     
     /**
+     * Check, if the current request method is DELETE.  
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isDelete()
+    {
+        return $this->method === 'DELETE' ? true : false;
+    }
+    
+    /**
      * Returns the current request method.
      *
      * @api
@@ -144,12 +161,12 @@ class Request extends AbstractMessage implements RequestInterface
     }
     
     /**
-     * @return Request Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function initMethod()
     {
-        if (isset($this->server['REQUEST_METHOD'])) {
-            $this->method = strtoupper($this->server['REQUEST_METHOD']);
+        if (isset($this->SERVER['REQUEST_METHOD'])) {
+            $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
         }
         
         return $this;
@@ -171,12 +188,14 @@ class Request extends AbstractMessage implements RequestInterface
     }
     
     /**
-     * @return Request Provides a fluent interface.
+     * @internal
+     *
+     * @return $this Provides a fluent interface.
      */
     protected function initBasePath()
     {
-        if (isset($this->server['SCRIPT_NAME'])) {
-            $path = dirname($this->server['SCRIPT_NAME']);
+        if (isset($this->SERVER['SCRIPT_NAME'])) {
+            $path = dirname($this->SERVER['SCRIPT_NAME']);
         }        
         
         if ($path !== '.') {
@@ -206,16 +225,18 @@ class Request extends AbstractMessage implements RequestInterface
     }
     
     /**
-     * @return Request Provides a fluent interface.
+     * @internal
+     *
+     * @return $this Provides a fluent interface.
      */
     protected function initPathInfo()
     {
-        if (isset($this->server['PATH_INFO'])) {
-            $pathInfo = $this->server['PATH_INFO'];
-        } elseif (isset($this->server['ORIG_PATH_INFO'])) {
-            $pathInfo = $this->server['ORIG_PATH_INFO'];
-        } elseif (isset($this->server['REQUEST_URI'])) {
-            $pathInfo = str_replace($this->getBasePath(), '', $this->server['REQUEST_URI']);
+        if (isset($this->SERVER['PATH_INFO'])) {
+            $pathInfo = $this->SERVER['PATH_INFO'];
+        } elseif (isset($this->SERVER['ORIG_PATH_INFO'])) {
+            $pathInfo = $this->SERVER['ORIG_PATH_INFO'];
+        } elseif (isset($this->SERVER['REQUEST_URI'])) {
+            $pathInfo = str_replace($this->getBasePath(), '', $this->SERVER['REQUEST_URI']);
         }
         
         $this->pathInfo = $pathInfo;
@@ -239,7 +260,9 @@ class Request extends AbstractMessage implements RequestInterface
     }
     
     /**
-     * @return Request Provides a fluent interface.
+     * @internal
+     *
+     * @return $this Provides a fluent interface.
      */
     protected function initPath()
     {
