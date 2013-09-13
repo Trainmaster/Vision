@@ -151,6 +151,15 @@ class Router
         }             
         
         foreach ($this->routes as $route) {
+        
+            $allowedMethod = $route->getHttpMethod();
+            
+            if (isset($allowedMethod)) {
+                if (strcasecmp($method, $allowedMethod) !== 0) {
+                    continue;
+                } 
+            }
+            
             if ($route instanceof StaticRoute) {
                 $path = $route->getPath();
                 if ($pathInfo === $path) {
@@ -167,16 +176,15 @@ class Router
                 continue;
             }
             
-            $requirements = $route->getRequirements();
-            
-            if (isset($requirements['HTTP_METHOD'])) {
-                if (strcasecmp($method, $requirements['HTTP_METHOD']) !== 0) {
-                    $match = false;
-                    continue;
+            break;
+        }
+        
+        if (isset($matches)) {
+            foreach ($matches as $key => $match) {
+                if (is_string($key)) {
+                    $this->request->{$method}[$key] = $match;
                 }
             }
-            
-            break;
         }
         
         if ($match) {
