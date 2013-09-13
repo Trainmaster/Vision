@@ -1,26 +1,62 @@
 <?php
+/**
+ * Vision PHP-Framework
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ * @copyright 2012-2013 Frank Liepert
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */ 
 namespace Vision\Validator;
 
+/**
+ * InputInteger
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */ 
 class InputInteger extends AbstractValidator 
 {
-    const NO_INTEGER = 'The given value could not be validated as integer.';
+    /** @type string INPUT_NOT_INTEGER */
+    const INPUT_NOT_INTEGER = 'The given value could not be validated as integer.';
     
+    /** @type null|int $min */
     protected $min = null;
     
+    /** @type null|int $max */
     protected $max = null;
-    
+        
+    /**
+     * @api
+     * 
+     * @param int $min 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setMin($min)
     {
         $this->min = (int) $min;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param int $max 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setMax($max)
     {
         $this->max = (int) $max;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param mixed $value 
+     * 
+     * @return bool
+     */
     public function isValid($value) 
     {
         $options = array();
@@ -39,7 +75,7 @@ class InputInteger extends AbstractValidator
             return true;
         }    
         
-        $this->addError(self::NO_INTEGER);
+        $this->addError(self::INPUT_NOT_INTEGER);
         
         return false;
     }
