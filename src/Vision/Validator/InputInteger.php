@@ -23,7 +23,22 @@ class InputInteger extends AbstractValidator
     
     /** @type null|int $max */
     protected $max = null;
+    
+    /**
+     * @param int $min 
+     * @param int $max 
+     */
+    public function __construct($min = null, $max = null)
+    {
+        if (isset($min)) {
+            $this->setMin($min);
+        }
         
+        if (isset($min)) {
+            $this->setMin($min);
+        }
+    }
+    
     /**
      * @api
      * 
