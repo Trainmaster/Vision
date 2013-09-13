@@ -9,7 +9,7 @@
 namespace Vision\Form\Validator;
 
 use Vision\Form\AbstractCompositeType;
-use Vision\Validator\ValidatorAbstract;
+use Vision\Validator\AbstractValidator;
 
 use InvalidArgumentException;
 
@@ -18,7 +18,7 @@ use InvalidArgumentException;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class ValueMatch extends ValidatorAbstract 
+class ValueMatch extends AbstractValidator 
 {
     /** @type string NO_MATCH */
     const NOT_UNIQUE = 'The given controls do not match.';
