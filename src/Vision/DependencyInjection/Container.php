@@ -62,6 +62,37 @@ class Container implements ContainerInterface
     /**
      * @api
      * 
+     * @param string $class 
+     * @param null|string $alias  
+     * 
+     * @throws \LogicException
+     *
+     * @return Definition
+     */
+    public function register($class, $alias = null)
+    {
+        $class = $this->resolveParameter($class);
+        $definition = new Definition($class);
+        
+        if (!isset($alias)) {
+            $alias = $class;
+        }
+        
+        if (isset($this->definitions[$alias])) {
+            throw new \LogicException(sprintf(
+                'The alias "%s" is already assigned.',
+                $alias
+            ));
+        }
+        
+        $this->definitions[$alias] = $definition;
+        
+        return $definition;
+    }
+    
+    /**
+     * @api
+     * 
      * @param string $alias 
      * 
      * @return mixed
@@ -219,7 +250,7 @@ class Container implements ContainerInterface
         $interfaces = $reflection->getInterfaceNames();
         
         if (!empty($interfaces)) {
-            $setterInjections = array();
+            $methodInjections = array();
             foreach ($interfaces as $interface) {            
                 if (!$this->isDefined($interface)) {
                     continue;
@@ -227,17 +258,17 @@ class Container implements ContainerInterface
 
                 $def = $this->getDefinition($interface);
                 
-                $dependencies = $def->getSetterInjections();
+                $dependencies = $def->getMethodInjections();
                 
                 if (empty($dependencies)) {
                     continue;
                 }     
                 
-                $setterInjections = array_merge($setterInjections, $dependencies);                
+                $methodInjections = array_merge($methodInjections, $dependencies);                
             }
             
-            if (!empty($setterInjections)) {
-                $definition->setSetter($setterInjections); 
+            if (!empty($methodInjections)) {
+                $definition->setMethod($methodInjections); 
             }
         }
 
@@ -255,7 +286,7 @@ class Container implements ContainerInterface
             }
         }
         
-        $setterInjections = $definition->getSetterInjections();        
+        $setterInjections = $definition->getMethodInjections();        
         if (!empty($setterInjections)) {    
             foreach ($setterInjections as $setter) {
                 foreach ($setter as $method => $dependencies) {
