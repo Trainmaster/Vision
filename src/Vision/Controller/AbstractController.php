@@ -81,7 +81,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     {
         $url = $this->url->parse($url);
         
-        if ($url === false) {
+        if (!$url) {
             return false;
         }
         
