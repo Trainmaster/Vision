@@ -266,13 +266,14 @@ class Form extends AbstractCompositeType
         foreach ($iterator as $element) {
             if ($element instanceof Control\ControlAbstract) {
                 $name = $element->getName();
-                $value = $this->getValueByName($name);
+                $rawValue = $this->getValueByName($name);
+                $element->setRawValue($rawValue);
                 
                 if (!$element->isRequired() && empty($value)) {
                     continue;
                 }
 
-                if (!$element->isValid($value)) {
+                if (!$element->isValid()) {
                     $this->errors[$name] = $element->getErrors();
                     $isValid = false;
                 }

@@ -360,8 +360,21 @@ abstract class ControlAbstract extends HtmlElement
     public function getValue() 
     {
         return $this->value;
-    }   
-        
+    }       
+    
+    /**
+     * @api
+     * 
+     * @param mixed $rawValue 
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function setRawValue($rawValue)
+    {
+        $this->rawValue = $rawValue;
+        return $this;
+    }
+    
     /**
      * @api
      * 
@@ -402,11 +415,11 @@ abstract class ControlAbstract extends HtmlElement
      * 
      * @return bool
      */
-    public function isValid($value) 
+    public function isValid() 
     {    
         $isValid = true;
         
-        $this->rawValue = $value;
+        $value = $this->rawValue;
         
         if ($this->isRequired()) {              
             array_unshift($this->validators, new Validator\InputNotEmptyString);
@@ -417,7 +430,7 @@ abstract class ControlAbstract extends HtmlElement
         }
         
         foreach ($this->validators as $validator) {            
-            if ($validator->isValid($value) === false) {
+            if (!$validator->isValid($value)) {
                 $key = get_class($validator);
                 $this->errors[$key] = $validator->getErrors();
                 $isValid = false;               
