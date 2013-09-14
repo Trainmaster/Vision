@@ -105,7 +105,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         }
         
         if (!isset($url['scheme'])) {
-            if (isset($this->request->server['HTTPS'])) {
+            if (isset($this->request->SERVER['HTTPS'])) {
                 $scheme = 'https';
             } else {
                 $scheme = 'http';
@@ -114,8 +114,8 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         }
         
         if (!isset($url['host'])) {
-            if (isset($this->request->server['SERVER_NAME'])) {
-                $url['host'] = $this->request->server['SERVER_NAME'];
+            if (isset($this->request->SERVER['SERVER_NAME'])) {
+                $url['host'] = $this->request->SERVER['SERVER_NAME'];
             }
         }
         
