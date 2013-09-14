@@ -180,10 +180,12 @@ class Form extends AbstractCompositeType
      * 
      * Example: $this->getValueByName(foo[bar][baz]) returns
      *          the value of $this->data[$foo][$bar][$baz] or NULL.
-     * 
+     *
+     * @internal
+     *
      * @param string $name 
      * 
-     * @return null|mixed
+     * @return mixed
      */
     protected function getValueByName($name)
     {
@@ -209,7 +211,7 @@ class Form extends AbstractCompositeType
     /** 
      * @param array $data 
      * 
-     * @return Form Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function bindData(array $data)
     {
@@ -218,6 +220,8 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getData()
@@ -226,6 +230,8 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getErrors()
@@ -234,6 +240,8 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @return bool
      */
     public function isSent()
@@ -245,6 +253,8 @@ class Form extends AbstractCompositeType
     }
     
     /**
+     * @api
+     *
      * @return bool
      */
     public function isValid() 

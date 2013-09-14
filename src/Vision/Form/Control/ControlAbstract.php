@@ -21,20 +21,32 @@ use Vision\Form\Decorator\DecoratorInterface;
  */ 
 abstract class ControlAbstract extends HtmlElement 
 {
+    /** @type array $decorators */
     protected $decorators = array();
 
+    /** @type array $filters */
     protected $filters = array();
     
+    /** @type array $validators */
     protected $validators = array();
     
+    /** @type array $errors */
     protected $errors = array();
         
+    /** @type null|string $label */
     protected $label = null; 
-        
-    protected $value = null;
     
+    /** @type mixed $rawValue The value before filtering/validation. */
     protected $rawValue = null;
     
+    /** @type mixed $value The value after filtering/validation. */
+    protected $value = null;
+    
+    /**
+     * Constructor
+     * 
+     * @param string $name 
+     */
     final public function __construct($name) 
     {
         $this->setName($name);      
@@ -42,8 +54,9 @@ abstract class ControlAbstract extends HtmlElement
         $this->init();
     }
     
-    abstract public function init();
-
+    /**
+     * @return string
+     */
     public function __toString()
     {
         $html = parent::__toString();
@@ -54,10 +67,22 @@ abstract class ControlAbstract extends HtmlElement
         
         return $html;
     }
+    
+    /**
+     * Initializes this class with decorators, filters,
+     * validators or other settings.
+     *
+     * @return void
+     */
+    abstract public function init();    
 
     /**
-     * Add a decorator
-     */
+     * @api
+     * 
+     * @param DecoratorInterface $decorator 
+     * 
+     * @return $this Provides a fluent interface.
+     */ 
     public function addDecorator(DecoratorInterface $decorator) 
     {
         $this->decorators[] = $decorator->setElement($this);
@@ -65,24 +90,35 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Add decorators
-     */
+     * @api
+     * 
+     * @param array $decorators 
+     * 
+     * @return $this Provides a fluent interface.
+     */ 
     public function addDecorators(array $decorators) 
     {
         foreach ($decorators as $decorator) {
             $this->addDecorator($decorator);
         }
         return $this;
-    }
-    
+    }    
+
     /**
-     * Gets all decorators
+     * @api 
+     * 
+     * @return array
      */
     public function getDecorators() 
     {
         return $this->decorators;
     }
     
+    /**
+     * @api
+     * 
+     * @return $this Provides a fluent interface.
+     */ 
     public function resetDecorators()
     {
         $this->decorators = array();
@@ -101,7 +137,11 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Add filter
+     * @api
+     * 
+     * @param FilterInterface $filter 
+     * 
+     * @return $this Provides a fluent interface.
      */ 
     public function addFilter(FilterInterface $filter) 
     {
@@ -110,8 +150,12 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Add multiple filters at once.
-     */ 
+     * @api
+     * 
+     * @param array $filters 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function addFilters(array $filters) 
     {
         foreach ($filters as $filter) {
@@ -121,16 +165,23 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Get all filters.
+     * @api 
+     * 
+     * @return array
      */
+    
     public function getFilters() 
     {
         return $this->filters;
     }
     
     /**
-     * Add validator.
-     */ 
+     * @api
+     * 
+     * @param ValidatorInterface $validator 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function addValidator(ValidatorInterface $validator) 
     {
         $this->validators[] = $validator;
@@ -138,8 +189,13 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Add multiple validators at once.
-     */ 
+     * @api
+     * 
+     * @param array $validators 
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    
     public function addValidators(array $validators) 
     {
         foreach ($validators as $validator) {
@@ -149,7 +205,9 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Get all validators.
+     * @api
+     * 
+     * @return array
      */
     public function getValidators() 
     {    
@@ -157,6 +215,8 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
+     * @api
+     * 
      * @return array
      */
     public function getErrors()
@@ -165,7 +225,11 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Set name attribute.
+     * @api
+     * 
+     * @param string $name 
+     * 
+     * @return $this Provides a fluent interface.
      */
     public function setName($name) 
     {
@@ -175,59 +239,99 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Gets name attribute.
+     * @api
+     * 
+     * @return string
      */
     public function getName() 
     {
         return $this->getAttribute('name');
     }
 
+    /**
+     * @api
+     * 
+     * @param bool $disabled 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setDisabled($disabled) 
     {
         $disabled = (bool) $disabled;
+        
         if ($disabled === true) {
             $this->setAttribute('disabled', 'disabled');
         }
+        
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param bool $readOnly 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setReadOnly($readOnly) 
     {
         $readOnly = (bool) $readOnly;
+        
         if ($readOnly === true) {
             $this->setAttribute('readonly', 'readonly');
         }
+        
         return $this;
     }        
     
     /**
-     * Sets required flag
+     * @api
+     * 
+     * @param bool $value 
+     * 
+     * @return $this Provides a fluent interface.
      */
     public function setRequired($required) 
     {
         $this->required = (bool) $required;
         $attribute = $this->getAttribute('required');
-        if ($required === true) {
+        
+        if ($required) {
             $this->setAttribute('required');
         } elseif ($attribute === null) {
             $this->removeAttribute('required');
         }
+        
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param string $value 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setPlaceholder($placeholder)
     {
         $this->setAttribute('placeholder', $placeholder);
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getPlaceholder()
     {
         return $this->placeholder;
     }
     
     /**
-     * Gets required flag
+     * @api
+     * 
+     * @return bool
      */
     public function isRequired() 
     {
@@ -235,7 +339,11 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Sets value.
+     * @api
+     * 
+     * @param mixed $value 
+     * 
+     * @return $this Provides a fluent interface.
      */
     public function setValue($value) 
     {   
@@ -245,7 +353,9 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Gets value.
+     * @api
+     * 
+     * @return mixed
      */
     public function getValue() 
     {
@@ -253,15 +363,21 @@ abstract class ControlAbstract extends HtmlElement
     }   
         
     /**
-     * Get raw value
+     * @api
+     * 
+     * @return mixed
      */
     public function getRawValue() 
     {
         return $this->rawValue;
     }
-
+    
     /**
-     * Set label
+     * @api
+     * 
+     * @param string $label 
+     * 
+     * @return $this Provides a fluent interface.
      */
     public function setLabel($label) 
     {
@@ -270,7 +386,9 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Get label
+     * @api
+     * 
+     * @return string
      */
     public function getLabel() 
     {
@@ -278,7 +396,11 @@ abstract class ControlAbstract extends HtmlElement
     }
     
     /**
-     * Check if value is valid
+     * @api
+     * 
+     * @param mixed $value 
+     * 
+     * @return bool
      */
     public function isValid($value) 
     {    

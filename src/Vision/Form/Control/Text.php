@@ -17,12 +17,18 @@ use Vision\Form\Decorator;
  */ 
 class Text extends ControlAbstract 
 {
+    /** @type string $tag */
     protected $tag = 'input';
 
+    /** @type array $attributes */
     protected $attributes = array('type' => 'text');
 
+    /** @type bool $isVoid */
     protected $isVoid = true;    
 
+    /**
+     * @return void
+     */
     public function init() 
     {
         $this->addDecorator(new Decorator\Label)
