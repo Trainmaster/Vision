@@ -17,8 +17,12 @@ use Vision\Form\Decorator;
  */ 
 class Textarea extends ControlAbstract 
 {
+    /** @type string $tag */
     protected $tag = 'textarea';
     
+    /**
+     * @return void
+     */    
     public function init() 
     {
         $this->addDecorator(new Decorator\Label)
@@ -27,18 +31,39 @@ class Textarea extends ControlAbstract
         $this->addClass('input-textarea');
     }
     
+    /**
+     * @api
+     * 
+     * @param int $rows 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setRows($rows) 
     {
         $this->setAttribute('rows', (int) $rows);
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param int $cols 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setCols($cols) 
     {
         $this->setAttribute('cols', (int) $cols);
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param mixed $value 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setValue($value) 
     {   
         $this->contents[] = $value;
@@ -46,6 +71,13 @@ class Textarea extends ControlAbstract
 		return $this;
 	}
     
+    /**
+     * @api
+     * 
+     * @param mixed $value 
+     * 
+     * @return bool
+     */
     public function isValid($value) 
     {
         if (parent::isValid($value) === true) {
