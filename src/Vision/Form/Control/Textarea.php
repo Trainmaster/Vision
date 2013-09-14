@@ -66,7 +66,7 @@ class Textarea extends ControlAbstract
      */
     public function setValue($value) 
     {   
-        $this->contents[] = $value;
+        $this->addContent($value);
 		$this->value = $value;
 		return $this;
 	}
