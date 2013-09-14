@@ -70,20 +70,4 @@ class Textarea extends ControlAbstract
 		$this->value = $value;
 		return $this;
 	}
-    
-    /**
-     * @api
-     * 
-     * @param mixed $value 
-     * 
-     * @return bool
-     */
-    public function isValid($value) 
-    {
-        if (parent::isValid($value) === true) {
-            $this->contents[] = $this->getValue();
-            return true;
-        }
-        return false;
-    }
 }
