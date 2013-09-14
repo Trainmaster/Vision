@@ -437,9 +437,7 @@ abstract class ControlAbstract extends HtmlElement
             }             
         }
 
-        if ($isValid === true) {
-            $this->setValue($value);
-        }
+        $this->setValue($value);
         
         return $isValid;
     }
