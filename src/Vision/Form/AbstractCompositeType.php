@@ -20,7 +20,7 @@ use Vision\Validator\ValidatorInterface;
  */ 
 abstract class AbstractCompositeType extends HtmlElement
 {
-    /** @type string|null $name */
+    /** @type null|string $name */
     protected $name = null;
     
     /** @type array $elements */
@@ -36,8 +36,6 @@ abstract class AbstractCompositeType extends HtmlElement
      * Constructor
      * 
      * @param string $name 
-     * 
-     * @return void
      */
     final public function __construct($name) 
     {
@@ -51,6 +49,8 @@ abstract class AbstractCompositeType extends HtmlElement
     abstract public function init();
     
     /**
+     * @api
+     *
      * @return string
      */
     public function getContents() 
@@ -70,9 +70,11 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *
      * @param mixed $element 
      * 
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function addElement($element) 
     {
@@ -81,9 +83,11 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *
      * @param array $elements 
      * 
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function addElements(array $elements) 
     {
@@ -94,6 +98,8 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *
      * @param string $name 
      * 
      * @return mixed
@@ -107,6 +113,8 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getElements()
@@ -115,6 +123,8 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *
      * @return string
      */
     public function getName()
@@ -123,7 +133,11 @@ abstract class AbstractCompositeType extends HtmlElement
     }   
 
     /**
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @api
+     *
+     * @param DecoratorInterface $decorator
+     *
+     * @return $this Provides a fluent interface.
      */
     public function addDecorator(DecoratorInterface $decorator) 
     {
@@ -132,7 +146,11 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @api
+     *   
+     * @param array $decorators
+     *
+     * @return $this Provides a fluent interface.
      */
     public function addDecorators(array $decorators) 
     {
@@ -143,6 +161,8 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *   
      * @return array
      */
     public function getDecorators() 
@@ -151,7 +171,9 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /** 
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @api
+     *
+     * @return $this Provides a fluent interface.
      */
     public function resetDecorators()
     {
@@ -160,7 +182,11 @@ abstract class AbstractCompositeType extends HtmlElement
     }    
     
     /**
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @api
+     *
+     * @param ValidatorInterface $validator
+     *
+     * @return $this Provides a fluent interface.
      */
     public function addValidator(ValidatorInterface $validator) 
     {
@@ -169,7 +195,11 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @api
+     *
+     * @param array $validators
+     *
+     * @return $this Provides a fluent interface.
      */
     public function addValidators(array $validators) 
     {
@@ -180,6 +210,8 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /**
+     * @api
+     *
      * @return array
      */
     public function getValidators() 
@@ -188,7 +220,9 @@ abstract class AbstractCompositeType extends HtmlElement
     }
     
     /** 
-     * @return AbstractCompositeType Provides a fluent interface.
+     * @api
+     *
+     * @return $this Provides a fluent interface.
      */
     public function resetValidators()
     {

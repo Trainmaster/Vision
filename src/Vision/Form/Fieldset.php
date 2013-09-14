@@ -19,15 +19,25 @@ use Vision\Form\Control\ControlAbstract;
  */ 
 class Fieldset extends AbstractCompositeType
 {
+    /** @type string $tag */
     protected $tag = 'fieldset';
-        
+      
+    /** @type null|string $legend */      
     protected $legend = null;
     
+    /**
+     * @return void
+     */
     public function init()
     {
         $this->addDecorator(new Decorator\Ul);
     }
         
+    /**
+     * @api
+     * 
+     * @return mixed
+     */
     public function getContents() 
     {
         $content = parent::getContents();
@@ -41,11 +51,23 @@ class Fieldset extends AbstractCompositeType
         return $content;
     }
 
+    /**
+     * @api
+     * 
+     * @param string $legend 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setLegend($legend) {
         $this->legend = $legend;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getLegend() {
         return $this->legend;
     }
