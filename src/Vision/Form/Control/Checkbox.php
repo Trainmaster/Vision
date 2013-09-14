@@ -50,7 +50,7 @@ class Checkbox extends MultiOptionControlAbstract
      */
     public function __toString() 
     {   
-        $content = '';
+        $html = '';
         
         foreach ($this->options as $option => $label) {
             $this->removeAttribute('checked');
@@ -61,10 +61,10 @@ class Checkbox extends MultiOptionControlAbstract
                 $this->setAttribute('checked', 'checked');
             }         
 
-            $content .= parent::__toString();
+            $html .= parent::__toString();
         }
         
-        return $content;
+        return $html;
     }
     
     /**
