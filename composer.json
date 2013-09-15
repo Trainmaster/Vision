@@ -6,6 +6,9 @@
     "require": {
         "php": ">=5.3.8"
     },
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*"
+    },
     "authors": [
         {
             "name": "Frank Liepert",
