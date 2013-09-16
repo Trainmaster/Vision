@@ -40,7 +40,7 @@ class Cache implements CacheInterface
      * 
      * @return Storage\StorageInterface
      */
-    public function set($key, $value, $expiration)
+    public function set($key, $value, $expiration = 0)
     {
         return $this->storage->set($key, $value, $expiration);
     }
