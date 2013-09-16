@@ -15,7 +15,7 @@ namespace Vision\Cache;
  */
 interface CacheInterface
 {
-    public function getAdapter();
+    public function getStorage();
     
     public function set($key, $value);
     

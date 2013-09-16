@@ -24,9 +24,9 @@ class Cache implements CacheInterface
     }
 
     /**
-     * @return Adapter\AdapterInterface
+     * @return Storage\StorageInterface
      */
-    public function getAdapter()
+    public function getStorage()
     {
         return $this->storage;
     }
@@ -37,7 +37,7 @@ class Cache implements CacheInterface
      * @param string $key 
      * @param mixed $value 
      * 
-     * @return Adapter\AdapterInterface Provides a fluent interface.
+     * @return Storage\StorageInterface
      */
     public function set($key, $value)
     {
