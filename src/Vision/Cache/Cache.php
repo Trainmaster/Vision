@@ -36,12 +36,13 @@ class Cache implements CacheInterface
      * 
      * @param string $key 
      * @param mixed $value 
+     * @param int $value 
      * 
      * @return Storage\StorageInterface
      */
-    public function set($key, $value)
+    public function set($key, $value, $expiration)
     {
-        return $this->storage->set($key, $value);
+        return $this->storage->set($key, $value, $expiration);
     }
     
     /**

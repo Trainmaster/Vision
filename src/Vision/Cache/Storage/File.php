@@ -43,10 +43,11 @@ class File implements StorageInterface
      * 
      * @param string $key 
      * @param mixed $value 
+     * @param int $expiration 
      * 
      * @return $this Provides a fluent interface.
      */
-    public function set($key, $value)
+    public function set($key, $value, $expiration = 0)
     {
         switch ($this->encoding) {
             case self::ENC_SERIALIZE:
@@ -59,9 +60,18 @@ class File implements StorageInterface
         }
 
         $filename = $this->prepareFilename($key);
-               
-        file_put_contents($filename, $data, LOCK_EX);
         
+        $file = new \SplFileObject($filename, 'w');
+        
+        $expiration = (int) $expiration;
+        
+        if ($file->flock(LOCK_EX)) {
+            $file->ftruncate(0);
+            $file->fwrite($expiration . "\n" . $data);
+            $file->next();
+            $file->flock(LOCK_UN);
+        }
+
         return $this;
     }
     
@@ -81,7 +91,24 @@ class File implements StorageInterface
             return null;
         }
         
-        $data = file_get_contents($filename, 'r');
+        $file = new \SplFileObject($filename, 'r');
+        
+        $time = time();
+        $mTime = $file->getMTime();
+        
+        $diff = $time - $mTime;
+
+        $expiration = (int) $file->fgets();
+        
+        if ($expiration > 0 && $diff > $expiration) {
+            unset($file);   
+            unlink($filename);
+            return null;
+        }
+        
+        ob_start();        
+        $file->fpassthru();        
+        $data = ob_get_clean();
                
         switch ($this->encoding) {
             case self::ENC_SERIALIZE:
