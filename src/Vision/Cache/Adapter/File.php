@@ -13,7 +13,7 @@ namespace Vision\Cache\Adapter;
  *
  * @author Frank Liepert
  */
-class File implements AdapterInterface
+class File implements StorageInterface
 {
     /** @type int ENC_SERIALIZE */
     const ENC_SERIALIZE = 1;

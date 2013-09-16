@@ -16,11 +16,11 @@ namespace Vision\Cache;
 class Cache implements CacheInterface
 {
     /**
-     * @param Adapter\AdapterInterface $adapter 
+     * @param Storage\StorageInterface $storage 
      */
-    public function __construct(Adapter\AdapterInterface $adapter)
+    public function __construct(Storage\StorageInterface $storage)
     {
-        $this->adapter = $adapter;
+        $this->storage = $storage;
     }
 
     /**
@@ -28,7 +28,7 @@ class Cache implements CacheInterface
      */
     public function getAdapter()
     {
-        return $this->adapter;
+        return $this->storage;
     }
     
     /**
@@ -41,7 +41,7 @@ class Cache implements CacheInterface
      */
     public function set($key, $value)
     {
-        return $this->adapter->set($key, $value);
+        return $this->storage->set($key, $value);
     }
     
     /**
@@ -53,6 +53,6 @@ class Cache implements CacheInterface
      */
     public function get($key)
     {   
-        return $this->adapter->get($key);
+        return $this->storage->get($key);
     }
 }

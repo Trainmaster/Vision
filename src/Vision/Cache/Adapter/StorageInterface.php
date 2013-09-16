@@ -9,11 +9,11 @@
 namespace Vision\Cache\Adapter;
 
 /**
- * AdapterInterface
+ * StorageInterface
  *
  * @author Frank Liepert
  */
-interface AdapterInterface
+interface StorageInterface
 {    
     public function set($key, $value);
     
