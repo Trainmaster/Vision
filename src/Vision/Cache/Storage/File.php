@@ -44,7 +44,7 @@ class File implements StorageInterface
      * @param string $key 
      * @param mixed $value 
      * 
-     * @return File Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function set($key, $value)
     {
@@ -97,6 +97,8 @@ class File implements StorageInterface
     }
     
     /**
+     * @internal
+     *
      * @param string $filename 
      * 
      * @return string
