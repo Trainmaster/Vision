@@ -6,7 +6,7 @@
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */ 
-namespace Vision\Cache\Adapter;
+namespace Vision\Cache\Storage;
 
 /**
  * StorageInterface
