@@ -23,7 +23,7 @@ $cache->set('foo', 'bar', 10);
 var_dump ($cache->get('foo'));
 // string(3) "bar"
 
-sleep(15)
+sleep(15);
 
 var_dump ($cache->get('foo'));
 // NULL
