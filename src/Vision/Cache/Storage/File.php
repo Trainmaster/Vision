@@ -24,6 +24,9 @@ class File implements StorageInterface
     /** @type int $cacheDir */
     protected $cacheDir = null;
     
+    /** @type null|string $cacheFileExtension */
+    protected $cacheFileExtension = null;
+    
     /** @type int $encoding */
     protected $encoding = self::ENC_SERIALIZE;
     
@@ -34,6 +37,10 @@ class File implements StorageInterface
     {
         if (isset($options['cache_dir'])) {
             $this->cacheDir = rtrim($options['cache_dir'], '\\/');
+        }
+        
+        if (isset($options['cache_file_extension'])) {
+            $this->cacheFileExtension = pathinfo($options['cache_file_extension'], PATHINFO_EXTENSION);
         }
         
         if (isset($options['encoding'])) {
@@ -140,7 +147,12 @@ class File implements StorageInterface
     {       
         if ($this->validateCacheDirectory()) {
             $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
-        }            
+        }
+        
+        if (!empty($this->cacheFileExtension)) {
+            $filename = $filename . '.' . $this->cacheFileExtension;
+        }
+        
         return $filename;        
     }
     
