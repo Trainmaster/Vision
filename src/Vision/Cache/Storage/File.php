@@ -42,7 +42,7 @@ class File implements StorageInterface
      * @api
      * 
      * @param string $key 
-     * @param mixed $value 
+     * @param bool|int|float|string|array|object $value 
      * @param int $expiration 
      * 
      * @return $this Provides a fluent interface.
@@ -80,7 +80,7 @@ class File implements StorageInterface
      * 
      * @param string $key 
      * 
-     * @return mixed
+     * @return bool|int|float|string|array|object|null
      */
     public function get($key)
     {
