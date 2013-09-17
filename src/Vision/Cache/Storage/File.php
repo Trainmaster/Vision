@@ -33,7 +33,7 @@ class File implements StorageInterface
     public function __construct(array $options = array())
     {
         if (isset($options['cache_dir'])) {
-            $this->cacheDir = rtrim($options['cache_dir'], '\\/';
+            $this->cacheDir = rtrim($options['cache_dir'], '\\/');
         }
         
         if (isset($options['encoding'])) {
