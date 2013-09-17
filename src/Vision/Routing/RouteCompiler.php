@@ -160,13 +160,14 @@ class RouteCompiler
     }
     
     /**
-     * Parses a string and returns the corresponding class and method names.
+     * Parses a string and returns an array with 
+     * the corresponding class and method.
      *
      * @internal
      *
      * @param string $controller
      *
-     * @throws \InvalidArgumentException if the provided argument is malformed.
+     * @throws \InvalidArgumentException If the provided argument is malformed.
      *
      * @return array
      */

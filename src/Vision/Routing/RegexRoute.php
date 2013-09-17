@@ -15,13 +15,13 @@ namespace Vision\Routing;
  */
 class RegexRoute extends AbstractCompiledRoute
 {
-    /** @type string $regex */
+    /** @type null|string $regex */
     protected $regex = null;
     
     /**
      * @param string $regex 
      * @param string $class 
-     * @param string $method 
+     * @param string|null $method 
      */
     public function __construct($regex, $class, $method = null)
     {

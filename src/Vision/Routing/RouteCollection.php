@@ -21,7 +21,7 @@ class RouteCollection implements \IteratorAggregate
     /**
      * @api
      * 
-     * @return ArrayIterator
+     * @return \ArrayIterator
      */
     public function getIterator()
     {
@@ -33,7 +33,7 @@ class RouteCollection implements \IteratorAggregate
      * 
      * @param array $defaults 
      * 
-     * @return RouteCollection Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function applyDefaults(array $defaults)
     {
@@ -48,7 +48,7 @@ class RouteCollection implements \IteratorAggregate
      * 
      * @param string $prefix 
      * 
-     * @return RouteCollection Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */    
     public function applyPrefix($prefix)
     {
@@ -63,7 +63,7 @@ class RouteCollection implements \IteratorAggregate
      * 
      * @param array $requirements 
      * 
-     * @return RouteCollection Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function applyRequirements(array $requirements)
     {
@@ -71,8 +71,7 @@ class RouteCollection implements \IteratorAggregate
             $route->setRequirements($route->getRequirements() + $requirements);
         }
         return $this;
-    }
-   
+    }   
     
     /**
      * @api
@@ -80,7 +79,7 @@ class RouteCollection implements \IteratorAggregate
      * @param string $alias 
      * @param Route $route 
      * 
-     * @return RouteCollection Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function add($alias, Route $route)
     {
@@ -101,7 +100,7 @@ class RouteCollection implements \IteratorAggregate
      * 
      * @param RouteCollection $collection 
      * 
-     * @return RouteCollection Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function addRouteCollection(RouteCollection $collection)
     {

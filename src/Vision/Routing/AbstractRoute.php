@@ -26,7 +26,7 @@ abstract class AbstractRoute
      * 
      * @param array $defaults 
      * 
-     * @return AbstractRoute Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setDefaults(array $defaults)
     {
@@ -49,7 +49,7 @@ abstract class AbstractRoute
      * 
      * @param array $requirements 
      * 
-     * @return AbstractRoute Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setRequirements(array $requirements)
     {

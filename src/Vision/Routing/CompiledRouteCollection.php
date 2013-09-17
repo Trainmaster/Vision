@@ -21,7 +21,7 @@ class CompiledRouteCollection implements \IteratorAggregate
     /**
      * @api
      * 
-     * @return ArrayIterator
+     * @return \ArrayIterator
      */
     public function getIterator()
     {
@@ -34,7 +34,7 @@ class CompiledRouteCollection implements \IteratorAggregate
      * @param string $alias 
      * @param AbstractCompiledRoute $route 
      * 
-     * @return CompiledRouteCollection Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function add($alias, AbstractCompiledRoute $route)
     {

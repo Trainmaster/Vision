@@ -15,10 +15,10 @@ namespace Vision\Routing;
  */ 
 class Route extends AbstractRoute
 {
-    /** @type string $controller */
+    /** @type null|string $controller */
     protected $controller = null;
     
-    /** @type string $path */
+    /** @type null|string $path */
     protected $path = null;
     
     /**
@@ -38,7 +38,7 @@ class Route extends AbstractRoute
      *
      * @param string $controller 
      * 
-     * @return AbstractRoute Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setController($controller)
     {
@@ -61,7 +61,7 @@ class Route extends AbstractRoute
      * 
      * @param string $path 
      * 
-     * @return Route Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setPath($path)
     {
