@@ -21,7 +21,7 @@ class File implements StorageInterface
     /** @type int ENC_JSON */
     const ENC_JSON = 2;
     
-    /** @type int $cacheDir */
+    /** @type null|string $cacheDir */
     protected $cacheDir = null;
     
     /** @type null|string $cacheFileExtension */
@@ -31,7 +31,11 @@ class File implements StorageInterface
     protected $encoding = self::ENC_SERIALIZE;
     
     /**
-     * @param array $options  
+     * @param array $options {
+     *     @type string $cache_dir An optional cache directory.
+     *     @type string $cache_file_extension An optional extension for the cache file(s).
+     *     @type int $encoding The encoding being used for data storage.
+     * } 
      */
     public function __construct(array $options = array())
     {
