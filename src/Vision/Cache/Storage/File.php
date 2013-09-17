@@ -21,6 +21,9 @@ class File implements StorageInterface
     /** @type int ENC_JSON */
     const ENC_JSON = 2;
     
+    /** @type int $cacheDir */
+    protected $cacheDir = null;
+    
     /** @type int $encoding */
     protected $encoding = self::ENC_SERIALIZE;
     
@@ -30,7 +33,7 @@ class File implements StorageInterface
     public function __construct(array $options = array())
     {
         if (isset($options['cache_dir'])) {
-            $this->cacheDir = $options['cache_dir'];
+            $this->cacheDir = rtrim($options['cache_dir'], '\\/';
         }
         
         if (isset($options['encoding'])) {
@@ -131,15 +134,10 @@ class File implements StorageInterface
      * @return string
      */
     protected function prepareFilename($filename)
-    {
-        if (!is_dir($this->cacheDir)) {
-            mkdir($this->cacheDir, 0600);
-        }
-        
-        if (isset($this->cacheDir)) {
-            $filename = $this->cacheDir . $filename;
-        }
-
+    {       
+        if (isset($this->cacheDir) && !is_dir($this->cacheDir) && mkdir($this->cacheDir, 0600)) {
+            $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
+        }            
         return $filename;        
     }
 }
