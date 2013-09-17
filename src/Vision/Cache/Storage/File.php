@@ -138,7 +138,7 @@ class File implements StorageInterface
      */
     protected function prepareFilename($filename)
     {       
-        if ($this->locateCacheDirectory()) {
+        if ($this->validateCacheDirectory()) {
             $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
         }            
         return $filename;        
@@ -146,13 +146,13 @@ class File implements StorageInterface
     
     /**
      * This method performs several checks in order
-     * to locate a cache directory.
+     * to validate a possible given cache directory.
      *
      * @internal
      * 
      * @return bool
      */
-    protected function locateCacheDirectory()
+    protected function validateCacheDirectory()
     {
         if (!isset($this->cacheDir)){
             return false;
