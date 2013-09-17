@@ -127,7 +127,7 @@ class File implements StorageInterface
     }
     
     /**
-     * In case a cache directory can be located,
+     * In case a set cache directory can be validated,
      * prepend it to the filename.
      *
      * @internal
