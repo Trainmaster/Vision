@@ -127,6 +127,9 @@ class File implements StorageInterface
     }
     
     /**
+     * In case a cache directory can be located,
+     * prepend it to the filename.
+     *
      * @internal
      *
      * @param string $filename 
@@ -135,9 +138,34 @@ class File implements StorageInterface
      */
     protected function prepareFilename($filename)
     {       
-        if (isset($this->cacheDir) && !is_dir($this->cacheDir) && mkdir($this->cacheDir, 0600)) {
+        if ($this->locateCacheDirectory()) {
             $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
         }            
         return $filename;        
+    }
+    
+    /**
+     * This method performs several checks in order
+     * to locate a cache directory.
+     *
+     * @internal
+     * 
+     * @return bool
+     */
+    protected function locateCacheDirectory()
+    {
+        if (!isset($this->cacheDir)){
+            return false;
+        }
+        
+        if (is_dir($this->cacheDir)) {
+            return true;
+        }   
+        
+        if (mkdir($this->cacheDir, 0600)) {
+            return true;
+        }
+        
+        return false;
     }
 }
