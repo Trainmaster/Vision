@@ -167,6 +167,8 @@ class File implements StorageInterface
      * @internal
      * 
      * @return bool
+     *
+     * @todo Make chmod configurable when calling mkdir()
      */
     protected function validateCacheDirectory()
     {
@@ -178,7 +180,7 @@ class File implements StorageInterface
             return true;
         }   
         
-        if (mkdir($this->cacheDir, 0600)) {
+        if (mkdir($this->cacheDir, 0755)) {
             return true;
         }
         
