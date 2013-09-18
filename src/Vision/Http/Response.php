@@ -77,7 +77,7 @@ class Response extends AbstractMessage implements ResponseInterface
      * @param string $name 
      * @param string $value 
      * 
-     * @return Response Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function addHeader($name, $value) 
     {
@@ -90,7 +90,7 @@ class Response extends AbstractMessage implements ResponseInterface
      * 
      * @param mixed $body 
      * 
-     * @return Response Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function body($body) 
     {
@@ -103,7 +103,7 @@ class Response extends AbstractMessage implements ResponseInterface
      * 
      * @param int $statusCode 
      * 
-     * @return Response Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setStatusCode($statusCode)
     {          
@@ -168,7 +168,7 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * @api
      * 
-     * @return Response Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     protected function sendStatusLine()
     {
@@ -187,7 +187,7 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * @api
      * 
-     * @return Response Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     protected function sendHeaders() 
     {
@@ -200,7 +200,7 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * @api
      * 
-     * @return Response Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     protected function sendBody()
     {
