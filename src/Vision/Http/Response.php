@@ -233,7 +233,7 @@ class Response extends AbstractMessage implements ResponseInterface
     }
     
     /**
-     * @api
+     * @internal
      * 
      * @return $this Provides a fluent interface.
      */
@@ -251,7 +251,7 @@ class Response extends AbstractMessage implements ResponseInterface
     }
     
     /**
-     * @api
+     * @internal
      * 
      * @return $this Provides a fluent interface.
      */
@@ -270,7 +270,7 @@ class Response extends AbstractMessage implements ResponseInterface
     }
     
     /**
-     * @api
+     * @internal
      * 
      * @return $this Provides a fluent interface.
      */
@@ -283,7 +283,7 @@ class Response extends AbstractMessage implements ResponseInterface
     }
     
     /**
-     * @api
+     * @internal
      * 
      * @return $this Provides a fluent interface.
      */
