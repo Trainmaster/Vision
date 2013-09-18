@@ -15,6 +15,12 @@ namespace Vision\Http;
  */
 class Response extends AbstractMessage implements ResponseInterface
 {
+    /** @type array $cookies */
+    protected $cookies = array();
+    
+    /** @type array $rawCookies */
+    protected $rawCookies = array();
+    
     /** @type array $headers */
     protected $headers = array();
     
@@ -83,7 +89,67 @@ class Response extends AbstractMessage implements ResponseInterface
     {
         $this->headers[(string) $name] = (string) $value;
         return $this;
-    }   
+    }
+
+    /**
+     * @api
+     * 
+     * @param string $name 
+     * @param string $value  
+     * @param int    $expire  
+     * @param string $path  
+     * @param string $domain  
+     * @param bool   $secure  
+     * @param bool   $httponly  
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function addCookie($name, $value = '', $expire = 0, $path = '', 
+                              $domain = '', $secure = false, $httponly = false)
+    {
+        $this->cookies[] = func_get_args();
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @return array
+     */
+    public function getCookies()
+    {
+        return $this->cookies;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $name 
+     * @param string $value  
+     * @param int    $expire  
+     * @param string $path  
+     * @param string $domain  
+     * @param bool   $secure  
+     * @param bool   $httponly  
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function addRawCookie($name, $value = '', $expire = 0, $path = '', 
+                                 $domain = '', $secure = false, $httponly = false)
+    {
+        $this->rawCookies[] = func_get_args();
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @return array
+     */
+    public function getRawCookies()
+    {
+        return $this->rawCookies;
+    }
     
     /**
      * @api
@@ -160,9 +226,28 @@ class Response extends AbstractMessage implements ResponseInterface
      */
     public function send()
     {
-        $this->sendStatusLine()
+        $this->sendCookies()
+             ->sendStatusLine()
              ->sendHeaders()
              ->sendBody();
+    }
+    
+    /**
+     * @api
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    protected function sendCookies()
+    {
+        foreach ($this->cookies as $cookie) {
+            call_user_func_array('setcookie', $cookie);
+        }
+        
+        foreach ($this->rawCookies as $rawCookie) {
+            call_user_func_array('setrawcookie', $rawCookie);
+        }
+        
+        return $this;
     }
     
     /**
