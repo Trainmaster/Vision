@@ -15,6 +15,13 @@ namespace Vision\Http;
  */
 class Url
 {
+    /**
+     * @api
+     * 
+     * @param string $url 
+     * 
+     * @return bool|array
+     */
     public function parse($url)
     {
         $url = parse_url($url);
@@ -26,6 +33,13 @@ class Url
         return $url;
     }
     
+    /**
+     * @api
+     * 
+     * @param array $parameters 
+     * 
+     * @return bool|string
+     */
     public function build(array $parameters)
     {        
         $url = '';

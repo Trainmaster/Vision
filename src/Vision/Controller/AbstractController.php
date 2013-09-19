@@ -22,57 +22,115 @@ use Vision\Templating\TemplateEngineAwareInterface;
 /**
  * AbstractController
  *
+ * This class provides a base for all controllers and may be customized.
+ *
  * @author Frank Liepert
  */
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface, 
                                              TemplateEngineAwareInterface, SessionAwareInterface,
                                              UrlAwareInterface, ControllerInterface
 {      
+    /** @type RequestInterface $request */
     protected $request = null;
     
+    /** @type ResponseInterface $response */
     protected $response = null;
     
+    /** @type Session $session */
     protected $session = null;
     
+    /** @type null|object $template */
     protected $template = null;
     
+    /** @type Url $url */
     protected $url = null;
     
+    /**
+     * This method will be called right after instantiating the controller.
+     *
+     * @api
+     * 
+     * @return void
+     */
     public function preFilter()
     {
         $this->initSessionToken();
     }
     
+    /**
+     * @api
+     * 
+     * @param RequestInterface $request 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param ResponseInterface $response 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param Session $session 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setSession(Session $session)
     {
         $this->session = $session;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param object $template 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setTemplate($template)
     {
         $this->template = $template;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @param Url $url 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setUrl(Url $url)
     {
         $this->url = $url;
         return $this;
-    }
+    }    
     
+    /**
+     * This is a shorthand method for creating a redirect response.
+     *
+     * @api
+     * 
+     * @param string $url 
+     * 
+     * @return ResponseInterface Provides a fluent interface.
+     */
     public function redirect($url)
     {
         $url = $this->url->parse($url);
@@ -94,6 +152,13 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         exit;     
     }
     
+    /**
+     * @api
+     * 
+     * @param array $url 
+     * 
+     * @return string
+     */
     public function populateUrlParameters(array $url)
     {
         if ($this->request === null) {
@@ -116,6 +181,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         }
         
         $path = $this->request->getBasePath();
+        
         if (!isset($url['path']) && isset($path)) {            
             $url['path'] = $path;
         } else {
@@ -128,6 +194,13 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         return $url;    
     }
     
+    /**
+     * This method is for session token generation and may be overridden.
+     *
+     * @api
+     * 
+     * @return void
+     */
     protected function initSessionToken()
     {
         if (isset($this->session) && !isset($this->session['token'])) {
