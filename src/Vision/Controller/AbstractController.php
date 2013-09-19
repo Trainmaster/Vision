@@ -39,12 +39,8 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     protected $url = null;
     
     public function preFilter()
-    {    
-        if (!isset($this->session['token'])) {
-            $random = new Random;
-            $token = $random->generateHex(128);
-            $this->session['token'] = $token;
-        }
+    {
+        $this->initSessionToken();
     }
     
     public function setRequest(RequestInterface $request)
@@ -130,5 +126,14 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         }
         
         return $url;    
+    }
+    
+    protected function initSessionToken()
+    {
+        if (isset($this->session) && !isset($this->session['token'])) {
+            $random = new Random;
+            $token = $random->generateHex(128);
+            $this->session['token'] = $token;
+        }
     }
 }
