@@ -24,6 +24,49 @@ interface ResponseInterface
     
     /**
      * @api
+     * 
+     * @param string $name 
+     * @param string $value  
+     * @param int    $expire  
+     * @param string $path  
+     * @param string $domain  
+     * @param bool   $secure  
+     * @param bool   $httponly  
+     */
+    public function addCookie($name, $value = '', $expire = 0, $path = '', 
+                              $domain = '', $secure = false, $httponly = false);
+    
+    /**
+     * @api
+     * 
+     * @param string $name 
+     * @param string $value  
+     * @param int    $expire  
+     * @param string $path  
+     * @param string $domain  
+     * @param bool   $secure  
+     * @param bool   $httponly  
+     */
+    public function addRawCookie($name, $value = '', $expire = 0, $path = '', 
+                                 $domain = '', $secure = false, $httponly = false);
+    
+    /**
+     * @api
+     * 
+     * @param string $name 
+     * @param string $value 
+     */
+    public function addHeader($name, $value);
+    
+    /**
+     * @api
+     * 
+     * @param int $statusCode 
+     */
+    public function setStatusCode($statusCode);
+    
+    /**
+     * @api
      */
     public function send();
 }
