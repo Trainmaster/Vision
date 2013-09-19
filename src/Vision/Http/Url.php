@@ -14,25 +14,7 @@ namespace Vision\Http;
  * @author Frank Liepert
  */
 class Url
-{
-    /**
-     * @api
-     * 
-     * @param string $url 
-     * 
-     * @return bool|array
-     */
-    public function parse($url)
-    {
-        $url = parse_url($url);
-        
-        if ($url === false) {
-            return false;
-        }
-        
-        return $url;
-    }
-    
+{   
     /**
      * @api
      * 

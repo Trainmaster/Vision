@@ -133,7 +133,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      */
     public function redirect($url)
     {
-        $url = $this->url->parse($url);
+        $url = parse_url($url);
         
         if (!$url) {
             return false;
