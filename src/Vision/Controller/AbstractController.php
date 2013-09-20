@@ -150,7 +150,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
             return false;
         }
         
-        $url = $this->populateUrlParameters($url);
+        $url = $this->url->populateUrlParameters($url, $this->request);
         $url = $this->url->build($url);
         
         if ($this->response === null || $url === false) {
@@ -161,49 +161,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
                        ->setStatusCode(302);
         
         return $this->response;
-    }
-    
-    /**
-     * @api
-     * 
-     * @param array $url 
-     * 
-     * @return array
-     */
-    public function populateUrlParameters(array $url)
-    {
-        if ($this->request === null) {
-            return $url;
-        }
-        
-        if (!isset($url['scheme'])) {
-            if (isset($this->request->SERVER['HTTPS'])) {
-                $scheme = 'https';
-            } else {
-                $scheme = 'http';
-            }
-            $url['scheme'] = $scheme;
-        }
-        
-        if (!isset($url['host'])) {
-            if (isset($this->request->SERVER['SERVER_NAME'])) {
-                $url['host'] = $this->request->SERVER['SERVER_NAME'];
-            }
-        }
-        
-        $path = $this->request->getBasePath();
-        
-        if (!isset($url['path']) && isset($path)) {            
-            $url['path'] = $path;
-        } else {
-            if (strpos($url['path'], '/') !== 0) {
-                $url['path'] = '/' . $url['path'];
-            }
-            $url['path'] = $path . $url['path'];
-        }
-        
-        return $url;    
-    }
+    }   
     
     /**
      * This method is for session token generation and may be overridden.

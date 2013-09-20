@@ -60,4 +60,43 @@ class Url
         
         return $url;
     }
+    
+    /**
+     * @api
+     * 
+     * @param array $url 
+     * @param RequestInterface $request 
+     * 
+     * @return array
+     */
+    public function populateUrlParameters(array $url, RequestInterface $request)
+    {       
+        if (!isset($url['scheme'])) {
+            if (isset($request->SERVER['HTTPS'])) {
+                $scheme = 'https';
+            } else {
+                $scheme = 'http';
+            }
+            $url['scheme'] = $scheme;
+        }
+        
+        if (!isset($url['host'])) {
+            if (isset($request->SERVER['SERVER_NAME'])) {
+                $url['host'] = $request->SERVER['SERVER_NAME'];
+            }
+        }
+        
+        $path = $request->getBasePath();
+        
+        if (!isset($url['path']) && isset($path)) {            
+            $url['path'] = $path;
+        } else {
+            if (strpos($url['path'], '/') !== 0) {
+                $url['path'] = '/' . $url['path'];
+            }
+            $url['path'] = $path . $url['path'];
+        }
+        
+        return $url;    
+    }
 }
