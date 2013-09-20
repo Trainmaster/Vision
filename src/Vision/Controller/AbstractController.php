@@ -208,7 +208,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     /**
      * This method is for session token generation and may be overridden.
      *
-     * @api
+     * @internal
      * 
      * @return void
      */
