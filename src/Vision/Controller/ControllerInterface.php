@@ -16,4 +16,6 @@ namespace Vision\Controller;
 interface ControllerInterface
 {
     public function preFilter();
+    
+    public function postFilter();
 }

@@ -98,13 +98,25 @@ class FrontController
             ));
         }
         
+        $response = null;
+        
         $instance->preFilter();        
         
         if (method_exists($instance, $method)) {
-            return $instance->$method();
+            $response = $instance->$method();
         }
+        
+        if (!($response instanceof ResponseInterface)) {
+            throw new \UnexpectedValueException(sprintf(
+                'The method "%s::%s" must return a response object.',
+                $class,
+                $method
+            ));
+        }
+        
+        $instance->postFilter(); 
 
-        return false;
+        return $response;
     }
     
     /**
@@ -125,20 +137,10 @@ class FrontController
             if ($route instanceof AbstractCompiledRoute) {
                 $class = $route->getClass();
                 $method = $route->getMethod();
-                $response = $this->invokeController($class, $method);
+                $this->response = $this->invokeController($class, $method);
             } else {
                 throw new \RuntimeException('No matching route.');
-            }
-            
-            if ($response instanceof ResponseInterface) {
-                $this->response = $response;
-            } else {
-                throw new \UnexpectedValueException(sprintf(
-                    'The method "%s::%s" must return a response object.',
-                    $class,
-                    $method
-                ));
-            }
+            }           
         } catch (\Exception $e) {
             return $this->handleException($e);
         }       

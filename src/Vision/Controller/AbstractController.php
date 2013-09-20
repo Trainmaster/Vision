@@ -58,6 +58,17 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     }
     
     /**
+     * This method will be called right after invoking the controller action.
+     *
+     * @api
+     * 
+     * @return void
+     */
+    public function postFilter()
+    {
+    }
+    
+    /**
      * @api
      * 
      * @param RequestInterface $request 
