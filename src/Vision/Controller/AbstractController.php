@@ -140,7 +140,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      * 
      * @param string $url 
      * 
-     * @return ResponseInterface Provides a fluent interface.
+     * @return bool|ResponseInterface
      */
     public function redirect($url)
     {
@@ -168,7 +168,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      * 
      * @param array $url 
      * 
-     * @return string
+     * @return array
      */
     public function populateUrlParameters(array $url)
     {
