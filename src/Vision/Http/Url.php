@@ -48,12 +48,12 @@ class Url
             $url .= $path;
         }        
         
-        if (isset($parameters['query']) && isset($path)) {
+        if (isset($path, $parameters['query'])) {
             $query = $parameters['query'];
             $url .= '?' . http_build_query($query);
         } 
         
-        if (isset($parameters['fragment']) && isset($query)) {
+        if (isset($query, $parameters['fragment'])) {
             $fragment = $parameters['fragment'];
             $url .= '#' . $fragment;
         }
