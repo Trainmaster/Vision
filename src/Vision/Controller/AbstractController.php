@@ -150,7 +150,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
             return false;
         }
         
-        $url = $this->url->populateUrlParameters($url, $this->request);
+        $url = $this->url->populateFromRequest($url, $this->request);
         $url = $this->url->build($url);
         
         if ($this->response === null || $url === false) {

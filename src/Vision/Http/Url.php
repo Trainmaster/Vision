@@ -69,7 +69,7 @@ class Url
      * 
      * @return array
      */
-    public function populateUrlParameters(array $url, RequestInterface $request)
+    public function populateFromRequest(array $url, RequestInterface $request)
     {       
         if (!isset($url['scheme'])) {
             if (isset($request->SERVER['HTTPS'])) {
