@@ -158,9 +158,9 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         }
         
         $this->response->addHeader('Location', $url)
-                       ->setStatusCode(302)
-                       ->send();
-        exit;     
+                       ->setStatusCode(302);
+        
+        return $this->response;
     }
     
     /**
