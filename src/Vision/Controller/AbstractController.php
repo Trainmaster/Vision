@@ -16,7 +16,6 @@ use Vision\Http\ResponseAwareInterface;
 use Vision\Session\Session;
 use Vision\Session\SessionAwareInterface;
 use Vision\Http\Url;
-use Vision\Http\UrlAwareInterface;
 use Vision\Templating\TemplateEngineAwareInterface;
 
 /**
@@ -28,7 +27,7 @@ use Vision\Templating\TemplateEngineAwareInterface;
  */
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface, 
                                              TemplateEngineAwareInterface, SessionAwareInterface,
-                                             UrlAwareInterface, ControllerInterface
+                                             ControllerInterface
 {      
     /** @type RequestInterface $request */
     protected $request = null;
@@ -41,10 +40,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     
     /** @type null|object $template */
     protected $template = null;
-    
-    /** @type Url $url */
-    protected $url = null;
-    
+        
     /**
      * This method will be called right after instantiating the controller.
      *
@@ -121,19 +117,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     }
     
     /**
-     * @api
-     * 
-     * @param Url $url 
-     * 
-     * @return $this Provides a fluent interface.
-     */
-    public function setUrl(Url $url)
-    {
-        $this->url = $url;
-        return $this;
-    }    
-    
-    /**
      * This is a shorthand method for creating a redirect response.
      *
      * @api
@@ -144,14 +127,8 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      */
     public function redirect($url)
     {
-        $url = parse_url($url);
-        
-        if (!$url) {
-            return false;
-        }
-        
-        $url = $this->url->populateFromRequest($url, $this->request);
-        $url = $this->url->build($url);
+        $url = new Url($url);
+        $url = $url->populateFromRequest($this->request)->build();
         
         if ($this->response === null || $url === false) {
             return false;
