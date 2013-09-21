@@ -14,89 +14,104 @@ namespace Vision\Http;
  * @author Frank Liepert
  */
 class Url
-{   
+{
+    /** @type array $components */
+    protected $components = array();
+    
+    /**
+     * Constructor
+     * 
+     * @param string $url 
+     */
+    
+    public function __construct($url)
+    {
+        $components = parse_url($url);
+        
+        if (!empty($components)) {
+            $this->components = $components;
+        }
+    }
+    
     /**
      * @api
      * 
-     * @param array $parameters 
+     * @param RequestInterface $request 
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function populateFromRequest(RequestInterface $request)
+    {       
+        if (!isset($this->components['scheme'])) {
+            if (isset($request->SERVER['HTTPS'])) {
+                $scheme = 'https';
+            } else {
+                $scheme = 'http';
+            }
+            $this->components['scheme'] = $scheme;
+        }
+        
+        if (!isset($this->components['host'])) {
+            if (isset($request->SERVER['SERVER_NAME'])) {
+                $this->components['host'] = $request->SERVER['SERVER_NAME'];
+            }
+        }
+        
+        $path = $request->getBasePath();
+        
+        if (!isset($this->components['path']) && isset($path)) {            
+            $this->components['path'] = $path;
+        } else {
+            if (strpos($this->components['path'], '/') !== 0) {
+                $this->components['path'] = '/' . $this->components['path'];
+            }
+            $this->components['path'] = $path . $this->components['path'];
+        }
+        
+        return $this;    
+    }
+    
+    /**
+     * @api
      * 
      * @return bool|string
      */
-    public function build(array $parameters)
+    public function build()
     {        
         $url = '';
 
-        if (isset($parameters['scheme'])) {
-            $scheme = $parameters['scheme'];
+        if (isset($this->components['scheme'])) {
+            $scheme = $this->components['scheme'];
             $url .= $scheme . '://';
         } else {
             return false;
         }        
         
-        if (isset($parameters['host'])) {
-            $host = $parameters['host'];
+        if (isset($this->components['host'])) {
+            $host = $this->components['host'];
             $url .= $host;
         } else {
             return false;
         }       
         
-        if (isset($parameters['path'])) {
-            $path = $parameters['path'];
+        if (isset($this->components['path'])) {
+            $path = $this->components['path'];
             if (strpos($path, '/') !== 0) {
                 $path = '/' . $path;
             }
             $url .= $path;
         }        
         
-        if (isset($path, $parameters['query'])) {
-            $query = $parameters['query'];
+        if (isset($path, $this->components['query'])) {
+            $query = $this->components['query'];
             $url .= '?' . http_build_query($query);
         } 
         
-        if (isset($query, $parameters['fragment'])) {
-            $fragment = $parameters['fragment'];
+        if (isset($query, $this->components['fragment'])) {
+            $fragment = $this->components['fragment'];
             $url .= '#' . $fragment;
         }
         
         return $url;
-    }
-    
-    /**
-     * @api
-     * 
-     * @param array $url 
-     * @param RequestInterface $request 
-     * 
-     * @return array
-     */
-    public function populateFromRequest(array $url, RequestInterface $request)
-    {       
-        if (!isset($url['scheme'])) {
-            if (isset($request->SERVER['HTTPS'])) {
-                $scheme = 'https';
-            } else {
-                $scheme = 'http';
-            }
-            $url['scheme'] = $scheme;
-        }
-        
-        if (!isset($url['host'])) {
-            if (isset($request->SERVER['SERVER_NAME'])) {
-                $url['host'] = $request->SERVER['SERVER_NAME'];
-            }
-        }
-        
-        $path = $request->getBasePath();
-        
-        if (!isset($url['path']) && isset($path)) {            
-            $url['path'] = $path;
-        } else {
-            if (strpos($url['path'], '/') !== 0) {
-                $url['path'] = '/' . $url['path'];
-            }
-            $url['path'] = $path . $url['path'];
-        }
-        
-        return $url;    
     }
 }
