@@ -100,7 +100,11 @@ class FrontController
         
         $response = null;
         
-        $instance->preFilter();        
+        $preFilter = $instance->preFilter();
+
+        if ($preFilter instanceof ResponseInterface) {
+            return $response;
+        }
         
         if (method_exists($instance, $method)) {
             $response = $instance->$method();
