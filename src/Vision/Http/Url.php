@@ -43,7 +43,8 @@ class Url
     public function populateFromRequest(RequestInterface $request)
     {       
         if (!isset($this->components['scheme'])) {
-            if (isset($request->SERVER['HTTPS'])) {
+            $https = $request->SERVER['HTTPS'];
+            if (!empty($https) && $https !== 'off') {
                 $scheme = 'https';
             } else {
                 $scheme = 'http';
