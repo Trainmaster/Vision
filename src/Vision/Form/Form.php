@@ -41,21 +41,8 @@ class Form extends AbstractCompositeType
     /** @type string $tag */
     protected $tag = 'form';
     
-    /** @type int $tabindex */
-    protected $tabindex = 0;
-    
     /** @type RecursiveIteratorIterator|null $formElementsIterator */
     protected $formElementsIterator = null;
-    
-    /**
-     * @api
-     * 
-     * @return integer
-     */
-    public function increment()
-    {
-        return ++$this->tabindex;
-    }
     
     /**
      * @return void
