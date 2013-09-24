@@ -15,59 +15,80 @@ use Vision\DataStructures\ArrayProxyObject;
  *
  * @author Frank Liepert
  */
-class Session extends ArrayProxyObject
+class Session extends ArrayProxyObject implements SessionInterface
 {    
+    /** @type null|Extension\ExtensionInteface $extension */
     protected $extension = null;
     
-    public function __construct($extension) 
+    /**
+     * @param Extension\ExtensionInteface $extension 
+     */    
+    public function __construct(Extension\ExtensionInterface $extension) 
     {       
         register_shutdown_function(array($this, '__destruct'));
-        $this->setExtension($extension);
+        $this->extension = $extension;
         $this->extension->start();
         $this->extension->load($this);
     }
-    
+       
     public function __destruct()    
     {
         $this->extension->save($this);
     }
     
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return serialize($this->getArrayCopy());
     }
-
-    public function clear()
-    {
-        $this->exchangeArray(array());
-    }
     
-    public function start()
-    {
-        return $this->getExtension()->start();
-    }
-    
-    public function setExtension($extension)
-    {
-        $this->extension = $extension;
-        return $this;
-    }
-    
+    /**
+     * @api
+     * 
+     * @return Extension\ExtensionInterface $extension 
+     */
     public function getExtension()
     {
         return $this->extension;
     }
+
+    /** 
+     * @return array
+     */
+    public function clear()
+    {
+        return $this->exchangeArray(array());
+    }
     
+    /**
+     * @see Extension\ExtensionInterface
+     */
+    public function start()
+    {
+        return $this->extension->start();
+    }   
+    
+    /**
+     * @see Extension\ExtensionInterface
+     */
     public function getStatus()
     {
         return $this->extension->getStatus();
     }
     
+    /**
+     * @see Extension\ExtensionInterface
+     */
     public function getId()
     {
         return $this->extension->getId();
     }
     
+    /**
+     * @see Extension\ExtensionInterface
+     */
     public function regenerateId($deleteOldSession = true)
     {
         return $this->extension->regenerateId($deleteOldSession);

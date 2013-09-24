@@ -8,21 +8,28 @@
  */ 
 namespace Vision\Session\Extension;
 
-use RuntimeException;
+use Vision\Session\SessionInterface;
 
 /**
  * NativeExtension
  *
  * @author Frank Liepert
  */
-class NativeExtension 
+class NativeExtension implements ExtensionInterface
 {
     /** @type bool $started */
     protected $started = false;
         
+    /**
+     * @api
+     *
+     * @throws \RuntimeException
+     * 
+     * @return bool
+     */
     public function start()
     {
-        if ($this->started === true) {
+        if ($this->started) {
             return true;
         }
         
@@ -30,20 +37,28 @@ class NativeExtension
             $this->started = true;
             return true;
         } else {
-            throw RuntimeException('Session could not be started.');
+            throw \RuntimeException('Session could not be started.');
         }
     }
     
-    public function load($session)
+    /**
+     * 
+     * 
+     * @param <type> $session 
+     * 
+     * @return <type>
+     */
+    public function load(SessionInterface $session)
     {
-        if ($this->started === false) {
+        if (!$this->started) {
             $this->start();
-        }        
+        }     
+        
         $session->exchangeArray($_SESSION);
         return;
     }
     
-    public function save($session)
+    public function save(SessionInterface $session)
     {
         // Hackish workaround for session_status() as of PHP 5.4
         @session_start();
