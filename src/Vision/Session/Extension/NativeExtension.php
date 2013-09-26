@@ -42,11 +42,11 @@ class NativeExtension implements ExtensionInterface
     }
     
     /**
+     * @api
      * 
+     * @param SessionInterface $session 
      * 
-     * @param <type> $session 
-     * 
-     * @return <type>
+     * @return void
      */
     public function load(SessionInterface $session)
     {
@@ -58,6 +58,13 @@ class NativeExtension implements ExtensionInterface
         return;
     }
     
+    /**
+     * @api
+     * 
+     * @param SessionInterface $session 
+     * 
+     * @return void
+     */
     public function save(SessionInterface $session)
     {
         // Hackish workaround for session_status() as of PHP 5.4
@@ -65,21 +72,43 @@ class NativeExtension implements ExtensionInterface
         return $_SESSION = $session->getArrayCopy();
     }
 
+    /**
+     * @api
+     * 
+     * @return bool
+     */
     public function isStarted()
     {
         return (bool) $this->started;
     }
     
+    /**
+     * @api
+     * 
+     * @return int
+     */
     public function getStatus()
     {
         return session_status();
     }
     
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getId()
     {
         return session_id();
     }
     
+    /**
+     * @api
+     * 
+     * @param bool $deleteOldSession  
+     * 
+     * @return bool
+     */
     public function regenerateId($deleteOldSession = true)
     {
         return session_regenerate_id($deleteOldSession);
