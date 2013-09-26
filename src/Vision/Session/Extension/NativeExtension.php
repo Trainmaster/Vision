@@ -55,7 +55,6 @@ class NativeExtension implements ExtensionInterface
         }     
         
         $session->exchangeArray($_SESSION);
-        return;
     }
     
     /**
@@ -69,7 +68,7 @@ class NativeExtension implements ExtensionInterface
     {
         // Hackish workaround for session_status() as of PHP 5.4
         @session_start();
-        return $_SESSION = $session->getArrayCopy();
+        $_SESSION = $session->getArrayCopy();
     }
 
     /**
