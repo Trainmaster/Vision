@@ -66,8 +66,15 @@ class NativeExtension implements ExtensionInterface
      */
     public function save(SessionInterface $session)
     {
-        // Hackish workaround for session_status() as of PHP 5.4
-        @session_start();
+        $status = $this->getStatus();
+        
+        if (isset($status) && $status !== PHP_SESSION_ACTIVE) {
+            $this->started = false;
+            $this->start();
+        } else {
+            @session_start();
+        }
+
         $_SESSION = $session->getArrayCopy();
     }
 
@@ -84,11 +91,14 @@ class NativeExtension implements ExtensionInterface
     /**
      * @api
      * 
-     * @return int
+     * @return null|int
      */
     public function getStatus()
     {
-        return session_status();
+        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+            return session_status();
+        }
+        return null;
     }
     
     /**
