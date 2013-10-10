@@ -19,18 +19,31 @@ use Vision\Controller\FrontController;
  */
 abstract class AbstractApp
 {
+    /** @type bool $debug */
     protected $debug = true;
     
+    /** @type string $environment */
     protected $environment = 'dev';   
     
+    /** @type FrontController $frontController */
     protected $frontController = null;
     
+    /**
+     * Constructor
+     * 
+     * @param FrontController $frontController 
+     */
     public function __construct(FrontController $frontController)
     {
         $this->frontController = $frontController;
         $this->initLocale();
     }
     
+    /**
+     * This method sets the locale based on the HTTP-Accept-Language-Header.
+     * 
+     * @return void
+     */
     public function initLocale()
     {
         if (class_exists('Locale') === false) {
@@ -50,28 +63,57 @@ abstract class AbstractApp
         Locale::setDefault($locale);       
     }
     
+    /**
+     * @api
+     * 
+     * @param string $debug 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setDebug($debug)
     {
         $this->debug = (bool) $debug;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return bool
+     */
     public function getDebug()
     {
         return $this->debug;
     }
     
+    /**
+     * @api
+     * 
+     * @param string $environment 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return string
+     */
     public function getEnvironment()
     {
         return $this->environment;
     }
     
+    /**
+     * @api
+     * 
+     * @return void
+     */
     public function run()
     {   
         $this->frontController->run();
