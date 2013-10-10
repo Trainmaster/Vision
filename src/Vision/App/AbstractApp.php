@@ -11,7 +11,6 @@ namespace Vision\App;
 use Locale;
 
 use Vision\Controller\FrontController;
-use Vision\File\Loader\LoaderInterface;
 
 /**
  * AbstractApp
@@ -25,8 +24,6 @@ abstract class AbstractApp
     protected $environment = 'dev';   
     
     protected $frontController = null;
-    
-    protected $loader = null;
     
     public function __construct(FrontController $frontController)
     {
