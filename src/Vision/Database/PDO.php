@@ -18,6 +18,19 @@ class PDO extends \PDO
     /** @type bool $hasActiveTransaction */
     protected $hasActiveTransaction = false;
     
+    
+    /**
+     * This method returns the current driver name (only if it's supported by the driver)
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getDriverName()
+    {
+        return $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    }
+    
     /**
     * Workaround for WHERE IN() queries
     *
@@ -36,6 +49,29 @@ class PDO extends \PDO
         }
         
         return array();
+    }
+    
+    /**
+     * This method returns a UUID ready to be stored as BINARY(16).
+     * 
+     * @todo Support for other drivers.
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function createUuid()
+    {
+        $name = $this->getDriverName();
+        
+        switch ($name) {
+            case 'mysql':
+                $sth = $this->pdo->query('SELECT UNHEX(REPLACE(UUID(), "-", ""))');
+                return $sth->fetchColumn();
+            
+            default:
+                return null;            
+        }
     }
     
     /**
