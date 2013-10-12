@@ -1,5 +1,7 @@
 # Autoload
 
+## Usage
+
 The usage is straightforward, the directory structure is exemplary.
 
 `app/acme/config/autoload.php`
