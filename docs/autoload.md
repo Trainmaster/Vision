@@ -1,7 +1,6 @@
 # Autoload
 
-The usage of the autoloader is straightforward. The directory structure is exemplary.
-
+The usage is straightforward, the directory structure is exemplary.
 
 `app/acme/config/autoload.php`
 ```php
@@ -21,4 +20,4 @@ $classAutoloader = new \Vision\Autoload\SplClassLoader('acme', '../../app');
 $classAutoloader->register();
 ```
 
-As you can see, it is very easy to implement other libraries like Zend Framework or Twig.
+As you can see, it is very easy to integrate third-party libraries like [ZF2](http://framework.zend.com) or [Twig](http://twig.sensiolabs.org).
