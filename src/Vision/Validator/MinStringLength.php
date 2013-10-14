@@ -30,16 +30,6 @@ class MinStringLength extends AbstractMultibyteStringValidator
     }
     
     /**
-     * @param string $value 
-     * 
-     * @return bool
-     */
-    public function __invoke($value)
-    {
-        return $this->isValid($value);
-    }
-    
-    /**
      * @api
      *
      * @return int
