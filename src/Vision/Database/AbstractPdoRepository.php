@@ -6,25 +6,20 @@
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
-namespace Vision\Database\Mapper;
-
-use PDO;
-use PDOException;
+namespace Vision\Database;
 
 /**
  * PDOMapper
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class PDOMapper
+abstract class AbstractPdoRepository
 {
     /** @type null|PDO */
     protected $pdo = null;
            
     /**
      * @param PDO $pdo 
-     * 
-     * @return void
      */
     public function __construct(PDO $pdo)
     {

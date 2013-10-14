@@ -8,16 +8,14 @@
  */ 
 namespace Vision\Extension\Navigation;
 
-use Vision\Database\Mapper\PDOMapper;
-
-use PDO;
+use Vision\Database\AbstractPdoRepository;
 
 /**
  * NavigationMapper
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class NavigationMapper extends PDOMapper implements NavigationMapperInterface
+class NavigationMapper extends AbstractPdoRepository implements NavigationMapperInterface
 {
     /**
      * @api
@@ -51,13 +49,13 @@ class NavigationMapper extends PDOMapper implements NavigationMapperInterface
                          ni18n.name ASC';
                 
         $pstmt = $this->pdo->prepare($sql);
-        $pstmt->bindParam(':ancestor', $id, PDO::PARAM_INT);
-        $pstmt->bindParam(':language_id', $languageId, PDO::PARAM_INT);
+        $pstmt->bindParam(':ancestor', $id, \PDO::PARAM_INT);
+        $pstmt->bindParam(':language_id', $languageId, \PDO::PARAM_INT);
         $pstmt->execute();
 
         $result = array();
 
-        while ($data = $pstmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($data = $pstmt->fetch(\PDO::FETCH_ASSOC)) {
             $node = new Node($data['node_id']);
             $node->setShowLink($data['show_link'])
                  ->setIsVisible($data['is_visible'])
