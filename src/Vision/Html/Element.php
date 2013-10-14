@@ -162,13 +162,8 @@ class Element
     protected function renderAttributes()
     {
         $html = '';
-        $attributes = $this->attributes;
-        
-        if (empty($attributes)) {
-            return $html;
-        }
-        
-        foreach ($attributes as $key => $value) {
+
+        foreach ($this->attributes as $key => $value) {
             if (strlen($key) < 1) {
                 break;
             }
