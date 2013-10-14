@@ -15,6 +15,9 @@ namespace Vision\Routing;
  */
 abstract class AbstractRoute
 {        
+    /** @type string $httpMethod */
+    protected $httpMethod = null;
+    
     /** @type array $defaults */
     protected $defaults = array();
     
@@ -65,5 +68,28 @@ abstract class AbstractRoute
     public function getRequirements()
     {
         return $this->requirements;
+    }
+    
+    /**
+     * @api
+     * 
+     * @param string $httpMethod 
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function setHttpMethod($httpMethod)
+    {
+        $this->httpMethod = $httpMethod;
+        return $this;
+    }
+    
+    /**
+     * @api
+     * 
+     * @return string
+     */
+    public function getHttpMethod()
+    {
+        return $this->httpMethod;
     }
 }

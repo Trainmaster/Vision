@@ -58,6 +58,7 @@ class RouteCompiler
         $controller = $route->getController();
         $defaults = $route->getDefaults();
         $requirements = $route->getRequirements();
+        $httpMethod = $route->getHttpMethod();
         
         $reqRegex = $this->createRequiredRegex();
         $optRegex = $this->createOptionalRegex();
@@ -106,7 +107,8 @@ class RouteCompiler
         }
         
         $route->setDefaults($defaults)
-              ->setRequirements($requirements);
+              ->setRequirements($requirements)
+              ->setHttpMethod($httpMethod);
         
         return $route;
     }
