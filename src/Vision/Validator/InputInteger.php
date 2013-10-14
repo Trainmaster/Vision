@@ -34,8 +34,8 @@ class InputInteger extends AbstractValidator
             $this->setMin($min);
         }
         
-        if (isset($min)) {
-            $this->setMin($min);
+        if (isset($max)) {
+            $this->setMax($max);
         }
     }
     
