@@ -22,8 +22,7 @@ class Url
      * Constructor
      * 
      * @param string $url 
-     */
-    
+     */    
     public function __construct($url)
     {
         $components = parse_url($url);
