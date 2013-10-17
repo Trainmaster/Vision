@@ -50,11 +50,20 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function __construct()
     {
-        $this->initSuperglobals()
-             ->initMethod()     
-             ->initBasePath()               
+        $this->GET = new SuperglobalProxyObject($_GET);
+        $this->POST = new SuperglobalProxyObject($_POST);
+        $this->FILES = new SuperglobalProxyObject($_FILES);        
+        $this->COOKIE = new SuperglobalProxyObject($_COOKIE);
+        $this->SERVER = new SuperglobalProxyObject($_SERVER);  
+        
+        // Set $this->method
+        if (isset($this->SERVER['REQUEST_METHOD'])) {
+            $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
+        }
+        
+        $this->initBasePath()               
              ->initPathInfo()
-             ->initPath();        
+             ->initPath();       
     }
     
     /**
@@ -71,21 +80,6 @@ class Request extends AbstractMessage implements RequestInterface
         }
         
         return null;
-    }
-    
-    /**
-     * @api
-     * 
-     * @return $this Provides a fluent interface.
-     */
-    public function initSuperglobals()
-    {
-        $this->GET = new SuperglobalProxyObject($_GET);
-        $this->POST = new SuperglobalProxyObject($_POST);
-        $this->FILES = new SuperglobalProxyObject($_FILES);        
-        $this->COOKIE = new SuperglobalProxyObject($_COOKIE);
-        $this->SERVER = new SuperglobalProxyObject($_SERVER);        
-        return $this;
     }
         
     /**
@@ -158,18 +152,6 @@ class Request extends AbstractMessage implements RequestInterface
     public function getMethod()
     {
         return $this->method;
-    }
-    
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    public function initMethod()
-    {
-        if (isset($this->SERVER['REQUEST_METHOD'])) {
-            $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
-        }
-        
-        return $this;
     }
     
     /**
