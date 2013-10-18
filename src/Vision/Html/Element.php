@@ -199,7 +199,7 @@ class Element
      *
      * @param string $content 
      * 
-     * @return Element Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function addContent($content) 
     {
@@ -237,7 +237,7 @@ class Element
      * @param string $key 
      * @param string $value  
      * 
-     * @return Element Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setAttribute($key, $value = null) 
     {
@@ -250,7 +250,7 @@ class Element
      *
      * @param array $attributes 
      * 
-     * @return Element Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setAttributes(array $attributes) 
     {
@@ -309,7 +309,7 @@ class Element
      * 
      * @param string $id 
      * 
-     * @return Element Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setId($id)
     {
@@ -332,7 +332,7 @@ class Element
      *
      * @param string $class 
      * 
-     * @return Element Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function addClass($class) 
     {
@@ -353,7 +353,7 @@ class Element
      *
      * @param string $class 
      * 
-     * @return Element Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function removeClass($class) 
     {
