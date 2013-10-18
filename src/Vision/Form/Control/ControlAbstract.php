@@ -259,8 +259,10 @@ abstract class ControlAbstract extends HtmlElement
     {
         $disabled = (bool) $disabled;
         
-        if ($disabled === true) {
-            $this->setAttribute('disabled', 'disabled');
+        if ($disabled) {
+            $this->setAttribute('disabled');
+        } else {
+            $this->removeAttribute('disabled');
         }
         
         return $this;
@@ -277,8 +279,10 @@ abstract class ControlAbstract extends HtmlElement
     {
         $readOnly = (bool) $readOnly;
         
-        if ($readOnly === true) {
-            $this->setAttribute('readonly', 'readonly');
+        if ($readOnly) {
+            $this->setAttribute('readonly');
+        } else {
+            $this->removeAttribute('readonly');
         }
         
         return $this;
@@ -294,11 +298,10 @@ abstract class ControlAbstract extends HtmlElement
     public function setRequired($required) 
     {
         $this->required = (bool) $required;
-        $attribute = $this->getAttribute('required');
         
         if ($required) {
             $this->setAttribute('required');
-        } elseif ($attribute === null) {
+        } else {
             $this->removeAttribute('required');
         }
         
