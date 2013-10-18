@@ -163,11 +163,7 @@ class Element
     {
         $html = '';
 
-        foreach ($this->attributes as $key => $value) {
-            if (strlen($key) < 1) {
-                break;
-            }
-            
+        foreach ($this->attributes as $key => $value) {           
             if ($value === null) {
                 $html .= ' ' . $this->clean($key);
             } else {
