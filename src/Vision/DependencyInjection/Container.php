@@ -346,6 +346,15 @@ class Container implements ContainerInterface
         if ($i % 2 === 0 && $i >= 2) {      
             $di = $this;
             $value = preg_replace_callback("#%([\w.-]+)%#u", function($match) use (&$di) {
+                $parameter = $di->getParameter($match[1]);
+                if ($parameter !== null) {
+                    return $parameter;
+                } else {
+                    throw new \OutOfRangeException(sprintf(
+                        'No parameter definition for "%s". Double-check the container configuration file(s).',
+                        $match[1]
+                    ));
+                }
                 return $di->getParameter($match[1]) !== null ? $di->getParameter($match[1]) : $match[1];
             }, $dependency);
             $dependency = $value;
