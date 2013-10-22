@@ -254,7 +254,7 @@ class Element
      */
     public function setAttributes(array $attributes) 
     {
-        foreach($attributes as $key => $value) {
+        foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
         }
         
