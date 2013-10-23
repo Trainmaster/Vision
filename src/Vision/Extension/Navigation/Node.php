@@ -15,7 +15,7 @@ namespace Vision\Extension\Navigation;
  */
 class Node
 {
-    protected $navigationId = null;
+    protected $id = null;
     
     protected $showLink = true;
     
@@ -31,30 +31,19 @@ class Node
     
     protected $children = array();
 
-    public function __construct($navigationId)
+    public function __construct($id)
     {
-        $this->setNavigationId($navigationId);
+        $this->id = $id;
     }
     
     public function __toString()
     {
         return $this->name;
     }
-
-    public function setNavigationId($navigationId)
-    {
-        $this->navigationId = (int) $navigationId;
-        return $this;
-    }
-    
-    public function getNavigationId()
-    {
-        return $this->navigationId;
-    }
     
     public function getId()
     {
-        return $this->navigationId;
+        return $this->id;
     }
     
     public function setShowLink($showLink)

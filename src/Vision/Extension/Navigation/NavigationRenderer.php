@@ -129,7 +129,7 @@ class NavigationRenderer implements NavigationRendererInterface
             $maxDepth = $iterator->getMaxDepth();
             
             if (isset($node->isActive)) {
-                $actives[$node->getNavigationId()] = $depth;
+                $actives[$node->getId()] = $depth;
             }
             
             if ($maxDepth === false) {
