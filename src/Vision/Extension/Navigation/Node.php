@@ -102,7 +102,7 @@ class Node
     
     public function hasChildren()
     {
-        return (bool) !empty($this->children);
+        return !empty($this->children);
     }
     
     public function resetChildren()
