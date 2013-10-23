@@ -136,11 +136,12 @@ class Node
      * 
      * @param self $child 
      * 
-     * @return void
+     * @return $this
      */
     public function addChild(self $child)
     {
         $this->children[] = $child;
+        return $this;
     }
     
     /**
