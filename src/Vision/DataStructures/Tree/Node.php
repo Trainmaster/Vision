@@ -37,6 +37,16 @@ class Node
     /**
      * @api
      * 
+     * @return null|Node
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    
+    /**
+     * @api
+     * 
      * @param self $child 
      * 
      * @return $this Provides a fluent interface.
