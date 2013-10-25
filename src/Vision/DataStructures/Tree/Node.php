@@ -14,10 +14,26 @@ namespace Vision\DataStructures\Tree;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Node
-{    
+{
+    /** @type null|Node $parent */
+    protected $parent = null;
+    
     /** @type array $children */
     protected $children = array();
-
+    
+    /**
+     * @api
+     * 
+     * @param self $parent 
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function setParent(self $parent)
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+    
     /**
      * @api
      * 
@@ -27,7 +43,7 @@ class Node
      */
     public function addChild(self $child)
     {
-        $this->children[] = $child;
+        $this->children[] = $child->setParent($this);
         return $this;
     }
     
