@@ -20,16 +20,6 @@ class Node
     
     /** @type array $children */
     protected $children = array();
-    
-    /**
-     * @api
-     * 
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @api
