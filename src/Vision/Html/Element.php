@@ -143,11 +143,7 @@ class Element
      */
     protected function clean($value)
     {
-        if (is_string($value) 
-            || is_int($value)
-            || is_float($value)
-            || is_bool($value)
-            || (is_object($value) && method_exists($value, '__toString'))) {
+        if (is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
             return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);            
         }
         
@@ -207,12 +203,7 @@ class Element
             throw new LogicException('Void elements are not allowed to have contents.');
         }
         
-        if (is_string($content)
-            || is_int($content)
-            || is_float($content)
-            || is_bool($content)
-            || is_null($content)
-            || $content instanceof self) {        
+        if (is_scalar($content) || $content instanceof self) {        
             $this->contents[] = $content;        
         } else {
             throw new InvalidArgumentException('Unsupported argument type.');
