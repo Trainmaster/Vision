@@ -15,7 +15,7 @@ class NodeIterator implements \RecursiveIterator
 {
     /** @type array $nodes */
     private $nodes;
-
+    
     /**
      * @param Node $node 
      */
