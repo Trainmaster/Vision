@@ -14,10 +14,7 @@ namespace Vision\DataStructures\Tree;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Node
-{
-    /** @type null|int $id */
-    protected $id = null;
-    
+{    
     /** @type array $children */
     protected $children = array();
 
