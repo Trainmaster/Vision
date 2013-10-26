@@ -136,7 +136,7 @@ class RouteCollection implements \IteratorAggregate
      */
     public function has($alias)
     {
-        return (bool) isset($this->routes[$alias]);
+        return isset($this->routes[$alias]);
     }
     
     /**
