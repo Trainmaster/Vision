@@ -8,10 +8,9 @@
  */ 
 namespace Vision\Extension\Navigation;
 
+use Vision\DataStructures\Tree\NodeIterator;
 use Vision\Html\Element;
 use Vision\Http\RequestInterface;
-use RecursiveCachingIterator;
-use RecursiveIteratorIterator;
 
 /**
  * @author Frank Liepert <contact@frank-liepert.de>
@@ -98,17 +97,17 @@ class NavigationRenderer implements NavigationRendererInterface
     /**
      * @api
      *
-     * @param array $tree 
+     * @param Node $node 
      * 
      * @return string
      */
-    public function render(array $tree)
-    {    
+    public function render(Node $node)
+    {        
         $basePath = $this->request->getBasePath();
-        
-        $nodeIterator = new NodeIterator($tree);
-        $cachingIterator = new RecursiveCachingIterator($nodeIterator);
-        $iterator = new RecursiveIteratorIterator($cachingIterator, RecursiveIteratorIterator::SELF_FIRST);
+                
+        $nodeIterator = new NodeIterator($node);
+        $cachingIterator = new \RecursiveCachingIterator($nodeIterator);
+        $iterator = new \RecursiveIteratorIterator($cachingIterator, \RecursiveIteratorIterator::SELF_FIRST);
         
         $fromDepth = $this->fromDepth;
         $limitDepth = $this->limitDepth;
@@ -131,7 +130,7 @@ class NavigationRenderer implements NavigationRendererInterface
             if (isset($node->isActive)) {
                 $actives[$node->getId()] = $depth;
             }
-            
+
             if ($maxDepth === false) {
                 $maxDepth = -1;
             }
@@ -145,7 +144,7 @@ class NavigationRenderer implements NavigationRendererInterface
                 continue;
             }
 
-            $parent = $node->getParent();
+            $parent = $node->getParentId();
             $parentIsActive = array_key_exists($parent, $actives);
             
             if (!$parentIsActive) {

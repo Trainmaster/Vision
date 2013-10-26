@@ -14,7 +14,7 @@ namespace Vision\Extension\Navigation;
 interface NavigationRendererInterface
 {
     /**
-     * @param array $tree 
+     * @param Node $node 
      */
-    public function render(array $tree);
+    public function render(Node $node);
 }

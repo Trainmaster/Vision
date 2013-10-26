@@ -59,13 +59,43 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
             $node = new Node($data['node_id']);
             $node->setShowLink($data['show_link'])
                  ->setIsVisible($data['is_visible'])
-                 ->setParent($data['parent'])
+                 ->setParentId($data['parent'])
                  ->setName($data['name'])
                  ->setPath($data['path'])
                  ->setAttributes(json_decode($data['attributes'], true));
             $result[$data['node_id']] = $node;          
         }
+        
+        $result = $this->convertFlatToHierarchical($result);
 
-        return $result;
+        if (isset($result[$id])) {
+            return $result[$id];
+        }
+
+        return null;
+    }
+    
+    /**
+     * Converts flat array to hierarchical array.
+     * 
+     * @param array $data 
+     * 
+     * @return array $data
+     */
+    protected function convertFlatToHierarchical(array $data)
+    {
+        foreach ($data as $row) {
+            if ($row instanceof Node) {
+                $parent = $row->getParentId();
+                if (array_key_exists($parent, $data)) {
+                    $data[$parent]->addChild($row);
+                    unset($data[$row->getId()]);
+                }                
+            } else {
+                throw new RuntimeException('Array element must be an instance of Node.');
+            }
+        }      
+        
+        return $data;
     }
 }

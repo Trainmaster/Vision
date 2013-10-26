@@ -8,12 +8,14 @@
  */ 
 namespace Vision\Extension\Navigation;
 
+use Vision\DataStructures\Tree\Node as TreeNode;
+
 /**
  * Node
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Node
+class Node extends TreeNode
 {
     /** @type null|int $id */
     protected $id = null;
@@ -25,7 +27,7 @@ class Node
     protected $isVisible = true;
     
     /** @type null|int $parent */
-    protected $parent = null;
+    protected $parentId = null;
     
     /** @type null|string $name */
     protected $name = null;
@@ -36,20 +38,20 @@ class Node
     /** @type array $attributes */
     protected $attributes = array();
     
-    /** @type array $children */
-    protected $children = array();
-
     /**
      * @param int $id 
      */
     public function __construct($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
     }
     
+    /** 
+     * @return string
+     */
     public function __toString()
     {
-        return $this->name;
+        return (string) $this->name;
     }
     
     /**
@@ -115,9 +117,9 @@ class Node
      * 
      * @return $this Provides a fluent interface.
      */
-    public function setParent($parent)
+    public function setParentId($parentId)
     {   
-        $this->parent = (int) $parent;
+        $this->parentId = (int) $parentId;
         return $this;
     }
     
@@ -126,52 +128,9 @@ class Node
      * 
      * @return int
      */
-    public function getParent()
+    public function getParentId()
     {
-        return $this->parent;
-    }
-    
-    /**
-     * @api
-     * 
-     * @param self $child 
-     * 
-     * @return $this
-     */
-    public function addChild(self $child)
-    {
-        $this->children[] = $child;
-        return $this;
-    }
-    
-    /**
-     * @api
-     * 
-     * @return array
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-    
-    /**
-     * @api
-     * 
-     * @return bool
-     */
-    public function hasChildren()
-    {
-        return !empty($this->children);
-    }
-    
-    /**
-     * @api
-     * 
-     * @return array
-     */
-    public function resetChildren()
-    {
-        return $this->children = array();
+        return $this->parentId;
     }
     
     /**
