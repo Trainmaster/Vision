@@ -77,7 +77,7 @@ class NavigationRenderer implements NavigationRendererInterface
      */
     public function expandBy($expandBy)
     {
-        $this->expandBy = $expandBy;
+        $this->expandBy = (int) $expandBy;
         return $this;
     }
     
