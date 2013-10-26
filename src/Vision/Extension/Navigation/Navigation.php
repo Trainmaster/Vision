@@ -214,11 +214,9 @@ class Navigation
     }
     
     /**
-     * Prepares the tree.
+     * Load the tree from either the mapper or the cache (optional).
      *
-     * @throws RuntimeException
-     *
-     * @return array $tree
+     * @return null|Node
      */
     protected function loadTree()
     {
@@ -228,21 +226,24 @@ class Navigation
 
         $key = md5($this->rootId . $this->languageId);
         
-        $tree = null;
+        $data = null;
         
         if (isset($this->cache)) {
-            $tree = $this->cache->get($key);
-            if (isset($tree)) {
-                return $tree;
+            $data = $this->cache->get($key);
+            if ($data instanceof Node) {
+                return $data;
             }
         }
         
-        if (!isset($tree)) {
-            $tree = $this->mapper->loadByIdAndLanguageId($this->rootId, $this->languageId);
+        if (!isset($data)) {
+            $data = $this->mapper->loadByIdAndLanguageId($this->rootId, $this->languageId);
+            if (!($data instanceof Node)) {
+                return null;
+            }
         }
         
-        // $tr = new Node(null);
-        // $tr->addChild($tree);
+        $tree = new Node(null);
+        $tree->addChild($data);
         
         if (isset($this->cache)) {
             $this->cache->set($key, $tree);
