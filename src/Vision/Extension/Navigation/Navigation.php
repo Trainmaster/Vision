@@ -197,7 +197,7 @@ class Navigation
      */
     public function link($link)
     {
-        $this->renderer->link((bool) $link);
+        $this->renderer->link($link);
         return $this;
     }
     
