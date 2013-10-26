@@ -255,7 +255,7 @@ class Navigation
     /**
      * Traverse nodes and find the node best matching with the current request.
      * 
-     * @param Node $tree 
+     * @param Node $node 
      * 
      * @return void
      */
@@ -277,14 +277,12 @@ class Navigation
     /**
      * Recursively find all nodes in the active branch and mark them as active.
      * 
-     * @param array $data 
-     * @param int $id 
+     * @param Node $node 
      * 
      * @return void
      */
     protected function markParent(Node $node)
-    {
-        
+    {        
         $parent = $node->getParent();
         $node->isActive = true;
         if ($parent !== null) {        
