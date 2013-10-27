@@ -245,8 +245,8 @@ class Form extends AbstractCompositeType
      * @return bool
      */
     public function isValid() 
-    {         
-        $isValid = true;    
+    {
+        $isValid = true;
         
         $iterator = $this->getIterator();
         
@@ -267,16 +267,16 @@ class Form extends AbstractCompositeType
                 
                 $this->values[$name] = $element->getValue();
             }
-        }  
+        }
         
         foreach ($this->validators as $validator) {
             if (!$validator->isValid($this)) {
                 $key = get_class($validator);
-                $this->errors[$this->name][$key] = $validator->getErrors();
+                $this->errors[$key] = $validator->getErrors();
                 $isValid = false;
             }
         }
-
+        
         return $isValid;
     }
 }
