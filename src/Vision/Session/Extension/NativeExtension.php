@@ -9,6 +9,7 @@
 namespace Vision\Session\Extension;
 
 use Vision\Session\SessionInterface;
+use Vision\Session\Handler\HandlerInterface;
 
 /**
  * NativeExtension
@@ -19,7 +20,32 @@ class NativeExtension implements ExtensionInterface
 {
     /** @type bool $started */
     protected $started = false;
-        
+    
+    /**
+     * Constructor
+     * 
+     * @param null|HandlerInterface $handler  
+     */
+    public function __construct(HandlerInterface $handler = null)
+    {
+        if (isset($handler)) {
+            if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+                session_set_save_handler($handler, true);                
+            } else {
+                session_set_save_handler(                
+                    array($handler, 'close'),
+                    array($handler, 'destroy'),
+                    array($handler, 'gc'),
+                    array($handler, 'open'),
+                    array($handler, 'read'),
+                    array($handler, 'write')
+                );
+
+                register_shutdown_function('session_write_close');
+            }
+        }
+    }
+    
     /**
      * @api
      *
