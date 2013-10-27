@@ -21,7 +21,7 @@ use InvalidArgumentException;
 class ValueMatch extends AbstractValidator 
 {
     /** @type string NO_MATCH */
-    const NOT_UNIQUE = 'The given controls do not match.';
+    const NOT_UNIQUE = 'The given controls %s do not match.';
     
     /** @type array $controls */
     protected $controls = array();
@@ -71,8 +71,11 @@ class ValueMatch extends AbstractValidator
             return true;
         }
         
-        $this->addError(self::NOT_UNIQUE)
-             ->addError(array('controls' => $this->controls));
+        foreach ($this->controls as $control) {
+            $names[] = $control->getName();
+        }
+        
+        $this->addError(sprintf(self::NOT_UNIQUE, '"' . implode($names, '", "') . '"'));
         
         return false;                
     }

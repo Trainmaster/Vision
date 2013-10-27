@@ -256,7 +256,7 @@ class Form extends AbstractCompositeType
                 $rawValue = $this->getValueByName($name);
                 $element->setRawValue($rawValue);
                 
-                if (!$element->isRequired() && empty($value)) {
+                if (!$element->isRequired() && empty($rawValue)) {
                     continue;
                 }
 
