@@ -149,7 +149,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      */
     protected function initSessionToken()
     {
-        if (isset($this->session) && !isset($this->session['token'])) {
+        if (isset($this->session) && empty($this->session['token'])) {
             $random = new Random;
             $token = $random->generateHex(128);
             $this->session['token'] = $token;
