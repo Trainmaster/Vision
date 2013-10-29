@@ -72,7 +72,7 @@ class ValueMatch extends AbstractValidator
         }
         
         foreach ($this->controls as $control) {
-            $names[] = $control->getName();
+            $names[] = $control->getLabel();
         }
         
         $this->addError(sprintf(self::NOT_UNIQUE, '"' . implode($names, '", "') . '"'));
