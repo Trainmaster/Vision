@@ -50,6 +50,16 @@ class Authentication
     
     /**
      * @api
+     *
+     * @return void
+     */
+    public function isAuthenticated()
+    {
+        return $this->storage->exists();
+    }
+    
+    /**
+     * @api
      * 
      * @return array
      */

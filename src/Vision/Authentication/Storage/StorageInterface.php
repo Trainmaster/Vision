@@ -26,6 +26,11 @@ interface StorageInterface
     public function load();
     
     /**
+     * @return bool
+     */    
+    public function exists();
+    
+    /**
      * @return void
      */    
     public function clear();
