@@ -38,6 +38,8 @@ class Authentication
      */
     public function authenticate(array $data)
     {
+        $this->clearIdentity();
+        
         $authentication = $this->strategy->authenticate($data);
         
         if ($authentication) {
