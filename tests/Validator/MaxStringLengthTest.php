@@ -7,7 +7,7 @@ class MaxStringLengthTest extends \PHPUnit_Framework_TestCase
 
     protected $singleBytes = array('$', '$$');
     
-    protected $multiBytes = array('¢', '€', '¢¢', '€€');
+    protected $multiBytes = array('¢', '€', "\xF0\xA4\xAD\xA2", '¢¢', '€€', "\xF0\xA4\xAD\xA2\xF0\xA4\xAD\xA2");
     
     public static function setUpBeforeClass()
     {
@@ -40,11 +40,13 @@ class MaxStringLengthTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(self::$validatorOne->isValid($this->multiBytes[0]));
         $this->assertTrue(self::$validatorOne->isValid($this->multiBytes[1]));
+        $this->assertTrue(self::$validatorOne->isValid($this->multiBytes[2]));
     }
     
     public function testMultiByteFailure()
     {
-        $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[2]));
         $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[3]));
+        $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[4]));
+        $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[5]));
     }   
 }
