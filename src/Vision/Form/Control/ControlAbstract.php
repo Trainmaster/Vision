@@ -424,8 +424,11 @@ abstract class ControlAbstract extends HtmlElement
         
         $value = $this->rawValue;
         
-        if ($this->isRequired()) {              
-            array_unshift($this->validators, new Validator\InputNotEmptyString);
+        if ($this->isRequired()) {
+            $validator = new Validator\InputNotEmptyString;
+            if (array_search($validator, $this->validators) === false) {           
+                array_unshift($this->validators, $validator);
+            }
         }
         
         foreach ($this->validators as $validator) {            
