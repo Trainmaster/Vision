@@ -86,7 +86,7 @@ class InputInteger extends AbstractValidator
         
         $result = filter_var($value, FILTER_VALIDATE_INT, $options);
         
-        if ($result) {  
+        if ($result !== false) {  
             return true;
         }    
         
