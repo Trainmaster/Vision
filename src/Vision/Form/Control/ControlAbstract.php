@@ -299,7 +299,7 @@ abstract class ControlAbstract extends HtmlElement
     {
         $this->required = (bool) $required;
         
-        if ($required) {
+        if ($this->required) {
             $this->setAttribute('required');
         } else {
             $this->removeAttribute('required');
