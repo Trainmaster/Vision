@@ -26,12 +26,32 @@ class InputNotEmptyString extends AbstractValidator
      * @return bool
      */
     public function isValid($value)
-    {
-        $value = filter_var($value, FILTER_UNSAFE_RAW, array('flags' => FILTER_FLAG_EMPTY_STRING_NULL));
-        
-        if ($value !== false || $value !== null) {
+    {        
+        if (is_string($value) && $value !== '') {
             return true;
         }
+        
+        if (is_array($value)) {
+            $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
+            
+            $count = iterator_count($iterator);
+            
+            if ($count === 0) {
+                goto error;
+            }
+            
+            foreach ($iterator as $leaf) {
+                if (is_string($leaf) && $leaf !== '') {
+                    continue;
+                } else {
+                    goto error;
+                }
+            }
+            
+            return true;
+        }
+        
+        error:
         
         $this->addError(self::INPUT_NOT_EMPTY_STRING);
         
