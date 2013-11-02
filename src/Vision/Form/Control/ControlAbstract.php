@@ -428,16 +428,16 @@ abstract class ControlAbstract extends HtmlElement
             array_unshift($this->validators, new Validator\InputNotEmptyString);
         }
         
-        foreach ($this->filters as $filter) {
-            $value = $filter->filter($value);
-        }
-        
         foreach ($this->validators as $validator) {            
             if (!$validator->isValid($value)) {
                 $key = get_class($validator);
                 $this->errors[$key] = $validator->getErrors();
                 $isValid = false;               
             }             
+        }
+        
+        foreach ($this->filters as $filter) {
+            $value = $filter->filter($value);
         }
 
         $this->setValue($value);
