@@ -9,11 +9,11 @@
 namespace Vision\Validator;
 
 /**
- * InArray
+ * Integer
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class IsInteger extends AbstractValidator 
+class Integer extends AbstractValidator 
 {
     /** @type string NO_INTEGER */
     const NO_INTEGER = 'The given value is not an integer.';
