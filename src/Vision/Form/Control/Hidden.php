@@ -8,8 +8,6 @@
  */ 
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator;
-
 /**
  * Hidden
  *
