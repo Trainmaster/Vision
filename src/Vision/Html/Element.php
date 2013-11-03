@@ -38,17 +38,7 @@ class Element
      */
     public function __construct($tag) 
     {
-        if (empty($tag)) {
-            throw new InvalidArgumentException('Tag name must not be empty.');
-        }
-        
-        $tag = trim($tag);
-        $tag = strtolower($tag);
-        $this->tag = $tag;
-        
-        if (in_array($tag, self::$voidElements)) {
-            $this->isVoid = true;
-        }       
+        $this->setTag($tag);
     } 
     
     /**
@@ -360,6 +350,32 @@ class Element
             
             $this->setAttribute('class', $class);
         }       
+        
+        return $this;
+    }
+    
+    /**
+     * @internal
+     * 
+     * @param string $tag 
+     * 
+     * @throws InvalidArgumentException
+     *
+     * @return $this Provides a fluent interface.
+     */
+    protected function setTag($tag)
+    {
+        if (empty($tag)) {
+            throw new InvalidArgumentException('Tag name must not be empty.');
+        }
+
+        $tag = trim($tag);
+        $tag = strtolower($tag);
+        $this->tag = $tag;
+
+        if (in_array($tag, self::$voidElements)) {
+            $this->isVoid = true;
+        }
         
         return $this;
     }
