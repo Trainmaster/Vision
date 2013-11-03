@@ -76,12 +76,31 @@ class Select extends MultiOptionAbstractControl
         return $this->getAttribute('size');
     }
     
+    /**
+     * @api
+     * 
+     * @param bool $multiple 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setMultiple($multiple) 
     {
-        $this->setAttribute('multiple', null);
+        $multiple = (bool) $multiple;
+        
+        if ($multiple) {
+            $this->setAttribute('multiple');
+        } else {
+            $this->removeAttribute('multiple');
+        }
+        
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return bool
+     */
     public function getMultiple() 
     {
         return $this->getAttribute('multiple');
