@@ -157,7 +157,7 @@ abstract class AbstractControl extends AbstractType
      */
     public function setRequired($required) 
     {
-        $this->required = (bool) $required;
+        $required = (bool) $required;
         
         if ($this->required) {
             $this->setAttribute('required');
@@ -166,6 +166,17 @@ abstract class AbstractControl extends AbstractType
         }
         
         return $this;
+    }
+    
+        
+    /**
+     * @api
+     * 
+     * @return bool
+     */
+    public function isRequired() 
+    {
+        return $this->getAttribute('required');
     }
     
     /**
@@ -189,16 +200,6 @@ abstract class AbstractControl extends AbstractType
     public function getPlaceholder()
     {
         return $this->placeholder;
-    }
-    
-    /**
-     * @api
-     * 
-     * @return bool
-     */
-    public function isRequired() 
-    {
-        return $this->required;
     }
     
     /**
