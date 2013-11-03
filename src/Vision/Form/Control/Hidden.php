@@ -19,17 +19,4 @@ class Hidden extends Text
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'hidden'); 
-    
-    /**
-     * Constructor
-     * 
-     * @param string $name 
-     */
-    public function __construct($name)
-    {
-        parent::__construct($name);
-        
-        $this->setAttribute('id', $this->getName())
-             ->setAttribute('readonly', 'readonly');            
-    }
 }
