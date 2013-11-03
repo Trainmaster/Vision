@@ -159,7 +159,7 @@ abstract class AbstractControl extends AbstractType
     {
         $required = (bool) $required;
         
-        if ($this->required) {
+        if ($required) {
             $this->setAttribute('required');
         } else {
             $this->removeAttribute('required');
