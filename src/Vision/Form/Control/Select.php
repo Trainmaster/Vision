@@ -33,6 +33,9 @@ class Select extends MultiOptionAbstractControl
              ->addClass('input-select'));            
     }  
     
+    /**
+     * @return string
+     */
     public function __toString() 
     {
         foreach ($this->options as $value => $content) {
@@ -50,12 +53,24 @@ class Select extends MultiOptionAbstractControl
         return parent::__toString();
     }
     
+    /**
+     * @api
+     * 
+     * @param int $size 
+     * 
+     * @return $this Provides a fluent interface.
+     */
     public function setSize($size) 
     {
         $this->setAttribute('size', (int) $size);
         return $this;
     }
     
+    /**
+     * @api
+     * 
+     * @return int
+     */
     public function getSize() 
     {
         return $this->getAttribute('size');
