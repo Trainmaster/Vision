@@ -55,7 +55,7 @@ abstract class AbstractType extends HtmlElement
      */
     public function addDecorator(DecoratorInterface $decorator) 
     {
-        $this->decorators[] = $decorator;
+        $this->decorators[] = $decorator->setElement($this);
         return $this;
     }
     
