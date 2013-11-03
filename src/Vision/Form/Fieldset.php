@@ -34,7 +34,7 @@ class Fieldset extends AbstractCompositeType
         $this->setTag('fieldset')
              ->addDecorator(new Decorator\Ul);
     }
-        
+    
     /**
      * @api
      * 
@@ -43,7 +43,7 @@ class Fieldset extends AbstractCompositeType
     public function getContents() 
     {
         $content = parent::getContents();
-
+        
         if ($this->legend) {
             $legend = new Element('legend');
             $legend->addContent($this->legend);
@@ -52,7 +52,7 @@ class Fieldset extends AbstractCompositeType
         
         return $content;
     }
-
+    
     /**
      * @api
      * 
@@ -60,7 +60,8 @@ class Fieldset extends AbstractCompositeType
      * 
      * @return $this Provides a fluent interface.
      */
-    public function setLegend($legend) {
+    public function setLegend($legend)
+    {
         $this->legend = $legend;
         return $this;
     }
@@ -70,7 +71,8 @@ class Fieldset extends AbstractCompositeType
      * 
      * @return string
      */
-    public function getLegend() {
+    public function getLegend()
+    {
         return $this->legend;
     }
 }

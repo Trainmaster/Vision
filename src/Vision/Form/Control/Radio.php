@@ -30,6 +30,7 @@ class Radio extends MultiOptionAbstractControl
     public function __toString() 
     {	
         $content = null;
+        
         if ($this->view === null) {
             foreach ($this->options as $key => $value) {
                 $label = new \Vision\Html\Element('label');
@@ -43,10 +44,12 @@ class Radio extends MultiOptionAbstractControl
                 $content .= $li;  
             }            
         }
+        
         foreach ($this->decorators as $decorator) {
             $decorator->setElement($this);
             $content = $decorator->render($content);
         }
+        
         return $content;
 	}
 }
