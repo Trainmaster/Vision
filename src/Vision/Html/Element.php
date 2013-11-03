@@ -195,6 +195,8 @@ class Element
         
         if (is_scalar($content) || $content instanceof self) {        
             $this->contents[] = $content;        
+        } elseif ($content === null) {
+            return $this;
         } else {
             throw new InvalidArgumentException('Unsupported argument type.');
         }
