@@ -38,16 +38,20 @@ class Form extends AbstractCompositeType
     /** @type array $values */
     protected $values = array();
     
-    /** @type string $tag */
-    protected $tag = 'form';
-    
     /** @type RecursiveIteratorIterator|null $formElementsIterator */
     protected $formElementsIterator = null;
     
     /**
-     * @return void
-     */    
-    public function init() {}
+     * Constructor
+     * 
+     * @param string $name 
+     */
+    public function __construct($name) 
+    {
+        parent::__construct($name);
+        
+        $this->setTag('form');
+    }
     
     /**
      * @param string $action 

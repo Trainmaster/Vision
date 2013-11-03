@@ -8,27 +8,19 @@
  */ 
 namespace Vision\Form\Control;
 
-use Vision\Html\Element as HtmlElement;
+use Vision\Form\AbstractType;
 use Vision\Filter\FilterInterface;
 use Vision\Validator;
-use Vision\Validator\ValidatorInterface;
-use Vision\Form\Decorator\DecoratorInterface;
 
 /**
  * AbstractControl
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-abstract class AbstractControl extends HtmlElement 
+abstract class AbstractControl extends AbstractType 
 {
-    /** @type array $decorators */
-    protected $decorators = array();
-
     /** @type array $filters */
     protected $filters = array();
-    
-    /** @type array $validators */
-    protected $validators = array();
     
     /** @type array $errors */
     protected $errors = array();
@@ -49,7 +41,7 @@ abstract class AbstractControl extends HtmlElement
      */
     public function __construct($name) 
     {
-        $this->setName($name);      
+        parent::__construct($name);    
         $this->setRequired(true);
     }
     
@@ -65,66 +57,6 @@ abstract class AbstractControl extends HtmlElement
         }
         
         return $html;
-    }
-
-    /**
-     * @api
-     * 
-     * @param DecoratorInterface $decorator 
-     * 
-     * @return $this Provides a fluent interface.
-     */ 
-    public function addDecorator(DecoratorInterface $decorator) 
-    {
-        $this->decorators[] = $decorator->setElement($this);
-        return $this;
-    }
-    
-    /**
-     * @api
-     * 
-     * @param array $decorators 
-     * 
-     * @return $this Provides a fluent interface.
-     */ 
-    public function addDecorators(array $decorators) 
-    {
-        foreach ($decorators as $decorator) {
-            $this->addDecorator($decorator);
-        }
-        return $this;
-    }    
-
-    /**
-     * @api 
-     * 
-     * @return array
-     */
-    public function getDecorators() 
-    {
-        return $this->decorators;
-    }
-    
-    /**
-     * @api
-     * 
-     * @return $this Provides a fluent interface.
-     */ 
-    public function resetDecorators()
-    {
-        $this->decorators = array();
-        return $this;
-    }
-    
-    /**
-     * Removes a decorator
-     */
-    public function removeDecorator($name) 
-    {
-        if (isset($this->decorators[$name])) {
-            unset($this->decorators[$name]);
-        }
-        return $this;
     }
     
     /**
@@ -169,45 +101,6 @@ abstract class AbstractControl extends HtmlElement
     /**
      * @api
      * 
-     * @param ValidatorInterface $validator 
-     * 
-     * @return $this Provides a fluent interface.
-     */
-    public function addValidator(ValidatorInterface $validator) 
-    {
-        $this->validators[] = $validator;
-        return $this;
-    }
-    
-    /**
-     * @api
-     * 
-     * @param array $validators 
-     * 
-     * @return $this Provides a fluent interface.
-     */
-    
-    public function addValidators(array $validators) 
-    {
-        foreach ($validators as $validator) {
-            $this->addValidator($validator);
-        }
-        return $this;
-    }
-    
-    /**
-     * @api
-     * 
-     * @return array
-     */
-    public function getValidators() 
-    {    
-        return $this->validators;
-    }
-    
-    /**
-     * @api
-     * 
      * @return array
      */
     public function getErrors()
@@ -215,30 +108,6 @@ abstract class AbstractControl extends HtmlElement
         return $this->errors;
     }
     
-    /**
-     * @api
-     * 
-     * @param string $name 
-     * 
-     * @return $this Provides a fluent interface.
-     */
-    public function setName($name) 
-    {
-        $this->setAttribute('name', (string) $name);
-        return $this;
-
-    }
-    
-    /**
-     * @api
-     * 
-     * @return string
-     */
-    public function getName() 
-    {
-        return $this->getAttribute('name');
-    }
-
     /**
      * @api
      * 

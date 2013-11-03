@@ -19,18 +19,20 @@ use Vision\Form\Control\ControlAbstract;
  */ 
 class Fieldset extends AbstractCompositeType
 {
-    /** @type string $tag */
-    protected $tag = 'fieldset';
-      
     /** @type null|string $legend */      
     protected $legend = null;
     
     /**
-     * @return void
+     * Constructor
+     * 
+     * @param string $name 
      */
-    public function init()
+    public function __construct($name) 
     {
-        $this->addDecorator(new Decorator\Ul);
+        parent::__construct($name);
+        
+        $this->setTag('fieldset')
+             ->addDecorator(new Decorator\Ul);
     }
         
     /**
