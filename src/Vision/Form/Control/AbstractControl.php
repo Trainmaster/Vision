@@ -15,11 +15,11 @@ use Vision\Validator\ValidatorInterface;
 use Vision\Form\Decorator\DecoratorInterface;
 
 /**
- * ControlAbstract
+ * AbstractControl
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-abstract class ControlAbstract extends HtmlElement 
+abstract class AbstractControl extends HtmlElement 
 {
     /** @type array $decorators */
     protected $decorators = array();

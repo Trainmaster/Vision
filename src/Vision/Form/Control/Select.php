@@ -16,7 +16,7 @@ use Vision\Html\Element;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Select extends MultiOptionControlAbstract 
+class Select extends MultiOptionAbstractControl 
 {
     protected $tag = 'select';
 

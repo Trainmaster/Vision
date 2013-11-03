@@ -15,7 +15,7 @@ use Vision\Form\Decorator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Textarea extends ControlAbstract 
+class Textarea extends AbstractControl 
 {
     /** @type string $tag */
     protected $tag = 'textarea';

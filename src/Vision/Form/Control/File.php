@@ -15,7 +15,7 @@ use Vision\Form\Decorator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class File extends ControlAbstract 
+class File extends AbstractControl 
 {
     protected $tag = 'input';
 

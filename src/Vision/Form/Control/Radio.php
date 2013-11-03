@@ -10,7 +10,7 @@ namespace Vision\Form\Control;
 
 use Vision\Form\Decorator\Label;
 
-class Radio extends MultiOptionControlAbstract 
+class Radio extends MultiOptionAbstractControl 
 {
     protected $tag = 'input';
     

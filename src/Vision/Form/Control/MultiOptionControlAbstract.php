@@ -9,11 +9,11 @@
 namespace Vision\Form\Control;
 
 /**
- * MultiOptionControlAbstract
+ * MultiOptionAbstractControl
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-abstract class MultiOptionControlAbstract extends ControlAbstract 
+abstract class MultiOptionAbstractControl extends AbstractControl 
 {
     /** @type array $options */
     protected $options = array();
@@ -21,7 +21,7 @@ abstract class MultiOptionControlAbstract extends ControlAbstract
     /** 
      * @param array $options 
      * 
-     * @return MultiOptionControlAbstract Provides a fluent interface.
+     * @return MultiOptionAbstractControl Provides a fluent interface.
      */
     public function setOptions(array $options) 
     {

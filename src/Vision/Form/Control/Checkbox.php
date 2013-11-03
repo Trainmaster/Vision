@@ -18,7 +18,7 @@ use Vision\Validator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Checkbox extends MultiOptionControlAbstract 
+class Checkbox extends MultiOptionAbstractControl 
 {
     /** @type string $input */
     protected $tag = 'input';

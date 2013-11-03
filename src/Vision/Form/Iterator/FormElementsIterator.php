@@ -9,7 +9,7 @@
 namespace Vision\Form\Iterator;
 
 use RecursiveIterator;
-use Vision\Form\Control\ControlAbstract;
+use Vision\Form\Control\AbstractControl;
 
 /**
  * FormElementsIterator
@@ -29,7 +29,7 @@ class FormElementsIterator implements RecursiveIterator
     
     public function hasChildren()
     {   
-        if ($this->elements[$this->current] instanceof ControlAbstract) {
+        if ($this->elements[$this->current] instanceof AbstractControl) {
             return false;
         }
         return count($this->elements[$this->current]) > 0;

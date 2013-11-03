@@ -15,7 +15,7 @@ use Vision\Form\Decorator\Label;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Submit extends ControlAbstract 
+class Submit extends AbstractControl 
 {
     protected $tag = 'input';
     
