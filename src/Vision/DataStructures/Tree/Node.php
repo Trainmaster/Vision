@@ -13,7 +13,7 @@ namespace Vision\DataStructures\Tree;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Node
+class Node implements NodeInterface
 {
     /** @type null|Node $parent */
     protected $parent = null;

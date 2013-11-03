@@ -17,9 +17,9 @@ class NodeIterator implements \RecursiveIterator
     private $nodes;
     
     /**
-     * @param Node $node 
+     * @param NodeInterface $node 
      */
-    public function __construct(Node $node) 
+    public function __construct(NodeInterface $node) 
     {
         $this->nodes = $node->getChildren();
     }
