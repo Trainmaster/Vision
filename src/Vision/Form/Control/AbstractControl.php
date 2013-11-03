@@ -47,11 +47,10 @@ abstract class AbstractControl extends HtmlElement
      * 
      * @param string $name 
      */
-    final public function __construct($name) 
+    public function __construct($name) 
     {
         $this->setName($name);      
         $this->setRequired(true);
-        $this->init();
     }
     
     /**
@@ -67,14 +66,6 @@ abstract class AbstractControl extends HtmlElement
         
         return $html;
     }
-    
-    /**
-     * Initializes this class with decorators, filters,
-     * validators or other settings.
-     *
-     * @return void
-     */
-    abstract public function init();    
 
     /**
      * @api

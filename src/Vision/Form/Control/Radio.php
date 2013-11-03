@@ -12,16 +12,19 @@ use Vision\Form\Decorator\Label;
 
 class Radio extends MultiOptionAbstractControl 
 {
-    protected $tag = 'input';
-    
-    protected $attributes = array('type' => 'radio');
-    
-    protected $isVoid = true; 
-    
-    public function init() 
+    /**
+     * Constructor
+     * 
+     * @param string $name 
+     */
+    public function __construct($name)
     {
-        $this->addDecorator(new Label);
-		$this->addClass('input-'.$this->getAttribute('type'));        
+        parent::__construct($name);
+        
+        $this->setTag('input')
+             ->setAttribute('type', 'radio')
+             ->addDecorator(new Label)
+             ->addClass('input-' . $this->getAttribute('type'));            
     }
     
     public function __toString() 

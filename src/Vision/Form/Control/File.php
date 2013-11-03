@@ -8,25 +8,13 @@
  */ 
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator;
-
 /**
  * File
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class File extends AbstractControl 
+class File extends Text 
 {
-    protected $tag = 'input';
-
+    /** @type array $attributes */
     protected $attributes = array('type' => 'file');
-
-    protected $isVoid = true;    
-
-    public function init() 
-    {
-        $this->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li);
-		$this->addClass('input-' . $this->getAttribute('type'));        
-    }
 }

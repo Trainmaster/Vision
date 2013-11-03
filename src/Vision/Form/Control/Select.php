@@ -18,14 +18,20 @@ use Vision\Html\Element;
  */ 
 class Select extends MultiOptionAbstractControl 
 {
-    protected $tag = 'select';
-
-    public function init() 
+    /**
+     * Constructor
+     * 
+     * @param string $name 
+     */
+    public function __construct($name)
     {
-        $this->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li);
-        $this->addClass('input-select');    
-    }
+        parent::__construct($name);
+        
+        $this->setTag('select')
+             ->addDecorator(new Decorator\Label)
+             ->addDecorator(new Decorator\Li)
+             ->addClass('input-select'));            
+    }  
     
     public function __toString() 
     {

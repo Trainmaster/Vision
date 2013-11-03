@@ -17,18 +17,20 @@ use Vision\Form\Decorator;
  */ 
 class Textarea extends AbstractControl 
 {
-    /** @type string $tag */
-    protected $tag = 'textarea';
-    
     /**
-     * @return void
-     */    
-    public function init() 
+     * Constructor
+     * 
+     * @param string $name 
+     */
+    public function __construct($name)
     {
-        $this->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li);
-        $this->setAttribute('id', $this->getName());
-        $this->addClass('input-textarea');
+        parent::__construct($name);
+        
+        $this->setTag('textarea')
+             ->setAttribute('id', $this->getName())
+             ->addDecorator(new Decorator\Label)
+             ->addDecorator(new Decorator\Li)
+             ->addClass('input-textarea');            
     }
     
     /**

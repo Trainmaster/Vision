@@ -18,15 +18,18 @@ use Vision\Form\Decorator;
 class Hidden extends Text 
 {
     /** @type array $attributes */
-    protected $attributes = array('type' => 'hidden');
-
+    protected $attributes = array('type' => 'hidden'); 
+    
     /**
-     * @return void
+     * Constructor
+     * 
+     * @param string $name 
      */
-    public function init() 
+    public function __construct($name)
     {
-        $this->setAttribute('id', $this->getName());
-        $this->setAttribute('readonly', 'readonly');
-        $this->addClass('input-' . $this->getAttribute('type'));        
+        parent::__construct($name);
+        
+        $this->setAttribute('id', $this->getName())
+             ->setAttribute('readonly', 'readonly');            
     }
 }

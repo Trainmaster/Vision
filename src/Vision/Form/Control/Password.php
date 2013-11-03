@@ -13,16 +13,8 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Password extends Text 
-{    
+class Password extends Text
+{
     /** @type array $attributes */
-    protected $attributes = array('type' => 'password');  
-    
-    /**
-     * @return void
-     */
-    public function init() 
-    {
-        parent::init();          
-    }
+    protected $attributes = array('type' => 'password');
 }

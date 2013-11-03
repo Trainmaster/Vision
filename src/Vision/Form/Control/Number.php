@@ -14,17 +14,9 @@ namespace Vision\Form\Control;
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
 class Number extends Text 
-{    
+{
     /** @type array $attributes */
-    protected $attributes = array('type' => 'number');  
-    
-    /**
-     * @return void
-     */
-    public function init() 
-    {
-        parent::init(); 
-    }
+    protected $attributes = array('type' => 'number');
     
     /**
      * @param int $min 

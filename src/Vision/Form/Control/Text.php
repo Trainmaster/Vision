@@ -17,22 +17,21 @@ use Vision\Form\Decorator;
  */ 
 class Text extends AbstractControl 
 {
-    /** @type string $tag */
-    protected $tag = 'input';
-
     /** @type array $attributes */
-    protected $attributes = array('type' => 'text');
-
-    /** @type bool $isVoid */
-    protected $isVoid = true;    
-
+    protected $attributes = array('type' => 'text'); 
+    
     /**
-     * @return void
+     * Constructor
+     * 
+     * @param string $name 
      */
-    public function init() 
+    public function __construct($name)
     {
-        $this->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li);
-		$this->addClass('input-' . $this->getAttribute('type'));        
+        parent::__construct($name);
+        
+        $this->setTag('input')
+             ->addDecorator(new Decorator\Label)
+             ->addDecorator(new Decorator\Li)
+             ->addClass('input-' . $this->getAttribute('type'));            
     }
 }

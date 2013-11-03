@@ -20,20 +20,20 @@ use Vision\Validator;
  */ 
 class Checkbox extends MultiOptionAbstractControl 
 {
-    /** @type string $input */
-    protected $tag = 'input';
-    
     /** @type array $attributes */
     protected $attributes = array('type' => 'checkbox');
     
-    /** @type bool $isVoid */
-    protected $isVoid = true; 
-    
     /**
-     * @return void
+     * Constructor
+     * 
+     * @param string $name 
      */
-    public function init() 
+    public function __construct($name)
     {
+        parent::__construct($name);
+        
+        $this->setTag('textarea');
+        
         $label = new Decorator\Label;
         $label->setPlacement('APPEND');
         $label->getDecorator()->addClass('label-checkbox');
@@ -42,7 +42,7 @@ class Checkbox extends MultiOptionAbstractControl
         
         $this->addDecorator($label)
              ->addDecorator($li);
-        $this->setRequired(false);
+        $this->setRequired(false);           
     }
     
     /**

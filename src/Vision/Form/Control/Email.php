@@ -18,14 +18,17 @@ use Vision\Validator;
 class Email extends Text 
 {    
     /** @type array $attributes */
-    protected $attributes = array('type' => 'email');   
+    protected $attributes = array('type' => 'email');
     
     /**
-     * @return void
+     * Constructor
+     * 
+     * @param string $name 
      */
-    public function init() 
+    public function __construct($name)
     {
-        parent::init();
+        parent::__construct($name);
+        
         $this->addValidator(new Validator\Email);            
     }
 }

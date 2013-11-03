@@ -17,16 +17,19 @@ use Vision\Form\Decorator\Label;
  */ 
 class Submit extends AbstractControl 
 {
-    protected $tag = 'input';
-    
-    protected $attributes = array('type' => 'submit');
-    
-    protected $isVoid = true; 
-    
-    public function init() 
+    /**
+     * Constructor
+     * 
+     * @param string $name 
+     */
+    public function __construct($name)
     {
-        $this->setAttribute('id', $this->getName());
-		$this->addClass('input-' . $this->getAttribute('type'));  
-        $this->setRequired(false);
-    }
+        parent::__construct($name);
+        
+        $this->setTag('input')
+             ->setAttribute('type', 'submit')
+             ->setAttribute('id', $this->getName())
+             ->addClass('input-' . $this->getAttribute('type'))
+             ->setRequired(false);            
+    }    
 }
