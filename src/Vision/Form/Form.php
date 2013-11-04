@@ -8,6 +8,8 @@
  */ 
 namespace Vision\Form;
 
+use Vision\DataStructures\Tree\Node;
+use Vision\DataStructures\Tree\NodeIterator;
 use Vision\Http\RequestInterface;
 use Vision\Html\Element as HtmlElement;
 use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
@@ -20,7 +22,7 @@ use InvalidArgumentException;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */ 
-class Form extends AbstractCompositeType 
+class Form extends AbstractCompositeType
 {        
     /** @type array $attributes */
     protected $attributes = array(
@@ -38,8 +40,8 @@ class Form extends AbstractCompositeType
     /** @type array $values */
     protected $values = array();
     
-    /** @type RecursiveIteratorIterator|null $formElementsIterator */
-    protected $formElementsIterator = null;
+    /** @type RecursiveIteratorIterator|null $iterator */
+    protected $iterator = null;
     
     /**
      * Constructor
@@ -69,12 +71,13 @@ class Form extends AbstractCompositeType
      */
     public function getIterator()
     {
-        if ($this->formElementsIterator === null) {
-            $formElementsIterator = new Iterator\FormElementsIterator($this->elements);             
-            $this->formElementsIterator = new RecursiveIteratorIterator($formElementsIterator, RecursiveIteratorIterator::CHILD_FIRST);
+        if ($this->iterator === null) {
+            $node = new Node;
+            $node->addChild($this);
+            $this->iterator = new RecursiveIteratorIterator(new NodeIterator($node), RecursiveIteratorIterator::CHILD_FIRST);
         }
         
-        return $this->formElementsIterator;
+        return $this->iterator;
     }
     
     /**
