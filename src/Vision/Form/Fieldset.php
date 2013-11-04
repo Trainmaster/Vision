@@ -8,9 +8,7 @@
  */ 
 namespace Vision\Form;
 
-use Vision\Http\Request;
 use Vision\Html\Element;
-use Vision\Form\Control\ControlAbstract;
 
 /**
  * Fieldset
