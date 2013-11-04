@@ -169,39 +169,6 @@ class Form extends AbstractCompositeType
         return $this->values;
     }
     
-    /**
-     * Retrieve array value by html array notation
-     * 
-     * Example: $this->getValueByName(foo[bar][baz]) returns
-     *          the value of $this->data[$foo][$bar][$baz] or NULL.
-     *
-     * @internal
-     *
-     * @param string $name 
-     * 
-     * @return mixed
-     */
-    protected function getValueByName($name)
-    {
-        if (strpos($name, '[]') !== false) {
-            $name = str_replace('[]', '', $name);
-        }
-        
-        $parts = explode('[', $name);
-        $value = $this->data;
-        
-        foreach ($parts as $part) {
-            $part = rtrim($part, ']');
-            if (isset($value[$part])) {
-                $value = $value[$part];
-            } else {
-                return null;
-            }
-        }
-        
-        return $value;
-    }
-     
     /** 
      * @param array $data 
      * 
@@ -285,5 +252,38 @@ class Form extends AbstractCompositeType
         }
         
         return $isValid;
+    }
+    
+    /**
+     * Retrieve array value by html array notation
+     * 
+     * Example: $this->getValueByName(foo[bar][baz]) returns
+     *          the value of $this->data[$foo][$bar][$baz] or NULL.
+     *
+     * @internal
+     *
+     * @param string $name 
+     * 
+     * @return mixed
+     */
+    protected function getValueByName($name)
+    {
+        if (strpos($name, '[]') !== false) {
+            $name = str_replace('[]', '', $name);
+        }
+        
+        $parts = explode('[', $name);
+        $value = $this->data;
+        
+        foreach ($parts as $part) {
+            $part = rtrim($part, ']');
+            if (isset($value[$part])) {
+                $value = $value[$part];
+            } else {
+                return null;
+            }
+        }
+        
+        return $value;
     }
 }
