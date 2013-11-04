@@ -227,8 +227,8 @@ class Form extends AbstractCompositeType
     /**
      * Retrieve array value by html array notation
      *
-     * Example: $this->getValueByName(foo[bar][baz]) returns
-     *          the value of $this->data[$foo][$bar][$baz] or NULL.
+     * Example: 
+     * $this->getValueByName('foo[bar]') returns the value of $this->data['foo']['bar'] or NULL.
      *
      * @internal
      *
