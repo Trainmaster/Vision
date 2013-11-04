@@ -91,7 +91,7 @@ class Form extends AbstractCompositeType
     {
         if (is_string($mixed)) {
             $name = trim($mixed);
-        } elseif ($mixed instanceof Control\ControlAbstract) {
+        } elseif ($mixed instanceof Control\AbstractControl) {
             $name = $mixed->getName();
         } else {
             throw new InvalidArgumentException('');
@@ -113,7 +113,7 @@ class Form extends AbstractCompositeType
      *
      * @param string $name 
      * 
-     * @return Form\ControlAbstract | null
+     * @return Form\AbstractControl | null
      */
     public function getElementByName($name)
     {
@@ -258,7 +258,7 @@ class Form extends AbstractCompositeType
         $iterator = $this->getIterator();
         
         foreach ($iterator as $element) {
-            if ($element instanceof Control\ControlAbstract) {
+            if ($element instanceof Control\AbstractControl) {
                 $name = $element->getName();
                 $rawValue = $this->getValueByName($name);
                 $element->setRawValue($rawValue);
