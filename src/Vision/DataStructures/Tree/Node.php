@@ -24,11 +24,11 @@ class Node implements NodeInterface
     /**
      * @api
      * 
-     * @param self $parent 
+     * @param NodeInterface $parent 
      * 
      * @return $this Provides a fluent interface.
      */
-    public function setParent(self $parent)
+    public function setParent(NodeInterface $parent)
     {
         $this->parent = $parent;
         return $this;
@@ -47,11 +47,11 @@ class Node implements NodeInterface
     /**
      * @api
      * 
-     * @param self $child 
+     * @param NodeInterface $child 
      * 
      * @return $this Provides a fluent interface.
      */
-    public function addChild(self $child)
+    public function addChild(NodeInterface $child)
     {
         $this->children[] = $child->setParent($this);
         return $this;

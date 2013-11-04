@@ -14,7 +14,16 @@ namespace Vision\DataStructures\Tree;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 interface NodeInterface
-{   
+{
+    /**
+     * @api
+     * 
+     * @param NodeInterface $parent 
+     * 
+     * @return $this Provides a fluent interface.
+     */
+    public function setParent(NodeInterface $parent);
+    
     /**
      * @api
      * 
