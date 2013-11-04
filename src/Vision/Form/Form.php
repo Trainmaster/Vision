@@ -110,36 +110,6 @@ class Form extends AbstractCompositeType
     
     /**
      * @api
-     *
-     * @param string $name 
-     * 
-     * @return Form\AbstractControl | null
-     */
-    public function getElementByName($name)
-    {
-        return $this->getElement($name);
-    }
-    
-    /**
-     * @api
-     *
-     * @param string $name 
-     * 
-     * @return mixed|bool
-     */
-    public function getValue($name)
-    {
-        $element = $this->getElementByName($name);
-        
-        if ($element) {
-            return $element->getValue();
-        }
-        
-        return false;
-    }
-    
-    /**
-     * @api
      * 
      * @param array $data 
      * 
