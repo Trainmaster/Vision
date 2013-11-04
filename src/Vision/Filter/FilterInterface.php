@@ -13,10 +13,10 @@ namespace Vision\Filter;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-interface FilterInterface 
+interface FilterInterface
 {
     /**
-     * @param mixed $value 
+     * @param mixed $value
      */
     public function filter($value);
 }

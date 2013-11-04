@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Form;
 
 use Vision\Html\Element as HtmlElement;
@@ -17,25 +17,25 @@ use Vision\Validator\ValidatorInterface;
  * AbstractType
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
+ */
 abstract class AbstractType extends HtmlElement
 {
     /** @type array $decorators */
     protected $decorators = array();
-    
+
     /** @type array $validators */
     protected $validators = array();
-    
+
     /**
      * Constructor
-     * 
-     * @param string $name 
+     *
+     * @param string $name
      */
-    public function __construct($name) 
+    public function __construct($name)
     {
         $this->setAttribute('name', trim($name));
     }
-    
+
     /**
      * @api
      *
@@ -44,7 +44,7 @@ abstract class AbstractType extends HtmlElement
     public function getName()
     {
         return $this->getAttribute('name');
-    }   
+    }
 
     /**
      * @api
@@ -53,38 +53,38 @@ abstract class AbstractType extends HtmlElement
      *
      * @return $this Provides a fluent interface.
      */
-    public function addDecorator(DecoratorInterface $decorator) 
+    public function addDecorator(DecoratorInterface $decorator)
     {
         $this->decorators[] = $decorator->setElement($this);
         return $this;
     }
-    
+
     /**
      * @api
-     *   
+     *
      * @param array $decorators
      *
      * @return $this Provides a fluent interface.
      */
-    public function addDecorators(array $decorators) 
+    public function addDecorators(array $decorators)
     {
         foreach ($decorators as $decorator) {
             $this->addDecorator($decorator);
         }
         return $this;
     }
-    
+
     /**
      * @api
-     *   
+     *
      * @return array
      */
-    public function getDecorators() 
+    public function getDecorators()
     {
         return $this->decorators;
     }
-    
-    /** 
+
+    /**
      * @api
      *
      * @return $this Provides a fluent interface.
@@ -93,8 +93,8 @@ abstract class AbstractType extends HtmlElement
     {
         $this->decorators = array();
         return $this;
-    }    
-    
+    }
+
     /**
      * @api
      *
@@ -102,12 +102,12 @@ abstract class AbstractType extends HtmlElement
      *
      * @return $this Provides a fluent interface.
      */
-    public function addValidator(ValidatorInterface $validator) 
+    public function addValidator(ValidatorInterface $validator)
     {
         $this->validators[] = $validator;
         return $this;
     }
-    
+
     /**
      * @api
      *
@@ -115,25 +115,25 @@ abstract class AbstractType extends HtmlElement
      *
      * @return $this Provides a fluent interface.
      */
-    public function addValidators(array $validators) 
+    public function addValidators(array $validators)
     {
         foreach ($validators as $validator) {
             $this->addValidator($validator);
         }
         return $this;
     }
-    
+
     /**
      * @api
      *
      * @return array
      */
-    public function getValidators() 
+    public function getValidators()
     {
         return $this->validators;
     }
-    
-    /** 
+
+    /**
      * @api
      *
      * @return $this Provides a fluent interface.

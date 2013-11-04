@@ -15,7 +15,7 @@ use SplFileObject;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class File extends SplFileObject 
+class File extends SplFileObject
 {
     /**
      * @api
@@ -24,11 +24,11 @@ class File extends SplFileObject
      *
      * @return bool
      */
-    public function isLoadable() 
-    {                
+    public function isLoadable()
+    {
         if ($this->isFile() && $this->isReadable()) {
             return true;
-        }                
+        }
         return false;
     }
 }

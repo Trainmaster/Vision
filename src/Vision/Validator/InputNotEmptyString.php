@@ -5,41 +5,41 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Validator;
 
 /**
  * InputNotEmptyString
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
-class InputNotEmptyString extends AbstractValidator 
-{   
+ */
+class InputNotEmptyString extends AbstractValidator
+{
     /** @type string INPUT_NOT_EMPTY_STRING */
     const INPUT_NOT_EMPTY_STRING = 'The given string is not empty.';
-    
+
     /**
      * @api
-     * 
-     * @param mixed $value 
-     * 
+     *
+     * @param mixed $value
+     *
      * @return bool
      */
     public function isValid($value)
-    {        
+    {
         if (is_string($value) && $value !== '') {
             return true;
         }
-        
+
         if (is_array($value)) {
             $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
-            
+
             $count = iterator_count($iterator);
-            
+
             if ($count === 0) {
                 goto error;
             }
-            
+
             foreach ($iterator as $leaf) {
                 if (is_string($leaf) && $leaf !== '') {
                     continue;
@@ -47,14 +47,14 @@ class InputNotEmptyString extends AbstractValidator
                     goto error;
                 }
             }
-            
+
             return true;
         }
-        
+
         error:
-        
+
         $this->addError(self::INPUT_NOT_EMPTY_STRING);
-        
+
         return false;
     }
 }

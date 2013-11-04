@@ -5,28 +5,28 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\File;
 
 /**
  * FileSystem
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
+ */
 class FileSystem
 {
     /** @type array */
     protected $aliases = array();
-    
+
     /** @type null|string $dirs */
     protected $currentDir = null;
-    
+
     /**
      * @api
      *
-     * @param string $alias 
-     * @param string $path 
-     * 
+     * @param string $alias
+     * @param string $path
+     *
      * @return FileSystem Provides a fluent interface.
      */
     public function addAlias($alias, $path)
@@ -34,12 +34,12 @@ class FileSystem
         $this->aliases[$alias] = $path;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $alias 
-     * 
+     *
+     * @param string $alias
+     *
      * @return string|null
      */
     public function getAlias($alias)
@@ -49,22 +49,22 @@ class FileSystem
         }
         return null;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getAliases()
     {
         return $this->aliases;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $dest 
-     * 
+     *
+     * @param string $dest
+     *
      * @return bool
      */
     public function isWritable($dest)
@@ -72,18 +72,18 @@ class FileSystem
         if (is_file($dest)) {
             return is_writable($dest);
         }
-        
+
         $dir = pathinfo($dest, PATHINFO_DIRNAME);
-        
+
         return is_writable($dir);
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $src 
-     * @param string $dest 
-     * 
+     *
+     * @param string $src
+     * @param string $dest
+     *
      * @return bool
      */
     public function move($src, $dest)
@@ -91,31 +91,31 @@ class FileSystem
         if ($this->isWritable($dest) === false) {
             return false;
         }
-        
+
         if (is_uploaded_file($src)) {
             return move_uploaded_file($src, $dest);
         }
-        
+
         return rename($src, $dest);
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $dir 
-     * 
+     *
+     * @param string $dir
+     *
      * @return bool
      */
     public function chdir($dir)
     {
         return $this->setCurrentDir($dir);
     }
-    
+
     /**
      * @api
      *
-     * @param string $dir 
-     * 
+     * @param string $dir
+     *
      * @return bool
      */
     public function setCurrentDir($dir)
@@ -126,13 +126,13 @@ class FileSystem
         }
         return false;
     }
-    
+
     /**
      * @api
      *
-     * @param string $source 
-     * @param string $newName  
-     * 
+     * @param string $source
+     * @param string $newName
+     *
      * @return bool
      */
     public function moveHere($source, $newName = null)
@@ -140,11 +140,11 @@ class FileSystem
         if ($this->currentDir === null) {
             return false;
         }
-        
+
         if ($newName === null) {
             return $this->move($source, $this->currentDir . DIRECTORY_SEPARATOR . basename($source));
         }
-        
+
         return $this->move($source, $this->currentDir . DIRECTORY_SEPARATOR . $newName);
     }
 }

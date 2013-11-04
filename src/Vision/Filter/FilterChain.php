@@ -19,10 +19,10 @@ class FilterChain implements FilterInterface
      * @type array
      */
     protected $filters = array();
-    
+
     /**
-     * @param FilterInterface $filter 
-     * 
+     * @param FilterInterface $filter
+     *
      * @return FilterChain
      */
     public function add(FilterInterface $filter)
@@ -30,10 +30,10 @@ class FilterChain implements FilterInterface
         $this->filters[] = $filter;
         return $this;
     }
-    
+
     /**
-     * @param mixed $value 
-     * 
+     * @param mixed $value
+     *
      * @return mixed
      */
     public function filter($value)
@@ -41,7 +41,7 @@ class FilterChain implements FilterInterface
         foreach ($this->filters as $filter) {
             $value = $filter($value);
         }
-        
+
         return $value;
     }
 }

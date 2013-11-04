@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Extension\Navigation;
 
 use Vision\DataStructures\Tree\NodeIterator;
@@ -19,34 +19,34 @@ class NavigationRenderer implements NavigationRendererInterface
 {
     /** @type RequestInterface $request */
     protected $request = null;
-    
+
     /** @type int $fromDepth */
     protected $fromDepth = 0;
 
     /** @type int $limitDepth */
     protected $limitDepth = -1;
-    
+
     /** @type int $expandBy */
     protected $expandBy = -1;
-    
+
     /** @type bool $link */
     protected $link = false;
-    
+
     /**
      * Constructor
      *
-     * @param RequestInterface $request 
+     * @param RequestInterface $request
      */
     public function __construct(RequestInterface $request)
     {
         $this->request = $request;
     }
-    
+
     /**
      * @api
-     * 
-     * @param int $fromDepth 
-     * 
+     *
+     * @param int $fromDepth
+     *
      * @return NavigationRenderer Provides a fluent interface.
      */
     public function fromDepth($fromDepth)
@@ -54,12 +54,12 @@ class NavigationRenderer implements NavigationRendererInterface
         $this->fromDepth = (int) $fromDepth;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param int $limitDepth 
-     * 
+     *
+     * @param int $limitDepth
+     *
      * @return NavigationRenderer Provides a fluent interface.
      */
     public function limitDepth($limitDepth)
@@ -67,12 +67,12 @@ class NavigationRenderer implements NavigationRendererInterface
         $this->limitDepth = (int) $limitDepth;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param int $expandBy 
-     * 
+     *
+     * @param int $expandBy
+     *
      * @return NavigationRenderer Provides a fluent interface.
      */
     public function expandBy($expandBy)
@@ -80,12 +80,12 @@ class NavigationRenderer implements NavigationRendererInterface
         $this->expandBy = (int) $expandBy;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param bool $link 
-     * 
+     *
+     * @param bool $link
+     *
      * @return NavigationRenderer Provides a fluent interface.
      */
     public function link($link)
@@ -93,30 +93,30 @@ class NavigationRenderer implements NavigationRendererInterface
         $this->link = (bool) $link;
         return $this;
     }
-    
+
     /**
      * @api
      *
-     * @param Node $node 
-     * 
+     * @param Node $node
+     *
      * @return string
      */
     public function render(Node $node)
-    {        
+    {
         $basePath = $this->request->getBasePath();
-                
+
         $nodeIterator = new NodeIterator($node);
         $cachingIterator = new \RecursiveCachingIterator($nodeIterator);
         $iterator = new \RecursiveIteratorIterator($cachingIterator, \RecursiveIteratorIterator::SELF_FIRST);
-        
+
         $fromDepth = $this->fromDepth;
         $limitDepth = $this->limitDepth;
         $expandBy = $this->expandBy;
         $link = $this->link;
-        
+
         $actives = array();
         $lastDepth = $fromDepth - 1;
-        
+
         if ($limitDepth > 0) {
             $iterator->setMaxDepth($fromDepth + $limitDepth - 1);
         }
@@ -126,7 +126,7 @@ class NavigationRenderer implements NavigationRendererInterface
         foreach ($iterator as $node) {
             $depth = $iterator->getDepth();
             $maxDepth = $iterator->getMaxDepth();
-            
+
             if (isset($node->isActive)) {
                 $actives[$node->getId()] = $depth;
             }
@@ -134,19 +134,19 @@ class NavigationRenderer implements NavigationRendererInterface
             if ($maxDepth === false) {
                 $maxDepth = -1;
             }
-            
+
             if ($maxDepth >= 0 && $depth > $maxDepth) {
                 $iterator->current()->resetChildren();
                 continue;
             }
-            
+
             if ($depth < $fromDepth) {
                 continue;
             }
 
             $parent = $node->getParentId();
             $parentIsActive = array_key_exists($parent, $actives);
-            
+
             if (!$parentIsActive) {
                 if ((!empty($actives) && ($depth > 0 || $depth > max($actives)) && $link)
                     || ($link && $fromDepth > 0)) {
@@ -154,12 +154,12 @@ class NavigationRenderer implements NavigationRendererInterface
                     continue;
                 }
             }
-            
+
             if (empty($actives) && $link) {
                 $iterator->setMaxDepth($depth);
-                $iterator->current()->resetChildren(); 
+                $iterator->current()->resetChildren();
             }
-            
+
             if ($depth < $lastDepth) {
                 $html .= '</ul></li>';
             } elseif ($depth > $lastDepth) {
@@ -177,22 +177,22 @@ class NavigationRenderer implements NavigationRendererInterface
                     $class = 'foreverAlone-item';
                 } else {
                     $class = 'last-item';
-                }                
+                }
             }
 
             if ($node->isVisible()) {
-                if ($node->showLink()) {                    
+                if ($node->showLink()) {
                     $url = $node->getPath();
-                    
+
                     $element = new Element('a');
-                    
+
                     if (parse_url($url, PHP_URL_SCHEME)) {
                         $href = $url;
                         $element->setAttribute('target', '_blank');
                     } else {
                         $href = $basePath . $url;
-                    }             
-                    
+                    }
+
                     $element->setAttribute('href', $href);
                 } else {
                     $element = new Element('span');
@@ -201,16 +201,16 @@ class NavigationRenderer implements NavigationRendererInterface
             } else {
                 $element = null;
             }
-            
+
             $li = new Element('li');
             $li->addContent($element);
-            
+
             $attributes = $node->getAttributes();
-        
+
             if (!empty($attributes)) {
                 $li->setAttributes($attributes);
             }
-            
+
             if (isset($class)) {
                 $li->addClass($class);
             }
@@ -218,27 +218,27 @@ class NavigationRenderer implements NavigationRendererInterface
             if (isset($node->isActive)) {
                 $li->addClass('active');
             }
-            
+
             $html .= $li->renderStartTag()
                   .  $li->renderContents();
-            
+
             if (!$iterator->current()->hasChildren() || $depth === $maxDepth) {
                 $html .= '</li>';
             }
-            
-            $lastDepth = $depth;           
+
+            $lastDepth = $depth;
         }
 
         $diff = $lastDepth - $this->fromDepth;
-        
+
         if ($diff > 0) {
-            $html .= str_repeat('</ul></li>', $diff);             
+            $html .= str_repeat('</ul></li>', $diff);
         }
-        
+
         if ($diff >= 0) {
-            $html .= '</ul>'; 
+            $html .= '</ul>';
         }
-        
+
         return $html;
     }
 }

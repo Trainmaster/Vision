@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Http;
 
 /**
@@ -17,22 +17,22 @@ class Response extends AbstractMessage implements ResponseInterface
 {
     /** @type array $cookies */
     protected $cookies = array();
-    
+
     /** @type array $rawCookies */
     protected $rawCookies = array();
-    
+
     /** @type array $headers */
     protected $headers = array();
-    
+
     /** @type int $statusCode */
     protected $statusCode = 200;
-    
+
     /** @type string|null $reasonPhrase */
     protected $reasonPhrase = null;
-    
+
     /** @type string|null $body */
     protected $body = null;
-    
+
     /** @type array $statusCodesAndRecommendedReasonPhrases */
     protected $statusCodesAndRecommendedReasonPhrases = array(
         100 => 'Continue',
@@ -79,13 +79,13 @@ class Response extends AbstractMessage implements ResponseInterface
 
     /**
      * @api
-     * 
-     * @param string $name 
-     * @param string $value 
-     * 
+     *
+     * @param string $name
+     * @param string $value
+     *
      * @return $this Provides a fluent interface.
      */
-    public function addHeader($name, $value) 
+    public function addHeader($name, $value)
     {
         $this->headers[(string) $name] = (string) $value;
         return $this;
@@ -93,135 +93,135 @@ class Response extends AbstractMessage implements ResponseInterface
 
     /**
      * @api
-     * 
-     * @param string $name 
-     * @param string $value  
-     * @param int    $expire  
-     * @param string $path  
-     * @param string $domain  
-     * @param bool   $secure  
-     * @param bool   $httponly  
-     * 
+     *
+     * @param string $name
+     * @param string $value
+     * @param int    $expire
+     * @param string $path
+     * @param string $domain
+     * @param bool   $secure
+     * @param bool   $httponly
+     *
      * @return $this Provides a fluent interface.
      */
-    public function addCookie($name, $value = '', $expire = 0, $path = '', 
+    public function addCookie($name, $value = '', $expire = 0, $path = '',
                               $domain = '', $secure = false, $httponly = false)
     {
         $this->cookies[] = func_get_args();
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getCookies()
     {
         return $this->cookies;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $name 
-     * @param string $value  
-     * @param int    $expire  
-     * @param string $path  
-     * @param string $domain  
-     * @param bool   $secure  
-     * @param bool   $httponly  
-     * 
+     *
+     * @param string $name
+     * @param string $value
+     * @param int    $expire
+     * @param string $path
+     * @param string $domain
+     * @param bool   $secure
+     * @param bool   $httponly
+     *
      * @return $this Provides a fluent interface.
      */
-    public function addRawCookie($name, $value = '', $expire = 0, $path = '', 
+    public function addRawCookie($name, $value = '', $expire = 0, $path = '',
                                  $domain = '', $secure = false, $httponly = false)
     {
         $this->rawCookies[] = func_get_args();
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getRawCookies()
     {
         return $this->rawCookies;
     }
-    
+
     /**
      * @api
-     * 
-     * @param mixed $body 
-     * 
+     *
+     * @param mixed $body
+     *
      * @return $this Provides a fluent interface.
      */
-    public function body($body) 
+    public function body($body)
     {
         $this->body .= $body;
         return $this;
-    }   
-    
+    }
+
     /**
      * @api
-     * 
-     * @param int $statusCode 
-     * 
+     *
+     * @param int $statusCode
+     *
      * @return $this Provides a fluent interface.
      */
     public function setStatusCode($statusCode)
-    {          
+    {
         $statusCode = (int) $statusCode;
-        
-        if (isset($this->statusCodesAndRecommendedReasonPhrases[$statusCode])) {         
-            $this->statusCode = $statusCode;            
+
+        if (isset($this->statusCodesAndRecommendedReasonPhrases[$statusCode])) {
+            $this->statusCode = $statusCode;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return int
      */
     public function getStatusCode()
     {
         return $this->statusCode;
-    }  
-    
+    }
+
     /**
      * @api
-     * 
-     * @param string $reasonPhrase 
-     * 
+     *
+     * @param string $reasonPhrase
+     *
      * @return Response Provides a fluent interface.
      */
-    public function setReasonPhrase($reasonPhrase) 
+    public function setReasonPhrase($reasonPhrase)
     {
         $this->reasonPhrase = trim($reasonPhrase);
         return $this;
     }
-    
-    
+
+
     /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getReasonPhrase()
     {
         if ($this->reasonPhrase === null) {
             return $this->statusCodesAndRecommendedReasonPhrases[$this->getStatusCode()];
-        }        
+        }
         return $this->reasonPhrase;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return void
      */
     public function send()
@@ -231,10 +231,10 @@ class Response extends AbstractMessage implements ResponseInterface
              ->sendHeaders()
              ->sendBody();
     }
-    
+
     /**
      * @internal
-     * 
+     *
      * @return $this Provides a fluent interface.
      */
     protected function sendCookies()
@@ -242,49 +242,49 @@ class Response extends AbstractMessage implements ResponseInterface
         foreach ($this->cookies as $cookie) {
             call_user_func_array('setcookie', $cookie);
         }
-        
+
         foreach ($this->rawCookies as $rawCookie) {
             call_user_func_array('setrawcookie', $rawCookie);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @internal
-     * 
+     *
      * @return $this Provides a fluent interface.
      */
     protected function sendStatusLine()
     {
         $statusLine = sprintf(
-            'HTTP/%s %s %s', 
-            $this->getVersion(), 
-            $this->getStatusCode(), 
+            'HTTP/%s %s %s',
+            $this->getVersion(),
+            $this->getStatusCode(),
             $this->getReasonPhrase()
         );
-        
+
         header($statusLine);
-        
+
         return $this;
     }
-    
+
     /**
      * @internal
-     * 
+     *
      * @return $this Provides a fluent interface.
      */
-    protected function sendHeaders() 
+    protected function sendHeaders()
     {
         foreach ($this->headers as $key => $value) {
             header($key . ': ' . $value);
-        }        
+        }
         return $this;
     }
-    
+
     /**
      * @internal
-     * 
+     *
      * @return $this Provides a fluent interface.
      */
     protected function sendBody()

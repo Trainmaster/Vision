@@ -17,15 +17,15 @@ abstract class AbstractPdoRepository
 {
     /** @type null|PDO */
     protected $pdo = null;
-           
+
     /**
-     * @param PDO $pdo 
+     * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }
-    
+
     /**
      * @return PDO
      */

@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Routing;
 
 /**
@@ -17,15 +17,15 @@ abstract class AbstractCompiledRoute extends AbstractRoute
 {
     /** @type null|string $class */
     protected $class = null;
-    
+
     /** @type null|string $method */
     protected $method = null;
-    
+
     /**
      * @api
      *
-     * @param string $class 
-     * 
+     * @param string $class
+     *
      * @return $this Provides a fluent interface.
      */
     public function setClass($class)
@@ -33,9 +33,9 @@ abstract class AbstractCompiledRoute extends AbstractRoute
         $this->class = trim($class);
         return $this;
     }
-    
+
     /**
-     * @api 
+     * @api
      *
      * @return string
      */
@@ -43,12 +43,12 @@ abstract class AbstractCompiledRoute extends AbstractRoute
     {
         return $this->class;
     }
-    
+
     /**
      * @api
      *
-     * @param string $method 
-     * 
+     * @param string $method
+     *
      * @return $this Provides a fluent interface.
      */
     public function setMethod($method)
@@ -56,9 +56,9 @@ abstract class AbstractCompiledRoute extends AbstractRoute
         $this->method = trim($method);
         return $this;
     }
-    
+
     /**
-     * @api 
+     * @api
      *
      * @return string
      */

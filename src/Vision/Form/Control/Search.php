@@ -5,16 +5,16 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Form\Control;
 
 /**
  * Search
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
-class Search extends Text 
+ */
+class Search extends Text
 {
     /** @type array $attributes */
-    protected $attributes = array('type' => 'search'); 
+    protected $attributes = array('type' => 'search');
 }

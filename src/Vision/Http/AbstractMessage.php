@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Http;
 
 use InvalidArgumentException;
@@ -15,22 +15,22 @@ use InvalidArgumentException;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-abstract class AbstractMessage 
+abstract class AbstractMessage
 {
     /** @type string VERSION_10 */
     const VERSION_10 = '1.0';
-    
+
     /** @type string VERSION_11 */
     const VERSION_11 = '1.1';
-    
+
     /** @type string $version */
     protected $version = self::VERSION_11;
-    
+
     /**
      * @api
-     * 
-     * @param string $version 
-     * 
+     *
+     * @param string $version
+     *
      * @throws InvalidArgumentException
      *
      * @return AbstractMessage Provides a fluent interface.
@@ -43,15 +43,15 @@ abstract class AbstractMessage
                 $version
             ));
         }
-        
+
         $this->version = $version;
-        
+
         return $this;
     }
-    
-    /** 
+
+    /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getVersion()

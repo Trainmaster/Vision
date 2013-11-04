@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Session;
 
 use Vision\DataStructures\ArrayProxyObject;
@@ -16,26 +16,26 @@ use Vision\DataStructures\ArrayProxyObject;
  * @author Frank Liepert
  */
 class Session extends ArrayProxyObject implements SessionInterface
-{    
+{
     /** @type null|Extension\ExtensionInteface $extension */
     protected $extension = null;
-    
+
     /**
-     * @param Extension\ExtensionInteface $extension 
-     */    
-    public function __construct(Extension\ExtensionInterface $extension) 
-    {       
+     * @param Extension\ExtensionInteface $extension
+     */
+    public function __construct(Extension\ExtensionInterface $extension)
+    {
         register_shutdown_function(array($this, '__destruct'));
         $this->extension = $extension;
         $this->extension->start();
         $this->extension->load($this);
     }
-       
-    public function __destruct()    
+
+    public function __destruct()
     {
         $this->extension->save($this);
     }
-    
+
     /**
      * @return string
      */
@@ -43,33 +43,33 @@ class Session extends ArrayProxyObject implements SessionInterface
     {
         return serialize($this->getArrayCopy());
     }
-    
+
     /**
      * @api
-     * 
-     * @return Extension\ExtensionInterface $extension 
+     *
+     * @return Extension\ExtensionInterface $extension
      */
     public function getExtension()
     {
         return $this->extension;
     }
 
-    /** 
+    /**
      * @return array
      */
     public function clear()
     {
         return $this->exchangeArray(array());
     }
-    
+
     /**
      * @see Extension\ExtensionInterface
      */
     public function start()
     {
         return $this->extension->start();
-    }   
-    
+    }
+
     /**
      * @see Extension\ExtensionInterface
      */
@@ -77,7 +77,7 @@ class Session extends ArrayProxyObject implements SessionInterface
     {
         return $this->extension->getStatus();
     }
-    
+
     /**
      * @see Extension\ExtensionInterface
      */
@@ -85,7 +85,7 @@ class Session extends ArrayProxyObject implements SessionInterface
     {
         return $this->extension->getId();
     }
-    
+
     /**
      * @see Extension\ExtensionInterface
      */

@@ -17,13 +17,13 @@ use Vision\File\Loader\ScopeFileLoader;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 class NativeLoader extends ScopeFileLoader
-{   
+{
     /** @type string $scopeName */
     protected $scopeName = 'container';
-    
+
     /**
-     * @param DI\Container $container 
-     * 
+     * @param DI\Container $container
+     *
      * @return void
      */
     public function __construct(DI\Container $container)

@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Extension\Navigation;
 
 use Vision\Database\AbstractPdoRepository;
@@ -20,20 +20,20 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
     /**
      * @api
      *
-     * @param int $id 
-     * @param int $languageId 
-     * 
+     * @param int $id
+     * @param int $languageId
+     *
      * @return array $result
      */
     public function loadByIdAndLanguageId($id, $languageId)
-    {   
-        $sql = 'SELECT  nn.node_id, 
-                        nn.show_link, 
-                        nn.is_visible, 
-                        nn.weight, 
+    {
+        $sql = 'SELECT  nn.node_id,
+                        nn.show_link,
+                        nn.is_visible,
+                        nn.weight,
                         nn.attributes,
-                        nt2.ancestor AS parent, 
-                        ni18n.name, 
+                        nt2.ancestor AS parent,
+                        ni18n.name,
                         ni18n.path
                 FROM navigation_tree as nt1
                     INNER JOIN navigation_node as nn
@@ -45,9 +45,9 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
                         ON ni18n.node_id = nn.node_id
                         AND ni18n.language_id = :language_id
                 WHERE nt1.ancestor = :ancestor
-                ORDER BY nn.weight ASC, 
+                ORDER BY nn.weight ASC,
                          ni18n.name ASC';
-                
+
         $pstmt = $this->pdo->prepare($sql);
         $pstmt->bindParam(':ancestor', $id, \PDO::PARAM_INT);
         $pstmt->bindParam(':language_id', $languageId, \PDO::PARAM_INT);
@@ -63,9 +63,9 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
                  ->setName($data['name'])
                  ->setPath($data['path'])
                  ->setAttributes(json_decode($data['attributes'], true));
-            $result[$data['node_id']] = $node;          
+            $result[$data['node_id']] = $node;
         }
-        
+
         $result = $this->convertFlatToHierarchical($result);
 
         if (isset($result[$id])) {
@@ -74,12 +74,12 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
 
         return null;
     }
-    
+
     /**
      * Converts flat array to hierarchical array.
-     * 
-     * @param array $data 
-     * 
+     *
+     * @param array $data
+     *
      * @return array $data
      */
     protected function convertFlatToHierarchical(array $data)
@@ -90,12 +90,12 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
                 if (array_key_exists($parent, $data)) {
                     $data[$parent]->addChild($row);
                     unset($data[$row->getId()]);
-                }                
+                }
             } else {
                 throw new RuntimeException('Array element must be an instance of Node.');
             }
-        }      
-        
+        }
+
         return $data;
     }
 }

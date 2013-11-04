@@ -14,24 +14,24 @@ namespace Vision\Authentication\Storage;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 interface StorageInterface
-{   
+{
     /**
      * @return void
-     */    
+     */
     public function save(array $data);
-    
+
     /**
      * @return array
-     */    
+     */
     public function load();
-    
+
     /**
      * @return bool
-     */    
+     */
     public function exists();
-    
+
     /**
      * @return void
-     */    
+     */
     public function clear();
 }

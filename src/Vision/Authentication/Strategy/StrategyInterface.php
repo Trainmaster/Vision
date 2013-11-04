@@ -19,9 +19,9 @@ interface StrategyInterface
      * @return bool
      */
     public function authenticate(array $data);
-    
+
     /**
      * @return array
-     */    
+     */
     public function getIdentity();
 }

@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Session\Extension;
 
 use Vision\Session\SessionInterface;
@@ -20,19 +20,19 @@ class NativeExtension implements ExtensionInterface
 {
     /** @type bool $started */
     protected $started = false;
-    
+
     /**
      * Constructor
-     * 
-     * @param null|HandlerInterface $handler  
+     *
+     * @param null|HandlerInterface $handler
      */
     public function __construct(HandlerInterface $handler = null)
     {
         if (isset($handler)) {
             if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-                session_set_save_handler($handler, true);                
+                session_set_save_handler($handler, true);
             } else {
-                session_set_save_handler(                
+                session_set_save_handler(
                     array($handler, 'close'),
                     array($handler, 'destroy'),
                     array($handler, 'gc'),
@@ -45,12 +45,12 @@ class NativeExtension implements ExtensionInterface
             }
         }
     }
-    
+
     /**
      * @api
      *
      * @throws \RuntimeException
-     * 
+     *
      * @return bool
      */
     public function start()
@@ -58,7 +58,7 @@ class NativeExtension implements ExtensionInterface
         if ($this->started) {
             return true;
         }
-        
+
         if (session_start()) {
             $this->started = true;
             return true;
@@ -66,34 +66,34 @@ class NativeExtension implements ExtensionInterface
             throw \RuntimeException('Session could not be started.');
         }
     }
-    
+
     /**
      * @api
-     * 
-     * @param SessionInterface $session 
-     * 
+     *
+     * @param SessionInterface $session
+     *
      * @return void
      */
     public function load(SessionInterface $session)
     {
         if (!$this->started) {
             $this->start();
-        }     
-        
+        }
+
         $session->exchangeArray($_SESSION);
     }
-    
+
     /**
      * @api
-     * 
-     * @param SessionInterface $session 
-     * 
+     *
+     * @param SessionInterface $session
+     *
      * @return void
      */
     public function save(SessionInterface $session)
     {
         $status = $this->getStatus();
-        
+
         if (isset($status) && $status !== PHP_SESSION_ACTIVE) {
             $this->started = false;
             $this->start();
@@ -106,17 +106,17 @@ class NativeExtension implements ExtensionInterface
 
     /**
      * @api
-     * 
+     *
      * @return bool
      */
     public function isStarted()
     {
         return (bool) $this->started;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return null|int
      */
     public function getStatus()
@@ -126,22 +126,22 @@ class NativeExtension implements ExtensionInterface
         }
         return null;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getId()
     {
         return session_id();
     }
-    
+
     /**
      * @api
-     * 
-     * @param bool $deleteOldSession  
-     * 
+     *
+     * @param bool $deleteOldSession
+     *
      * @return bool
      */
     public function regenerateId($deleteOldSession = true)

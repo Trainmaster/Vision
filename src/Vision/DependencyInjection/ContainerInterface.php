@@ -14,9 +14,9 @@ namespace Vision\DependencyInjection;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 interface ContainerInterface
-{    
+{
     /**
-     * @param string $alias 
+     * @param string $alias
      */
-    public function get($alias); 
+    public function get($alias);
 }

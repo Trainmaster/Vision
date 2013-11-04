@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Form\Control;
 
 use Vision\Form\Decorator;
@@ -14,60 +14,60 @@ use Vision\Form\Decorator;
  * Textarea
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
-class Textarea extends AbstractControl 
+ */
+class Textarea extends AbstractControl
 {
     /**
      * Constructor
-     * 
-     * @param string $name 
+     *
+     * @param string $name
      */
     public function __construct($name)
     {
         parent::__construct($name);
-        
+
         $this->setTag('textarea')
              ->setAttribute('id', $this->getName())
              ->addDecorator(new Decorator\Label)
              ->addDecorator(new Decorator\Li)
-             ->addClass('input-textarea');            
+             ->addClass('input-textarea');
     }
-    
+
     /**
      * @api
-     * 
-     * @param int $rows 
-     * 
+     *
+     * @param int $rows
+     *
      * @return $this Provides a fluent interface.
      */
-    public function setRows($rows) 
+    public function setRows($rows)
     {
         $this->setAttribute('rows', (int) $rows);
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param int $cols 
-     * 
+     *
+     * @param int $cols
+     *
      * @return $this Provides a fluent interface.
      */
-    public function setCols($cols) 
+    public function setCols($cols)
     {
         $this->setAttribute('cols', (int) $cols);
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param mixed $value 
-     * 
+     *
+     * @param mixed $value
+     *
      * @return $this Provides a fluent interface.
      */
-    public function setValue($value) 
-    {   
+    public function setValue($value)
+    {
         $this->addContent($value);
 		$this->value = $value;
 		return $this;

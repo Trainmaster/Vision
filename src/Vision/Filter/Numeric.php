@@ -13,7 +13,7 @@ namespace Vision\Filter;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Numeric extends PregReplace 
-{   
-    protected $pattern = '/\P{N}/u';    
+class Numeric extends PregReplace
+{
+    protected $pattern = '/\P{N}/u';
 }

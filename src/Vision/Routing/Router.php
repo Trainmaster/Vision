@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Routing;
 
 use Vision\Cache\CacheInterface;
@@ -21,49 +21,49 @@ class Router
 {
     /** @type CacheInterface|null $cache */
     protected $cache = null;
-    
+
     /** @type RouteCompiler|null $compiler */
     protected $compiler = null;
-    
+
     /** @type LoaderInterface|null $loader */
     protected $loader = null;
-    
+
     /** @type RequestInterface|null $request */
     protected $request = null;
-    
+
     /** @type array $resources */
     protected $resources = array();
-    
+
     /** @type RequestInterface|null $request */
     protected $routes = null;
-    
+
     /**
-     * @param RequestInterface $request 
+     * @param RequestInterface $request
      */
     public function __construct(RequestInterface $request)
-    {        
+    {
         $this->request = $request;
         $this->routes = new CompiledRouteCollection;
     }
-    
+
     /**
-     * @api 
-     * 
-     * @param CacheInterface $cache 
-     * 
+     * @api
+     *
+     * @param CacheInterface $cache
+     *
      * @return Router Provides a fluent interface.
      */
     public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
         return $this;
-    }    
-    
+    }
+
     /**
-     * @api 
-     * 
-     * @param LoaderInterface $loader 
-     * 
+     * @api
+     *
+     * @param LoaderInterface $loader
+     *
      * @return Router Provides a fluent interface.
      */
     public function setLoader(LoaderInterface $loader)
@@ -71,13 +71,13 @@ class Router
         $this->loader = $loader;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $alias 
-     * @param AbstractCompiledRoute $route 
-     * 
+     *
+     * @param string $alias
+     * @param AbstractCompiledRoute $route
+     *
      * @return Router Provides a fluent interface.
      */
     public function addRoute($alias, AbstractCompiledRoute $route)
@@ -85,12 +85,12 @@ class Router
         $this->routes->add($alias, $route);
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @param array $routes
-     * 
+     *
      * @return Router Provides a fluent interface.
      */
     public function addRoutes(array $routes)
@@ -98,25 +98,25 @@ class Router
         foreach ($routes as $alias => $route) {
             $this->addRoute($alias, $route);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return CompiledRouteCollection
      */
     public function getRoutes()
     {
         return $this->routes;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @param string $resource
-     * 
+     *
      * @return Router Provides a fluent interface.
      */
     public function addResource($resource)
@@ -124,42 +124,42 @@ class Router
         $this->resources[] = (string) $resource;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getResources()
     {
         return $this->resources;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return mixed
      */
-    public function resolve() 
-    {           
+    public function resolve()
+    {
         $match = false;
         $method = $this->request->getMethod();
-        $pathInfo = $this->request->getPathInfo();  
-        
-        if (!$this->processCache()) {            
+        $pathInfo = $this->request->getPathInfo();
+
+        if (!$this->processCache()) {
             $this->loadResources();
-        }             
-        
+        }
+
         foreach ($this->routes as $route) {
-        
+
             $allowedMethod = $route->getHttpMethod();
-            
+
             if (isset($allowedMethod)) {
                 if (strcasecmp($method, $allowedMethod) !== 0) {
                     continue;
-                } 
+                }
             }
-            
+
             if ($route instanceof StaticRoute) {
                 $path = $route->getPath();
                 if ($pathInfo === $path) {
@@ -167,18 +167,18 @@ class Router
                 }
             } elseif ($route instanceof RegexRoute) {
                 $regex = $route->getRegex();
-                if (preg_match($regex, $pathInfo, $matches)) {                       
+                if (preg_match($regex, $pathInfo, $matches)) {
                     $match = true;
                 }
             }
-            
+
             if (!$match) {
                 continue;
             }
-            
+
             break;
         }
-        
+
         if (isset($matches)) {
             foreach ($matches as $key => $match) {
                 if (is_string($key)) {
@@ -186,7 +186,7 @@ class Router
                 }
             }
         }
-        
+
         if ($match) {
             $defaults = $route->getDefaults();
             if (!empty($defaults)) {
@@ -196,13 +196,13 @@ class Router
             }
             return $route;
         }
-        
+
         return null;
     }
-    
+
     /**
      * Initializes the route compiler if needed.
-     * 
+     *
      * @return Router Provides a fluent interface.
      */
     protected function initRouteCompiler()
@@ -210,7 +210,7 @@ class Router
         $this->compiler = new RouteCompiler;
         return $this;
     }
-    
+
     /**
      * @throws \InvalidArgumentException If a configuration file does not return a RouteCollection.
      *
@@ -220,30 +220,30 @@ class Router
     {
         if (empty($this->resources) || !isset($this->loader)) {
             return false;
-        } 
-        
+        }
+
         $this->initRouteCompiler();
-        
+
         foreach ($this->resources as $resource) {
             $collection = $this->loader->load($resource);
-            
+
             if (!($collection instanceof RouteCollection)){
                 throw new \InvalidArgumentException(sprintf(
                     'The file %s must return an instance of %s.',
                     $resource,
                     __NAMESPACE__ . '\RouteCollection'
                 ));
-            }            
-            
+            }
+
             foreach ($collection as $key => $route) {
                 $compiledRoute = $this->compiler->compile($route);
                 $this->addRoute($key, $compiledRoute);
             }
         }
-        
+
         return true;
     }
-    
+
     /**
      * @return bool
      */
@@ -251,26 +251,26 @@ class Router
     {
         if (!isset($this->cache)) {
             return false;
-        } 
-        
+        }
+
         $id = $this->getCacheKey();
         $routes = $this->cache->get($id);
-        
+
         if ($routes instanceof CompiledRouteCollection) {
             $this->routes = $routes;
         } else {
             $this->loadResources();
             $this->cache->set($id, $this->routes);
         }
-        
+
         return true;
     }
-    
+
     /**
      * @return string
      */
-    protected function getCacheKey()    
+    protected function getCacheKey()
     {
         return md5(__CLASS__ . serialize($this->resources));
-    }    
+    }
 }

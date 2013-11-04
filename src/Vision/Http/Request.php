@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Http;
 
 use Vision\DataStructures\SuperglobalProxyObject;
@@ -20,31 +20,31 @@ class Request extends AbstractMessage implements RequestInterface
 {
     /** @type null|SuperglobalProxyObject $GET */
     protected $GET = null;
-    
+
     /** @type null|SuperglobalProxyObject $POST */
     protected $POST = null;
 
     /** @type null|SuperglobalProxyObject $FILES */
     protected $FILES = null;
-    
+
     /** @type null|SuperglobalProxyObject $COOKIE */
     protected $COOKIE = null;
-    
+
     /** @type null|SuperglobalProxyObject $SERVER */
     protected $SERVER = null;
 
     /** @type null|string $method */
     protected $method = null;
-    
+
     /** @type null|string $basePath */
     protected $basePath = null;
-    
+
     /** @type null|string $path */
-    protected $path = null;   
-    
+    protected $path = null;
+
     /** @type null|string $pathInfo */
     protected $pathInfo = null;
-        
+
     /**
      * Constructor
      */
@@ -52,36 +52,36 @@ class Request extends AbstractMessage implements RequestInterface
     {
         $this->GET = new SuperglobalProxyObject($_GET);
         $this->POST = new SuperglobalProxyObject($_POST);
-        $this->FILES = new SuperglobalProxyObject($_FILES);        
+        $this->FILES = new SuperglobalProxyObject($_FILES);
         $this->COOKIE = new SuperglobalProxyObject($_COOKIE);
-        $this->SERVER = new SuperglobalProxyObject($_SERVER);  
-        
+        $this->SERVER = new SuperglobalProxyObject($_SERVER);
+
         // Set $this->method
         if (isset($this->SERVER['REQUEST_METHOD'])) {
             $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
         }
-        
-        $this->initBasePath()               
+
+        $this->initBasePath()
              ->initPathInfo()
-             ->initPath();       
+             ->initPath();
     }
-    
+
     /**
-     * @param string $key 
-     * 
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
     {
         $key = strtoupper($key);
-        
+
         if (isset($this->$key)) {
             return $this->$key;
         }
-        
+
         return null;
     }
-        
+
     /**
      * Check, if the current request method is POST.
      *
@@ -93,7 +93,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'POST' ? true : false;
     }
-    
+
     /**
      * Check, if the current request method is GET.
      *
@@ -105,9 +105,9 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'GET' ? true : false;
     }
-    
+
     /**
-     * Check, if the current request method is HEAD. 
+     * Check, if the current request method is HEAD.
      *
      * @api
      *
@@ -117,9 +117,9 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'HEAD' ? true : false;
     }
-    
+
     /**
-     * Check, if the current request method is PUT.  
+     * Check, if the current request method is PUT.
      *
      * @api
      *
@@ -129,9 +129,9 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'PUT' ? true : false;
     }
-    
+
     /**
-     * Check, if the current request method is DELETE.  
+     * Check, if the current request method is DELETE.
      *
      * @api
      *
@@ -141,7 +141,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'DELETE' ? true : false;
     }
-    
+
     /**
      * Returns the current request method.
      *
@@ -153,7 +153,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method;
     }
-    
+
     /**
      * Get base path of current url.
      *
@@ -168,7 +168,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->basePath;
     }
-    
+
     /**
      * @internal
      *
@@ -178,19 +178,19 @@ class Request extends AbstractMessage implements RequestInterface
     {
         if (isset($this->SERVER['SCRIPT_NAME'])) {
             $path = dirname($this->SERVER['SCRIPT_NAME']);
-        }        
-        
+        }
+
         if ($path !== '.') {
             $this->basePath = $path;
-        }        
-        
+        }
+
         if ($path === '/') {
             $this->basePath = '';
         }
-        
+
         return $this;
-    }   
-    
+    }
+
     /**
      * Get path info of current url.
      *
@@ -205,7 +205,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->pathInfo;
     }
-    
+
     /**
      * @internal
      *
@@ -220,12 +220,12 @@ class Request extends AbstractMessage implements RequestInterface
         } elseif (isset($this->SERVER['REQUEST_URI'])) {
             $pathInfo = str_replace($this->getBasePath(), '', $this->SERVER['REQUEST_URI']);
         }
-        
+
         $this->pathInfo = $pathInfo;
-        
+
         return $this;
     }
-    
+
     /**
      * Get path of current url.
      *
@@ -240,7 +240,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->path;
     }
-    
+
     /**
      * @internal
      *
@@ -249,9 +249,9 @@ class Request extends AbstractMessage implements RequestInterface
     protected function initPath()
     {
         $path = $this->getBasePath() . $this->getPathInfo();
-        
+
         $this->path = rtrim($path, '/');
-        
+
         return $this;
     }
 }

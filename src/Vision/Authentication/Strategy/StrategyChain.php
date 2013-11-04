@@ -17,12 +17,12 @@ class StrategyChain implements StrategyInterface
 {
     /** @type array $strategies */
     protected $strategies = array();
-    
+
     /**
      * @api
-     * 
-     * @param StrategyInterface $strategy 
-     * 
+     *
+     * @param StrategyInterface $strategy
+     *
      * @return $this Provides a fluent interface.
      */
     public function addStrategy(StrategyInterface $strategy)
@@ -30,12 +30,12 @@ class StrategyChain implements StrategyInterface
         $this->strategies[] = $strategy;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param array $strategies 
-     * 
+     *
+     * @param array $strategies
+     *
      * @return $this Provides a fluent interface.
      */
     public function addStrategies(array $strategies)
@@ -45,7 +45,7 @@ class StrategyChain implements StrategyInterface
         }
         return $this;
     }
-    
+
     /**
      * @api
      *
@@ -64,10 +64,10 @@ class StrategyChain implements StrategyInterface
         }
         return false;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getIdentity()

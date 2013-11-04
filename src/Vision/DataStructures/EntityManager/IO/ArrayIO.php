@@ -22,22 +22,22 @@ class ArrayIO implements IOInterface
     {
         $this->loader = $loader;
     }
-    
+
     public function import($file, EntityManager $em)
     {
         $array = $this->loader->load($file);
-        
+
         if ($array) {
             if (isset($array['repositories'])) {
                 $em->registerRepositories($array['repositories']);
             }
-            
+
             return true;
         }
-        
+
         return false;
     }
-    
+
     public function export($file, EntityManager $em)
     {
         throw new \Exception ('Not yet implemented.');

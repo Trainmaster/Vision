@@ -15,35 +15,35 @@ use Vision\DependencyInjection\Dependency;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Definition 
+class Definition
 {
     /** @type mixed $class */
     protected $class = null;
-    
+
     /** @type bool $shared */
     protected $shared = true;
-    
+
     /** @type array $property */
     protected $property = array();
-    
+
     /** @type array $constructor */
     protected $constructor = array();
-    
+
     /** @type array $method */
     protected $method = array();
-        
+
     /**
-     * @param string $class 
+     * @param string $class
      */
     public function __construct($class)
     {
         $this->setClass($class);
-    }    
-    
+    }
+
     /**
      * @api
      *
-     * @param string $class  
+     * @param string $class
      *
      * @throws InvalidArgumentException
      *
@@ -60,22 +60,22 @@ class Definition
         $this->class = $class;
         return $this;
     }
-    
+
     /**
      * @api
      *
      * @return string
      */
-    public function getClass() 
+    public function getClass()
     {
         return $this->class;
     }
-    
+
     /**
      * @api
      *
-     * @param bool $shared 
-     * 
+     * @param bool $shared
+     *
      * @return $this Provides a fluent interface.
      */
     public function setShared($shared)
@@ -83,7 +83,7 @@ class Definition
         $this->shared = (bool) $shared;
         return $this;
     }
-    
+
     /**
      * @api
      *
@@ -93,18 +93,18 @@ class Definition
     {
         return $this->shared;
     }
-    
+
     /**
      * @api
      *
-     * @param string $property 
+     * @param string $property
      * @param mixed $value
      *
      * @throws InvalidArgumentException
      *
      * @return $this Provides a fluent interface.
      */
-    public function property($property, $value) 
+    public function property($property, $value)
     {
         if (!is_string($property)) {
             throw new \InvalidArgumentException(sprintf(
@@ -115,31 +115,31 @@ class Definition
         $this->property[$property] = $value;
         return $this;
     }
-    
+
     /**
      * @api
      *
-     * @param array $constructor 
-     * 
+     * @param array $constructor
+     *
      * @return $this Provides a fluent interface.
      */
-    public function constructor(array $constructor) 
-    {   
+    public function constructor(array $constructor)
+    {
         $this->constructor = $constructor;
         return $this;
     }
-    
+
     /**
      * @api
      *
-     * @param string $method 
-     * @param array $dependencies 
+     * @param string $method
+     * @param array $dependencies
      *
      * @throws InvalidArgumentException
      *
      * @return $this Provides a fluent interface.
      */
-    public function method($method, array $dependencies) 
+    public function method($method, array $dependencies)
     {
         if (!is_string($method)) {
             throw new \InvalidArgumentException(sprintf(
@@ -149,13 +149,13 @@ class Definition
         }
         $this->method[][$method] = $dependencies;
         return $this;
-    } 
-    
+    }
+
     /**
      * @api
      *
-     * @param array $method 
-     * 
+     * @param array $method
+     *
      * @return $this Provides a fluent interface.
      */
     public function setMethod(array $method)
@@ -163,34 +163,34 @@ class Definition
         $this->method = $method;
         return $this;
     }
-    
+
     /**
      * @api
      *
      * @return array
      */
-    public function getPropertyInjections() 
+    public function getPropertyInjections()
     {
         return $this->property;
     }
-    
-    /**
-     * @api
-     *   
-     * @return array
-     */
-    public function getConstructorInjections() 
-    {   
-        return $this->constructor;
-    }   
-    
+
     /**
      * @api
      *
      * @return array
      */
-    public function getMethodInjections() 
+    public function getConstructorInjections()
+    {
+        return $this->constructor;
+    }
+
+    /**
+     * @api
+     *
+     * @return array
+     */
+    public function getMethodInjections()
     {
         return $this->method;
-    } 
+    }
 }

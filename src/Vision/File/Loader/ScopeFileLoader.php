@@ -17,13 +17,13 @@ class ScopeFileLoader extends AbstractFileLoader
 {
     /** @type null|string */
     protected $scope = null;
-    
+
     /** @type null|string */
     protected $scopeName = null;
-    
+
     /**
-     * @param string $file 
-     * 
+     * @param string $file
+     *
      * @return void
      */
     public function load($file)

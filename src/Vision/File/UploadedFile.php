@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\File;
 
 use InvalidArgumentException;
@@ -14,12 +14,12 @@ use InvalidArgumentException;
  * UploadedFile
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
+ */
 class UploadedFile extends File
 {
     /** @type array $clientData */
     protected $clientData = array();
-    
+
     public function __construct($filename)
     {
         if (is_uploaded_file($filename) === false) {
@@ -28,15 +28,15 @@ class UploadedFile extends File
                 $filename
             ));
         }
-        
-        parent::__construct($filename);    
+
+        parent::__construct($filename);
     }
-    
+
     /**
      * @api
      *
-     * @param array $data 
-     * 
+     * @param array $data
+     *
      * @return UploadedFile Provides a fluent interface.
      */
     public function setClientData(array $data)
@@ -44,7 +44,7 @@ class UploadedFile extends File
         $this->clientData = $data;
         return $this;
     }
-    
+
     /**
      * @api
      *
@@ -57,7 +57,7 @@ class UploadedFile extends File
         }
         return null;
     }
-    
+
     /**
      * @api
      *
@@ -70,7 +70,7 @@ class UploadedFile extends File
         }
         return null;
     }
-    
+
     /**
      * @api
      *
@@ -83,7 +83,7 @@ class UploadedFile extends File
         }
         return null;
     }
-    
+
     /**
      * @api
      *
@@ -96,7 +96,7 @@ class UploadedFile extends File
         }
         return null;
     }
-    
+
     /**
      * @api
      *
@@ -109,7 +109,7 @@ class UploadedFile extends File
         }
         return null;
     }
-    
+
     /**
      * @api
      *

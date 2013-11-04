@@ -16,19 +16,19 @@ namespace Vision\Filter;
 class InputString implements FilterInterface
 {
     protected $options = array();
-    
+
     public function __construct(array $options = array())
     {
         $this->options = $options;
     }
-    
+
     public function getOptions()
     {
         return $this->options;
     }
-    
+
     public function filter($value)
-    {       
+    {
         return filter_var($value, FILTER_SANITIZE_STRING, $this->getOptions());
     }
 }

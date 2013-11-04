@@ -17,17 +17,17 @@ class PregReplace implements FilterInterface
 {
     /**
      * @type null|string
-     */    
+     */
     protected $pattern = null;
-    
+
     /**
      * @type null|mixed
      */
     protected $replacement = null;
-    
+
     /**
-     * @param array $options  
-     * 
+     * @param array $options
+     *
      * @return void
      */
     public function __construct(array $options = array())
@@ -35,19 +35,19 @@ class PregReplace implements FilterInterface
         if (isset($options['pattern'])) {
             $this->pattern = $options['pattern'];
         }
-        
+
         if (isset($options['replacement'])) {
             $this->replacement = $options['replacement'];
         }
     }
-    
+
     /**
     * @link http://php.net/manual/de/function.preg-replace.php
     *
     * @param mixed $value
     */
-    public function filter($value) 
-    {   
+    public function filter($value)
+    {
         return preg_replace($this->pattern, $this->replacement, $value);
     }
 }

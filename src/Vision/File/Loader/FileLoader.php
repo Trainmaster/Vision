@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Vision PHP-Framework
  *
@@ -14,20 +14,20 @@ namespace Vision\File\Loader;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 class FileLoader extends AbstractFileLoader
-{     
+{
     /**
      * @api
-     * 
-     * @param string $file 
-     * 
+     *
+     * @param string $file
+     *
      * @return mixed
      */
     public function load($file)
-    {   
+    {
         if ($this->isLoadable($file)) {
             return include $file;
         }
-        
+
         return false;
     }
 }

@@ -15,26 +15,26 @@ use SplFileInfo;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class FileInfo extends SplFileInfo 
+class FileInfo extends SplFileInfo
 {
     /**
      * @api
-     * 
+     *
      * @todo Possible candidate for trait
      *
      * @return bool
      */
-    public function isLoadable() 
-    {                
+    public function isLoadable()
+    {
         if ($this->isFile() && $this->isReadable()) {
             return true;
-        }                
+        }
         return false;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return bool
      */
     public function isUploadedFile()

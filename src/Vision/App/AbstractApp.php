@@ -21,27 +21,27 @@ abstract class AbstractApp
 {
     /** @type bool $debug */
     protected $debug = true;
-    
+
     /** @type string $environment */
-    protected $environment = 'dev';   
-    
+    protected $environment = 'dev';
+
     /** @type FrontController $frontController */
     protected $frontController = null;
-    
+
     /**
      * Constructor
-     * 
-     * @param FrontController $frontController 
+     *
+     * @param FrontController $frontController
      */
     public function __construct(FrontController $frontController)
     {
         $this->frontController = $frontController;
         $this->initLocale();
     }
-    
+
     /**
      * This method sets the locale based on the HTTP-Accept-Language-Header.
-     * 
+     *
      * @return void
      */
     public function initLocale()
@@ -49,25 +49,25 @@ abstract class AbstractApp
         if (class_exists('Locale') === false) {
             return false;
         }
-            
+
         if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return false;
         }
-        
-        $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']); 
-        
+
+        $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
         if ($locale === null) {
             return false;
         }
-        
-        Locale::setDefault($locale);       
+
+        Locale::setDefault($locale);
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $debug 
-     * 
+     *
+     * @param string $debug
+     *
      * @return $this Provides a fluent interface.
      */
     public function setDebug($debug)
@@ -75,22 +75,22 @@ abstract class AbstractApp
         $this->debug = (bool) $debug;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return bool
      */
     public function getDebug()
     {
         return $this->debug;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $environment 
-     * 
+     *
+     * @param string $environment
+     *
      * @return $this Provides a fluent interface.
      */
     public function setEnvironment($environment)
@@ -98,24 +98,24 @@ abstract class AbstractApp
         $this->environment = $environment;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getEnvironment()
     {
         return $this->environment;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return void
      */
     public function run()
-    {   
+    {
         $this->frontController->run();
         $response = $this->frontController->getResponse();
         $response->send();

@@ -4,12 +4,12 @@ use Vision\Validator;
 class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
 {
     static $validator;
-    
+
     public static function setUpBeforeClass()
     {
         self::$validator = new Validator\InputNotEmptyString;
     }
-    
+
     public function testSuccess()
     {
         $this->assertTrue(self::$validator->isValid(' '));
@@ -17,9 +17,9 @@ class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(self::$validator->isValid(array('0')));
         $this->assertTrue(self::$validator->isValid(array(array('0'))));
     }
-    
+
     public function testFailure()
-    {        
+    {
         $this->assertFalse(self::$validator->isValid(new stdClass));
         $this->assertFalse(self::$validator->isValid(false));
         $this->assertFalse(self::$validator->isValid(null));
@@ -29,6 +29,6 @@ class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(self::$validator->isValid(array('')));
         $this->assertFalse(self::$validator->isValid(array(array(''))));
         $this->assertFalse(self::$validator->isValid(array()));
-        $this->assertFalse(self::$validator->isValid(array(array())));        
-    } 
+        $this->assertFalse(self::$validator->isValid(array(array())));
+    }
 }

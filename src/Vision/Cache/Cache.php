@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Cache;
 
 /**
@@ -16,7 +16,7 @@ namespace Vision\Cache;
 class Cache implements CacheInterface
 {
     /**
-     * @param Storage\StorageInterface $storage 
+     * @param Storage\StorageInterface $storage
      */
     public function __construct(Storage\StorageInterface $storage)
     {
@@ -30,30 +30,30 @@ class Cache implements CacheInterface
     {
         return $this->storage;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $key 
-     * @param mixed $value 
-     * @param int $value 
-     * 
+     *
+     * @param string $key
+     * @param mixed $value
+     * @param int $value
+     *
      * @return Storage\StorageInterface
      */
     public function set($key, $value, $expiration = 0)
     {
         return $this->storage->set($key, $value, $expiration);
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $key 
-     * 
+     *
+     * @param string $key
+     *
      * @return mixed
      */
     public function get($key)
-    {   
+    {
         return $this->storage->get($key);
     }
 }

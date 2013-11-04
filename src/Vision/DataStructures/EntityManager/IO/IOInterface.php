@@ -19,17 +19,17 @@ interface IOInterface
 {
     /**
      * @api
-     * 
-     * @param string $file 
-     * @param EntityManager $em 
+     *
+     * @param string $file
+     * @param EntityManager $em
      */
     public function import($file, EntityManager $em);
-    
+
     /**
      * @api
-     * 
-     * @param string $file 
-     * @param EntityManager $em 
+     *
+     * @param string $file
+     * @param EntityManager $em
      */
     public function export($file, EntityManager $em);
 }

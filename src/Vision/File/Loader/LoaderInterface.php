@@ -16,7 +16,7 @@ namespace Vision\File\Loader;
 interface LoaderInterface
 {
     /**
-     * @param string $resource 
+     * @param string $resource
      */
     public function load($resource);
 }

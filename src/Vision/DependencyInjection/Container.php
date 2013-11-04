@@ -18,13 +18,13 @@ use RuntimeException;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 class Container implements ContainerInterface
-{    
+{
     /** @type array $definitions */
     protected $definitions = array();
-    
+
     /** @type array $parameters */
     protected $parameters = array();
-    
+
     /** @type array $objects */
     protected $objects = array();
 
@@ -35,36 +35,36 @@ class Container implements ContainerInterface
     {
         $this->objects['dic'] = $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $alias 
-     * @param Definition $definition 
-     * 
+     *
+     * @param string $alias
+     * @param Definition $definition
+     *
      * @return Definition
      */
-    public function addDefinition($alias, Definition $definition) 
-    {           
+    public function addDefinition($alias, Definition $definition)
+    {
         $class = $definition->getClass();
         $class = $this->resolveParameter($class);
-        
+
         $definition->setClass($class);
         $this->definitions[$class] = $definition;
-        
+
         if ($alias !== null) {
             $this->definitions[$this->resolveParameter($alias)] =& $this->definitions[$class];
         }
-        
+
         return $definition;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $class 
-     * @param null|string $alias  
-     * 
+     *
+     * @param string $class
+     * @param null|string $alias
+     *
      * @throws \LogicException
      *
      * @return Definition
@@ -73,28 +73,28 @@ class Container implements ContainerInterface
     {
         $class = $this->resolveParameter($class);
         $definition = new Definition($class);
-        
+
         if (!isset($alias)) {
             $alias = $class;
         }
-        
+
         if (isset($this->definitions[$alias])) {
             throw new \LogicException(sprintf(
                 'The alias "%s" is already assigned.',
                 $alias
             ));
         }
-        
+
         $this->definitions[$alias] = $definition;
-        
+
         return $definition;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $alias 
-     * 
+     *
+     * @param string $alias
+     *
      * @return mixed
      */
     public function getDefinition($alias)
@@ -102,26 +102,26 @@ class Container implements ContainerInterface
         if (isset($this->definitions[$alias])) {
             return $this->definitions[$alias];
         }
-        
+
         return null;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getDefinitions()
     {
         return $this->definitions;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $key 
-     * @param mixed $value 
-     * 
+     *
+     * @param string $key
+     * @param mixed $value
+     *
      * @return Container Provides a fluent interface.
      */
     public function addParameter($key, $value)
@@ -132,17 +132,17 @@ class Container implements ContainerInterface
                 __METHOD__
             ));
         }
-        
+
         $this->parameters[$key] = $this->resolveParameter($value);
-        
+
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param array $parameters 
-     * 
+     *
+     * @param array $parameters
+     *
      * @return Container Provides a fluent interface.
      */
     public function addParameters(array $parameters)
@@ -150,15 +150,15 @@ class Container implements ContainerInterface
         foreach ($parameters as $key => $value) {
             $this->addParameter($key, $value);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $key 
-     * 
+     *
+     * @param string $key
+     *
      * @return mixed
      */
     public function getParameter($key)
@@ -166,25 +166,25 @@ class Container implements ContainerInterface
         if (isset($this->parameters[$key])) {
             return $this->parameters[$key];
         }
-        
+
         return null;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getParameters()
     {
         return $this->parameters;
     }
-    
+
     /**
      * @api
      *
-     * @param string $alias 
-     * 
+     * @param string $alias
+     *
      * @return bool
      */
     public function isDefined($alias)
@@ -192,15 +192,15 @@ class Container implements ContainerInterface
         if (isset($this->definitions[$alias])) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @api
      *
-     * @param string $alias 
-     * 
+     * @param string $alias
+     *
      * @return object
      *
      * @throws RuntimeException
@@ -213,7 +213,7 @@ class Container implements ContainerInterface
                 __METHOD__
             ));
         }
-        
+
         if ($this->isDefined($alias)) {
             $definition = $this->definitions[$alias];
             $isShared = $definition->isShared();
@@ -228,122 +228,122 @@ class Container implements ContainerInterface
             }
         } else {
             throw new RuntimeException(sprintf(
-                'No definition for %s. Double-check the container configuration file(s).', 
+                'No definition for %s. Double-check the container configuration file(s).',
                 $alias
             ));
         }
     }
-    
+
     /**
-     * @param Definition $definition 
-     * 
+     * @param Definition $definition
+     *
      * @return mixed
      */
     protected function createObject(Definition $definition)
-    {                   
+    {
         $reflection = new ReflectionClass($definition->getClass());
-        
+
         if (!$reflection->isInstantiable()) {
             return false;
         }
-        
+
         $interfaces = $reflection->getInterfaceNames();
-        
+
         if (!empty($interfaces)) {
             $methodInjections = array();
-            foreach ($interfaces as $interface) {            
+            foreach ($interfaces as $interface) {
                 if (!$this->isDefined($interface)) {
                     continue;
                 }
 
                 $def = $this->getDefinition($interface);
-                
+
                 $dependencies = $def->getMethodInjections();
-                
+
                 if (empty($dependencies)) {
                     continue;
-                }     
-                
-                $methodInjections = array_merge($methodInjections, $dependencies);                
+                }
+
+                $methodInjections = array_merge($methodInjections, $dependencies);
             }
-            
+
             if (!empty($methodInjections)) {
-                $definition->setMethod($methodInjections); 
+                $definition->setMethod($methodInjections);
             }
         }
 
-        $constructorInjections = $definition->getConstructorInjections();        
+        $constructorInjections = $definition->getConstructorInjections();
         if (!empty($constructorInjections)) {
             $instance = $reflection->newInstanceArgs($this->resolveDependencies($constructorInjections));
         } else {
             $instance = $reflection->newInstance();
         }
 
-        $propertyInjections = $definition->getPropertyInjections();        
+        $propertyInjections = $definition->getPropertyInjections();
         if (!empty($propertyInjections)) {
             foreach ($propertyInjections as $property => $value) {
                 $reflection->getProperty($property)->setValue($instance, $this->resolveDependency($value));
             }
         }
-        
-        $setterInjections = $definition->getMethodInjections();        
-        if (!empty($setterInjections)) {    
+
+        $setterInjections = $definition->getMethodInjections();
+        if (!empty($setterInjections)) {
             foreach ($setterInjections as $setter) {
                 foreach ($setter as $method => $dependencies) {
                     $reflection->getMethod($method)->invokeArgs($instance, $this->resolveDependencies($dependencies));
                 }
-            }               
-        }   
-        
-        return $instance;       
+            }
+        }
+
+        return $instance;
     }
-    
+
     /**
-     * @param string $dependency 
-     * 
+     * @param string $dependency
+     *
      * @return mixed
      */
     protected function resolveDependency($dependency)
-    {    
+    {
         if (is_string($dependency)) {
             $dependency = $this->resolveParameter($dependency);
-            $dependency = $this->resolveReference($dependency);    
+            $dependency = $this->resolveReference($dependency);
         } elseif (is_array($dependency)) {
             foreach ($dependency as &$value) {
                 $value = $this->resolveDependency($value);
             }
         }
-        
+
         return $dependency;
     }
-    
+
     /**
-     * @param array $dependencies 
-     * 
+     * @param array $dependencies
+     *
      * @return array
      */
     protected function resolveDependencies(array $dependencies)
     {
         foreach ($dependencies as &$dependency) {
             $dependency = $this->resolveDependency($dependency);
-        }     
-        
+        }
+
         return $dependencies;
     }
-    
+
     /**
      * @todo Compiler for caching.
      * @todo Support for other parameter types (currently, only string is supported)
      *
-     * @param string $dependency 
-     * 
+     * @param string $dependency
+     *
      * @return mixed
      */
     protected function resolveParameter($dependency)
-    {              
+    {
         $i = substr_count($dependency, '%');
-       
-        if ($i % 2 === 0 && $i >= 2) {      
+
+        if ($i % 2 === 0 && $i >= 2) {
             $di = $this;
             $value = preg_replace_callback("#%([\w.-]+)%#u", function($match) use (&$di) {
                 $parameter = $di->getParameter($match[1]);
@@ -359,13 +359,13 @@ class Container implements ContainerInterface
             }, $dependency);
             $dependency = $value;
         }
-        
+
         return $dependency;
-    } 
-    
+    }
+
     /**
-     * @param string $dependency 
-     * 
+     * @param string $dependency
+     *
      * @return mixed
      */
     protected function resolveReference($dependency)
@@ -374,7 +374,7 @@ class Container implements ContainerInterface
             $dependency = substr($dependency, 1);
             return $this->get($dependency);
         }
-        
+
         return $dependency;
     }
 }

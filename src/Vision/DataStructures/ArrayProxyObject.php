@@ -19,20 +19,20 @@ class ArrayProxyObject implements ArrayAccess
 {
     /** @type array $data */
     protected $data = array();
-        
+
     /**
-     * @param array $data 
-     * 
+     * @param array $data
+     *
      * @return void
      */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
-    
+
     /**
-     * @param array $data 
-     * 
+     * @param array $data
+     *
      * @return ArrayProxyObject Provides a fluent interface.
      */
     public function exchangeArray(array $data)
@@ -42,8 +42,8 @@ class ArrayProxyObject implements ArrayAccess
     }
 
     /**
-     * @param int|string $offset 
-     * 
+     * @param int|string $offset
+     *
      * @return bool
      */
     public function offsetExists($offset)
@@ -53,7 +53,7 @@ class ArrayProxyObject implements ArrayAccess
 
     /**
      * @param int|string $offset
-     * 
+     *
      * @return mixed
      */
     public function &offsetGet($offset)
@@ -62,9 +62,9 @@ class ArrayProxyObject implements ArrayAccess
     }
 
     /**
-     * @param int|string $offset 
-     * @param mixed $value 
-     * 
+     * @param int|string $offset
+     * @param mixed $value
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -73,15 +73,15 @@ class ArrayProxyObject implements ArrayAccess
     }
 
     /**
-     * @param int|string $offset 
-     * 
+     * @param int|string $offset
+     *
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
     }
-    
+
     /**
      * @return array
      */

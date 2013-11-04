@@ -17,39 +17,39 @@ class Authentication
 {
     /** @type null|Strategy\StrategyInterface $strategy */
     protected $strategy = null;
-    
+
     /**
      * Constructor
-     * 
-     * @param FrontController $frontController 
+     *
+     * @param FrontController $frontController
      */
     public function __construct(Strategy\StrategyInterface $strategy, Storage\StorageInterface $storage)
     {
         $this->strategy = $strategy;
         $this->storage = $storage;
     }
-    
+
     /**
      * @api
-     * 
-     * @param array $data 
-     * 
+     *
+     * @param array $data
+     *
      * @return bool
      */
     public function authenticate(array $data)
     {
         $this->clearIdentity();
-        
+
         $authentication = $this->strategy->authenticate($data);
-        
+
         if ($authentication) {
             $this->storage->save($this->strategy->getIdentity());
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @api
      *
@@ -59,20 +59,20 @@ class Authentication
     {
         return $this->storage->exists();
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getIdentity()
     {
         return $this->storage->load();
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return bool
      */
     public function clearIdentity()

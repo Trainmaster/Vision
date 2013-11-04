@@ -13,12 +13,12 @@ namespace Vision\Database;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class PDO extends \PDO 
+class PDO extends \PDO
 {
     /** @type bool $hasActiveTransaction */
     protected $hasActiveTransaction = false;
-    
-    
+
+
     /**
      * This method returns the current driver name (only if it's supported by the driver)
      *
@@ -30,7 +30,7 @@ class PDO extends \PDO
     {
         return $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
-    
+
     /**
     * Workaround for WHERE IN() queries
     *
@@ -44,16 +44,16 @@ class PDO extends \PDO
     {
         if (is_array($mixed)) {
             $count = count($mixed) - 1;
-            $questionMarks = str_repeat('?,', $count) . '?';   
+            $questionMarks = str_repeat('?,', $count) . '?';
             return $questionMarks;
         }
-        
+
         return array();
     }
-    
+
     /**
      * This method returns a UUID ready to be stored as BINARY(16).
-     * 
+     *
      * @todo Support for other drivers.
      *
      * @api
@@ -63,26 +63,26 @@ class PDO extends \PDO
     public function createUuid()
     {
         $name = $this->getDriverName();
-        
+
         switch ($name) {
             case 'mysql':
                 $sth = $this->pdo->query('SELECT UNHEX(REPLACE(UUID(), "-", ""))');
                 return $sth->fetchColumn();
-            
+
             default:
-                return null;            
+                return null;
         }
     }
-    
+
     /**
      * Another workaround for WHERE IN() queries with array.
      *
-     * Example: Passing an array with three elements it will return "IN (?, ?, ?)" 
+     * Example: Passing an array with three elements it will return "IN (?, ?, ?)"
      *
      * @api
-     * 
-     * @param array $data 
-     * 
+     *
+     * @param array $data
+     *
      * @return string
      */
     public function IN(array $data)
@@ -91,14 +91,14 @@ class PDO extends \PDO
         $string = 'IN (' . $string . ')';
         return $string;
     }
-    
+
     /**
      * Useful method for Inserts
-     * 
+     *
      * @api
      *
-     * @param mixed $mixed 
-     * 
+     * @param mixed $mixed
+     *
      * @return string
      */
     public function createMultipleValuesList($mixed)
@@ -108,15 +108,15 @@ class PDO extends \PDO
             $count = count($mixed);
             $firstValue = reset($mixed);
             if (is_array($firstValue)) {
-                $list = '(' . $this->createQuestionMarks($firstValue) . ')';                             
+                $list = '(' . $this->createQuestionMarks($firstValue) . ')';
             } elseif (is_string($firstValue) || is_int($firstValue)) {
-                $list = '(?)'; 
-            } 
-            $list = array_fill(0, $count, $list);  
+                $list = '(?)';
+            }
+            $list = array_fill(0, $count, $list);
             return implode(',', $list);
         }
     }
-    
+
     /**
      * Support for nested transactions
      *
@@ -142,7 +142,7 @@ class PDO extends \PDO
      * @return bool
      */
     public function commit()
-    {        
+    {
         $this->hasActiveTransaction = false;
         return parent::commit();
     }
@@ -155,7 +155,7 @@ class PDO extends \PDO
      * @return bool
      */
     public function rollback()
-    {        
+    {
         $this->hasActiveTransaction = false;
         return parent::rollback();
     }

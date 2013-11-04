@@ -13,22 +13,22 @@ namespace Vision\Validator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class MinStringLength extends AbstractMultibyteStringValidator 
+class MinStringLength extends AbstractMultibyteStringValidator
 {
     /** @type string STRING_TOO_SHORT */
     const STRING_TOO_SHORT = 'The given string "%s" is too short. The minimum length is "%s"';
-    
+
     /** @type int $min */
     protected $min = null;
 
     /**
-     * @param int $min 
+     * @param int $min
      */
-    public function __construct($min) 
+    public function __construct($min)
     {
         $this->min = (int) $min;
     }
-    
+
     /**
      * @api
      *
@@ -41,23 +41,23 @@ class MinStringLength extends AbstractMultibyteStringValidator
 
     /**
      * @api
-     * 
-     * @param string $value 
-     * 
+     *
+     * @param string $value
+     *
      * @return bool
      */
-    public function isValid($value) 
+    public function isValid($value)
     {
         $this->value = $value;
-        
+
         $this->checkEncoding();
-        
+
         if (mb_strlen($value) >= $this->min) {
             return true;
         }
-        
+
         $this->addError(sprintf(self::STRING_TOO_SHORT, $value, $this->min));
-        
+
         return false;
     }
 }

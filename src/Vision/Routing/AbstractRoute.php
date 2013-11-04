@@ -5,7 +5,7 @@
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Routing;
 
 /**
@@ -14,21 +14,21 @@ namespace Vision\Routing;
  * @author Frank Liepert <contact@frank-liepert.de>
  */
 abstract class AbstractRoute
-{        
+{
     /** @type string $httpMethod */
     protected $httpMethod = null;
-    
+
     /** @type array $defaults */
     protected $defaults = array();
-    
+
     /** @type array $requirements */
     protected $requirements = array();
-        
+
     /**
      * @api
-     * 
-     * @param array $defaults 
-     * 
+     *
+     * @param array $defaults
+     *
      * @return $this Provides a fluent interface.
      */
     public function setDefaults(array $defaults)
@@ -39,19 +39,19 @@ abstract class AbstractRoute
 
     /**
      * @api
-     * 
+     *
      * @return array
      */
     public function getDefaults()
     {
         return $this->defaults;
     }
-    
+
     /**
      * @api
-     * 
-     * @param array $requirements 
-     * 
+     *
+     * @param array $requirements
+     *
      * @return $this Provides a fluent interface.
      */
     public function setRequirements(array $requirements)
@@ -69,12 +69,12 @@ abstract class AbstractRoute
     {
         return $this->requirements;
     }
-    
+
     /**
      * @api
-     * 
-     * @param string $httpMethod 
-     * 
+     *
+     * @param string $httpMethod
+     *
      * @return $this Provides a fluent interface.
      */
     public function setHttpMethod($httpMethod)
@@ -82,10 +82,10 @@ abstract class AbstractRoute
         $this->httpMethod = $httpMethod;
         return $this;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getHttpMethod()

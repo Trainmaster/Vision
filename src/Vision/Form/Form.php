@@ -1,11 +1,11 @@
-<?php 
+<?php
 /**
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  * @copyright 2012-2013 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- */ 
+ */
 namespace Vision\Form;
 
 use Vision\DataStructures\Tree\Node;
@@ -21,51 +21,51 @@ use InvalidArgumentException;
  * Form
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- */ 
+ */
 class Form extends AbstractCompositeType
-{        
+{
     /** @type array $attributes */
     protected $attributes = array(
         'action' => '',
         'enctype' => 'multipart/form-data',
         'method' => 'post'
     );
-           
+
     /** @type array */
     protected $data = array();
-    
+
     /** @type array $errors */
     protected $errors = array();
-    
+
     /** @type array $values */
     protected $values = array();
-    
+
     /** @type RecursiveIteratorIterator|null $iterator */
     protected $iterator = null;
-    
+
     /**
      * Constructor
-     * 
-     * @param string $name 
+     *
+     * @param string $name
      */
-    public function __construct($name) 
+    public function __construct($name)
     {
         parent::__construct($name);
-        
+
         $this->setTag('form');
     }
-    
+
     /**
-     * @param string $action 
-     * 
+     * @param string $action
+     *
      * @return Form Provides a fluent interface.
      */
     public function setAction($action)
     {
         $this->setAttribute('action', $action);
         return $this;
-    }           
-    
+    }
+
     /**
      * @return RecursiveIteratorIterator
      */
@@ -76,18 +76,18 @@ class Form extends AbstractCompositeType
             $node->addChild($this);
             $this->iterator = new RecursiveIteratorIterator(new NodeIterator($node), RecursiveIteratorIterator::CHILD_FIRST);
         }
-        
+
         return $this->iterator;
     }
-    
+
     /**
      * @api
      *
-     * @param mixed $name 
-     * 
+     * @param mixed $name
+     *
      * @return mixed
      */
-    public function getElement($mixed) 
+    public function getElement($mixed)
     {
         if (is_string($mixed)) {
             $name = trim($mixed);
@@ -96,39 +96,39 @@ class Form extends AbstractCompositeType
         } else {
             throw new InvalidArgumentException('');
         }
-        
+
         $iterator = $this->getIterator();
-        
-        foreach ($iterator as $element) {       
+
+        foreach ($iterator as $element) {
             if ($element->getName() === $name) {
                 return $element;
-            }            
-        } 
-        
+            }
+        }
+
         return null;
     }
-    
+
     /**
      * @api
-     * 
-     * @param array $data 
-     * 
+     *
+     * @param array $data
+     *
      * @return Form Provides a fluent interface.
      */
     public function setValues(array $data)
     {
         $iterator = $this->getIterator();
-        
+
         foreach ($iterator as $element) {
             $name = $element->getName();
             if (isset($data[$name])) {
                 $element->setValue($data[$name]);
             }
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @api
      *
@@ -138,10 +138,10 @@ class Form extends AbstractCompositeType
     {
         return $this->values;
     }
-    
-    /** 
-     * @param array $data 
-     * 
+
+    /**
+     * @param array $data
+     *
      * @return $this Provides a fluent interface.
      */
     public function bindData(array $data)
@@ -149,7 +149,7 @@ class Form extends AbstractCompositeType
         $this->data = $data;
         return $this;
     }
-    
+
     /**
      * @api
      *
@@ -159,7 +159,7 @@ class Form extends AbstractCompositeType
     {
         return $this->data;
     }
-    
+
     /**
      * @api
      *
@@ -169,7 +169,7 @@ class Form extends AbstractCompositeType
     {
         return $this->errors;
     }
-    
+
     /**
      * @api
      *
@@ -182,24 +182,24 @@ class Form extends AbstractCompositeType
         }
         return false;
     }
-    
+
     /**
      * @api
      *
      * @return bool
      */
-    public function isValid() 
+    public function isValid()
     {
         $isValid = true;
-        
+
         $iterator = $this->getIterator();
-        
+
         foreach ($iterator as $element) {
             if ($element instanceof Control\AbstractControl) {
                 $name = $element->getName();
                 $rawValue = $this->getValueByName($name);
                 $element->setRawValue($rawValue);
-                
+
                 if (!$element->isRequired() && empty($rawValue)) {
                     continue;
                 }
@@ -208,11 +208,11 @@ class Form extends AbstractCompositeType
                     $this->errors[$name] = $element->getErrors();
                     $isValid = false;
                 }
-                
+
                 $this->values[$name] = $element->getValue();
             }
         }
-        
+
         foreach ($this->validators as $validator) {
             if (!$validator->isValid($this)) {
                 $key = get_class($validator);
@@ -220,20 +220,20 @@ class Form extends AbstractCompositeType
                 $isValid = false;
             }
         }
-        
+
         return $isValid;
     }
-    
+
     /**
      * Retrieve array value by html array notation
-     * 
+     *
      * Example: $this->getValueByName(foo[bar][baz]) returns
      *          the value of $this->data[$foo][$bar][$baz] or NULL.
      *
      * @internal
      *
-     * @param string $name 
-     * 
+     * @param string $name
+     *
      * @return mixed
      */
     protected function getValueByName($name)
@@ -241,10 +241,10 @@ class Form extends AbstractCompositeType
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
         }
-        
+
         $parts = explode('[', $name);
         $value = $this->data;
-        
+
         foreach ($parts as $part) {
             $part = rtrim($part, ']');
             if (isset($value[$part])) {
@@ -253,7 +253,7 @@ class Form extends AbstractCompositeType
                 return null;
             }
         }
-        
+
         return $value;
     }
 }
