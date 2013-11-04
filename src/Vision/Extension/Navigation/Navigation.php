@@ -63,11 +63,11 @@ class Navigation
     {
         $tree = $this->loadTree();
 
-        $this->markActiveBranch($tree);
-
         if (!($tree instanceof Node)) {
             return '';
         }
+
+        $this->markActiveBranch($tree);
 
         return $this->renderer->render($tree);
     }
