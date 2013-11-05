@@ -30,7 +30,7 @@ class Select extends MultiOptionAbstractControl
         $this->setTag('select')
              ->addDecorator(new Decorator\Label)
              ->addDecorator(new Decorator\Li)
-             ->addClass('input-select'));
+             ->addClass('input-select');
     }
 
     /**
