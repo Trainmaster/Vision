@@ -189,11 +189,7 @@ class Container implements ContainerInterface
      */
     public function isDefined($alias)
     {
-        if (isset($this->definitions[$alias])) {
-            return true;
-        }
-
-        return false;
+        return isset($this->definitions[$alias]);
     }
 
     /**
