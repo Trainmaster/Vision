@@ -39,29 +39,6 @@ class Container implements ContainerInterface
     /**
      * @api
      *
-     * @param string $alias
-     * @param Definition $definition
-     *
-     * @return Definition
-     */
-    public function addDefinition($alias, Definition $definition)
-    {
-        $class = $definition->getClass();
-        $class = $this->resolveParameter($class);
-
-        $definition->setClass($class);
-        $this->definitions[$class] = $definition;
-
-        if ($alias !== null) {
-            $this->definitions[$this->resolveParameter($alias)] =& $this->definitions[$class];
-        }
-
-        return $definition;
-    }
-
-    /**
-     * @api
-     *
      * @param string $class
      * @param null|string $alias
      *
