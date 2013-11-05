@@ -101,7 +101,7 @@ class Container implements ContainerInterface
      *
      * @return Container Provides a fluent interface.
      */
-    public function addParameter($key, $value)
+    public function setParameter($key, $value)
     {
         if (!is_string($key)) {
             throw new InvalidArgumentException(sprintf(
@@ -122,10 +122,10 @@ class Container implements ContainerInterface
      *
      * @return Container Provides a fluent interface.
      */
-    public function addParameters(array $parameters)
+    public function setParameters(array $parameters)
     {
         foreach ($parameters as $key => $value) {
-            $this->addParameter($key, $value);
+            $this->setParameter($key, $value);
         }
 
         return $this;
