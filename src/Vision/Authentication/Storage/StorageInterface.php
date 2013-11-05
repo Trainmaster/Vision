@@ -18,7 +18,7 @@ interface StorageInterface
     /**
      * @return void
      */
-    public function save(array $data);
+    public function save($data);
 
     /**
      * @return array
