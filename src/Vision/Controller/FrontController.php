@@ -82,6 +82,7 @@ class FrontController
      * @param string $class
      * @param string $method
      *
+     * @throws \RuntimeException
      * @throws \UnexpectedValueException
      *
      * @return mixed
@@ -108,6 +109,12 @@ class FrontController
 
         if (method_exists($instance, $method)) {
             $response = $instance->$method();
+        } else {
+            throw new \RuntimeException(sprintf(
+                'The method "%s::%s" does not exist.',
+                $class,
+                $method
+            ));
         }
 
         if (!($response instanceof ResponseInterface)) {
