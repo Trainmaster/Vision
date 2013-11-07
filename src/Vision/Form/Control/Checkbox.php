@@ -32,7 +32,7 @@ class Checkbox extends MultiOptionAbstractControl
     {
         parent::__construct($name);
 
-        $this->setTag('textarea');
+        $this->setTag('input');
 
         $label = new Decorator\Label;
         $label->setPlacement('APPEND');
