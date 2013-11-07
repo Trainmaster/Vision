@@ -141,6 +141,16 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'DELETE' ? true : false;
     }
+    
+    /**
+     * @api
+     * 
+     * @return null|string
+     */
+    public function getHost()
+    {
+        return $this->SERVER['SERVER_NAME'];
+    }
 
     /**
      * Returns the current request method.
