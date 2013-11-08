@@ -268,7 +268,7 @@ class Navigation
 
         foreach ($iterator as $node) {
             $url = $node->getPath();
-            if ($url === $pathInfo) {
+            if ($url === $pathInfo || (!empty($url) && strpos($pathInfo, $url) === 0)) {
                 $this->markParent($node);
             }
         }
