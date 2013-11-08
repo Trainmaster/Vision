@@ -85,7 +85,7 @@ class FrontController
      * @throws \RuntimeException
      * @throws \UnexpectedValueException
      *
-     * @return mixed
+     * @return ResponseInterface
      */
     public function invokeController($class, $method)
     {
@@ -134,9 +134,8 @@ class FrontController
      * @api
      *
      * @throws \RuntimeException
-     * @throws \UnexpectedValueException
      *
-     * @return <type>
+     * @return void
      */
     public function run()
     {
@@ -153,7 +152,7 @@ class FrontController
                 throw new \RuntimeException('No matching route.');
             }
         } catch (\Exception $e) {
-            return $this->handleException($e);
+            $this->handleException($e);
         }
     }
 
@@ -162,14 +161,16 @@ class FrontController
      *
      * @param \Exception $e
      *
-     * @return mixed
+     * @return void
      */
     protected function handleException(\Exception $e)
     {
-        if ($this->container->isDefined('ExceptionController')) {
-            $this->container->getDefinition('ExceptionController')->setter('setException', array($e));
-            return $this->invokeController('ExceptionController', 'indexAction');
+        $definition = $this->container->getDefinition('ExceptionController');
+        if ($definition !== null) {
+            $definition->method('setException', array($e));
+            $this->response = $this->invokeController('ExceptionController', 'indexAction');
+        } else {
+            $this->response->body(highlight_string($e));
         }
-        $this->response->body(highlight_string($e));
     }
 }
