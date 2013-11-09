@@ -90,6 +90,12 @@ class Element
      */
     public function renderContents()
     {
+        $tag = $this->getTag();
+
+        if (empty($tag)) {
+            return '';
+        }
+
         $html = '';
         $contents = $this->getContents();
 
