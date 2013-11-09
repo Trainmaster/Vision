@@ -8,8 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\Html\Element as HtmlElement;
-use Vision\Html\ElementFactory;
 use Vision\Validator;
 
 /**
