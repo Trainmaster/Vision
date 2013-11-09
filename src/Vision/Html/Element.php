@@ -88,6 +88,16 @@ class Element
      *
      * @return string
      */
+    public function start()
+    {
+        return $this->renderStartTag();
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
     public function renderContents()
     {
         $tag = $this->getTag();
@@ -128,6 +138,16 @@ class Element
         $html = '</%s>';
 
         return sprintf($html, $tag);
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function end()
+    {
+        return $this->renderEndTag();
     }
 
     /**
