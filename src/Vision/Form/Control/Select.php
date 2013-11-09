@@ -8,7 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator;
 use Vision\Html\Element;
 
 /**
@@ -28,8 +27,6 @@ class Select extends MultiOptionAbstractControl
         parent::__construct($name);
 
         $this->setTag('select')
-             ->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li)
              ->addClass('input-select');
     }
 

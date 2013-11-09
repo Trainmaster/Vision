@@ -10,7 +10,6 @@ namespace Vision\Form\Control;
 
 use Vision\Html\Element as HtmlElement;
 use Vision\Html\ElementFactory;
-use Vision\Form\Decorator;
 use Vision\Validator;
 
 /**
@@ -33,15 +32,6 @@ class Checkbox extends MultiOptionAbstractControl
         parent::__construct($name);
 
         $this->setTag('input');
-
-        $label = new Decorator\Label;
-        $label->setPlacement('APPEND');
-        $label->getDecorator()->addClass('label-checkbox');
-
-        $li = new Decorator\Li;
-
-        $this->addDecorator($label)
-             ->addDecorator($li);
         $this->setRequired(false);
     }
 

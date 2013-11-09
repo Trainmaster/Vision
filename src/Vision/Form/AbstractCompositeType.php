@@ -35,10 +35,6 @@ abstract class AbstractCompositeType extends AbstractType implements NodeInterfa
             $content .= $element;
         }
 
-        foreach ($this->decorators as $decorator) {
-            $content = $decorator->render($content);
-        }
-
         return $content;
     }
 

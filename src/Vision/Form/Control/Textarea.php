@@ -8,7 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator;
 
 /**
  * Textarea
@@ -27,9 +26,6 @@ class Textarea extends AbstractControl
         parent::__construct($name);
 
         $this->setTag('textarea')
-             ->setAttribute('id', $this->getName())
-             ->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li)
              ->addClass('input-textarea');
     }
 

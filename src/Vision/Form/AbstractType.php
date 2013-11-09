@@ -10,7 +10,6 @@ namespace Vision\Form;
 
 use Vision\Html\Element as HtmlElement;
 
-use Vision\Form\Decorator\DecoratorInterface;
 use Vision\Validator\ValidatorInterface;
 
 /**
@@ -20,9 +19,6 @@ use Vision\Validator\ValidatorInterface;
  */
 abstract class AbstractType extends HtmlElement
 {
-    /** @type array $decorators */
-    protected $decorators = array();
-
     /** @type array $validators */
     protected $validators = array();
 
@@ -44,55 +40,6 @@ abstract class AbstractType extends HtmlElement
     public function getName()
     {
         return $this->getAttribute('name');
-    }
-
-    /**
-     * @api
-     *
-     * @param DecoratorInterface $decorator
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function addDecorator(DecoratorInterface $decorator)
-    {
-        $this->decorators[] = $decorator->setElement($this);
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param array $decorators
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function addDecorators(array $decorators)
-    {
-        foreach ($decorators as $decorator) {
-            $this->addDecorator($decorator);
-        }
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @return array
-     */
-    public function getDecorators()
-    {
-        return $this->decorators;
-    }
-
-    /**
-     * @api
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function resetDecorators()
-    {
-        $this->decorators = array();
-        return $this;
     }
 
     /**

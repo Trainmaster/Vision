@@ -8,8 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator;
-
 /**
  * Text
  *
@@ -30,8 +28,6 @@ class Text extends AbstractControl
         parent::__construct($name);
 
         $this->setTag('input')
-             ->addDecorator(new Decorator\Label)
-             ->addDecorator(new Decorator\Li)
              ->addClass('input-' . $this->getAttribute('type'));
     }
 }

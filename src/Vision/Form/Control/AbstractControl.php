@@ -47,20 +47,6 @@ abstract class AbstractControl extends AbstractType implements NodeInterface
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        $html = parent::__toString();
-
-        foreach ($this->decorators as $decorator) {
-            $html = $decorator->render($html);
-        }
-
-        return $html;
-    }
-
-    /**
      * @api
      *
      * @param FilterInterface $filter

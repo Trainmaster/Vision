@@ -8,8 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\Form\Decorator\Label;
-
 class Radio extends MultiOptionAbstractControl
 {
     /**
@@ -23,7 +21,6 @@ class Radio extends MultiOptionAbstractControl
 
         $this->setTag('input')
              ->setAttribute('type', 'radio')
-             ->addDecorator(new Label)
              ->addClass('input-' . $this->getAttribute('type'));
     }
 
@@ -43,11 +40,6 @@ class Radio extends MultiOptionAbstractControl
                 $li->setContent($label . $radio);
                 $content .= $li;
             }
-        }
-
-        foreach ($this->decorators as $decorator) {
-            $decorator->setElement($this);
-            $content = $decorator->render($content);
         }
 
         return $content;

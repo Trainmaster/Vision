@@ -29,8 +29,7 @@ class Fieldset extends AbstractCompositeType
     {
         parent::__construct($name);
 
-        $this->setTag('fieldset')
-             ->addDecorator(new Decorator\Ul);
+        $this->setTag('fieldset');
     }
 
     /**
