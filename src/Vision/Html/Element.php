@@ -393,8 +393,11 @@ class Element
      */
     protected function setTag($tag)
     {
-        if (empty($tag)) {
-            throw new InvalidArgumentException('Tag name must not be empty.');
+        if (!is_string($tag) || !preg_match('#^\w+$#', $tag)) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be a string and only use characters in the range 0–9, a–z, and A–Z.',
+                __METHOD__
+            ));
         }
 
         $tag = trim($tag);
