@@ -233,7 +233,7 @@ class Element
     /**
      * @api
      *
-     * @return string
+     * @return array
      */
     public function getContents()
     {
