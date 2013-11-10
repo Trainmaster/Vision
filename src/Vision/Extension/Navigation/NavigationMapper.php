@@ -45,6 +45,7 @@ class NavigationMapper extends AbstractPdoRepository implements NavigationMapper
                         ON ni18n.node_id = nn.node_id
                         AND ni18n.language_id = :language_id
                 WHERE nt1.ancestor = :ancestor
+                AND nn.is_visible = TRUE
                 ORDER BY nn.weight ASC,
                          ni18n.name ASC';
 
