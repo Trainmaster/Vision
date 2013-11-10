@@ -14,6 +14,7 @@ Vision requires PHP >= 5.3.8.
 *  [Cache](/docs/cache.md)
 *  [Crypt](/docs/crypt.md)
 *  [Dependency Injection](/docs/dependency-injection.md)
+*  [Form](/docs/form.md)
 
 
 ## Contribution Guideline
