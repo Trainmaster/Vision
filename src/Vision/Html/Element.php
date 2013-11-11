@@ -209,7 +209,7 @@ class Element
     /**
      * @api
      *
-     * @param string $content
+     * @param int|float|string|bool|object|null $content
      *
      * @return $this Provides a fluent interface.
      */
@@ -219,7 +219,7 @@ class Element
             throw new LogicException('Void elements are not allowed to have contents.');
         }
 
-        if (is_scalar($content) || $content instanceof self) {
+        if (is_scalar($content) || (is_object($content) && method_exists($content, '__toString'))) {
             $this->contents[] = $content;
         } elseif ($content === null) {
             return $this;
