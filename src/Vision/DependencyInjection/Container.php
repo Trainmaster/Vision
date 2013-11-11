@@ -239,7 +239,7 @@ class Container implements ContainerInterface
 
                 $methodInjections = array_merge($methodInjections, $dependencies);
             }
-            
+
             if (!empty($methodInjections)) {
                 foreach ($methodInjections as $method) {
                     foreach ($method as $name => $args) {
