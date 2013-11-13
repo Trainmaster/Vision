@@ -27,6 +27,8 @@ $bar = $container->get('Bar');
 ```
 
 ### Interface injection
+
+```php
 use Vision\DependencyInjection\Container;
 
 class Foo
