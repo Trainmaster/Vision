@@ -36,6 +36,9 @@ class Request extends AbstractMessage implements RequestInterface
     /** @type null|string $method */
     protected $method = null;
 
+    /** @type null|string $host */
+    protected $host = null;
+
     /** @type null|string $basePath */
     protected $basePath = null;
 
@@ -61,7 +64,8 @@ class Request extends AbstractMessage implements RequestInterface
             $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
         }
 
-        $this->initBasePath()
+        $this->initHost()
+             ->initBasePath()
              ->initPathInfo()
              ->initPath();
     }
@@ -141,15 +145,39 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method === 'DELETE' ? true : false;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return null|string
      */
     public function getHost()
     {
-        return $this->SERVER['SERVER_NAME'];
+        return $this->host;
+    }
+
+    /**
+     * @internal
+     *
+     * @return $this Provides a fluent interface.
+     */
+    protected function initHost()
+    {
+        $host = $this->SERVER['HTTP_HOST'];
+
+        if ($host === null) {
+            return $this;
+        }
+
+        if (strlen($host > 255)) {
+            return $this;
+        }
+
+        if (preg_match('#^[-._A-Za-z0-9]+$#', $host)) {
+            $this->host = $host;
+        }
+
+        return $this;
     }
 
     /**
