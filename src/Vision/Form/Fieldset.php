@@ -59,7 +59,7 @@ class Fieldset extends AbstractCompositeType
      */
     public function setLegend($legend)
     {
-        $this->legend = $legend;
+        $this->legend = (string) $legend;
         return $this;
     }
 
