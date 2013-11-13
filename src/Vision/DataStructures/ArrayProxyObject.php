@@ -8,14 +8,12 @@
  */
 namespace Vision\DataStructures;
 
-use ArrayAccess;
-
 /**
  * ArrayProxyObject
  *
  * @author Frank Liepert
  */
-class ArrayProxyObject implements ArrayAccess
+class ArrayProxyObject implements \ArrayAccess
 {
     /** @type array $data */
     protected $data = array();
