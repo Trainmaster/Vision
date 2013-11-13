@@ -23,6 +23,5 @@ $container = new Container;
 $container->register('Foo');
 $container->register('Bar')->constructor('@Foo'));
 
-var_dump($container->get('Bar'));
-// bool(false)
+$bar = $container->get('Bar');
 ```
