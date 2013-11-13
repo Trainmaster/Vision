@@ -45,7 +45,7 @@ abstract class AbstractCompositeType extends AbstractType implements NodeInterfa
      *
      * @return $this Provides a fluent interface.
      */
-    public function addElement($element)
+    public function addElement(AbstractType $element)
     {
         $this->elements[] = $element;
         return $this;
