@@ -53,6 +53,10 @@ class Form extends AbstractCompositeType
         parent::__construct($name);
 
         $this->setTag('form');
+
+        $node = new Node;
+        $node->addChild($this);
+        $this->iterator = new RecursiveIteratorIterator(new NodeIterator($node), RecursiveIteratorIterator::CHILD_FIRST);
     }
 
     /**
@@ -71,12 +75,6 @@ class Form extends AbstractCompositeType
      */
     public function getIterator()
     {
-        if ($this->iterator === null) {
-            $node = new Node;
-            $node->addChild($this);
-            $this->iterator = new RecursiveIteratorIterator(new NodeIterator($node), RecursiveIteratorIterator::CHILD_FIRST);
-        }
-
         return $this->iterator;
     }
 
@@ -227,7 +225,7 @@ class Form extends AbstractCompositeType
     /**
      * Retrieve array value by html array notation
      *
-     * Example: 
+     * Example:
      * $this->getValueByName('foo[bar]') returns the value of $this->data['foo']['bar'] or NULL.
      *
      * @internal
