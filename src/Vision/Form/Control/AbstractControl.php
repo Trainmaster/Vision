@@ -35,17 +35,6 @@ abstract class AbstractControl extends AbstractType
     protected $value = null;
 
     /**
-     * Constructor
-     *
-     * @param string $name
-     */
-    public function __construct($name)
-    {
-        parent::__construct($name);
-        $this->setRequired(true);
-    }
-
-    /**
      * @api
      *
      * @param FilterInterface $filter
