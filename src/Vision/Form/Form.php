@@ -14,9 +14,6 @@ use Vision\Http\RequestInterface;
 use Vision\Html\Element as HtmlElement;
 use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
 
-use RecursiveIteratorIterator;
-use InvalidArgumentException;
-
 /**
  * Form
  *
@@ -40,7 +37,7 @@ class Form extends AbstractCompositeType
     /** @type array $values */
     protected $values = array();
 
-    /** @type RecursiveIteratorIterator|null $iterator */
+    /** @type \RecursiveIteratorIterator|null $iterator */
     protected $iterator = null;
 
     /**
@@ -56,7 +53,7 @@ class Form extends AbstractCompositeType
 
         $node = new Node;
         $node->addChild($this);
-        $this->iterator = new RecursiveIteratorIterator(new NodeIterator($node), RecursiveIteratorIterator::CHILD_FIRST);
+        $this->iterator = new \RecursiveIteratorIterator(new NodeIterator($node), \RecursiveIteratorIterator::CHILD_FIRST);
     }
 
     /**
@@ -71,7 +68,7 @@ class Form extends AbstractCompositeType
     }
 
     /**
-     * @return RecursiveIteratorIterator
+     * @return \RecursiveIteratorIterator
      */
     public function getIterator()
     {
@@ -92,7 +89,7 @@ class Form extends AbstractCompositeType
         } elseif ($mixed instanceof Control\AbstractControl) {
             $name = $mixed->getName();
         } else {
-            throw new InvalidArgumentException('');
+            throw new \InvalidArgumentException('');
         }
 
         $iterator = $this->getIterator();
