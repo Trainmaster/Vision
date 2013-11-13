@@ -8,7 +8,6 @@
  */
 namespace Vision\Form;
 
-use Vision\DataStructures\Tree\NodeInterface;
 use Vision\Form\Decorator\DecoratorInterface;
 use Vision\Validator\ValidatorInterface;
 
@@ -17,7 +16,7 @@ use Vision\Validator\ValidatorInterface;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-abstract class AbstractCompositeType extends AbstractType implements NodeInterface
+abstract class AbstractCompositeType extends AbstractType
 {
     /** @type array $elements */
     protected $elements = array();
@@ -87,21 +86,6 @@ abstract class AbstractCompositeType extends AbstractType implements NodeInterfa
      * @return array
      */
     public function getElements()
-    {
-        return $this->elements;
-    }
-
-    public function setParent(NodeInterface $parent)
-    {
-        return $this;
-    }
-
-    public function hasChildren()
-    {
-        return !empty($this->elements);
-    }
-
-    public function getChildren()
     {
         return $this->elements;
     }

@@ -8,7 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\DataStructures\Tree\NodeInterface;
 use Vision\Form\AbstractType;
 use Vision\Filter\FilterInterface;
 use Vision\Validator;
@@ -18,7 +17,7 @@ use Vision\Validator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-abstract class AbstractControl extends AbstractType implements NodeInterface
+abstract class AbstractControl extends AbstractType
 {
     /** @type array $filters */
     protected $filters = array();
@@ -294,11 +293,6 @@ abstract class AbstractControl extends AbstractType implements NodeInterface
         $this->setValue($value);
 
         return $isValid;
-    }
-
-    public function setParent(NodeInterface $parent)
-    {
-        return $this;
     }
 
     public function hasChildren()

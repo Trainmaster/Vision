@@ -8,8 +8,8 @@
  */
 namespace Vision\Form;
 
+use Vision\DataStructures\Tree\NodeInterface;
 use Vision\Html\Element as HtmlElement;
-
 use Vision\Validator\ValidatorInterface;
 
 /**
@@ -17,7 +17,7 @@ use Vision\Validator\ValidatorInterface;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-abstract class AbstractType extends HtmlElement
+abstract class AbstractType extends HtmlElement implements NodeInterface
 {
     /** @type array $validators */
     protected $validators = array();
@@ -89,5 +89,38 @@ abstract class AbstractType extends HtmlElement
     {
         $this->validators = array();
         return $this;
+    }
+
+
+    /**
+     * @api
+     *
+     * @param NodeInterface $parent
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setParent(NodeInterface $parent)
+    {
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return bool
+     */
+    public function hasChildren()
+    {
+        return !empty($this->elements);
+    }
+
+    /**
+     * @api
+     *
+     * @return array
+     */
+    public function getChildren()
+    {
+        return $this->elements;
     }
 }
