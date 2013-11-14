@@ -11,8 +11,6 @@ namespace Vision\Form\Validator;
 use Vision\Form\AbstractCompositeType;
 use Vision\Validator\AbstractValidator;
 
-use InvalidArgumentException;
-
 /**
  * ValueMatch
  *
@@ -45,14 +43,14 @@ class ValueMatch extends AbstractValidator
      *
      * @param AbstractCompositeType $form
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return bool
      */
     public function isValid($form)
     {
         if (!($form instanceof AbstractCompositeType)) {
-            throw new InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(sprintf(
                 'Argument 1 passed to %s must be an instance of %s.',
                 __METHOD__,
                 get_class('AbstractCompositeType')
