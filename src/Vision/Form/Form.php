@@ -108,7 +108,7 @@ class Form extends AbstractCompositeType
      *
      * @return $this Provides a fluent interface.
      */
-    public function bindData(array $data)
+    public function setData(array $data)
     {
         $this->data = $data;
         return $this;
