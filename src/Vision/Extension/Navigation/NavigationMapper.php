@@ -8,14 +8,14 @@
  */
 namespace Vision\Extension\Navigation;
 
-use Vision\Database\AbstractPdoRepository;
+use Vision\Database\AbstractPdoMapper;
 
 /**
  * NavigationMapper
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class NavigationMapper extends AbstractPdoRepository implements NavigationMapperInterface
+class NavigationMapper extends AbstractPdoMapper implements NavigationMapperInterface
 {
     /**
      * @api

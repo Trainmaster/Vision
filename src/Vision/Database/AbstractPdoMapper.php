@@ -9,27 +9,27 @@
 namespace Vision\Database;
 
 /**
- * PDOMapper
+ * AbstractPdoMapper
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-abstract class AbstractPdoRepository
+abstract class AbstractPdoMapper
 {
-    /** @type null|PDO */
+    /** @type null|\PDO */
     protected $pdo = null;
 
     /**
-     * @param PDO $pdo
+     * @param \PDO $pdo
      */
-    public function __construct(PDO $pdo)
+    public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
     }
 
     /**
-     * @return PDO
+     * @return \PDO
      */
-    public function getPDO()
+    public function getPdo()
     {
         return $this->pdo;
     }
