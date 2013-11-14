@@ -68,21 +68,6 @@ abstract class AbstractCompositeType extends AbstractType
     /**
      * @api
      *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function getElement($name)
-    {
-        if (isset($this->elements[$name])) {
-            return $this->elements[$name];
-        }
-        return null;
-    }
-
-    /**
-     * @api
-     *
      * @return array
      */
     public function getElements()

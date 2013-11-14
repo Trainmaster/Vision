@@ -57,17 +57,6 @@ class Form extends AbstractCompositeType
     }
 
     /**
-     * @param string $action
-     *
-     * @return Form Provides a fluent interface.
-     */
-    public function setAction($action)
-    {
-        $this->setAttribute('action', $action);
-        return $this;
-    }
-
-    /**
      * @return \RecursiveIteratorIterator
      */
     public function getIterator()
@@ -76,31 +65,14 @@ class Form extends AbstractCompositeType
     }
 
     /**
-     * @api
+     * @param string $action
      *
-     * @param mixed $name
-     *
-     * @return mixed
+     * @return Form Provides a fluent interface.
      */
-    public function getElement($mixed)
+    public function setAction($action)
     {
-        if (is_string($mixed)) {
-            $name = trim($mixed);
-        } elseif ($mixed instanceof Control\AbstractControl) {
-            $name = $mixed->getName();
-        } else {
-            throw new \InvalidArgumentException('');
-        }
-
-        $iterator = $this->getIterator();
-
-        foreach ($iterator as $element) {
-            if ($element->getName() === $name) {
-                return $element;
-            }
-        }
-
-        return null;
+        $this->setAttribute('action', $action);
+        return $this;
     }
 
     /**
@@ -176,6 +148,35 @@ class Form extends AbstractCompositeType
             return true;
         }
         return false;
+    }
+
+    /**
+     * @api
+     *
+     * @param string $name
+     *
+     * @return AbstractType|null
+     */
+    public function getElement($name)
+    {
+        if (!is_string($name)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be a string.',
+                __METHOD__
+            ));
+        }
+
+        $name = trim($name);
+
+        $iterator = $this->getIterator();
+
+        foreach ($iterator as $element) {
+            if ($element->getName() === $name) {
+                return $element;
+            }
+        }
+
+        return null;
     }
 
     /**
