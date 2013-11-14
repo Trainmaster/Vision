@@ -10,9 +10,6 @@ namespace Vision\Form;
 
 use Vision\DataStructures\Tree\Node;
 use Vision\DataStructures\Tree\NodeIterator;
-use Vision\Http\RequestInterface;
-use Vision\Html\Element as HtmlElement;
-use Vision\View\Html\ElementAbstract as HtmlElementViewAbstract;
 
 /**
  * Form
