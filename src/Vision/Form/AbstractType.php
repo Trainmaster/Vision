@@ -19,6 +19,9 @@ use Vision\Validator\ValidatorInterface;
  */
 abstract class AbstractType extends HtmlElement implements NodeInterface
 {
+    /** @type array $elements */
+    protected $elements = array();
+
     /** @type array $validators */
     protected $validators = array();
 
