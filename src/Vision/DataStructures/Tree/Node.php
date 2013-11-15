@@ -82,7 +82,7 @@ class Node implements NodeInterface
      *
      * @return array
      */
-    public function resetChildren()
+    public function removeChildren()
     {
         return $this->children = array();
     }

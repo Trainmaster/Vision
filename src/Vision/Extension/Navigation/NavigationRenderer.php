@@ -136,7 +136,7 @@ class NavigationRenderer implements NavigationRendererInterface
             }
 
             if ($maxDepth >= 0 && $depth > $maxDepth) {
-                $iterator->current()->resetChildren();
+                $iterator->current()->removeChildren();
                 continue;
             }
 
@@ -150,14 +150,14 @@ class NavigationRenderer implements NavigationRendererInterface
             if (!$parentIsActive) {
                 if ((!empty($actives) && ($depth > 0 || $depth > max($actives)) && $link)
                     || ($link && $fromDepth > 0)) {
-                    $iterator->current()->resetChildren();
+                    $iterator->current()->removeChildren();
                     continue;
                 }
             }
 
             if (empty($actives) && $link) {
                 $iterator->setMaxDepth($depth);
-                $iterator->current()->resetChildren();
+                $iterator->current()->removeChildren();
             }
 
             if ($depth < $lastDepth) {
