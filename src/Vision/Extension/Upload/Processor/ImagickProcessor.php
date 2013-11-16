@@ -69,10 +69,6 @@ class ImagickProcessor extends AbstractProcessor
         $extension = strtoupper($file->getClientExtension());
         $im->destroy();
 
-        if (in_array($extension, $formats)) {
-            return true;
-        }
-
-        return false;
+        return in_array($extension, $formats);
     }
 }
