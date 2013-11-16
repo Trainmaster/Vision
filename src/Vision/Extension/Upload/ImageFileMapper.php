@@ -8,16 +8,14 @@
  */
 namespace Vision\Extension\Upload;
 
-use Vision\Database\Mapper\PDOMapper;
-
-use PDO;
+use Vision\Database\AbstractPdoMapper;
 
 /**
  * ImageFileMapper
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class ImageFileMapper extends PDOMapper
+class ImageFileMapper extends AbstractPdoMapper
 {
     public function createDomainObject($path)
     {
@@ -50,13 +48,13 @@ class ImageFileMapper extends PDOMapper
                     alt = VALUES(alt),
                     caption = VALUES(caption)';
         $pstmt = $this->pdo->prepare($sql);
-        $pstmt->bindValue(':image_id', $entity->getId(), PDO::PARAM_INT);
-        $pstmt->bindValue(':path', $entity->getPath(), PDO::PARAM_STR);
-        $pstmt->bindValue(':height', $entity->getHeight(), PDO::PARAM_INT);
-        $pstmt->bindValue(':width', $entity->getWidth(), PDO::PARAM_INT);
-        $pstmt->bindValue(':size', $entity->getSize(), PDO::PARAM_STR);
-        $pstmt->bindValue(':alt', $entity->getAlt(), PDO::PARAM_STR);
-        $pstmt->bindValue(':caption', $entity->getCaption(), PDO::PARAM_STR);
+        $pstmt->bindValue(':image_id', $entity->getId(), \PDO::PARAM_INT);
+        $pstmt->bindValue(':path', $entity->getPath(), \PDO::PARAM_STR);
+        $pstmt->bindValue(':height', $entity->getHeight(), \PDO::PARAM_INT);
+        $pstmt->bindValue(':width', $entity->getWidth(), \PDO::PARAM_INT);
+        $pstmt->bindValue(':size', $entity->getSize(), \PDO::PARAM_STR);
+        $pstmt->bindValue(':alt', $entity->getAlt(), \PDO::PARAM_STR);
+        $pstmt->bindValue(':caption', $entity->getCaption(), \PDO::PARAM_STR);
         $pstmt->execute();
 
         $id = $this->pdo->lastInsertId();
@@ -89,7 +87,7 @@ class ImageFileMapper extends PDOMapper
         $pstmt = $this->pdo->prepare($sql);
         $pstmt->execute($ids);
 
-        while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $pstmt->fetch(\PDO::FETCH_ASSOC)) {
             $entities[] = $this->createDomainObject($row['path'])->populate($row);
         }
 
