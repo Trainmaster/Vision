@@ -15,6 +15,8 @@ namespace Vision\Http;
  */
 interface RequestInterface
 {
+    public function getHost();
+
     public function getMethod();
 
     public function getPath();
