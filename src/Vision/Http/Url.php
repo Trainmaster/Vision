@@ -42,19 +42,11 @@ class Url
     public function populateFromRequest(RequestInterface $request)
     {
         if (!isset($this->components['scheme'])) {
-            $https = $request->SERVER['HTTPS'];
-            if (!empty($https) && $https !== 'off') {
-                $scheme = 'https';
-            } else {
-                $scheme = 'http';
-            }
-            $this->components['scheme'] = $scheme;
+            $this->components['scheme'] = $request->getScheme();
         }
 
         if (!isset($this->components['host'])) {
-            if (isset($request->SERVER['SERVER_NAME'])) {
-                $this->components['host'] = $request->SERVER['SERVER_NAME'];
-            }
+            $this->components['host'] = $request->getHost();
         }
 
         $path = $request->getBasePath();
