@@ -149,11 +149,34 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * @api
      *
+     * @return bool
+     */
+    public function isSecure()
+    {
+        return (!empty($https) && $https !== 'off');
+    }
+
+    /**
+     * @api
+     *
      * @return null|string
      */
     public function getHost()
     {
         return $this->host;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getScheme()
+    {
+        if ($this->isSecure()) {
+            return 'https';
+        }
+        return 'http';
     }
 
     /**
