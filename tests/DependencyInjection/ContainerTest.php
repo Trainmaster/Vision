@@ -13,6 +13,22 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass'));
     }
 
+    public function testRegisterWhenArgumentOneIsNoString()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $container = new Container;
+
+        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register(new stdClass));
+    }
+
+    public function testRegisterWhenArgumentTwoIsNoString()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $container = new Container;
+
+        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass', new stdClass));
+    }
+
     public function testRegisterWithTwoArguments()
     {
         $container = new Container;

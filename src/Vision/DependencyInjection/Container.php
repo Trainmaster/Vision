@@ -42,17 +42,32 @@ class Container implements ContainerInterface
      * @param string $class
      * @param null|string $alias
      *
+     * @throws \InvalidArgumentException
      * @throws \LogicException
      *
      * @return Definition
      */
     public function register($class, $alias = null)
     {
+        if (!is_string($class)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be a string.',
+                __METHOD__
+            ));
+        }
+
         $class = $this->resolveParameter($class);
         $definition = new Definition($class);
 
         if (!isset($alias)) {
             $alias = $class;
+        }
+
+        if (!is_string($alias)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Argument 2 passed to %s must be a string.',
+                __METHOD__
+            ));
         }
 
         if (isset($this->definitions[$alias])) {
