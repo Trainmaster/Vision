@@ -22,4 +22,6 @@ interface RequestInterface
     public function getPath();
 
     public function getPathInfo();
+    
+    public function getScheme();
 }
