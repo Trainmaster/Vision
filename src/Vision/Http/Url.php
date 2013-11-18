@@ -73,15 +73,13 @@ class Url
         $url = '';
 
         if (isset($this->components['scheme'])) {
-            $scheme = $this->components['scheme'];
-            $url .= $scheme . '://';
+            $url .= $this->components['scheme'] . '://';
         } else {
             return false;
         }
 
         if (isset($this->components['host'])) {
-            $host = $this->components['host'];
-            $url .= $host;
+            $url .= $this->components['host'];
         } else {
             return false;
         }
@@ -95,13 +93,11 @@ class Url
         }
 
         if (isset($path, $this->components['query'])) {
-            $query = $this->components['query'];
-            $url .= '?' . http_build_query($query);
+            $url .= '?' . http_build_query($this->components['query']);
         }
 
         if (isset($query, $this->components['fragment'])) {
-            $fragment = $this->components['fragment'];
-            $url .= '#' . $fragment;
+            $url .= '#' . $this->components['fragment'];
         }
 
         return $url;
