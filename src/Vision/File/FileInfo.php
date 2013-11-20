@@ -31,14 +31,4 @@ class FileInfo extends SplFileInfo
         }
         return false;
     }
-
-    /**
-     * @api
-     *
-     * @return bool
-     */
-    public function isUploadedFile()
-    {
-        return is_uploaded_file($this);
-    }
 }
