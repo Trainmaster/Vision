@@ -8,8 +8,6 @@
  */
 namespace Vision\Extension\Upload;
 
-use SplFileObject;
-
 /**
  * File
  *
@@ -23,6 +21,11 @@ class File
 
     protected $size = null;
 
+    public function __construct($path)
+    {
+        $this->path = (string) $path;
+    }
+
     public function setId($id)
     {
         if (!empty($id)) {
@@ -34,12 +37,6 @@ class File
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setPath($path)
-    {
-        $this->path = $path;
-        return $this;
     }
 
     public function getPath()
@@ -69,14 +66,10 @@ class File
         return $this->size;
     }
 
-    public function populate(array $data)
+    public function exchangeArray(array $data)
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
-        }
-
-        if (array_key_exists('path', $data)) {
-            $this->setPath($data['path']);
         }
 
         if (array_key_exists('size', $data)) {
@@ -88,12 +81,10 @@ class File
 
     public function getArrayCopy()
     {
-        $array = array(
+        return array(
             'id' => $this->getId(),
             'path' => $this->getPath(),
             'size' => $this->getSize()
         );
-
-        return $array;
     }
 }

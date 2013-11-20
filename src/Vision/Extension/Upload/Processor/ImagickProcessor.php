@@ -8,17 +8,17 @@
  */
 namespace Vision\Extension\Upload\Processor;
 
+use Vision\Extension\Upload\ImageFile;
 use Vision\File\UploadedFile;
 
 use Imagick;
-use RuntimeException;
 
 /**
  * ImagickProcessor
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class ImagickProcessor extends AbstractProcessor
+class ImagickProcessor implements ProcessorInterface
 {
     /**
      * @return void
@@ -26,11 +26,14 @@ class ImagickProcessor extends AbstractProcessor
     public function __construct()
     {
         if (extension_loaded('Imagick') === false) {
-            throw new RuntimeException('The Imagick extension is required.');
+            throw new \RuntimeException('The Imagick extension is required.');
         }
     }
 
     /**
+     * @api
+     *
+     * @param UploadedFile $file
      * @param string $dest
      *
      * @return string|bool
@@ -43,23 +46,25 @@ class ImagickProcessor extends AbstractProcessor
         $dirname = pathinfo($dest, PATHINFO_DIRNAME);
         $filename = pathinfo($dest, PATHINFO_FILENAME);
         $extension = strtolower($im->getImageFormat());
-        $height = $im->getImageHeight();
-        $width = $im->getImageWidth();
+        
+        $data['height'] = $im->getImageHeight();
+        $data['width'] = $im->getImageWidth();
 
         $filename = $dirname . DIRECTORY_SEPARATOR . $filename . '.' . $extension;
 
         if ($im->writeImage($filename)) {
             $im->destroy();
-            $object = $this->mapToObject($filename);
-            $object->imageHeight = $height;
-            $object->imageWidth = $width;
-            return $object;
+            $image = new ImageFile($filename);
+            $image->exchangeArray($data);
+            return $image;
         }
 
         return false;
     }
 
     /**
+     * @api
+     *
      * @return bool
      */
     public function isResponsibleFor(UploadedFile $file)

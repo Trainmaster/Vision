@@ -29,16 +29,8 @@ class ImageFile extends File
         return $this;
     }
 
-    public function getHeight($max = null)
+    public function getHeight()
     {
-        if (isset($max)) {
-            $max = (int) $max;
-
-            if ($max < $this->height) {
-                return $max;
-            }
-        }
-
         return $this->height;
     }
 
@@ -55,7 +47,7 @@ class ImageFile extends File
 
     public function setAlt($alt)
     {
-        $this->alt = $alt;
+        $this->alt = (string) $alt;
         return $this;
     }
 
@@ -66,7 +58,7 @@ class ImageFile extends File
 
     public function setCaption($caption)
     {
-        $this->caption = $caption;
+        $this->caption = (string) $caption;
         return $this;
     }
 
@@ -75,9 +67,9 @@ class ImageFile extends File
         return $this->caption;
     }
 
-    public function populate(array $data)
+    public function exchangeArray(array $data)
     {
-        parent::populate($data);
+        parent::exchangeArray($data);
 
         if (array_key_exists('height', $data)) {
             $this->setHeight($data['height']);

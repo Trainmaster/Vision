@@ -45,7 +45,6 @@ class NavigationMapper extends AbstractPdoMapper implements NavigationMapperInte
                         ON ni18n.node_id = nn.node_id
                         AND ni18n.language_id = :language_id
                 WHERE nt1.ancestor = :ancestor
-                AND nn.is_visible = TRUE
                 ORDER BY nn.weight ASC,
                          ni18n.name ASC';
 
@@ -74,6 +73,22 @@ class NavigationMapper extends AbstractPdoMapper implements NavigationMapperInte
         }
 
         return null;
+    }
+
+    public function save(Node $node)
+    {
+        $sql = 'INSERT INTO navigation_tree (ancestor, descendant)
+                    SELECT nt.ancestor, :node_id, nt.path_length + 1
+                    FROM navigation_tree AS nt
+                    WHERE nt.descendant = :parent_id
+                UNION ALL
+                    SELECT :node_id, :node_id, 0';
+    }
+
+    public function delete(Node $node)
+    {
+        $sql = 'DELETE FROM navigation_tree
+                WHERE descendant = :node_id';
     }
 
     /**

@@ -88,7 +88,7 @@ class ImageFileMapper extends AbstractPdoMapper
         $pstmt->execute($ids);
 
         while ($row = $pstmt->fetch(\PDO::FETCH_ASSOC)) {
-            $entities[] = $this->createDomainObject($row['path'])->populate($row);
+            $entities[] = $this->createDomainObject($row['path'])->exchangeArray($row);
         }
 
         return $entities;
