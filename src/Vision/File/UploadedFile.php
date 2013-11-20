@@ -8,8 +8,6 @@
  */
 namespace Vision\File;
 
-use InvalidArgumentException;
-
 /**
  * UploadedFile
  *
@@ -22,8 +20,8 @@ class UploadedFile extends File
 
     public function __construct($filename)
     {
-        if (is_uploaded_file($filename) === false) {
-            throw new InvalidArgumentException(sprintf(
+        if (!is_uploaded_file($filename)) {
+            throw new \InvalidArgumentException(sprintf(
                 'The file "%s" is not an uploaded file.',
                 $filename
             ));

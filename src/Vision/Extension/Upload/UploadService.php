@@ -49,7 +49,7 @@ class UploadService
 
     public function move(UploadedFile $file, $dest)
     {
-        if ($this->fileSystem->isWritable($dest) === false) {
+        if (!$this->fileSystem->isWritable($dest)) {
             throw new RuntimeException(sprintf(
                 'Unable to write to destination "%s". Double-check the permissions.',
                 $dest

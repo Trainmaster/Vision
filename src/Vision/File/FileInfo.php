@@ -8,14 +8,12 @@
  */
 namespace Vision\File;
 
-use SplFileInfo;
-
 /**
  * FileInfo
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class FileInfo extends SplFileInfo
+class FileInfo extends \SplFileInfo
 {
     /**
      * @api

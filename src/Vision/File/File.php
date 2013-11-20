@@ -8,14 +8,12 @@
  */
 namespace Vision\File;
 
-use SplFileObject;
-
 /**
  * File
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class File extends SplFileObject
+class File extends \SplFileObject
 {
     /**
      * @api
