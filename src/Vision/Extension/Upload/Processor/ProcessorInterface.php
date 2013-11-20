@@ -20,6 +20,7 @@ interface ProcessorInterface
     /**
      * @api
      *
+     * @param UploadedFile $file
      * @param string $dest
      */
     public function process(UploadedFile $file, $dest);
