@@ -26,7 +26,6 @@ class Submit extends AbstractControl
 
         $this->setTag('input')
              ->setAttribute('type', 'submit')
-             ->addClass('input-' . $this->getAttribute('type'))
              ->setRequired(false);
     }
 }
