@@ -28,7 +28,7 @@ class PDO extends \PDO
      */
     public function getDriverName()
     {
-        return $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+        return $this->getAttribute(PDO::ATTR_DRIVER_NAME);
     }
 
     /**
@@ -66,7 +66,7 @@ class PDO extends \PDO
 
         switch ($name) {
             case 'mysql':
-                $sth = $this->pdo->query('SELECT UNHEX(REPLACE(UUID(), "-", ""))');
+                $sth = $this->query('SELECT UNHEX(REPLACE(UUID(), "-", ""))');
                 return $sth->fetchColumn();
 
             default:
