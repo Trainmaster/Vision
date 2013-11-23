@@ -214,6 +214,16 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method;
     }
+    
+    /**
+     * @api
+     * 
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->getScheme() . '://' . $this->getHost() . $this->getBasePath();
+    }
 
     /**
      * Get base path of current url.
