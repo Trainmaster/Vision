@@ -28,6 +28,7 @@ class Text extends AbstractControl
         parent::__construct($name);
 
         $this->setTag('input')
+             ->setRequired(true)
              ->addClass('input-' . $this->getAttribute('type'));
     }
 }
