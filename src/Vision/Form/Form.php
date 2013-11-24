@@ -84,9 +84,11 @@ class Form extends AbstractCompositeType
         $iterator = $this->getIterator();
 
         foreach ($iterator as $element) {
-            $name = $element->getName();
-            if (isset($data[$name])) {
-                $element->setValue($data[$name]);
+            if ($element instanceof Control\AbstractControl) {
+                $name = $element->getName();
+                if (isset($data[$name])) {
+                    $element->setValue($data[$name]);
+                }
             }
         }
 
