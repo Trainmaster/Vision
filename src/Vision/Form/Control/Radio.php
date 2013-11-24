@@ -8,6 +8,8 @@
  */
 namespace Vision\Form\Control;
 
+use Vision\Html\Element;
+
 class Radio extends MultiOptionAbstractControl
 {
     /**
@@ -24,24 +26,14 @@ class Radio extends MultiOptionAbstractControl
              ->addClass('input-' . $this->getAttribute('type'));
     }
 
-    public function __toString()
+    public function setOptions(array $options)
     {
-        $content = null;
-
-        if ($this->view === null) {
-            foreach ($this->options as $key => $value) {
-                $label = new \Vision\Html\Element('label');
-                $label->setContent($key);
-                $label->setAttribute('for', $this->getName() . '-' . $value);
-                $this->setAttribute('value', $value);
-                $this->setAttribute('id', $this->getName() . '-' . $value);
-                $radio = new \Vision\View\Html\Element($this);
-                $li = new \Vision\Html\Element('li');
-                $li->setContent($label . $radio);
-                $content .= $li;
-            }
+        foreach ($options as $value => $label) {
+            $option = new self($this->getName());
+            $option->setValue($value);
+            $option->setId($this->getName() . '-' . $value);
+            $this->options[$label] = $option;
         }
-
-        return $content;
-	}
+        return $this;
+    }
 }
