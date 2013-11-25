@@ -17,4 +17,7 @@ class Hidden extends Text
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'hidden');
+
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array('required');
 }

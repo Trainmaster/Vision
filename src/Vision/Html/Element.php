@@ -19,6 +19,9 @@ class Element
     /** @type array $attributes */
     protected $attributes = array();
 
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array();
+
     /** @type array $contents */
     protected $contents = array();
 
@@ -250,7 +253,9 @@ class Element
      */
     public function setAttribute($key, $value = true)
     {
-        $this->attributes[$key] = $value;
+        if (!in_array($key, $this->invalidAttributes)) {
+            $this->attributes[$key] = $value;
+        }
         return $this;
     }
 
