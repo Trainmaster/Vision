@@ -143,7 +143,6 @@ abstract class AbstractControl extends AbstractType
         return $this;
     }
 
-
     /**
      * @api
      *
