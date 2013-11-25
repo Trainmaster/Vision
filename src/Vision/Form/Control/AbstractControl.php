@@ -151,7 +151,7 @@ abstract class AbstractControl extends AbstractType
      */
     public function isRequired()
     {
-        return $this->getAttribute('required');
+        return (bool) $this->getAttribute('required');
     }
 
     /**
