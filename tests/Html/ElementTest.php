@@ -60,7 +60,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetAttributes()
     {
         $attr = array(
-            'required',
+            'required' => true,
             'id' => 'foo'
         );
 
