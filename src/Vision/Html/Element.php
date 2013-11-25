@@ -176,7 +176,7 @@ class Element
         $html = '';
 
         foreach ($this->attributes as $key => $value) {
-            if ($value === null) {
+            if ($value === true) {
                 $html .= ' ' . $this->clean($key);
             } else {
                 $html .= ' ' . $this->clean($key) . '="' . $this->clean($value). '"';
@@ -248,7 +248,7 @@ class Element
      *
      * @return $this Provides a fluent interface.
      */
-    public function setAttribute($key, $value = null)
+    public function setAttribute($key, $value = true)
     {
         $this->attributes[$key] = $value;
         return $this;

@@ -45,7 +45,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(null, $element->getAttribute('required'));
         $this->assertSame($element, $element->setAttribute('required'));
-        $this->assertSame(null, $element->getAttribute('required'));
+        $this->assertSame(true, $element->getAttribute('required'));
     }
 
     public function testSetAndGetAttributeWithTwoArguments()
