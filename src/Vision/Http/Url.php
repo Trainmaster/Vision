@@ -93,7 +93,7 @@ class Url
         }
 
         if (isset($path, $this->components['query'])) {
-            $url .= '?' . http_build_query($this->components['query']);
+            $url .= '?' . $this->components['query'];
         }
 
         if (isset($query, $this->components['fragment'])) {
