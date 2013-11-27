@@ -125,7 +125,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      *
      * @return bool|ResponseInterface
      */
-    public function redirect($url)
+    public function redirect($url, $statusCode = 302)
     {
         $url = new Url($url);
         $url = $url->populateFromRequest($this->request)->build();
@@ -135,7 +135,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
         }
 
         $this->response->addHeader('Location', $url)
-                       ->setStatusCode(302);
+                       ->setStatusCode($statusCode);
 
         return $this->response;
     }
