@@ -92,11 +92,11 @@ class Url
             $url .= $path;
         }
 
-        if (isset($host, $this->components['query'])) {
+        if (isset($this->components['host'], $this->components['query'])) {
             $url .= '?' . $this->components['query'];
         }
 
-        if (isset($host, $this->components['fragment'])) {
+        if (isset($this->components['host'], $this->components['fragment'])) {
             $url .= '#' . $this->components['fragment'];
         }
 
