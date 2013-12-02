@@ -147,13 +147,15 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
+     * @see http://www.php.net/manual/en/reserved.variables.server.php
+     *
      * @api
      *
      * @return bool
      */
     public function isSecure()
     {
-        return (!empty($https) && $https !== 'off');
+        return (!empty($this->SERVER['HTTPS']) && $this->SERVER['HTTPS'] !== 'off');
     }
 
     /**
@@ -214,10 +216,10 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return $this->method;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getBaseUrl()
