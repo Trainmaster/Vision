@@ -18,7 +18,6 @@ class PDO extends \PDO
     /** @type bool $hasActiveTransaction */
     protected $hasActiveTransaction = false;
 
-
     /**
      * This method returns the current driver name (only if it's supported by the driver)
      *
@@ -28,7 +27,7 @@ class PDO extends \PDO
      */
     public function getDriverName()
     {
-        return $this->getAttribute(PDO::ATTR_DRIVER_NAME);
+        return parent::getAttribute(\PDO::ATTR_DRIVER_NAME);
     }
 
     /**
