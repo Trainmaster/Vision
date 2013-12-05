@@ -49,15 +49,8 @@ class Url
             $this->components['host'] = $request->getHost();
         }
 
-        $path = $request->getBasePath();
-
-        if (!isset($this->components['path']) && isset($path)) {
-            $this->components['path'] = $path;
-        } else {
-            if (strpos($this->components['path'], '/') !== 0) {
-                $this->components['path'] = '/' . $this->components['path'];
-            }
-            $this->components['path'] = $path . $this->components['path'];
+        if (!isset($this->components['path'])) {
+            $this->components['path'] = $request->getBasePath();
         }
 
         return $this;
