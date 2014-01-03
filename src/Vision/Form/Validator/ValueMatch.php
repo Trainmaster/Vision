@@ -58,7 +58,7 @@ class ValueMatch extends AbstractValidator
         }
 
         foreach ($this->controls as $control) {
-            $values[] = $form->getValue($control);
+            $values[] = $control->getValue();
         }
 
         $unique = array_unique($values);
