@@ -30,7 +30,7 @@ class Checkbox extends MultiOptionAbstractControl
         parent::__construct($name);
 
         $this->setTag('input');
-        $this->setRequired(false);
+        $this->setRequired(true);
     }
 
     /**
