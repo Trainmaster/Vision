@@ -30,16 +30,16 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
                                              ControllerInterface
 {
     /** @type RequestInterface $request */
-    protected $request = null;
+    protected $request;
 
     /** @type ResponseInterface $response */
-    protected $response = null;
+    protected $response;
 
     /** @type Session $session */
-    protected $session = null;
+    protected $session;
 
     /** @type null|object $template */
-    protected $template = null;
+    protected $template;
 
     /**
      * This method will be called right after instantiating the controller.

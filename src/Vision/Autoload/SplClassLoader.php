@@ -19,13 +19,13 @@ class SplClassLoader
     protected $fileExtension = '.php';
 
     /** @type string $namespace */
-    protected $namespace = null;
+    protected $namespace;
 
     /** @type string $namespaceSeparator */
     protected $namespaceSeparator = '\\';
 
     /** @type string $path */
-    protected $path = null;
+    protected $path;
 
     /**
      * @param string $namespace

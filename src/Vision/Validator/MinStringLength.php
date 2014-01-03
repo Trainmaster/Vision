@@ -19,7 +19,7 @@ class MinStringLength extends AbstractMultibyteStringValidator
     const STRING_TOO_SHORT = 'The given string "%s" is too short. The minimum length is "%s"';
 
     /** @type int $min */
-    protected $min = null;
+    protected $min;
 
     /**
      * @param int $min

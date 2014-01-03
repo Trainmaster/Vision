@@ -19,7 +19,7 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     const STRING_TOO_LONG = 'The given string "%s" is too long. The maximum length is "%s"';
 
     /** @type int $max */
-    protected $max = null;
+    protected $max;
 
     /**
      * @param int $min

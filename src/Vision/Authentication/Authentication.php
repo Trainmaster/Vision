@@ -16,7 +16,7 @@ namespace Vision\Authentication;
 class Authentication
 {
     /** @type null|Strategy\StrategyInterface $strategy */
-    protected $strategy = null;
+    protected $strategy;
 
     /**
      * Constructor

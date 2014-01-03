@@ -26,7 +26,7 @@ abstract class AbstractApp
     protected $environment = 'dev';
 
     /** @type FrontController $frontController */
-    protected $frontController = null;
+    protected $frontController;
 
     /**
      * Constructor

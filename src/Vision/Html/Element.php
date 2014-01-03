@@ -34,7 +34,7 @@ class Element
     protected $isVoid = false;
 
     /** @type string $tag */
-    protected $tag = null;
+    protected $tag;
 
     /**
      * @param string $tag

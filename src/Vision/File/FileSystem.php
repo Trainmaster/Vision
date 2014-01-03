@@ -19,7 +19,7 @@ class FileSystem
     protected $aliases = array();
 
     /** @type null|string $dirs */
-    protected $currentDir = null;
+    protected $currentDir;
 
     /**
      * @api

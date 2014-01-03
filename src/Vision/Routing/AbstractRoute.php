@@ -16,7 +16,7 @@ namespace Vision\Routing;
 abstract class AbstractRoute
 {
     /** @type string $httpMethod */
-    protected $httpMethod = null;
+    protected $httpMethod;
 
     /** @type array $defaults */
     protected $defaults = array();

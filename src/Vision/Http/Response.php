@@ -28,10 +28,10 @@ class Response extends AbstractMessage implements ResponseInterface
     protected $statusCode = 200;
 
     /** @type string|null $reasonPhrase */
-    protected $reasonPhrase = null;
+    protected $reasonPhrase;
 
     /** @type string|null $body */
-    protected $body = null;
+    protected $body;
 
     /** @type array $statusCodesAndRecommendedReasonPhrases */
     protected $statusCodesAndRecommendedReasonPhrases = array(

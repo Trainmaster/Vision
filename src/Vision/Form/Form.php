@@ -35,7 +35,7 @@ class Form extends AbstractCompositeType
     protected $values = array();
 
     /** @type \RecursiveIteratorIterator|null $iterator */
-    protected $iterator = null;
+    protected $iterator;
 
     /**
      * Constructor

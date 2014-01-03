@@ -19,10 +19,10 @@ class InputInteger extends AbstractValidator
     const INPUT_NOT_INTEGER = 'The given value could not be validated as integer.';
 
     /** @type null|int $min */
-    protected $min = null;
+    protected $min;
 
     /** @type null|int $max */
-    protected $max = null;
+    protected $max;
 
     /**
      * @param int $min

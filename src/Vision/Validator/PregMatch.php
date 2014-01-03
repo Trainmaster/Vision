@@ -19,7 +19,7 @@ class PregMatch extends AbstractValidator
     const NO_MATCH_FOUND = 'No match was found.';
 
     /** @type null|string $pattern */
-    protected $pattern = null;
+    protected $pattern;
 
     /**
      * @param array $options

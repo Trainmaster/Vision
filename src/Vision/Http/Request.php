@@ -19,34 +19,34 @@ use RuntimeException;
 class Request extends AbstractMessage implements RequestInterface
 {
     /** @type null|SuperglobalProxyObject $GET */
-    protected $GET = null;
+    protected $GET;
 
     /** @type null|SuperglobalProxyObject $POST */
-    protected $POST = null;
+    protected $POST;
 
     /** @type null|SuperglobalProxyObject $FILES */
-    protected $FILES = null;
+    protected $FILES;
 
     /** @type null|SuperglobalProxyObject $COOKIE */
-    protected $COOKIE = null;
+    protected $COOKIE;
 
     /** @type null|SuperglobalProxyObject $SERVER */
-    protected $SERVER = null;
+    protected $SERVER;
 
     /** @type null|string $method */
-    protected $method = null;
+    protected $method;
 
     /** @type null|string $host */
-    protected $host = null;
+    protected $host;
 
     /** @type null|string $basePath */
-    protected $basePath = null;
+    protected $basePath;
 
     /** @type null|string $path */
-    protected $path = null;
+    protected $path;
 
     /** @type null|string $pathInfo */
-    protected $pathInfo = null;
+    protected $pathInfo;
 
     /**
      * Constructor

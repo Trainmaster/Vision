@@ -18,7 +18,7 @@ use Vision\DataStructures\ArrayProxyObject;
 class Session extends ArrayProxyObject implements SessionInterface
 {
     /** @type null|Extension\ExtensionInteface $extension */
-    protected $extension = null;
+    protected $extension;
 
     /**
      * @param Extension\ExtensionInteface $extension

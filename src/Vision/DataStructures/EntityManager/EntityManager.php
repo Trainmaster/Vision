@@ -22,10 +22,10 @@ use RuntimeException;
 class EntityManager
 {
     /** @type null $io */
-    protected $io = null;
+    protected $io;
 
     /** @type null $container */
-    protected $container = null;
+    protected $container;
 
     /** @type array $repositories */
     protected $repositories = array();

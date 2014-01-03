@@ -16,7 +16,7 @@ namespace Vision\Routing;
 class RegexRoute extends AbstractCompiledRoute
 {
     /** @type null|string $regex */
-    protected $regex = null;
+    protected $regex;
 
     /**
      * @param string $regex

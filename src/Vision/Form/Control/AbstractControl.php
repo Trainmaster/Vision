@@ -26,13 +26,13 @@ abstract class AbstractControl extends AbstractType
     protected $errors = array();
 
     /** @type null|string $label */
-    protected $label = null;
+    protected $label;
 
     /** @type mixed $rawValue The value before filtering/validation. */
-    protected $rawValue = null;
+    protected $rawValue;
 
     /** @type mixed $value The value after filtering/validation. */
-    protected $value = null;
+    protected $value;
 
     /**
      * @api

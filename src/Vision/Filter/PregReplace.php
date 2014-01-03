@@ -18,12 +18,12 @@ class PregReplace implements FilterInterface
     /**
      * @type null|string
      */
-    protected $pattern = null;
+    protected $pattern;
 
     /**
      * @type null|mixed
      */
-    protected $replacement = null;
+    protected $replacement;
 
     /**
      * @param array $options

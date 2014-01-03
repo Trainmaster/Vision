@@ -18,7 +18,7 @@ use Vision\DependencyInjection\Dependency;
 class Definition
 {
     /** @type mixed $class */
-    protected $class = null;
+    protected $class;
 
     /** @type bool $shared */
     protected $shared = true;

@@ -16,10 +16,10 @@ namespace Vision\Routing;
 abstract class AbstractCompiledRoute extends AbstractRoute
 {
     /** @type null|string $class */
-    protected $class = null;
+    protected $class;
 
     /** @type null|string $method */
-    protected $method = null;
+    protected $method;
 
     /**
      * @api

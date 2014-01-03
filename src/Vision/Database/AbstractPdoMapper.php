@@ -16,7 +16,7 @@ namespace Vision\Database;
 abstract class AbstractPdoMapper
 {
     /** @type null|\PDO */
-    protected $pdo = null;
+    protected $pdo;
 
     /**
      * @param \PDO $pdo
