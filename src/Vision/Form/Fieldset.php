@@ -18,7 +18,7 @@ use Vision\Html\Element;
 class Fieldset extends AbstractCompositeType
 {
     /** @type null|string $legend */
-    protected $legend = null;
+    protected $legend;
 
     /**
      * Constructor
