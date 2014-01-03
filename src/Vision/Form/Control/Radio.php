@@ -12,6 +12,9 @@ use Vision\Html\Element;
 
 class Radio extends MultiOptionAbstractControl
 {
+    /** @type array $attributes */
+    protected $attributes = array('type' => 'radio');
+
     /**
      * Constructor
      *
@@ -22,8 +25,28 @@ class Radio extends MultiOptionAbstractControl
         parent::__construct($name);
 
         $this->setTag('input')
-             ->setAttribute('type', 'radio')
+             ->setRequired(true)
              ->addClass('input-' . $this->getAttribute('type'));
+    }
+
+    public function addOption($value)
+    {
+        $option = new self($this->getName());
+        $option->setValue($value)
+               ->setId($this->getName() . '-' . $value);
+        $this->options[$value] = $option;
+        return $this;
+    }
+
+    public function getOption($value)
+    {
+        $option = parent::getOption($value);
+
+        if ($option instanceof self && $this->checkForPreSelection($option->getValue())) {
+            $option->setAttribute('checked');
+        }
+
+        return $option;
     }
 
     public function setOptions(array $options)

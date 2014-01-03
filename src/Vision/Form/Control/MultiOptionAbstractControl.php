@@ -18,6 +18,27 @@ abstract class MultiOptionAbstractControl extends AbstractControl
     /** @type array $options */
     protected $options = array();
 
+    public function addOption($value)
+    {
+        $this->options[$value] = $value;
+    }
+
+    public function addOptions(array $options)
+    {
+        foreach ($options as $option) {
+            $this->addOption($option);
+        }
+        return $this;
+    }
+
+    public function getOption($value)
+    {
+        if (isset($this->options[$value])) {
+            return $this->options[$value];
+        }
+        return null;
+    }
+
     /**
      * @param array $options
      *
