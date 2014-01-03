@@ -105,7 +105,11 @@ class File implements StorageInterface
             return null;
         }
 
-        $file = new \SplFileObject($filename, 'r');
+        try {
+            $file = new \SplFileObject($filename, 'r');
+        } catch (\RuntimeException $e) {
+            return;
+        }
 
         $time = time();
         $mTime = $file->getMTime();
