@@ -25,8 +25,7 @@ class Textarea extends AbstractControl
     {
         parent::__construct($name);
 
-        $this->setTag('textarea')
-             ->addClass('input-textarea');
+        $this->setTag('textarea');
     }
 
     /**
