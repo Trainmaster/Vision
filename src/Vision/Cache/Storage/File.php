@@ -16,10 +16,10 @@ namespace Vision\Cache\Storage;
 class File implements StorageInterface
 {
     /** @type null|string $cacheDir */
-    protected $cacheDir = null;
+    protected $cacheDir;
 
     /** @type null|string $cacheFileExtension */
-    protected $cacheFileExtension = null;
+    protected $cacheFileExtension;
 
     /**
      * @param array $options {
