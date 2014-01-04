@@ -15,26 +15,16 @@ namespace Vision\Cache\Storage;
  */
 class File implements StorageInterface
 {
-    /** @type int ENC_SERIALIZE */
-    const ENC_SERIALIZE = 1;
-
-    /** @type int ENC_JSON */
-    const ENC_JSON = 2;
-
     /** @type null|string $cacheDir */
     protected $cacheDir = null;
 
     /** @type null|string $cacheFileExtension */
     protected $cacheFileExtension = null;
 
-    /** @type int $encoding */
-    protected $encoding = self::ENC_SERIALIZE;
-
     /**
      * @param array $options {
      *     @type string $cache_dir An optional cache directory.
      *     @type string $cache_file_extension An optional extension for the cache file(s).
-     *     @type int $encoding The encoding being used for data storage.
      * }
      */
     public function __construct(array $options = array())
@@ -45,10 +35,6 @@ class File implements StorageInterface
 
         if (isset($options['cache_file_extension'])) {
             $this->cacheFileExtension = pathinfo($options['cache_file_extension'], PATHINFO_EXTENSION);
-        }
-
-        if (isset($options['encoding'])) {
-            $this->encoding = $options['encoding'];
         }
     }
 
@@ -63,15 +49,7 @@ class File implements StorageInterface
      */
     public function set($key, $value, $expiration = 0)
     {
-        switch ($this->encoding) {
-            case self::ENC_SERIALIZE:
-                $data = serialize($value);
-                break;
-
-            case self::ENC_JSON:
-                $data = json_encode($value);
-                break;
-        }
+        $data = serialize($value);
 
         $filename = $this->prepareFilename($key);
 
@@ -123,16 +101,7 @@ class File implements StorageInterface
         ob_start();
         $file->fpassthru();
         $data = ob_get_clean();
-
-        switch ($this->encoding) {
-            case self::ENC_SERIALIZE:
-                $value = unserialize($data);
-                break;
-
-            case self::ENC_JSON:
-                $value = json_decode($data);
-                break;
-        }
+        $value = unserialize($data);
 
         return $value;
     }
