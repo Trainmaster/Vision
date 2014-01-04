@@ -23,8 +23,8 @@ class File implements StorageInterface
 
     /**
      * @param array $options {
-     *     @type string $cache_dir An optional cache directory.
-     *     @type string $cache_file_extension An optional extension for the cache file(s).
+     *     @type string $cache_dir            An optional cache directory
+     *     @type string $cache_file_extension An optional file extension
      * }
      */
     public function __construct(array $options = array())
@@ -80,7 +80,7 @@ class File implements StorageInterface
         $filename = realpath($filename);
 
         if (!$filename) {
-            return null;
+            return;
         }
 
         $file = new \SplFileObject($filename, 'r');
@@ -95,7 +95,7 @@ class File implements StorageInterface
         if ($expiration > 0 && $diff > $expiration) {
             unset($file);
             unlink($filename);
-            return null;
+            return;
         }
 
         ob_start();
