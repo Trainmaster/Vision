@@ -140,8 +140,6 @@ class FrontController
     public function run()
     {
         try {
-            $response = null;
-
             $route = $this->router->resolve();
 
             if ($route instanceof AbstractCompiledRoute) {
