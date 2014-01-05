@@ -35,7 +35,7 @@ class FrontController
 
     /**
      * @param RequestInterface $request
-     * @param ReponseInterface $response
+     * @param ResponseInterface $response
      * @param Router $router
      * @param ContainerInterface $container
      */
