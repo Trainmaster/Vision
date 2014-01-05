@@ -9,6 +9,7 @@
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
+use Vision\Debug\ExceptionHandlerInterface;
 use Vision\Http\RequestInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
@@ -32,6 +33,9 @@ class FrontController
 
     /** @type null|Router $router */
     protected $router;
+
+    /** @type null|ExceptionHandlerInterface $exceptionHandler */
+    protected $exceptionHandler;
 
     /**
      * @param RequestInterface $request
@@ -76,6 +80,17 @@ class FrontController
     public function getRouter()
     {
         return $this->router;
+    }
+
+    /**
+     * @param ExceptionHandlerInterface $handler
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
+    {
+        $this->exceptionHandler = $exceptionHandler;
+        return $this;
     }
 
     /**
@@ -163,10 +178,8 @@ class FrontController
      */
     protected function handleException(\Exception $e)
     {
-        $definition = $this->container->getDefinition('ExceptionController');
-        if ($definition !== null) {
-            $definition->method('setException', array($e));
-            $this->response = $this->invokeController('ExceptionController', 'indexAction');
+        if (isset($this->exceptionHandler)) {
+            $this->response->body($this->exceptionHandler->handle($e));
         } else {
             $this->response->body(highlight_string($e));
         }
