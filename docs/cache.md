@@ -12,7 +12,6 @@ use Vision\Cache;
 use Vision\Cache\Storage\File as FileStorage;
 
 $options = array(
-    'encoding' => File::ENC_JSON,
     'cache_dir' => __DIR__ . '/cache'
 );
 
