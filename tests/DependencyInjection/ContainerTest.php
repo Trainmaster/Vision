@@ -54,6 +54,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container->register('BasicClass', 'Alias');
     }
 
+    public function testRegisterWithReservedAlias()
+    {
+        $this->setExpectedException('LogicException');
+
+        $container = new Container;
+        $container->register('BasicClass', 'self');
+    }
+
     public function testIsDefined()
     {
         $container = new Container;
@@ -133,6 +141,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $instanceTwo = $container->get('BasicClass');
 
         $this->assertNotSame($instanceOne, $instanceTwo);
+    }
+
+    public function testGetSelf()
+    {
+        $container = new Container;
+
+        $self = $container->get('self');
+
+        $this->assertSame($container, $self);
     }
 
     public function testDependentClass()

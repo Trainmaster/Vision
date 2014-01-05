@@ -69,6 +69,13 @@ class Container implements ContainerInterface
                 __METHOD__
             ));
         }
+        
+        if ($alias === 'self') {
+            throw new \LogicException(sprintf(
+                'The alias "%s" is reserved.',
+                $alias
+            ));
+        }
 
         if (isset($this->definitions[$alias])) {
             throw new \LogicException(sprintf(
@@ -214,6 +221,8 @@ class Container implements ContainerInterface
                 $this->objects[$alias] = $instance;
                 return $instance;
             }
+        } elseif($alias === 'self') {
+            return $this;
         } else {
             throw new RuntimeException(sprintf(
                 'No definition for %s. Double-check the container configuration file(s).',
