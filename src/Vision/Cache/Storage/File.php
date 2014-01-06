@@ -33,9 +33,7 @@ class File implements StorageInterface
      */
     public function __construct(array $options = array())
     {
-        if (isset($options['cache_dir'])) {
-            $this->cacheDir = rtrim($options['cache_dir'], '\\/');
-        }
+        $this->cacheDir = sys_get_temp_dir();
 
         if (isset($options['cache_dir_chmod'])) {
             $this->cacheDirChmod = $options['cache_dir_chmod'];
@@ -44,6 +42,31 @@ class File implements StorageInterface
         if (isset($options['cache_file_extension'])) {
             $this->cacheFileExtension = pathinfo($options['cache_file_extension'], PATHINFO_EXTENSION);
         }
+    }
+
+    /**
+     * @api
+     *
+     * @param string $cacheDir
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setCacheDir($cacheDir)
+    {
+        $cacheDir = rtrim($cacheDir, '\\/');
+
+        if (is_dir($cacheDir)) {
+            $this->cacheDir = realpath($cacheDir);
+            return $this;
+        }
+
+        if (mkdir($cacheDir, $this->cacheDirChmod, true)
+            && chmod($cacheDir, $this->cacheDirChmod)
+        ) {
+            $this->cacheDir = realpath($cacheDir);
+        }
+
+        return $this;
     }
 
     /**
@@ -126,39 +149,12 @@ class File implements StorageInterface
      */
     protected function prepareFilename($filename)
     {
-        if ($this->validateCacheDirectory()) {
-            $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
-        }
+        $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
 
         if (!empty($this->cacheFileExtension)) {
             $filename = $filename . '.' . $this->cacheFileExtension;
         }
 
         return $filename;
-    }
-
-    /**
-     * This method performs several checks in order
-     * to validate a possible given cache directory.
-     *
-     * @internal
-     *
-     * @return bool
-     */
-    protected function validateCacheDirectory()
-    {
-        if (!isset($this->cacheDir)){
-            return false;
-        }
-
-        if (is_dir($this->cacheDir)) {
-            return true;
-        }
-
-        if (mkdir($this->cacheDir, $this->cacheDirChmod, true)) {
-            return true;
-        }
-
-        return false;
     }
 }
