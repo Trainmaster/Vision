@@ -49,6 +49,8 @@ class File implements StorageInterface
      *
      * @param string $cacheDir
      *
+     * @throws \RuntimeException
+     *
      * @return $this Provides a fluent interface.
      */
     public function setCacheDir($cacheDir)
@@ -60,11 +62,23 @@ class File implements StorageInterface
             return $this;
         }
 
-        if (mkdir($cacheDir, $this->cacheDirChmod, true)
-            && chmod($cacheDir, $this->cacheDirChmod)
-        ) {
-            $this->cacheDir = realpath($cacheDir);
+        if (!mkdir($cacheDir, $this->cacheDirChmod, true)) {
+            throw new \RuntimeException(sprintf(
+                'Failed to create the cache directory "%s".',
+                $cacheDir
+            ));
         }
+
+        if (!chmod($cacheDir, $this->cacheDirChmod)) {
+            $decoct = '0' . decoct($this->cacheDirChmod);
+            throw new \RuntimeException(sprintf(
+                "Failed to chmod('%s', %s)",
+                $cacheDir,
+                $decoct
+            ));
+        }
+
+        $this->cacheDir = realpath($cacheDir);
 
         return $this;
     }
