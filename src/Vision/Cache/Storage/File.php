@@ -22,7 +22,7 @@ class File implements StorageInterface
     protected $cacheDirChmod = 0755;
 
     /** @type null|string $cacheFileExtension */
-    protected $cacheFileExtension;
+    protected $cacheFileExtension = '.cache';
 
     /**
      * @param array $options {
