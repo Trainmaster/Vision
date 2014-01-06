@@ -155,7 +155,7 @@ class File implements StorageInterface
             return true;
         }
 
-        if (mkdir($this->cacheDir, $this->cacheDirChmod)) {
+        if (mkdir($this->cacheDir, $this->cacheDirChmod, true)) {
             return true;
         }
 
