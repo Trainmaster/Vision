@@ -18,12 +18,16 @@ class File implements StorageInterface
     /** @type null|string $cacheDir */
     protected $cacheDir;
 
+    /** @type int $cacheDirChmod */
+    protected $cacheDirChmod = 0755;
+
     /** @type null|string $cacheFileExtension */
     protected $cacheFileExtension;
 
     /**
      * @param array $options {
      *     @type string $cache_dir            An optional cache directory
+     *     @type string $cache_dir_chmod      Default chmod when creating the caching directory
      *     @type string $cache_file_extension An optional file extension
      * }
      */
@@ -31,6 +35,10 @@ class File implements StorageInterface
     {
         if (isset($options['cache_dir'])) {
             $this->cacheDir = rtrim($options['cache_dir'], '\\/');
+        }
+
+        if (isset($options['cache_dir_chmod'])) {
+            $this->cacheDirChmod = $options['cache_dir_chmod'];
         }
 
         if (isset($options['cache_file_extension'])) {
@@ -136,8 +144,6 @@ class File implements StorageInterface
      * @internal
      *
      * @return bool
-     *
-     * @todo Make chmod configurable when calling mkdir()
      */
     protected function validateCacheDirectory()
     {
@@ -149,7 +155,7 @@ class File implements StorageInterface
             return true;
         }
 
-        if (mkdir($this->cacheDir, 0755)) {
+        if (mkdir($this->cacheDir, $this->cacheDirChmod)) {
             return true;
         }
 
