@@ -15,18 +15,17 @@ namespace Vision\Cache\Storage;
  */
 class File implements StorageInterface
 {
-    /** @type null|string $cacheDir */
+    /** @type string $cacheDir */
     protected $cacheDir;
 
     /** @type int $cacheDirChmod */
     protected $cacheDirChmod = 0755;
 
-    /** @type null|string $cacheFileExtension */
+    /** @type string $cacheFileExtension */
     protected $cacheFileExtension = '.cache';
 
     /**
      * @param array $options {
-     *     @type string $cache_dir            An optional cache directory
      *     @type string $cache_dir_chmod      Default chmod when creating the caching directory
      *     @type string $cache_file_extension An optional file extension
      * }
@@ -152,9 +151,6 @@ class File implements StorageInterface
     }
 
     /**
-     * In case a set cache directory can be validated,
-     * prepend it to the filename.
-     *
      * @internal
      *
      * @param string $filename
