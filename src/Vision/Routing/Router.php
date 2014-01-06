@@ -271,6 +271,6 @@ class Router
      */
     protected function getCacheKey()
     {
-        return md5(__CLASS__ . serialize($this->resources));
+        return __CLASS__ . serialize($this->resources);
     }
 }

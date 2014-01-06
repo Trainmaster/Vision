@@ -159,6 +159,7 @@ class File implements StorageInterface
      */
     protected function prepareFilename($filename)
     {
+        $filename = md5($filename);
         $filename = $this->cacheDir . DIRECTORY_SEPARATOR . $filename;
 
         if (!empty($this->cacheFileExtension)) {
