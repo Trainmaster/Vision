@@ -8,6 +8,8 @@
  */
 namespace Vision\Form\Control;
 
+use Vision\Validator;
+
 /**
  * MultiOptionAbstractControl
  *
@@ -78,5 +80,17 @@ abstract class MultiOptionAbstractControl extends AbstractControl
         }
 
         return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function isValid()
+    {
+        if (!empty($this->options)) {
+            parent::addValidator(new Validator\InArray(array('haystack' => $this->options)));
+        }
+
+        return parent::isValid();
     }
 }
