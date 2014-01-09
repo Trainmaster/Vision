@@ -17,6 +17,9 @@ use Vision\Html\Element;
  */
 class Select extends MultiOptionAbstractControl
 {
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array('value');
+
     /**
      * Constructor
      *
