@@ -16,7 +16,7 @@ namespace Vision\Validator;
 class InputNotEmptyString extends AbstractValidator
 {
     /** @type string INPUT_NOT_EMPTY_STRING */
-    const INPUT_NOT_EMPTY_STRING = 'The given string is not empty.';
+    const INPUT_NOT_EMPTY_STRING = 'The given value contains an empty string.';
 
     /**
      * @api
@@ -41,11 +41,15 @@ class InputNotEmptyString extends AbstractValidator
             }
 
             foreach ($iterator as $leaf) {
-                if (is_string($leaf) && $leaf !== '') {
+                if (!is_string($leaf)) {
                     continue;
-                } else {
-                    goto error;
                 }
+
+                if ($leaf !== '') {
+                    continue;
+                }
+
+                goto error;
             }
 
             return true;
