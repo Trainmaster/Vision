@@ -228,6 +228,26 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
+     * @api
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->getScheme() . '://' . $this->getHost() . $this->getPath() . '?' . $this->getQueryString();
+    }
+    
+    /**
+     * @api
+     * 
+     * @return string
+     */
+    public function getQueryString()
+    {
+        return $this->SERVER['QUERY_STRING'];
+    }
+
+    /**
      * Get base path of current url.
      *
      * Example: http://www.example.com/foo/index.php/bar
