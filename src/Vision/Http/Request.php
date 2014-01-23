@@ -161,16 +161,6 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * @api
      *
-     * @return null|string
-     */
-    public function getHost()
-    {
-        return $this->host;
-    }
-
-    /**
-     * @api
-     *
      * @return string
      */
     public function getScheme()
@@ -179,6 +169,16 @@ class Request extends AbstractMessage implements RequestInterface
             return 'https';
         }
         return 'http';
+    }
+
+    /**
+     * @api
+     *
+     * @return null|string
+     */
+    public function getHost()
+    {
+        return $this->host;
     }
 
     /**
