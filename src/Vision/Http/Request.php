@@ -198,7 +198,7 @@ class Request extends AbstractMessage implements RequestInterface
             return $this;
         }
 
-        if (preg_match('#^[-._A-Za-z0-9]+$#', $host)) {
+        if (preg_match('#^[-._A-Za-z0-9]+$#D', $host)) {
             $this->host = $host;
         }
 

@@ -101,7 +101,7 @@ class RouteCompiler
                 $regex = str_replace($match[0][0], $tmp, $regex);
             }
 
-            $regex = '#^' . $regex . '$#u';
+            $regex = '#^' . $regex . '$#Du';
 
             $route = $this->createRegexRoute($regex, $class, $method);
         }
