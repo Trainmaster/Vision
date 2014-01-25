@@ -69,7 +69,7 @@ class Container implements ContainerInterface
                 __METHOD__
             ));
         }
-        
+
         if ($alias === 'self') {
             throw new \LogicException(sprintf(
                 'The alias "%s" is reserved.',
@@ -287,10 +287,10 @@ class Container implements ContainerInterface
             }
         }
 
-        $setterInjections = $definition->getMethodInjections();
-        if (!empty($setterInjections)) {
-            foreach ($setterInjections as $setter) {
-                foreach ($setter as $method => $dependencies) {
+        $methodInjections = $definition->getMethodInjections();
+        if (!empty($methodInjections)) {
+            foreach ($methodInjections as $methods) {
+                foreach ($methods as $method => $dependencies) {
                     $reflection->getMethod($method)->invokeArgs($instance, $this->resolveDependencies($dependencies));
                 }
             }
