@@ -238,7 +238,8 @@ class Container implements ContainerInterface
      */
     protected function createObject(Definition $definition)
     {
-        $reflection = new ReflectionClass($definition->getClass());
+        $class = $definition->getClass();
+        $reflection = new ReflectionClass($class);
 
         if (!$reflection->isInstantiable()) {
             return false;
@@ -273,8 +274,22 @@ class Container implements ContainerInterface
             }
         }
 
-        $constructorInjections = $definition->getConstructorInjections();
-        if (!empty($constructorInjections)) {
+        $constructor = $reflection->getConstructor();
+
+        if ($constructor) {
+            $constructorInjections = $definition->getConstructorInjections();
+            $required = $constructor->getNumberOfRequiredParameters();
+            $given = count($constructorInjections);
+
+            if ($given < $required) {
+                throw new \RuntimeException(sprintf(
+                    'The class "%s" requires %s arguments, %s given.',
+                    $class,
+                    $required,
+                    $given
+                ));
+            }
+
             $instance = $reflection->newInstanceArgs($this->resolveDependencies($constructorInjections));
         } else {
             $instance = $reflection->newInstance();
