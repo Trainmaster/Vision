@@ -157,6 +157,21 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return (!empty($this->SERVER['HTTPS']) && $this->SERVER['HTTPS'] !== 'off');
     }
+    
+    /**
+     * @api
+     * 
+     * @return bool
+     */
+    public function isAjax()
+    {
+        if (isset($this->SERVER['HTTP_X_REQUESTED_WITH'])
+            && $this->SERVER['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest")
+        {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * @api
