@@ -278,6 +278,10 @@ class Container implements ContainerInterface
 
         if ($constructor) {
             $constructorInjections = $definition->getConstructorInjections();
+
+            // number of required parameters causes trouble when working with certain PDO
+
+            /*
             $required = $constructor->getNumberOfRequiredParameters();
             $given = count($constructorInjections);
 
@@ -289,6 +293,7 @@ class Container implements ContainerInterface
                     $given
                 ));
             }
+            */
 
             $instance = $reflection->newInstanceArgs($this->resolveDependencies($constructorInjections));
         } else {
