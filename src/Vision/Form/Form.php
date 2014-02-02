@@ -143,10 +143,7 @@ class Form extends AbstractCompositeType
      */
     public function isSent()
     {
-        if (isset($this->data[$this->getName()])) {
-            return true;
-        }
-        return false;
+        return isset($this->data[$this->getName()]);
     }
 
     /**
