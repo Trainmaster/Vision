@@ -13,19 +13,11 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Submit extends AbstractControl
+class Submit extends AbstractInput
 {
-    /**
-     * Constructor
-     *
-     * @param string $name
-     */
-    public function __construct($name)
-    {
-        parent::__construct($name);
+    /** @type array $attributes */
+    protected $attributes = array('type' => 'submit');
 
-        $this->setTag('input')
-             ->setAttribute('type', 'submit')
-             ->setRequired(false);
-    }
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array('required');
 }

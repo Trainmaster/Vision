@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Reset extends Text
+class Reset extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'reset');

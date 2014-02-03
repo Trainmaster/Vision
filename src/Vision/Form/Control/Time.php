@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Time extends Text
+class Time extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'time');

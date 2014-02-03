@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Week extends Text
+class Week extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'week');

@@ -13,8 +13,11 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Range extends Text
+class Range extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'range');
+
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array('required');
 }

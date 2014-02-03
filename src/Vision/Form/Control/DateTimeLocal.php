@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class DateTimeLocal extends Text
+class DateTimeLocal extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'datetime-local');

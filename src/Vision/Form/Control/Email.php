@@ -15,7 +15,7 @@ use Vision\Validator;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Email extends Text
+class Email extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'email');

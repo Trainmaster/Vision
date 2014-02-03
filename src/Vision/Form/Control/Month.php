@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Month extends Text
+class Month extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'month');

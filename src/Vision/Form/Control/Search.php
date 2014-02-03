@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Search extends Text
+class Search extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'search');

@@ -13,22 +13,8 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Text extends AbstractControl
+class Text extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'text');
-
-    /**
-     * Constructor
-     *
-     * @param string $name
-     */
-    public function __construct($name)
-    {
-        parent::__construct($name);
-
-        $this->setTag('input')
-             ->setRequired(true)
-             ->addClass('input-' . $this->getAttribute('type'));
-    }
 }

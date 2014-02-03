@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Password extends Text
+class Password extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'password');

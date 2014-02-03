@@ -9,12 +9,22 @@
 namespace Vision\Form\Control;
 
 /**
- * File
+ * AbstractInput
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class File extends AbstractInput
+abstract class AbstractInput extends AbstractControl
 {
-    /** @type array $attributes */
-    protected $attributes = array('type' => 'file');
+     /**
+     * Constructor
+     *
+     * @param string $name
+     */
+    public function __construct($name)
+    {
+        parent::__construct($name);
+
+        $this->setTag('input')
+             ->setRequired(true);
+    }
 }

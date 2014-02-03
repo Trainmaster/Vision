@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Tel extends Text
+class Tel extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'tel');

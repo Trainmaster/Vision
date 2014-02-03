@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Hidden extends Text
+class Hidden extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'hidden');

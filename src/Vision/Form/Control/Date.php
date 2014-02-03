@@ -13,7 +13,7 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Date extends Text
+class Date extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'date');
