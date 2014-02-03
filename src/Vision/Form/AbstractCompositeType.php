@@ -72,6 +72,6 @@ abstract class AbstractCompositeType extends AbstractType
      */
     public function getElements()
     {
-        return $this->elements;
+        return parent::getChildren();
     }
 }
