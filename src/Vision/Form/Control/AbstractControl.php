@@ -283,11 +283,21 @@ abstract class AbstractControl extends AbstractType
         return $isValid;
     }
 
+    /**
+     * @internal
+     * 
+     * @return false
+     */
     public function hasChildren()
     {
         return false;
     }
 
+    /**
+     * @internal
+     * 
+     * @return array
+     */
     public function getChildren()
     {
         return array();
