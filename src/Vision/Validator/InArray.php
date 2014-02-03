@@ -27,40 +27,10 @@ class InArray extends AbstractValidator
     /**
      * @param array $options
      */
-    public function __construct(array $options)
-    {
-        if (isset($options['haystack'])) {
-            $this->setHaystack($options['haystack']);
-        }
-        if (isset($options['strict'])) {
-            $this->setStrict($options['strict']);
-        }
-    }
-
-    /**
-     * @api
-     *
-     * @param array $haystack
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setHaystack(array $haystack)
+    public function __construct(array $haystack, $strict = false)
     {
         $this->haystack = $haystack;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param bool $strict
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setStrict($strict)
-    {
         $this->strict = (bool) $strict;
-        return $this;
     }
 
     /**
