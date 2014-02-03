@@ -14,8 +14,8 @@ class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(self::$validator->isValid(' '));
         $this->assertTrue(self::$validator->isValid('0'));
-        $this->assertTrue(self::$validator->isValid(array('0')));
-        $this->assertTrue(self::$validator->isValid(array(array('0'))));
+        $this->assertTrue(self::$validator->isValid(array('0', 0)));
+        $this->assertTrue(self::$validator->isValid(array(array('0', 0))));
     }
 
     public function testFailure()
