@@ -52,4 +52,16 @@ class MinStringLengthTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse(self::$validatorTwo->isValid($byte));
         }
     }
+
+    public function testGetErrors()
+    {
+        self::$validatorOne->isValid($this->singleBytes[0]);
+        $this->assertEmpty(self::$validatorOne->getErrors());
+
+        self::$validatorOne->isValid('');
+        $this->assertNotEmpty(self::$validatorOne->getErrors());
+
+        self::$validatorOne->isValid($this->singleBytes[0]);
+        $this->assertEmpty(self::$validatorOne->getErrors());
+    }
 }

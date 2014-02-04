@@ -36,4 +36,14 @@ abstract class AbstractValidator implements ValidatorInterface
     {
         return $this->errors;
     }
+
+    /**
+     * @internal
+     *
+     * @return void
+     */
+    public function resetErrors()
+    {
+        $this->errors = array();
+    }
 }

@@ -49,4 +49,16 @@ class MaxStringLengthTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[4]));
         $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[5]));
     }
+
+    public function testGetErrors()
+    {
+        self::$validatorOne->isValid($this->singleBytes[0]);
+        $this->assertEmpty(self::$validatorOne->getErrors());
+
+        self::$validatorOne->isValid($this->singleBytes[1]);
+        $this->assertNotEmpty(self::$validatorOne->getErrors());
+
+        self::$validatorOne->isValid($this->singleBytes[0]);
+        $this->assertEmpty(self::$validatorOne->getErrors());
+    }
 }
