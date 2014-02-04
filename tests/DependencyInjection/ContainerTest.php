@@ -105,6 +105,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('BasicClass', $container->get('BasicClass'));
     }
 
+    /*
     public function testGetWhenNotRegisteredWithRequiredParameterCountForConstructor()
     {
         $this->setExpectedException('RuntimeException');
@@ -114,6 +115,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $container->get('DependentClass');
     }
+    */
 
     public function testGetWhenArgumentIsNoString()
     {
