@@ -49,9 +49,8 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     public function isValid($value)
     {
         $this->resetErrors();
-        $this->value = $value;
 
-        $this->checkEncoding();
+        $this->checkEncoding($value);
 
         if (mb_strlen($value) <= $this->max) {
             return true;
