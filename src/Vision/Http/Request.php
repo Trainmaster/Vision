@@ -249,7 +249,13 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function getUrl()
     {
-        return $this->getScheme() . '://' . $this->getHost() . $this->getPath() . '?' . $this->getQueryString();
+        $url = $this->getScheme() . '://' . $this->getHost() . $this->getPath();
+        
+        if ($this->getQueryString()) {
+            $url .= '?' . $this->getQueryString();
+        }
+        
+        return $url;
     }
     
     /**
