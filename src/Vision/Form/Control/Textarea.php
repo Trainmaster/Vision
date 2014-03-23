@@ -16,6 +16,9 @@ namespace Vision\Form\Control;
  */
 class Textarea extends AbstractControl
 {
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array('value');
+
     /**
      * Constructor
      *
@@ -63,8 +66,8 @@ class Textarea extends AbstractControl
      */
     public function setValue($value)
     {
+        parent::setValue($value);
         $this->addContent($value);
-		$this->value = $value;
 		return $this;
 	}
 }
