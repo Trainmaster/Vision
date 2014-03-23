@@ -157,16 +157,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     /**
      * @api
      *
-     * @return bool
-     */
-    public function isSent()
-    {
-        return $this->data->get($this->getName()) !== null;
-    }
-
-    /**
-     * @api
-     *
      * @param string $name
      *
      * @return AbstractType|null
