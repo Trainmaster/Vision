@@ -203,6 +203,7 @@ class Form extends AbstractCompositeType implements IteratorAggregate
         foreach ($this->controlsIterator as $element) {
             $name = $element->getName();
             $rawValue = $this->data->get($name);
+            
             $element->setRawValue($rawValue);
 
             if (!$element->isValid()) {
@@ -219,6 +220,10 @@ class Form extends AbstractCompositeType implements IteratorAggregate
                 $this->errors[$key] = $validator->getErrors();
                 $isValid = false;
             }
+        }
+        
+        if (!$isValid) {
+            $this->values->exchangeArray(array());
         }
 
         return $isValid;
