@@ -88,6 +88,39 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     public function getAction()
     {
         return $this->getAttribute('action');
+    }    
+    
+    /**
+     * @param string $method
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setMethod($method)
+    {
+        $this->setAttribute('method', $method);
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+    
+    /**
+     * @api
+     *
+     * @param string $method
+     *
+     * @return bool
+     */
+    public function isMethod($method)
+    {
+        return strcasecmp($this->getMethod(), $method) === 0;
     }
 
     /**
