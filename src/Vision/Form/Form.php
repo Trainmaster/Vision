@@ -8,6 +8,7 @@
  */
 namespace Vision\Form;
 
+use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 use Vision\DataStructures\Tree\Node;
 use Vision\DataStructures\Tree\NodeIterator;
 
@@ -51,6 +52,9 @@ class Form extends AbstractCompositeType
         $node = new Node;
         $node->addChild($this);
         $this->iterator = new \RecursiveIteratorIterator(new NodeIterator($node), \RecursiveIteratorIterator::CHILD_FIRST);
+
+        $this->data = new SquareBracketNotation;
+        $this->values = new SquareBracketNotation;
     }
 
     /**
@@ -64,7 +68,7 @@ class Form extends AbstractCompositeType
     /**
      * @param string $action
      *
-     * @return Form Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function setAction($action)
     {
@@ -75,22 +79,56 @@ class Form extends AbstractCompositeType
     /**
      * @api
      *
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->getAttribute('action');
+    }
+
+    /**
      * @param array $data
      *
-     * @return Form Provides a fluent interface.
+     * @return $this Provides a fluent interface.
+     */
+    public function setData(array $data)
+    {
+        $this->data->exchangeArray($data);
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data->getData();
+    }
+
+    /**
+     * @api
+     *
+     * @param array $data
+     *
+     * @return $this Provides a fluent interface.
      */
     public function setValues(array $data)
     {
+        $data = new SquareBracketNotation($data);
+
         $iterator = $this->getIterator();
 
         foreach ($iterator as $element) {
-            if ($element instanceof Control\AbstractControl) {
-                $name = $element->getName();
-                if (isset($data[$name])) {
-                    $element->setValue($data[$name]);
-                }
+            var_dump($element);
+            $value = $data->get($element->getName());
+            if ($value !== null) {
+                $element->setValue($value);
             }
         }
+
+        unset($data);
 
         return $this;
     }
@@ -102,28 +140,7 @@ class Form extends AbstractCompositeType
      */
     public function getValues()
     {
-        return $this->values;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setData(array $data)
-    {
-        $this->data = $data;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
+        return $this->values->getData();
     }
 
     /**
@@ -143,7 +160,7 @@ class Form extends AbstractCompositeType
      */
     public function isSent()
     {
-        return isset($this->data[$this->getName()]);
+        return $this->data->get($this->getName()) !== null;
     }
 
     /**
@@ -189,7 +206,7 @@ class Form extends AbstractCompositeType
         foreach ($iterator as $element) {
             if ($element instanceof Control\AbstractControl) {
                 $name = $element->getName();
-                $rawValue = $this->getValueByName($name);
+                $rawValue = $this->data->get($name);
                 $element->setRawValue($rawValue);
 
                 if (!$element->isValid()) {
@@ -197,7 +214,7 @@ class Form extends AbstractCompositeType
                     $isValid = false;
                 }
 
-                $this->values[$name] = $element->getValue();
+                $this->values->set($name, $element->getValue());
             }
         }
 
@@ -210,38 +227,5 @@ class Form extends AbstractCompositeType
         }
 
         return $isValid;
-    }
-
-    /**
-     * Retrieve array value by html array notation
-     *
-     * Example:
-     * $this->getValueByName('foo[bar]') returns the value of $this->data['foo']['bar'] or NULL.
-     *
-     * @internal
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    protected function getValueByName($name)
-    {
-        if (strpos($name, '[]') !== false) {
-            $name = str_replace('[]', '', $name);
-        }
-
-        $parts = explode('[', $name);
-        $value = $this->data;
-
-        foreach ($parts as $part) {
-            $part = rtrim($part, ']');
-            if (isset($value[$part])) {
-                $value = $value[$part];
-            } else {
-                return null;
-            }
-        }
-
-        return $value;
     }
 }
