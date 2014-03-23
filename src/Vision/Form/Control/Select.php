@@ -29,8 +29,7 @@ class Select extends MultiOptionAbstractControl
     {
         parent::__construct($name);
 
-        $this->setTag('select')
-             ->addClass('input-select');
+        $this->setTag('select');
     }
 
     /**
@@ -38,16 +37,8 @@ class Select extends MultiOptionAbstractControl
      */
     public function __toString()
     {
-        foreach ($this->options as $value => $content) {
-            $option = new Element('option');
-            $option->setAttribute('value', $value);
-            $option->addContent($content);
-
-            if ($this->checkForPreSelection($value)) {
-                $option->setAttribute('selected', 'selected');
-            }
-
-            $this->addContent($option);
+        foreach ($this->options as $value => $label) {
+            $this->addContent($this->createOption($value));
         }
 
         return parent::__toString();
@@ -104,5 +95,25 @@ class Select extends MultiOptionAbstractControl
     public function getMultiple()
     {
         return $this->getAttribute('multiple');
+    }
+    
+    /**
+     * @internal
+     * 
+     * @param string $value 
+     * 
+     * @return Element
+     */
+    protected function createOption($value)
+    {
+        $option = new Element('option');
+        $option->setAttribute('value', $value);
+        $option->addContent($this->options[$value]);
+
+        if ($this->checkCheckedness($value)) {
+            $option->setAttribute('selected', 'selected');
+        }
+        
+        return $option;
     }
 }

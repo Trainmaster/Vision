@@ -10,10 +10,18 @@ namespace Vision\Form\Control;
 
 use Vision\Html\Element;
 
+/**
+ * Radio
+ *
+ * @author Frank Liepert <contact@frank-liepert.de>
+ */
 class Radio extends MultiOptionAbstractControl
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'radio');
+
+    /** @type bool $checkedness */
+    protected $checkedness = false;
 
     /**
      * Constructor
@@ -24,39 +32,62 @@ class Radio extends MultiOptionAbstractControl
     {
         parent::__construct($name);
 
-        $this->setTag('input')
-             ->setRequired(true)
-             ->addClass('input-' . $this->getAttribute('type'));
+        $this->setTag('input');
     }
 
-    public function addOption($value)
+    /**
+     * @return string
+     */
+    public function __toString()
     {
-        $option = new self($this->getName());
-        $option->setValue($value)
-               ->setId($this->getName() . '-' . $value);
-        $this->options[$value] = $option;
-        return $this;
-    }
+        $html = '';
 
-    public function getOption($value)
-    {
-        $option = parent::getOption($value);
-
-        if ($option instanceof self && $this->checkForPreSelection($option->getValue())) {
-            $option->setAttribute('checked');
+        foreach ($this->options as $value => $label) {
+            $html .= $this->getButton($value);
         }
 
-        return $option;
+        return $html;
     }
 
-    public function setOptions(array $options)
+    /**
+     * @api
+     *
+     * @param string $value
+     *
+     * @return Element
+     */
+    public function getButton($value)
     {
-        foreach ($options as $value => $label) {
-            $option = new self($this->getName());
-            $option->setValue($value);
-            $option->setId($this->getName() . '-' . $value);
-            $this->options[$label] = $option;
+        if (!parent::hasOption($value)) {
+            return;
         }
-        return $this;
+
+        if (isset($this->elements[$value])) {
+            return $this->elements[$value];
+        }
+
+        return $this->elements[$value] = $this->createRadioButton($value);
+    }
+
+    /**
+     * @internal
+     *
+     * @param string $value
+     *
+     * @return Element
+     */
+    protected function createRadioButton($value)
+    {
+        $button = new Element('input');
+        $button->setAttributes(array(
+            'value' => $value,
+        ) + $this->getAttributes());
+
+        if (!$this->checkedness && parent::checkCheckedness($button->getAttribute('value'))) {
+            $button->setAttribute('checked');
+            $this->checkedness = true;
+        }
+
+        return $button;
     }
 }

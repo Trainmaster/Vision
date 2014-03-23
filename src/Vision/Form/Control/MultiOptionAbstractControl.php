@@ -20,39 +20,51 @@ abstract class MultiOptionAbstractControl extends AbstractControl
     /** @type array $options */
     protected $options = array();
 
-    public function addOption($value)
+    /**
+     * @api
+     *
+     * @param mixed $value
+     * @param mixed $label
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function addOption($value, $label)
     {
-        $this->options[$value] = $value;
-    }
-
-    public function addOptions(array $options)
-    {
-        foreach ($options as $option) {
-            $this->addOption($option);
-        }
+        $this->options[(string) $value] = (string) $label;
         return $this;
     }
 
-    public function getOption($value)
-    {
-        if (isset($this->options[$value])) {
-            return $this->options[$value];
-        }
-        return null;
-    }
-
     /**
+     * @api
+     *
      * @param array $options
      *
-     * @return MultiOptionAbstractControl Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
-    public function setOptions(array $options)
+    public function addOptions(array $options)
     {
-        $this->options = $options;
+        foreach ($options as $value => $label) {
+            $this->addOption($value, $label);
+        }
         return $this;
     }
 
+
     /**
+     * @internal
+     *
+     * @param string $value
+     *
+     * @return bool
+     */
+    protected function hasOption($value)
+    {
+        return isset($this->options[$value]);
+    }
+
+    /**
+     * @api
+     *
      * @return array
      */
     public function getOptions()
@@ -65,7 +77,7 @@ abstract class MultiOptionAbstractControl extends AbstractControl
      *
      * @return bool
      */
-    public function checkForPreSelection($val)
+    public function checkCheckedness($val)
     {
         $value = $this->getValue();
 
@@ -73,7 +85,7 @@ abstract class MultiOptionAbstractControl extends AbstractControl
             if (in_array($val, $value)) {
                 return true;
             }
-        } elseif (is_string($value) || is_bool($value) || is_int($value)) {
+        } elseif (is_scalar($value)) {
             if ($val == $value) {
                 return true;
             }
@@ -83,13 +95,11 @@ abstract class MultiOptionAbstractControl extends AbstractControl
     }
 
     /**
-     * @return array
+     * @return bool
      */
     public function isValid()
     {
-        if (!empty($this->options)) {
-            parent::addValidator(new Validator\InArray(array('haystack' => $this->options)));
-        }
+        parent::addValidator(new Validator\InArray(array_keys($this->options)));
 
         return parent::isValid();
     }

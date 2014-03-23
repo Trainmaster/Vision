@@ -8,7 +8,7 @@
  */
 namespace Vision\Form\Control;
 
-use Vision\Validator;
+use Vision\Html\Element;
 
 /**
  * Checkbox
@@ -40,18 +40,51 @@ class Checkbox extends MultiOptionAbstractControl
     {
         $html = '';
 
-        foreach ($this->options as $option => $label) {
-            $this->removeAttribute('checked');
-            $this->setLabel($label);
-            $this->setAttribute('value', $option);
-
-            if ($this->checkForPreSelection($option)) {
-                $this->setAttribute('checked', 'checked');
-            }
-
-            $html .= parent::__toString();
+        foreach ($this->options as $value => $label) {
+            $html .= $this->getCheckbox($value);
         }
 
         return $html;
+    }
+
+    /**
+     * @api
+     *
+     * @param string $value
+     *
+     * @return Element
+     */
+    public function getCheckbox($value)
+    {
+        if (!parent::hasOption($value)) {
+            return;
+        }
+
+        if (isset($this->elements[$value])) {
+            return $this->elements[$value];
+        }
+
+        return $this->elements[$value] = $this->createCheckbox($value);
+    }
+
+    /**
+     * @internal
+     *
+     * @param string $value
+     *
+     * @return Element
+     */
+    protected function createCheckbox($value)
+    {
+        $checkbox = new Element('input');
+        $checkbox->setAttributes(array(
+            'value' => $value,
+        ) + $this->getAttributes());
+
+        if (parent::checkCheckedness($checkbox->getAttribute('value'))) {
+            $checkbox->setAttribute('checked');
+        }
+
+        return $checkbox;
     }
 }
