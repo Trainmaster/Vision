@@ -90,6 +90,11 @@ class PDO extends \PDO
         $string = 'IN (' . $string . ')';
         return $string;
     }
+    
+    public function VALUES($data)
+    {
+        return $this->createMultipleValuesList($data);
+    }
 
     /**
      * Useful method for Inserts
