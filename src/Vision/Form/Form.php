@@ -12,12 +12,14 @@ use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 use Vision\DataStructures\Tree\Node;
 use Vision\DataStructures\Tree\NodeIterator;
 
+use IteratorAggregate;
+
 /**
  * Form
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Form extends AbstractCompositeType
+class Form extends AbstractCompositeType implements IteratorAggregate
 {
     /** @type array $attributes */
     protected $attributes = array(
@@ -35,9 +37,9 @@ class Form extends AbstractCompositeType
     /** @type array $values */
     protected $values = array();
 
-    /** @type \RecursiveIteratorIterator|null $iterator */
-    protected $iterator;
-
+    /** @type Iterator\ControlsIterator $controlsIterator */
+    protected $controlsIterator = null;
+    
     /**
      * Constructor
      *
@@ -50,8 +52,10 @@ class Form extends AbstractCompositeType
         $this->setTag('form');
 
         $node = new Node;
-        $node->addChild($this);
-        $this->iterator = new \RecursiveIteratorIterator(new NodeIterator($node), \RecursiveIteratorIterator::CHILD_FIRST);
+        $node->addChild($this);        
+        $this->node = $node;
+        
+        $this->controlsIterator = new Iterator\ControlsIterator(new \RecursiveIteratorIterator(new NodeIterator($this->node)));
 
         $this->data = new SquareBracketNotation;
         $this->values = new SquareBracketNotation;
@@ -62,7 +66,7 @@ class Form extends AbstractCompositeType
      */
     public function getIterator()
     {
-        return $this->iterator;
+        return new \RecursiveIteratorIterator(new NodeIterator($this->node), \RecursiveIteratorIterator::CHILD_FIRST);
     }
 
     /**
@@ -118,10 +122,7 @@ class Form extends AbstractCompositeType
     {
         $data = new SquareBracketNotation($data);
 
-        $iterator = $this->getIterator();
-
-        foreach ($iterator as $element) {
-            var_dump($element);
+        foreach ($this->controlsIterator as $element) {
             $value = $data->get($element->getName());
             if ($value !== null) {
                 $element->setValue($value);
@@ -181,9 +182,7 @@ class Form extends AbstractCompositeType
 
         $name = trim($name);
 
-        $iterator = $this->getIterator();
-
-        foreach ($iterator as $element) {
+        foreach ($this as $element) {
             if ($element->getName() === $name) {
                 return $element;
             }
@@ -201,21 +200,17 @@ class Form extends AbstractCompositeType
     {
         $isValid = true;
 
-        $iterator = $this->getIterator();
+        foreach ($this->controlsIterator as $element) {
+            $name = $element->getName();
+            $rawValue = $this->data->get($name);
+            $element->setRawValue($rawValue);
 
-        foreach ($iterator as $element) {
-            if ($element instanceof Control\AbstractControl) {
-                $name = $element->getName();
-                $rawValue = $this->data->get($name);
-                $element->setRawValue($rawValue);
-
-                if (!$element->isValid()) {
-                    $this->errors[$name] = $element->getErrors();
-                    $isValid = false;
-                }
-
-                $this->values->set($name, $element->getValue());
+            if (!$element->isValid()) {
+                $this->errors[$name] = $element->getErrors();
+                $isValid = false;
             }
+
+            $this->values->set($name, $element->getValue());
         }
 
         foreach ($this->validators as $validator) {
