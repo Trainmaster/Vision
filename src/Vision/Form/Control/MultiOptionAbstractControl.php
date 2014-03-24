@@ -82,13 +82,9 @@ abstract class MultiOptionAbstractControl extends AbstractControl
         $value = $this->getValue();
 
         if (is_array($value)) {
-            if (in_array($val, $value)) {
-                return true;
-            }
+            return in_array($val, $value);
         } elseif (is_scalar($value)) {
-            if ($val == $value) {
-                return true;
-            }
+            return $val == $value;
         }
 
         return false;
