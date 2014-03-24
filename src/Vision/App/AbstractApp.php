@@ -20,7 +20,10 @@ use Vision\Controller\FrontController;
 abstract class AbstractApp
 {
     /** @type bool $debug */
-    protected $debug = true;
+    protected $debug = true;    
+    
+    /** @type string $fallbackLocale */
+    protected $fallbackLocale = 'de_DE';
 
     /** @type string $environment */
     protected $environment = 'dev';
@@ -57,7 +60,7 @@ abstract class AbstractApp
         $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         if ($locale === null) {
-            return false;
+            $locale = $this->fallbackLocale;
         }
 
         Locale::setDefault($locale);
