@@ -59,7 +59,11 @@ class Random
     {
         $length = (int) $length;
 
-        if ($length <= 0) {
+        if ($length < 2) {
+            return false;
+        }
+
+        if (($length % 2) === 1) {
             return false;
         }
 
