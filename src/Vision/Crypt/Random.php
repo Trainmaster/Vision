@@ -31,9 +31,8 @@ class Random
         }
 
         if (function_exists('openssl_random_pseudo_bytes')) {
-            $length = (int) $length;
-            $strong = true;
-            $bytes = openssl_random_pseudo_bytes($length, $strong);
+            $cryptoStrong = true;
+            $bytes = openssl_random_pseudo_bytes($length, $cryptoStrong);
             if ($bytes !== false) {
                 return $bytes;
             }
