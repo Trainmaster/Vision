@@ -34,6 +34,9 @@ abstract class AbstractControl extends AbstractType
     /** @type mixed $value The value after filtering/validation. */
     protected $value;
 
+    /** @type bool $forceNull */
+    protected $forceNull = true;
+
     /**
      * @api
      *
@@ -249,6 +252,19 @@ abstract class AbstractControl extends AbstractType
     /**
      * @api
      *
+     * @param bool $forceNull
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function forceNull($forceNull)
+    {
+        $this->forceNull = (bool) $forceNull;
+        return $this;
+    }
+
+    /**
+     * @api
+     *
      * @param mixed $value
      *
      * @return bool
@@ -276,6 +292,10 @@ abstract class AbstractControl extends AbstractType
 
         foreach ($this->filters as $filter) {
             $value = $filter->filter($value);
+        }
+        
+        if ($this->forceNull && $value === '') {
+            $value = null;
         }
 
         $this->setValue($value);
