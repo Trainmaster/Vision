@@ -8,14 +8,14 @@
  */
 namespace Vision\Session;
 
-use Vision\DataStructures\ArrayProxyObject;
+use Vision\DataStructures\Arrays\ArrayObject;
 
 /**
  * Session
  *
  * @author Frank Liepert
  */
-class Session extends ArrayProxyObject implements SessionInterface
+class Session extends ArrayObject implements SessionInterface
 {
     /** @type null|Extension\ExtensionInteface $extension */
     protected $extension;

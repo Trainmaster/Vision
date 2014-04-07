@@ -174,7 +174,7 @@ class Form extends AbstractCompositeType implements IteratorAggregate
      */
     public function getValues()
     {
-        return $this->values->getData();
+        return $this->values->getArrayCopy();
     }
 
     /**

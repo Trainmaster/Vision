@@ -8,7 +8,7 @@
  */
 namespace Vision\Http;
 
-use Vision\DataStructures\SuperglobalProxyObject;
+use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 use RuntimeException;
 
 /**
@@ -18,19 +18,19 @@ use RuntimeException;
  */
 class Request extends AbstractMessage implements RequestInterface
 {
-    /** @type null|SuperglobalProxyObject $GET */
+    /** @type null|SquareBracketNotation $GET */
     protected $GET;
 
-    /** @type null|SuperglobalProxyObject $POST */
+    /** @type null|SquareBracketNotation $POST */
     protected $POST;
 
-    /** @type null|SuperglobalProxyObject $FILES */
+    /** @type null|SquareBracketNotation $FILES */
     protected $FILES;
 
-    /** @type null|SuperglobalProxyObject $COOKIE */
+    /** @type null|SquareBracketNotation $COOKIE */
     protected $COOKIE;
 
-    /** @type null|SuperglobalProxyObject $SERVER */
+    /** @type null|SquareBracketNotation $SERVER */
     protected $SERVER;
 
     /** @type null|string $method */
@@ -53,11 +53,11 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function __construct()
     {
-        $this->GET = new SuperglobalProxyObject($_GET);
-        $this->POST = new SuperglobalProxyObject($_POST);
-        $this->FILES = new SuperglobalProxyObject($_FILES);
-        $this->COOKIE = new SuperglobalProxyObject($_COOKIE);
-        $this->SERVER = new SuperglobalProxyObject($_SERVER);
+        $this->GET = new SquareBracketNotation($_GET);
+        $this->POST = new SquareBracketNotation($_POST);
+        $this->FILES = new SquareBracketNotation($_FILES);
+        $this->COOKIE = new SquareBracketNotation($_COOKIE);
+        $this->SERVER = new SquareBracketNotation($_SERVER);
 
         // Set $this->method
         if (isset($this->SERVER['REQUEST_METHOD'])) {
