@@ -25,17 +25,7 @@ class ArrayIO implements IOInterface
 
     public function import($file, EntityManager $em)
     {
-        $array = $this->loader->load($file);
-
-        if ($array) {
-            if (isset($array['repositories'])) {
-                $em->registerRepositories($array['repositories']);
-            }
-
-            return true;
-        }
-
-        return false;
+        return $em->registerRepositories($this->loader->load($file));
     }
 
     public function export($file, EntityManager $em)
