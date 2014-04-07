@@ -47,7 +47,7 @@ class EntityManager
      *
      * @param string $file
      *
-     * @return bool
+     * @return $this Provides a fluent interface.
      */
     public function import($file)
     {
@@ -60,7 +60,7 @@ class EntityManager
      * @param string $entity
      * @param string $repository
      *
-     * @return EntityManager Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function registerRepository($entity, $repository)
     {
@@ -73,7 +73,7 @@ class EntityManager
      *
      * @param array $data
      *
-     * @return EntityManager Provides a fluent interface.
+     * @return $this Provides a fluent interface.
      */
     public function registerRepositories(array $data)
     {
