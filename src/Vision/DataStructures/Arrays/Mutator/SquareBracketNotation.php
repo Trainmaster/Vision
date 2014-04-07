@@ -8,47 +8,15 @@
  */
 namespace Vision\DataStructures\Arrays\Mutator;
 
+use Vision\DataStructures\Arrays\ArrayObject;
+
 /**
  * SquareBracketNotation
  *
  * @author Frank Liepert
  */
-class SquareBracketNotation
+class SquareBracketNotation extends ArrayObject
 {
-    /** @type array $data */
-    protected $data = array();
-
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data = array())
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * @api
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-    
-    /**
-     * @api
-     *
-     * @param array $data
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function exchangeArray(array $data)
-    {
-        $this->data = $data;
-        return $this;
-    }
-
     /**
      * @param string $name
      * @param mixed  $value
