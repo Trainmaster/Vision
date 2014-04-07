@@ -23,13 +23,13 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
         $mutator->set('foo[bar]', 2);
         $mutator->set('foo', 1);
 
-        $this->assertSame(array('foo' => 1), $mutator->getData());
+        $this->assertSame(array('foo' => 1), $mutator->getArrayCopy());
 
 
         $mutator->set('foo', 1);
         $mutator->set('foo[bar]',2);
 
-        $this->assertSame(array('foo' => 1), $mutator->getData());
+        $this->assertSame(array('foo' => 1), $mutator->getArrayCopy());
     }
 
     public function testGetWithEmptyArray()
@@ -58,12 +58,12 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('baz', $mutator->get('foo[bar]'));
     }
 
-    public function testGetData()
+    public function testgetArrayCopy()
     {
         $mutator = new SquareBracketNotation(array());
-        $this->assertEmpty($mutator->getData());
+        $this->assertEmpty($mutator->getArrayCopy());
 
         $mutator = new SquareBracketNotation(array('foo' => 'bar'));
-        $this->assertSame(array('foo' => 'bar'), $mutator->getData());
+        $this->assertSame(array('foo' => 'bar'), $mutator->getArrayCopy());
     }
 }
