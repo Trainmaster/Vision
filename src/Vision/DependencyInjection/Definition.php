@@ -23,6 +23,9 @@ class Definition
     /** @type bool $shared */
     protected $shared = true;
 
+    /** @type bool|array $factory */
+    protected $factory = false;
+
     /** @type array $property */
     protected $property = array();
 
@@ -149,6 +152,30 @@ class Definition
         }
         $this->method[][$method] = $dependencies;
         return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @param string $method
+     * @param array  $args
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function factory($method, array $args)
+    {
+        $this->factory = array((string) $method, $args);
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return bool|array
+     */
+    public function getFactory()
+    {
+        return $this->factory;
     }
 
     /**

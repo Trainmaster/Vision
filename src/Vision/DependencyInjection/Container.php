@@ -239,7 +239,13 @@ class Container implements ContainerInterface
     protected function createObject(Definition $definition)
     {
         $class = $definition->getClass();
+        $factory = $definition->getFactory();
+
         $reflection = new ReflectionClass($class);
+
+        if ($factory) {
+            return $reflection->getMethod($factory[0])->invokeArgs(null, $this->resolveDependencies($factory[1]));
+        }
 
         if (!$reflection->isInstantiable()) {
             return false;
