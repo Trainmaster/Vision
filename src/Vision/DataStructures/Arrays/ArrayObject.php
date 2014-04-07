@@ -25,7 +25,7 @@ class ArrayObject implements ArrayAccess
      *
      * @return void
      */
-    public function __construct(array $data)
+    public function __construct(array $data = array())
     {
         $this->data = $data;
     }
