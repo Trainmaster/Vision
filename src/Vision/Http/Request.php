@@ -95,7 +95,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isPost()
     {
-        return $this->method === 'POST' ? true : false;
+        return $this->method === 'POST';
     }
 
     /**
@@ -107,7 +107,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isGet()
     {
-        return $this->method === 'GET' ? true : false;
+        return $this->method === 'GET';
     }
 
     /**
@@ -119,7 +119,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isHead()
     {
-        return $this->method === 'HEAD' ? true : false;
+        return $this->method === 'HEAD';
     }
 
     /**
@@ -131,7 +131,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isPut()
     {
-        return $this->method === 'PUT' ? true : false;
+        return $this->method === 'PUT';
     }
 
     /**
@@ -143,7 +143,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function isDelete()
     {
-        return $this->method === 'DELETE' ? true : false;
+        return $this->method === 'DELETE';
     }
 
     /**
@@ -157,20 +157,16 @@ class Request extends AbstractMessage implements RequestInterface
     {
         return (!empty($this->SERVER['HTTPS']) && $this->SERVER['HTTPS'] !== 'off');
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return bool
      */
     public function isAjax()
     {
-        if (isset($this->SERVER['HTTP_X_REQUESTED_WITH'])
-            && $this->SERVER['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest")
-        {
-            return true;
-        }
-        return false;
+        return (isset($this->SERVER['HTTP_X_REQUESTED_WITH'])
+                && $this->SERVER['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest");
     }
 
     /**
@@ -250,17 +246,17 @@ class Request extends AbstractMessage implements RequestInterface
     public function getUrl()
     {
         $url = $this->getScheme() . '://' . $this->getHost() . $this->getPath();
-        
+
         if ($this->getQueryString()) {
             $url .= '?' . $this->getQueryString();
         }
-        
+
         return $url;
     }
-    
+
     /**
      * @api
-     * 
+     *
      * @return string
      */
     public function getQueryString()
