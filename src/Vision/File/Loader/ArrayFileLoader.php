@@ -20,17 +20,20 @@ class ArrayFileLoader extends AbstractFileLoader
      *
      * @param string $file
      *
-     * @return array|bool
+     * @return array
      */
     public function load($file)
     {
-        if ($this->isLoadable($file)) {
-            $array = include $file;
-            if (is_array($array)) {
-                return $array;
-            }
+        if (!$this->isLoadable($file)) {
+            return array();
         }
 
-        return false;
+        $array = include $file;
+
+        if (is_array($array)) {
+            return $array;
+        }
+
+        return array();
     }
 }
