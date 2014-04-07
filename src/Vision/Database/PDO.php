@@ -95,6 +95,16 @@ class PDO extends \PDO
     {
         return $this->createMultipleValuesList($data);
     }
+    
+    public function SET(array $data)
+    {
+        $values = array_keys($data);
+        array_walk($values, function(&$value) {
+            $value = $value . ' = ?';
+        }); 
+        $qs = 'SET ' . implode(', ', $values);
+        return $qs;
+    }
 
     /**
      * Useful method for Inserts
