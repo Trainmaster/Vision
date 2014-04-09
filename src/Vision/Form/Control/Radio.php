@@ -33,6 +33,7 @@ class Radio extends AbstractOptionControl
         parent::__construct($name);
 
         $this->setTag('input');
+        $this->setRequired(true);
     }
 
     /**

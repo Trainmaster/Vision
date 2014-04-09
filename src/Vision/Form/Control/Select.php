@@ -30,6 +30,7 @@ class Select extends AbstractOptionControl
         parent::__construct($name);
 
         $this->setTag('select');
+        $this->setRequired(true);
     }
 
     /**
