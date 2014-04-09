@@ -271,36 +271,33 @@ abstract class AbstractControl extends AbstractType
      */
     public function isValid()
     {
-        $isValid = true;
-
         $value = $this->rawValue;
 
         if ($this->isRequired()) {
-            $validator = new Validator\InputNotEmptyString;
-            if (array_search($validator, $this->validators) === false) {
-                array_unshift($this->validators, $validator);
-            }
+            array_unshift($this->validators, new Validator\InputNotEmptyString, new Validator\NotNull);
         }
 
         foreach ($this->validators as $validator) {
             if (!$validator->isValid($value)) {
                 $key = get_class($validator);
                 $this->errors[$key] = $validator->getErrors();
-                $isValid = false;
             }
         }
 
         foreach ($this->filters as $filter) {
             $value = $filter->filter($value);
         }
-        
+
         if ($this->forceNull && $value === '') {
             $value = null;
         }
 
-        $this->setValue($value);
+        if (empty($this->errors)) {
+            $this->setValue($value);
+            return true;
+        }
 
-        return $isValid;
+        return false;
     }
 
     /**
