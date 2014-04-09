@@ -248,34 +248,32 @@ class Form extends AbstractCompositeType implements IteratorAggregate
      */
     public function isValid()
     {
-        $isValid = true;
-
         foreach ($this->controlsIterator as $element) {
             $name = $element->getName();
             $rawValue = $this->data->get($name);
 
             $element->setRawValue($rawValue);
 
-            if (!$element->isValid()) {
+            if ($element->isValid()) {
+                $this->values->set($name, $element->getValue());
+            } else {
                 $this->errors[$name] = $element->getErrors();
-                $isValid = false;
             }
-
-            $this->values->set($name, $element->getValue());
         }
 
         foreach ($this->validators as $validator) {
             if (!$validator->isValid($this)) {
                 $key = get_class($validator);
                 $this->errors[$key] = $validator->getErrors();
-                $isValid = false;
             }
         }
 
-        if (!$isValid) {
-            $this->values->exchangeArray(array());
+        if (empty($this->errors)) {
+            return true;
         }
 
-        return $isValid;
+        $this->values->exchangeArray(array());
+
+        return false;
     }
 }
