@@ -33,12 +33,13 @@ class ArrayObject implements ArrayAccess
     /**
      * @param array $data
      *
-     * @return ArrayProxyObject Provides a fluent interface.
+     * @return array
      */
     public function exchangeArray(array $data)
     {
+        $oldArray = $this->data;
         $this->data = $data;
-        return $this;
+        return $oldArray;
     }
 
     /**
