@@ -16,19 +16,20 @@ class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(self::$validator->isValid('0'));
         $this->assertTrue(self::$validator->isValid(array('0', 0)));
         $this->assertTrue(self::$validator->isValid(array(array('0', 0))));
+        $this->assertTrue(self::$validator->isValid(new stdClass));
+        $this->assertTrue(self::$validator->isValid(false));
+        $this->assertTrue(self::$validator->isValid(null));
+        $this->assertTrue(self::$validator->isValid(0));
+        $this->assertTrue(self::$validator->isValid(0.1));
+        $this->assertTrue(self::$validator->isValid(array()));
+        $this->assertTrue(self::$validator->isValid(array(array())));
     }
 
     public function testFailure()
     {
-        $this->assertFalse(self::$validator->isValid(new stdClass));
-        $this->assertFalse(self::$validator->isValid(false));
-        $this->assertFalse(self::$validator->isValid(null));
-        $this->assertFalse(self::$validator->isValid(0));
-        $this->assertFalse(self::$validator->isValid(0.1));
         $this->assertFalse(self::$validator->isValid(''));
         $this->assertFalse(self::$validator->isValid(array('')));
+        $this->assertFalse(self::$validator->isValid(array('foo', '')));
         $this->assertFalse(self::$validator->isValid(array(array(''))));
-        $this->assertFalse(self::$validator->isValid(array()));
-        $this->assertFalse(self::$validator->isValid(array(array())));
     }
 }

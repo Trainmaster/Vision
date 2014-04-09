@@ -39,7 +39,7 @@ class InputNotEmptyString extends AbstractValidator
             $count = iterator_count($iterator);
 
             if ($count === 0) {
-                goto error;
+                return true;
             }
 
             foreach ($iterator as $leaf) {
@@ -54,6 +54,10 @@ class InputNotEmptyString extends AbstractValidator
                 goto error;
             }
 
+            return true;
+        }
+
+        if (!is_string($value)) {
             return true;
         }
 
