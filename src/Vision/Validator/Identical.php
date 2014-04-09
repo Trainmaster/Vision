@@ -26,7 +26,7 @@ class Identical extends AbstractValidator
      */
     public function __construct($operand = null)
     {
-        $this->setoperand($operand);
+        $this->setOperand($operand);
     }
 
     /**
