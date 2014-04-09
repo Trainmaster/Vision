@@ -27,6 +27,8 @@ class Integer extends AbstractValidator
      */
     public function isValid($value)
     {
+        $this->resetErrors();
+
         if (is_int($value)) {
             return true;
         }

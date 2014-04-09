@@ -53,6 +53,8 @@ class PregMatch extends AbstractValidator
      */
     public function isValid($value)
     {
+        $this->resetErrors();
+
         $result = preg_match($this->pattern, $value);
         $result = (bool) $result;
 

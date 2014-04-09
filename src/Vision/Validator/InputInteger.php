@@ -74,6 +74,8 @@ class InputInteger extends AbstractValidator
      */
     public function isValid($value)
     {
+        $this->resetErrors();
+
         $options = array();
 
         if (isset($this->min)) {

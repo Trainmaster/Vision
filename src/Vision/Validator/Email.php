@@ -27,6 +27,8 @@ class Email extends AbstractValidator
      */
     public function isValid($email)
     {
+        $this->resetErrors();
+
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
         }

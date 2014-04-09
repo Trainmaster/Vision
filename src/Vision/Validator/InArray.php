@@ -42,6 +42,8 @@ class InArray extends AbstractValidator
      */
     public function isValid($value)
     {
+        $this->resetErrors();
+
         if ($value === null) {
             return true;
         }

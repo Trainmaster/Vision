@@ -27,6 +27,8 @@ class InputNotEmptyString extends AbstractValidator
      */
     public function isValid($value)
     {
+        $this->resetErrors();
+
         if (is_string($value) && $value !== '') {
             return true;
         }
