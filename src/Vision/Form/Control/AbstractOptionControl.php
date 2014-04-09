@@ -11,11 +11,11 @@ namespace Vision\Form\Control;
 use Vision\Validator;
 
 /**
- * MultiOptionAbstractControl
+ * AbstractOptionControl
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-abstract class MultiOptionAbstractControl extends AbstractControl
+abstract class AbstractOptionControl extends AbstractControl
 {
     /** @type array $options */
     protected $options = array();
@@ -28,7 +28,7 @@ abstract class MultiOptionAbstractControl extends AbstractControl
      *
      * @return $this Provides a fluent interface.
      */
-    public function addOption($value, $label)
+    public function setOption($value, $label)
     {
         $this->options[(string) $value] = (string) $label;
         return $this;
@@ -41,10 +41,10 @@ abstract class MultiOptionAbstractControl extends AbstractControl
      *
      * @return $this Provides a fluent interface.
      */
-    public function addOptions(array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $value => $label) {
-            $this->addOption($value, $label);
+            $this->setOption($value, $label);
         }
         return $this;
     }

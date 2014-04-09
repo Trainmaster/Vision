@@ -15,7 +15,7 @@ use Vision\Html\Element;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Checkbox extends MultiOptionAbstractControl
+class Checkbox extends AbstractOptionControl
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'checkbox');

@@ -15,7 +15,7 @@ use Vision\Html\Element;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Radio extends MultiOptionAbstractControl
+class Radio extends AbstractOptionControl
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'radio');

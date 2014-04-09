@@ -15,7 +15,7 @@ use Vision\Html\Element;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Select extends MultiOptionAbstractControl
+class Select extends AbstractOptionControl
 {
     /** @type array $invalidAttributes */
     protected $invalidAttributes = array('value');
@@ -96,12 +96,12 @@ class Select extends MultiOptionAbstractControl
     {
         return $this->getAttribute('multiple');
     }
-    
+
     /**
      * @internal
-     * 
-     * @param string $value 
-     * 
+     *
+     * @param string $value
+     *
      * @return Element
      */
     protected function createOption($value)
@@ -113,7 +113,7 @@ class Select extends MultiOptionAbstractControl
         if ($this->checkCheckedness($value)) {
             $option->setAttribute('selected', 'selected');
         }
-        
+
         return $option;
     }
 }
