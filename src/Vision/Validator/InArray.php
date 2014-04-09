@@ -58,6 +58,11 @@ class InArray extends AbstractValidator
         }
 
         $this->addError(self::VALUE_NOT_FOUND);
+        $this->addError(array(
+            'needle'   => $value,
+            'haystack' => $this->haystack,
+            'strict'   => $this->strict
+        ));
 
         return false;
     }
