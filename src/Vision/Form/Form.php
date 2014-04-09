@@ -39,7 +39,10 @@ class Form extends AbstractCompositeType implements IteratorAggregate
 
     /** @type Iterator\ControlsIterator $controlsIterator */
     protected $controlsIterator = null;
-    
+
+    /** @type Iterator\OptionControlsIterator $optionControlsIterator */
+    protected $optionControlsIterator = null;
+
     /**
      * Constructor
      *
@@ -52,10 +55,11 @@ class Form extends AbstractCompositeType implements IteratorAggregate
         $this->setTag('form');
 
         $node = new Node;
-        $node->addChild($this);        
+        $node->addChild($this);
         $this->node = $node;
-        
+
         $this->controlsIterator = new Iterator\ControlsIterator(new \RecursiveIteratorIterator(new NodeIterator($this->node)));
+        $this->optionControlsIterator = new Iterator\OptionControlsIterator(new \RecursiveIteratorIterator(new NodeIterator($this->node)));
 
         $this->data = new SquareBracketNotation;
         $this->values = new SquareBracketNotation;
@@ -88,8 +92,8 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     public function getAction()
     {
         return $this->getAttribute('action');
-    }    
-    
+    }
+
     /**
      * @param string $method
      *
@@ -110,7 +114,7 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     {
         return $this->getAttribute('method');
     }
-    
+
     /**
      * @api
      *
@@ -180,6 +184,29 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     /**
      * @api
      *
+     * @param array $data
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setOptions(array $data)
+    {
+        $data = new SquareBracketNotation($data);
+
+        foreach ($this->optionControlsIterator as $element) {
+            $options = $data->get($element->getName());
+            if (is_array($options) && !empty($options)) {
+                $element->setOptions($options);
+            }
+        }
+
+        unset($data);
+
+        return $this;
+    }
+
+    /**
+     * @api
+     *
      * @return array
      */
     public function getErrors()
@@ -226,7 +253,7 @@ class Form extends AbstractCompositeType implements IteratorAggregate
         foreach ($this->controlsIterator as $element) {
             $name = $element->getName();
             $rawValue = $this->data->get($name);
-            
+
             $element->setRawValue($rawValue);
 
             if (!$element->isValid()) {
@@ -244,7 +271,7 @@ class Form extends AbstractCompositeType implements IteratorAggregate
                 $isValid = false;
             }
         }
-        
+
         if (!$isValid) {
             $this->values->exchangeArray(array());
         }
