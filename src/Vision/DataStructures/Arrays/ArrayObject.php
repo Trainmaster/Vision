@@ -22,8 +22,6 @@ class ArrayObject implements ArrayAccess
 
     /**
      * @param array $data
-     *
-     * @return void
      */
     public function __construct(array $data = array())
     {
@@ -31,6 +29,8 @@ class ArrayObject implements ArrayAccess
     }
 
     /**
+     * @api
+     *
      * @param array $data
      *
      * @return array
@@ -43,6 +43,8 @@ class ArrayObject implements ArrayAccess
     }
 
     /**
+     * @api
+     *
      * @return array
      */
     public function getArrayCopy()
