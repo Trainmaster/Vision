@@ -250,9 +250,8 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     {
         foreach ($this->controlsIterator as $element) {
             $name = $element->getName();
-            $rawValue = $this->data->get($name);
 
-            $element->setRawValue($rawValue);
+            $element->setData($this->data->get($name));
 
             if ($element->isValid()) {
                 $this->values->set($name, $element->getValue());

@@ -28,8 +28,8 @@ abstract class AbstractControl extends AbstractType
     /** @type null|string $label */
     protected $label;
 
-    /** @type mixed $rawValue The value before filtering/validation. */
-    protected $rawValue;
+    /** @type mixed $data The value before filtering/validation. */
+    protected $data;
 
     /** @type mixed $value The value after filtering/validation. */
     protected $value;
@@ -206,13 +206,13 @@ abstract class AbstractControl extends AbstractType
     /**
      * @api
      *
-     * @param mixed $rawValue
+     * @param mixed $data
      *
      * @return $this Provides a fluent interface.
      */
-    public function setRawValue($rawValue)
+    public function setData($data)
     {
-        $this->rawValue = $rawValue;
+        $this->data = $data;
         return $this;
     }
 
@@ -221,9 +221,9 @@ abstract class AbstractControl extends AbstractType
      *
      * @return mixed
      */
-    public function getRawValue()
+    public function getData()
     {
-        return $this->rawValue;
+        return $this->data;
     }
 
     /**
@@ -271,7 +271,7 @@ abstract class AbstractControl extends AbstractType
      */
     public function isValid()
     {
-        $value = $this->rawValue;
+        $value = $this->data;
 
         if ($this->isRequired()) {
             array_unshift($this->validators, new Validator\InputNotEmptyString, new Validator\NotNull);
