@@ -57,6 +57,13 @@ class ContactForm extends Form
         $this->addElements(array($firstName, $lastName, $email, $submit));
     }
 }
+$form = new ContactForm('contact-form');
+
+// optional: pre-populate form controls
+$form->setValues(array());
+
+// optional: pre-populate form option controls (checkbox, select, radio)
+$form->setOptions(array());
 
 // input array (f.ex. $_POST or $_GET)
 $data = array(
@@ -65,12 +72,14 @@ $data = array(
     'email' => 'foo@bar.com',
 )
 
-$form = new ContactForm('contact-form');
-$form->bindData($data);
+$form->setData($data);
 
 if ($form->isValid()) {
     // get validated values (after validators/filters were applied)
     print_r ($form->getValues());
+
+    // or by element
+    print ($form->getElement('firstName')->getValue());
 } else {
     // get errors
     print_r ($form->getErrors());
