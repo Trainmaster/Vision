@@ -15,6 +15,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('post', $this->form->getMethod());
         $this->assertTrue($this->form->isMethod('post'));
         $this->assertSame(array(), $this->form->getData());
+        $this->assertSame(array(), $this->form->getValues());
         $this->assertSame(array(), $this->form->getErrors());
     }
 
@@ -47,5 +48,16 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame($this->form, $this->form->setData(array('foo' => 'bar')));
         $this->assertSame(array('foo' => 'bar'), $this->form->getData());
+    }
+
+    public function testSetAndGetValues()
+    {
+        $this->assertSame($this->form, $this->form->setValues(array('foo' => 'bar')));
+        $this->assertSame(array(), $this->form->getValues());
+    }
+
+    public function testSetOptions()
+    {
+        $this->assertSame($this->form, $this->form->setOptions(array('foo' => 'bar')));
     }
 }
