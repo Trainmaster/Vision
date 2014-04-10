@@ -21,74 +21,68 @@ use LogicException;
  */
 abstract class AbstractControl extends AbstractType
 {
+    /** @type null|string $label */
+    protected $label = null;
+
+    /** @type null|mixed $data */
+    protected $data = null;
+
+    /** @type null|mixed $value */
+    protected $value = null;
+
+    /** @type bool $isValidated */
+    protected $isValidated = false;
+
     /** @type array $filters */
     protected $filters = array();
 
     /** @type array $errors */
     protected $errors = array();
 
-    /** @type null|string $label */
-    protected $label;
-
-    /** @type mixed $data */
-    protected $data;
-
-    /** @type mixed $value */
-    protected $value;
-
-    /** @type bool $forceNull */
-    protected $forceNull = true;
-
-    /** @type bool $isValidated */
-    protected $isValidated = false;
-
     /**
      * @api
      *
-     * @param FilterInterface $filter
+     * @param string $label
      *
      * @return $this Provides a fluent interface.
      */
-    public function addFilter(FilterInterface $filter)
+    public function setLabel($label)
     {
-        $this->filters[] = $filter;
+        $this->label = (string) $label;
         return $this;
     }
 
     /**
      * @api
      *
-     * @param array $filters
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @api
+     *
+     * @param string $value
      *
      * @return $this Provides a fluent interface.
      */
-    public function addFilters(array $filters)
+    public function setPlaceholder($placeholder)
     {
-        foreach ($filters as $filter) {
-            $this->addFilter($filter);
-        }
+        $this->setAttribute('placeholder', $placeholder);
         return $this;
     }
 
     /**
      * @api
      *
-     * @return array
+     * @return string
      */
-
-    public function getFilters()
+    public function getPlaceholder()
     {
-        return $this->filters;
-    }
-
-    /**
-     * @api
-     *
-     * @return array
-     */
-    public function getErrors()
-    {
-        return $this->errors;
+        return $this->getAttribute('placeholder');
     }
 
     /**
@@ -164,24 +158,24 @@ abstract class AbstractControl extends AbstractType
     /**
      * @api
      *
-     * @param string $value
+     * @param mixed $data
      *
      * @return $this Provides a fluent interface.
      */
-    public function setPlaceholder($placeholder)
+    public function setData($data)
     {
-        $this->setAttribute('placeholder', $placeholder);
+        $this->data = $data;
         return $this;
     }
 
     /**
      * @api
      *
-     * @return string
+     * @return mixed
      */
-    public function getPlaceholder()
+    public function getData()
     {
-        return $this->getAttribute('placeholder');
+        return $this->data;
     }
 
     /**
@@ -211,67 +205,6 @@ abstract class AbstractControl extends AbstractType
     /**
      * @api
      *
-     * @param mixed $data
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @api
-     *
-     * @param string $label
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setLabel($label)
-    {
-        $this->label = (string) $label;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    /**
-     * @api
-     *
-     * @param bool $forceNull
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function forceNull($forceNull)
-    {
-        $this->forceNull = (bool) $forceNull;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param mixed $value
-     *
      * @return bool
      */
     public function isValid()
@@ -297,10 +230,6 @@ abstract class AbstractControl extends AbstractType
             $value = $filter->filter($value);
         }
 
-        if ($this->forceNull && $value === '') {
-            $value = null;
-        }
-
         $this->isValidated = true;
 
         if (empty($this->errors)) {
@@ -309,6 +238,55 @@ abstract class AbstractControl extends AbstractType
         }
 
         return false;
+    }
+
+    /**
+     * @api
+     *
+     * @param FilterInterface $filter
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->filters[] = $filter;
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @param array $filters
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function addFilters(array $filters)
+    {
+        foreach ($filters as $filter) {
+            $this->addFilter($filter);
+        }
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return array
+     */
+
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * @api
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
     /**
