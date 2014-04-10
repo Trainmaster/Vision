@@ -12,6 +12,8 @@ use Vision\Form\AbstractType;
 use Vision\Filter\FilterInterface;
 use Vision\Validator;
 
+use LogicException;
+
 /**
  * AbstractControl
  *
@@ -36,6 +38,9 @@ abstract class AbstractControl extends AbstractType
 
     /** @type bool $forceNull */
     protected $forceNull = true;
+
+    /** @type bool $isValidated */
+    protected $isValidated = false;
 
     /**
      * @api
@@ -271,6 +276,10 @@ abstract class AbstractControl extends AbstractType
      */
     public function isValid()
     {
+        if ($this->isValidated) {
+            throw new LogicException('The element may only be validated once per life-cycle.');
+        }
+
         $value = $this->data;
 
         if ($this->isRequired()) {
@@ -291,6 +300,8 @@ abstract class AbstractControl extends AbstractType
         if ($this->forceNull && $value === '') {
             $value = null;
         }
+
+        $this->isValidated = true;
 
         if (empty($this->errors)) {
             $this->setValue($value);
