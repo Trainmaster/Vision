@@ -97,3 +97,7 @@ echo $form->start()
      . '</fieldset>'
      . $form->end();
 ```
+
+## Known issues and limitations
+
+* No support for [optgroup element](http://www.w3.org/TR/html5/forms.html#the-optgroup-element).
