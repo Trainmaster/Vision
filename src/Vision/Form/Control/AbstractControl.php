@@ -28,10 +28,10 @@ abstract class AbstractControl extends AbstractType
     /** @type null|string $label */
     protected $label;
 
-    /** @type mixed $data The value before filtering/validation. */
+    /** @type mixed $data */
     protected $data;
 
-    /** @type mixed $value The value after filtering/validation. */
+    /** @type mixed $value */
     protected $value;
 
     /** @type bool $forceNull */
