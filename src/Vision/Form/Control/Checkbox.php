@@ -52,12 +52,12 @@ class Checkbox extends AbstractOptionControl
      *
      * @param string $value
      *
-     * @return Element
+     * @return null|Element
      */
     public function getCheckbox($value)
     {
         if (!parent::hasOption($value)) {
-            return;
+            return null;
         }
 
         if (isset($this->elements[$value])) {
