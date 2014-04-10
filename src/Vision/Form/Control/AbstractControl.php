@@ -176,7 +176,7 @@ abstract class AbstractControl extends AbstractType
      */
     public function getPlaceholder()
     {
-        return $this->placeholder;
+        return $this->getAttribute('placeholder');
     }
 
     /**
