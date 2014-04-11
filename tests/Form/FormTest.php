@@ -8,7 +8,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form = new Form('form');
     }
 
-    public function testMethodsWhenConstructing()
+    public function testDefaultsAfterConstruct()
     {
         $this->assertInstanceOf('RecursiveIteratorIterator', $this->form->getIterator());
         $this->assertSame('', $this->form->getAction());
