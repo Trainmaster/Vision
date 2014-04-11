@@ -95,7 +95,7 @@ abstract class AbstractOptionControl extends AbstractControl
      */
     public function isValid()
     {
-        parent::addValidator(new Validator\InArray(array_keys($this->options)));
+        parent::addValidator(new Validator\InArray(array_keys($this->options), false));
 
         return parent::isValid();
     }
