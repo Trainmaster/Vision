@@ -136,7 +136,7 @@ class Select extends AbstractOptionControl
         $option->addContent($this->options[$value]);
 
         if ($this->checkCheckedness($value)) {
-            $option->setAttribute('selected', 'selected');
+            $option->setAttribute('selected');
         }
 
         return $option;
