@@ -1,0 +1,136 @@
+<?php
+namespace VisionTest\Form;
+
+require_once 'BasicForm.php';
+
+use Vision\Form\Form;
+
+class BasicFormTest extends \PHPUnit_Framework_TestCase
+{
+    protected $defaultData = array(
+        'hidden' => 'hidden-Element',
+        'text' => 'text-Element',
+        'checkbox' => array(
+            1 => 'Checkbox1',
+            2 => 'Checkbox2',
+            3 => 'Checkbox3',
+        ),
+        'select' => array(
+            1 => 'Select1',
+            2 => 'Select2',
+            3 => 'Select3'
+        ),
+        'radio' => array(
+            1 => 'Radio1',
+            2 => 'Radio2',
+            3 => 'Radio3'
+        )
+    );
+
+    public function setUp()
+    {
+        $this->form = new BasicForm('basic_form');
+    }
+
+    public function testGetElement()
+    {
+        $form = $this->form;
+
+        $this->assertInstanceOf('Vision\Form\Control\Hidden', $form->getElement('hidden'));
+        $this->assertInstanceOf('Vision\Form\Control\Text', $form->getElement('text'));
+
+        $this->assertInstanceOf('Vision\Form\Control\Checkbox', $form->getElement('checkbox'));
+        $this->assertInstanceOf('Vision\Form\Control\Select', $form->getElement('select'));
+        $this->assertInstanceOf('Vision\Form\Control\Radio', $form->getElement('radio'));
+    }
+
+    public function testSetValues()
+    {
+        $form = $this->form;
+
+        $values = $this->defaultData;
+
+        $form->setValues($values);
+
+        $this->assertSame($values['checkbox'], $form->getElement('checkbox')->getValue());
+        $this->assertSame($values['checkbox'], $form->getElement('checkbox')->getValue());
+        $this->assertEmpty($form->getElement('checkbox')->getOptions());
+        $this->assertEmpty($form->getElement('select')->getOptions());
+        $this->assertEmpty($form->getElement('radio')->getOptions());
+    }
+
+    public function testSetOptions()
+    {
+        $form = $this->form;
+
+        $options = $this->defaultData;
+
+        $form->setOptions($options);
+
+        $this->assertNull($form->getElement('checkbox')->getValue());
+        $this->assertNull($form->getElement('checkbox')->getValue());
+        $this->assertSame($options['checkbox'], $form->getElement('checkbox')->getOptions());
+        $this->assertSame($options['select'], $form->getElement('select')->getOptions());
+        $this->assertSame($options['radio'], $form->getElement('radio')->getOptions());
+    }
+
+    public function testEmptyInputData()
+    {
+        $form = $this->form;
+
+        $form->setData(array());
+
+        $this->assertFalse($form->isValid());
+        $this->assertCount(4, $form->getErrors());
+    }
+
+    public function testPartialInvalidInputData()
+    {
+        $form = $this->form;
+
+        $form->setData(array(
+            'hidden'   => 'hidden',
+            'text'     => '',
+            'checkbox' => 1,
+            'select'   => 1,
+            'radio'    => 1
+        ));
+
+        $this->assertFalse($form->isValid());
+        $this->assertSame(array(), $form->getValues());
+        $this->assertCount(4, $form->getErrors());
+    }
+
+    public function testValidProcessing()
+    {
+        $form = $this->form;
+
+        $form->setValues($this->defaultData);
+        $form->setOptions($this->defaultData);
+
+        $this->assertEmpty($form->getValues());
+
+        $inputData = array(
+            'text'     => 'Hello World',
+            'checkbox' => '1',
+            'select'   => '1',
+            'radio'    => '1'
+        );
+
+        $form->setData($inputData);
+
+        $this->assertTrue($form->isValid());
+        $this->assertCount(0, $form->getErrors());
+
+        $values = array(
+            'hidden' => null,
+            'text'   => 'Hello World',
+            'checkbox' => '1',
+            'select'   => '1',
+            'radio'    => '1'
+        );
+
+        $this->assertSame($values, $form->getValues());
+        $this->assertSame($inputData, $form->getData());
+    }
+}
