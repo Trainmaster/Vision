@@ -14,6 +14,13 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractOptionControl', array('abstract'));
     }
 
+    public function testInheritance()
+    {
+        $control = $this->control;
+
+        $this->assertInstanceOf('Vision\Form\Control\AbstractControl', $control);
+    }
+
     public function testAfterConstruct()
     {
         $control = $this->control;
@@ -63,6 +70,14 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($control->isValid());
     }
 
+    public function testIsValidWithoutDataAndOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
+
+        $this->assertFalse($control->isValid());
+    }
+
     public function testIsValidWithDataAndWithoutOptions()
     {
         $control = $this->control;
@@ -72,9 +87,30 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($control->isValid());
     }
 
+    public function testIsValidWithDataAndWithoutOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
+
+        $control->setData(1);
+
+        $this->assertFalse($control->isValid());
+    }
+
     public function testIsValidWithDataAndOptions()
     {
         $control = $this->control;
+
+        $control->setData(1);
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertTrue($control->isValid());
+    }
+
+    public function testIsValidWithDataAndOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
 
         $control->setData(1);
         $control->setOptions($this->defaultOptions);
@@ -92,6 +128,17 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($control->isValid());
     }
 
+    public function testIsValidWithComplexDataAndOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
+
+        $control->setData(array(1, 2, 3));
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertTrue($control->isValid());
+    }
+
     public function testIsValidWithInvalidDataAndOptions()
     {
         $control = $this->control;
@@ -102,9 +149,52 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($control->isValid());
     }
 
+    public function testIsValidWithInvalidDataAndOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
+
+        $control->setData(4);
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertFalse($control->isValid());
+    }
+
+    public function testIsValidWithComplexPartialDataAndOptions()
+    {
+        $control = $this->control;
+
+        $control->setData(array(1, 3));
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertTrue($control->isValid());
+    }
+
+    public function testIsValidWithComplexPartialDataAndOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
+
+        $control->setData(array(1, 3));
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertTrue($control->isValid());
+    }
+
     public function testIsValidWithComplexPartialInvalidDataAndOptions()
     {
         $control = $this->control;
+
+        $control->setData(array(1, 2, 4));
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertFalse($control->isValid());
+    }
+
+    public function testIsValidWithComplexPartialInvalidDataAndOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
 
         $control->setData(array(1, 2, 4));
         $control->setOptions($this->defaultOptions);
@@ -119,5 +209,15 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $control->setOptions($this->defaultOptions);
 
         $this->assertTrue($control->isValid());
+    }
+
+    public function testIsValidWithoutDataAndWithOptionsWhenIsRequired()
+    {
+        $control = $this->control;
+        $control->setRequired(true);
+
+        $control->setOptions($this->defaultOptions);
+
+        $this->assertFalse($control->isValid());
     }
 }

@@ -8,6 +8,13 @@ class AbstractInputTest extends \PHPUnit_Framework_TestCase
         $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractInput', array('abstract'));
     }
 
+    public function testInheritance()
+    {
+        $control = $this->control;
+
+        $this->assertInstanceOf('Vision\Form\Control\AbstractControl', $control);
+    }
+
     public function testDefaultsAfterConstruct()
     {
         $control = $this->control;
