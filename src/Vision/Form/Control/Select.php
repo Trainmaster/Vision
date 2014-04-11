@@ -103,6 +103,26 @@ class Select extends AbstractOptionControl
     }
 
     /**
+     * @api
+     *
+     * @param string $value
+     *
+     * @return null|Element
+     */
+    public function getOption($value)
+    {
+        if (!parent::hasOption($value)) {
+            return null;
+        }
+
+        if (isset($this->elements[$value])) {
+            return $this->elements[$value];
+        }
+
+        return $this->elements[$value] = $this->createOption($value);
+    }
+
+    /**
      * @internal
      *
      * @param string $value
