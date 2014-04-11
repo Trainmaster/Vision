@@ -38,6 +38,10 @@ class Select extends AbstractOptionControl
      */
     public function __toString()
     {
+        if (empty($this->options)) {
+            return '';
+        }
+
         foreach ($this->options as $value => $label) {
             $this->addContent($this->createOption($value));
         }
