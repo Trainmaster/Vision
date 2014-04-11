@@ -27,7 +27,7 @@ class InArray extends AbstractValidator
     /**
      * @param array $options
      */
-    public function __construct(array $haystack, $strict = false)
+    public function __construct(array $haystack, $strict = true)
     {
         $this->haystack = $haystack;
         $this->strict = (bool) $strict;
