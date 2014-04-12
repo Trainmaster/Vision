@@ -45,4 +45,15 @@ class TextareaTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($control, $control->setValue('foo'));
         $this->assertSame(array('foo'), $control->getContents());
     }
+    
+    public function testSetValueAfterValidatingWithValueAndData()
+    {
+        $control = $this->control;
+        $control->setValue('foo');
+        $control->setData('bar');
+        $control->isValid();
+
+        $this->assertSame('bar', $control->getValue('foo'));
+        $this->assertSame(array('bar'), $control->getContents());
+    }
 }

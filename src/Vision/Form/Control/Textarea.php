@@ -66,8 +66,9 @@ class Textarea extends AbstractControl
      */
     public function setValue($value)
     {
-        parent::setValue($value);
+        $this->clearContents();
         $this->addContent($value);
-		return $this;
-	}
+        $this->value = $value;
+        return $this;
+    }
 }
