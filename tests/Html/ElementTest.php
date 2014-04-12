@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Html;
+
 use Vision\Html\Element;
 
 class ElementTest extends \PHPUnit_Framework_TestCase
@@ -9,15 +11,19 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Vision\Html\Element', $element);
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
     public function testContructWhenArgumentIsNoString()
     {
-        $this->setExpectedException('InvalidArgumentException');
         $element = new Element(1);
     }
-
+    
+    /**
+     * @expectedException InvalidArgumentException
+     */
     public function testContructWhenArgumentHasForbiddenCharacters()
     {
-        $this->setExpectedException('InvalidArgumentException');
         $element = new Element('h1?');
     }
 
@@ -101,20 +107,22 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array('Hello World', $content), $element->getContents());
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
     public function testAddContentWhenArgumentIsArray()
     {
         $element = new Element('div');
 
-        $this->setExpectedException('InvalidArgumentException');
-
         $element->addContent(array());
     }
 
+    /**
+     * @expectedException LogicException
+     */
     public function testAddContentWhenElementIsVoid()
     {
         $element = new Element('area');
-
-        $this->setExpectedException('LogicException');
 
         $element->addContent('foo');
     }
