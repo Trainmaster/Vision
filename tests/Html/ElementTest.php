@@ -118,4 +118,15 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $element->addContent('foo');
     }
+
+    public function testClearContents()
+    {
+        $element = new Element('div');
+
+        $element->addContent('foo');
+
+        $this->assertSame(array('foo'), $element->getContents());
+        $this->assertSame($element, $element->clearContents());
+        $this->assertSame(array(), $element->getContents());
+    }
 }

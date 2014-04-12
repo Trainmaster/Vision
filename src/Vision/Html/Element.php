@@ -246,6 +246,17 @@ class Element
     /**
      * @api
      *
+     * @return $this Provides a fluent interface.
+     */
+    public function clearContents()
+    {
+        $this->contents = array();
+        return $this;
+    }
+
+    /**
+     * @api
+     *
      * @param string $key
      * @param string $value
      *
