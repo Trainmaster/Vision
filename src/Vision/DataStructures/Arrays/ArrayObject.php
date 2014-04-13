@@ -107,8 +107,8 @@ class ArrayObject implements ArrayAccess, Countable
     /**
      * @return int
      */
-    public function count()
+    public function count($mode = COUNT_NORMAL)
     {
-        return count($this->data);
+        return count($this->data, $mode);
     }
 }
