@@ -45,6 +45,16 @@ class ArrayObject implements ArrayAccess
     /**
      * @api
      *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->data);
+    }
+
+    /**
+     * @api
+     *
      * @return array
      */
     public function getArrayCopy()
