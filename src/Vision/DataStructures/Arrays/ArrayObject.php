@@ -9,13 +9,14 @@
 namespace Vision\DataStructures\Arrays;
 
 use ArrayAccess;
+use Countable;
 
 /**
  * ArrayObject
  *
  * @author Frank Liepert
  */
-class ArrayObject implements ArrayAccess
+class ArrayObject implements ArrayAccess, Countable
 {
     /** @type array $data */
     protected $data = array();
@@ -101,5 +102,13 @@ class ArrayObject implements ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->data);
     }
 }
