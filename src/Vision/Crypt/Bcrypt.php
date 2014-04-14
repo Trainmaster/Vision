@@ -62,11 +62,7 @@ class Bcrypt
      */
     public function verify($password, $hash)
     {
-        if (crypt($password, $hash) === $hash) {
-            return true;
-        }
-
-        return false;
+        return crypt($password, $hash) === $hash;
     }
 
     /**
