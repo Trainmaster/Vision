@@ -8,6 +8,8 @@
  */
 namespace Vision\Form\Control;
 
+use DateTime;
+
 /**
  * Date
  *
@@ -17,4 +19,48 @@ class Date extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'date');
+
+    /** @type string $dateFormat */
+    protected $dateFormat = 'Y-m-d';
+
+    /**
+     * @api
+     *
+     * @param string $dateFormat
+     *
+     * @return $this Provides a fluent interface
+     */
+    public function setDateFormat($dateFormat)
+    {
+        $this->dateFormat = (string) $dateFormat;
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return $this->dateFormat;
+    }
+
+    /**
+     * @api
+     *
+     * @param mixed $value
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setValue($value)
+    {
+        if ($value instanceof DateTime) {
+            parent::setAttribute('value', $value->format($this->dateFormat));
+        }
+        
+        $this->value = $value;
+
+        return $this;
+    }
 }
