@@ -3,6 +3,8 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Date;
 
+use DateTime;
+
 class DateTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -41,5 +43,48 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('01.01.2000', $control->getAttribute('value'));
         $this->assertSame($dateTime, $control->getValue());
+    }
+
+    public function testValidStringAsValue()
+    {
+        $control = $this->control;
+
+        $control->setValue('2000-01-01');
+
+        $this->assertSame('2000-01-01', $control->getAttribute('value'));
+        $this->assertInstanceOf('DateTime', $control->getValue());
+    }
+
+    public function testNullAsValue()
+    {
+        $control = $this->control;
+
+        $control->setValue(null);
+
+        $dateTime = new DateTime;
+        $currentDate = $dateTime->format($control->getDateFormat());
+
+        $this->assertSame($currentDate, $control->getAttribute('value'));
+        $this->assertInstanceOf('DateTime', $control->getValue());
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testInvalidStringAsValue()
+    {
+        $control = $this->control;
+
+        $control->setValue('2000-101-01');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidArgumentAsValue()
+    {
+        $control = $this->control;
+
+        $control->setValue(2000);
     }
 }

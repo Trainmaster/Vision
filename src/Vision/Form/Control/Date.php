@@ -10,6 +10,8 @@ namespace Vision\Form\Control;
 
 use DateTime;
 
+use InvalidArgumentException;
+
 /**
  * Date
  *
@@ -51,13 +53,24 @@ class Date extends AbstractInput
      *
      * @param mixed $value
      *
+     * @throws InvalidArgumentException
+     *
      * @return $this Provides a fluent interface.
      */
     public function setValue($value)
     {
-        if ($value instanceof DateTime) {
-            parent::setAttribute('value', $value->format($this->dateFormat));
+        if (!$value instanceof DateTime) {
+            if (is_string($value) || $value === null) {
+                $value = new DateTime($value);            
+            } else {
+                throw new InvalidArgumentException(sprintf(
+                    'Argument 1 must be string, %s given.',
+                    gettype($value)
+                ));
+            }
         }
+        
+        parent::setAttribute('value', $value->format($this->dateFormat));
         
         $this->value = $value;
 
