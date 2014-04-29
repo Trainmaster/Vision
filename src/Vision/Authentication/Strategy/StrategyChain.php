@@ -76,5 +76,17 @@ class StrategyChain implements StrategyInterface
             return $this->accepted->getIdentity();
         }
         return array();
+    }    
+    
+    /**
+     * @api
+     *
+     * @return void
+     */
+    public function invalidate($identity)
+    {
+        foreach ($this->strategies as $strategy) {
+            $strategy->invalidate($identity);
+        }
     }
 }

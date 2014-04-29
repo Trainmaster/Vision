@@ -23,5 +23,10 @@ interface StrategyInterface
     /**
      * @return array
      */
-    public function getIdentity();
+    public function getIdentity();    
+    
+    /**
+     * @return void
+     */
+    public function invalidate($identity);
 }
