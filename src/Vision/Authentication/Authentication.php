@@ -77,7 +77,7 @@ class Authentication
      */
     public function clearIdentity()
     {
-        $this->strategy->invalidate();
+        $this->strategy->invalidate($this->getIdentity());
         return $this->storage->clear();
     }
 }

@@ -28,5 +28,5 @@ interface StrategyInterface
     /**
      * @return void
      */
-    public function invalidate();
+    public function invalidate($identity);
 }

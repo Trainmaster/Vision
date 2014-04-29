@@ -83,10 +83,10 @@ class StrategyChain implements StrategyInterface
      *
      * @return void
      */
-    public function invalidate()
+    public function invalidate($identity)
     {
         foreach ($this->strategies as $strategy) {
-            $strategy->invalidate();
+            $strategy->invalidate($identity);
         }
     }
 }
