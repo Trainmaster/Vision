@@ -3,7 +3,7 @@
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
+ * @copyright 2012-2014 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 namespace Vision\Authentication;
@@ -18,10 +18,14 @@ class Authentication
     /** @type null|Strategy\StrategyInterface $strategy */
     protected $strategy;
 
+    /** @type null|Storage\StorageInterface $storage */
+    protected $storage;
+
     /**
      * Constructor
      *
-     * @param FrontController $frontController
+     * @param Strategy\StrategyInterface $strategy
+     * @param Storage\StorageInterface $storage
      */
     public function __construct(Strategy\StrategyInterface $strategy, Storage\StorageInterface $storage)
     {
@@ -40,14 +44,13 @@ class Authentication
     {
         $this->clearIdentity();
 
-        $authentication = $this->strategy->authenticate($data);
+        $result = $this->strategy->authenticate($data);
 
-        if ($authentication) {
-            $this->storage->save($this->strategy->getIdentity());
-            return true;
+        if ($result->isSuccess()) {
+            $this->storage->save($result->getIdentity());
         }
 
-        return false;
+        return $result;
     }
 
     /**
@@ -73,7 +76,7 @@ class Authentication
     /**
      * @api
      *
-     * @return bool
+     * @return void
      */
     public function clearIdentity()
     {

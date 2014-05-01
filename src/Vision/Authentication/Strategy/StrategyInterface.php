@@ -3,7 +3,7 @@
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
+ * @copyright 2012-2014 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 namespace Vision\Authentication\Strategy;
@@ -16,16 +16,17 @@ namespace Vision\Authentication\Strategy;
 interface StrategyInterface
 {
     /**
-     * @return bool
+     * @api
+     *
+     * @return \Vision\Authentication\ResultInterface
      */
     public function authenticate(array $data);
 
     /**
-     * @return array
-     */
-    public function getIdentity();    
-    
-    /**
+     * @api
+     *
+     * @param mixed $identity
+     *
      * @return void
      */
     public function invalidate($identity);
