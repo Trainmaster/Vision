@@ -34,9 +34,9 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
         $this->assertSame(1234567.89, $control->getValue());
         $this->assertSame('USD', $control->getCurrency());
-    }    
-    
-    public function testCurrencyCodeWithoutEmptySpace()
+    }
+
+    public function testCurrencySignWithoutEmptySpace()
     {
         $control = $this->control;
 
@@ -47,9 +47,46 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('USD', $control->getCurrency());
     }
 
+    public function testLocalizedCurrencySignWithEmptySpace()
+    {
+        // \Locale::setDefault('en-US');
+
+        // $control = $this->control;
+
+        // $control->setValue('$ 1,234,567.89');
+
+        // $this->assertSame('$1,234,567.89', $control->getAttribute('value'));
+        // $this->assertSame(1234567.89, $control->getValue());
+        // $this->assertSame('USD', $control->getCurrency());
+
+        // \Locale::setDefault('de-DE');
+    }    
+    
+    public function testLocalizedCurrencySignWithoutEmptySpace()
+    {
+        \Locale::setDefault('en-US');
+
+        $control = $this->control;
+
+        $control->setValue('$1,234,567.89');
+
+        $this->assertSame('$1,234,567.89', $control->getAttribute('value'));
+        $this->assertSame(1234567.89, $control->getValue());
+        $this->assertSame('USD', $control->getCurrency());
+
+        \Locale::setDefault('de-DE');
+    }
+
     public function testEuroFormats()
     {
         $control = $this->control;
+
+        $control->setValue('1.234.567,89 EUR');
+
+        // contains non-breaking space
+        $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
+
+        $this->assertSame(1234567.89, $control->getValue());
 
         $control->setValue('1.234.567,89 €');
 
