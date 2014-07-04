@@ -8,6 +8,8 @@
  */
 namespace Vision\Form\Control;
 
+use DateTime;
+
 /**
  * DateTimeLocal
  *
@@ -17,4 +19,33 @@ class DateTimeLocal extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'datetime-local');
+
+    /** @type string $dateTimeLocalFormat */
+    protected $dateTimeLocalFormat = 'Y-m-d\TH:i:s';
+
+    /**
+     * @api
+     *
+     * @param mixed $value
+     *
+     * @throws Exception
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setValue($value)
+    {
+        if ($value === null) {
+            return parent::setValue($value);
+        }
+
+        if (!$value instanceof DateTime) {
+            $value = new DateTime($value);
+        }
+
+        parent::setAttribute('value', $value->format($this->dateTimeLocalFormat));
+
+        $this->value = $value;
+
+        return $this;
+    }
 }
