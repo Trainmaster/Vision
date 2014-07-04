@@ -21,7 +21,7 @@ class Time extends AbstractInput
     protected $attributes = array('type' => 'time');
 
     /** @type string $timeFormat */
-    protected $timeFormat = 'HH:mm';
+    protected $timeFormat = 'H:i';
 
     /**
      * @api
