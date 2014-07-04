@@ -17,4 +17,56 @@ class Time extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'time');
+
+    /** @type string $timeFormat */
+    protected $timeFormat = 'HH:mm';
+
+    /**
+     * @api
+     *
+     * @param string $dateFormat
+     *
+     * @return $this Provides a fluent interface
+     */
+    public function setTimeFormat($timeFormat)
+    {
+        $this->timeFormat = (string) $timeFormat;
+        return $this;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getTimeFormat()
+    {
+        return $this->timeFormat;
+    }
+
+    /**
+     * @api
+     *
+     * @param mixed $value
+     *
+     * @throws Exception
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setValue($value)
+    {
+        if ($value === null) {
+            return parent::setValue($value);
+        }
+
+        if (!$value instanceof DateTime) {
+            $value = new DateTime($value);
+        }
+
+        parent::setAttribute('value', $value->format($this->timeFormat));
+
+        $this->value = $value;
+
+        return $this;
+    }
 }
