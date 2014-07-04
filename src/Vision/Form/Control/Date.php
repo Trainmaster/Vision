@@ -59,19 +59,16 @@ class Date extends AbstractInput
      */
     public function setValue($value)
     {
-        if (!$value instanceof DateTime) {
-            if (is_string($value) || $value === null) {
-                $value = new DateTime($value);            
-            } else {
-                throw new InvalidArgumentException(sprintf(
-                    'Argument 1 must be string, %s given.',
-                    gettype($value)
-                ));
-            }
+        if ($value === null) {
+            return parent::setValue($value);
         }
-        
+
+        if (!$value instanceof DateTime) {
+            $value = new DateTime($value);
+        }
+
         parent::setAttribute('value', $value->format($this->dateFormat));
-        
+
         $this->value = $value;
 
         return $this;
