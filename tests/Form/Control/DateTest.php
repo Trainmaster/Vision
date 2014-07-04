@@ -61,11 +61,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
         $control->setValue(null);
 
-        $dateTime = new DateTime;
-        $currentDate = $dateTime->format($control->getDateFormat());
-
-        $this->assertSame($currentDate, $control->getAttribute('value'));
-        $this->assertInstanceOf('DateTime', $control->getValue());
+        $this->assertSame(null, $control->getAttribute('value'));
+        $this->assertSame(null, $control->getValue());
     }
 
     /**
@@ -76,15 +73,5 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $control = $this->control;
 
         $control->setValue('2000-101-01');
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testInvalidArgumentAsValue()
-    {
-        $control = $this->control;
-
-        $control->setValue(2000);
     }
 }
