@@ -53,7 +53,7 @@ class Date extends AbstractInput
      *
      * @param mixed $value
      *
-     * @throws InvalidArgumentException
+     * @throws Exception
      *
      * @return $this Provides a fluent interface.
      */
