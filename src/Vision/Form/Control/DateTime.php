@@ -8,8 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use DateTime as NativeDateTime;
-
 /**
  * DateTime
  *
@@ -19,7 +17,7 @@ class DateTime extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'datetime');
-    
+
     /**
      * @api
      *
@@ -35,11 +33,11 @@ class DateTime extends AbstractInput
             return parent::setValue($value);
         }
 
-        if (!$value instanceof NativeDateTime) {
-            $value = new NativeDateTime($value);
+        if (!$value instanceof \DateTime) {
+            $value = new \DateTime($value);
         }
 
-        parent::setAttribute('value', $value->format(NativeDateTime::RFC3339));
+        parent::setAttribute('value', $value->format(\DateTime::RFC3339));
 
         $this->value = $value;
 
