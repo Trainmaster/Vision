@@ -8,7 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-
 /**
  * Textarea
  *
