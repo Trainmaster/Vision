@@ -8,8 +8,6 @@
  */
 namespace Vision\Form\Control;
 
-use DateTime;
-
 /**
  * DateTimeLocal
  *
@@ -38,8 +36,8 @@ class DateTimeLocal extends AbstractInput
             return parent::setValue($value);
         }
 
-        if (!$value instanceof DateTime) {
-            $value = new DateTime($value);
+        if (!$value instanceof \DateTime) {
+            $value = new \DateTime($value);
         }
 
         parent::setAttribute('value', $value->format($this->dateTimeLocalFormat));
