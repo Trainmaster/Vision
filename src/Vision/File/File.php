@@ -24,6 +24,6 @@ class File extends \SplFileObject
      */
     public function isLoadable()
     {
-        return $this->isFile() && $this->isReadable();
+        return parent::isFile() && parent::isReadable();
     }
 }

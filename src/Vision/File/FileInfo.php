@@ -24,6 +24,6 @@ class FileInfo extends \SplFileInfo
      */
     public function isLoadable()
     {
-        return $this->isFile() && $this->isReadable();
+        return parent::isFile() && parent::isReadable();
     }
 }
