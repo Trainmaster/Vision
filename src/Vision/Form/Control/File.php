@@ -17,4 +17,20 @@ class File extends AbstractInput
 {
     /** @type array $attributes */
     protected $attributes = array('type' => 'file');
+
+    /** @type array $invalidAttributes */
+    protected $invalidAttributes = array('value');
+
+    /**
+     * @api
+     *
+     * @param mixed $value
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
 }
