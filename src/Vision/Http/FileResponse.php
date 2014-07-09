@@ -23,11 +23,15 @@ class FileResponse extends Response
     /**
      * Constructor
      *
-     * @param string $file
+     * @param \Vision\File\File|string $file
      */
     public function __construct($file)
     {
-        $this->file = new File($file, 'rb');
+        if ($file instanceof File) {
+            $this->file = $file;
+        } else {
+            $this->file = new File($file, 'rb');
+        }
     }
 
     /**
