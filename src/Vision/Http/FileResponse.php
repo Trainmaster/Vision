@@ -41,6 +41,7 @@ class FileResponse extends Response
      */
     public function send()
     {
+        $this->addHeader('Content-Type', $this->file->getMimeType());
         $this->addHeader('Content-Length', $this->file->getSize());
 
         $this->sendStatusLine()
