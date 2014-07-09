@@ -8,6 +8,8 @@
  */
 namespace Vision\File;
 
+use finfo;
+
 /**
  * File
  *
@@ -25,5 +27,16 @@ class File extends \SplFileObject
     public function isLoadable()
     {
         return parent::isFile() && parent::isReadable();
+    }
+
+    /**
+     * @api
+     *
+     * @return string|false
+     */
+    public function getMimeType()
+    {
+        $finfo = new finfo(FILEINFO_MIME);
+        return $finfo->file(parent::getPathname());
     }
 }
