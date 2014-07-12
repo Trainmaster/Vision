@@ -55,7 +55,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         $this->GET = new SquareBracketNotation($_GET);
         $this->POST = new SquareBracketNotation($_POST);
-        $this->FILES = new SquareBracketNotation($_FILES);
+        $this->FILES = new SquareBracketNotation($this->transformFilesArray($_FILES));
         $this->COOKIE = new SquareBracketNotation($_COOKIE);
         $this->SERVER = new SquareBracketNotation($_SERVER);
 
@@ -363,5 +363,34 @@ class Request extends AbstractMessage implements RequestInterface
         $this->path = rtrim($path, '/');
 
         return $this;
+    }
+
+    /**
+     * @internal
+     *
+     * @param array $files
+     *
+     * @return array
+     */
+    protected function transformFilesArray(array $files)
+    {
+        foreach ($files as &$value) {
+            $newArray = array();
+
+            foreach ($value as $key => $val) {
+                if (is_array($val)) {
+                    array_walk_recursive($val, function(&$item) use($key) {
+                        $item = array($key => $item);
+                    });
+                    $newArray = array_replace_recursive($newArray, $val);
+                }
+            }
+
+            if (!empty($newArray)) {
+                $value = $newArray;
+            }
+        }
+
+        return $files;
     }
 }
