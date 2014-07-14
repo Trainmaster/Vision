@@ -8,6 +8,8 @@
  */
 namespace Vision\Authentication;
 
+use UnexpectedValueException;
+
 /**
  * Authentication
  *
@@ -45,6 +47,14 @@ class Authentication
         $this->clearIdentity();
 
         $result = $this->strategy->authenticate($data);
+
+        if (!$result instanceof ResultInterface) {
+            throw new UnexpectedValueException(sprintf(
+                'The method "%s::authenticate" must return an instance of "%s".',
+                get_class($this->strategy),
+                __NAMESPACE__ . '\ResultInterface'
+            ));
+        }
 
         if ($result->isSuccess()) {
             $this->storage->save($result->getIdentity());
