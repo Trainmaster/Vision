@@ -191,7 +191,7 @@ class Router
             $defaults = $route->getDefaults();
             if (!empty($defaults)) {
                 foreach ($defaults as $key => $value) {
-                    $this->request->get[$key] = $value;
+                    $this->request->GET[$key] = $value;
                 }
             }
             return $route;
