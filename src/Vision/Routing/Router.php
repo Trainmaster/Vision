@@ -180,9 +180,9 @@ class Router
         }
 
         if (isset($matches)) {
-            foreach ($matches as $key => $match) {
+            foreach ($matches as $key => $value) {
                 if (is_string($key)) {
-                    $this->request->GET[$key] = $match;
+                    $this->request->GET[$key] = $value;
                 }
             }
         }
