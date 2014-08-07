@@ -179,7 +179,7 @@ class Router
             break;
         }
 
-        if (isset($matches)) {
+        if (!empty($matches)) {
             foreach ($matches as $key => $value) {
                 if (is_string($key)) {
                     $this->request->GET[$key] = $value;
