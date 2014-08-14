@@ -205,7 +205,7 @@ class Request extends AbstractMessage implements RequestInterface
             return $this;
         }
 
-        if (strlen($host > 255)) {
+        if (strlen($host) > 255) {
             return $this;
         }
 
