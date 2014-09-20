@@ -74,7 +74,6 @@ class RouteCompiler
         if (empty($matches)) {
             $route = $this->createStaticRoute($path, $class, $method);
         } else {
-            $start = 0;
             $tokens = array();
             $regex = $path;
 
@@ -91,7 +90,6 @@ class RouteCompiler
                     $tmp = '?' . $tmp . '?';
                 }
 
-                $start = $match[0][1] + strlen($match[0][0]);
                 $tokens[] = $match[1][0];
 
                 $regex = str_replace($match[0][0], $tmp, $regex);
