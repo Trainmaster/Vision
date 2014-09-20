@@ -45,7 +45,7 @@ abstract class AbstractApp
     /**
      * This method sets the locale based on the HTTP-Accept-Language-Header.
      *
-     * @return void
+     * @return bool
      */
     public function initLocale()
     {
@@ -63,7 +63,7 @@ abstract class AbstractApp
             $locale = $this->fallbackLocale;
         }
 
-        Locale::setDefault($locale);
+        return Locale::setDefault($locale);
     }
 
     /**
