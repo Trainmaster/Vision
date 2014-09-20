@@ -8,8 +8,6 @@
  */
 namespace Vision\DependencyInjection;
 
-use Vision\DependencyInjection\Dependency;
-
 /**
  * Definition
  *
