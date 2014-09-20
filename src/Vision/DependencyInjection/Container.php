@@ -382,7 +382,6 @@ class Container implements ContainerInterface
                         $match[1]
                     ));
                 }
-                return $di->getParameter($match[1]) !== null ? $di->getParameter($match[1]) : $match[1];
             }, $dependency);
             $dependency = $value;
         }
