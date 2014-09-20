@@ -37,7 +37,7 @@ abstract class AbstractCompositeType extends AbstractType
     /**
      * @api
      *
-     * @param mixed $element
+     * @param AbstractType $element
      *
      * @return $this Provides a fluent interface.
      */
