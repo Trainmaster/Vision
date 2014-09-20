@@ -2,3 +2,4 @@ tmp/
 vendor/
 src/Vision/Extension/
 composer.lock
+.idea
