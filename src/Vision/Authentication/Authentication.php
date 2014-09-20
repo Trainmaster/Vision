@@ -66,7 +66,7 @@ class Authentication
     /**
      * @api
      *
-     * @return void
+     * @return bool
      */
     public function isAuthenticated()
     {
@@ -91,6 +91,6 @@ class Authentication
     public function clearIdentity()
     {
         $this->strategy->invalidate($this->getIdentity());
-        return $this->storage->clear();
+        $this->storage->clear();
     }
 }
