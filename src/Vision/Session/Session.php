@@ -17,11 +17,11 @@ use Vision\DataStructures\Arrays\ArrayObject;
  */
 class Session extends ArrayObject implements SessionInterface
 {
-    /** @type null|Extension\ExtensionInteface $extension */
+    /** @type null|Extension\ExtensionInterface $extension */
     protected $extension;
 
     /**
-     * @param Extension\ExtensionInteface $extension
+     * @param Extension\ExtensionInterface $extension
      */
     public function __construct(Extension\ExtensionInterface $extension)
     {

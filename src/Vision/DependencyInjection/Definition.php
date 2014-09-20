@@ -48,7 +48,7 @@ class Definition
      *
      * @param string $class
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return $this Provides a fluent interface.
      */
@@ -103,7 +103,7 @@ class Definition
      * @param string $property
      * @param mixed $value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return $this Provides a fluent interface.
      */
@@ -138,7 +138,7 @@ class Definition
      * @param string $method
      * @param array $dependencies
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return $this Provides a fluent interface.
      */

@@ -48,7 +48,7 @@ class RouteCompiler
      *
      * @param Route $route
      *
-     * @return CompiledRoute
+     * @return AbstractCompiledRoute
      */
     public function compile(Route $route)
     {

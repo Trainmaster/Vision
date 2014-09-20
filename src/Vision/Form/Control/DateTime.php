@@ -23,7 +23,7 @@ class DateTime extends AbstractInput
      *
      * @param mixed $value
      *
-     * @throws Exception
+     * @throws \Exception
      *
      * @return $this Provides a fluent interface.
      */
