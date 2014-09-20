@@ -63,7 +63,7 @@ class NativeExtension implements ExtensionInterface
             $this->started = true;
             return true;
         } else {
-            throw \RuntimeException('Session could not be started.');
+            throw new \RuntimeException('Session could not be started.');
         }
     }
 
