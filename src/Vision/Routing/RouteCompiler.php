@@ -8,8 +8,6 @@
  */
 namespace Vision\Routing;
 
-use Vision\Http\RequestInterface;
-
 /**
  * RouteCompiler
  *

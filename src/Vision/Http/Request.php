@@ -9,7 +9,6 @@
 namespace Vision\Http;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
-use RuntimeException;
 
 /**
  * Request
