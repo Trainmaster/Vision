@@ -75,13 +75,11 @@ class RouteCompiler
             $route = $this->createStaticRoute($path, $class, $method);
         } else {
             $start = 0;
-            $length = 0;
             $tokens = array();
             $regex = $path;
 
             foreach ($matches as $match) {
                 $tmp = '';
-                $length = $match[0][1] - $start;
 
                 if (isset($requirements[$match[1][0]])) {
                     $tmp .= sprintf('(?<%s>%s)', $match[1][0], $requirements[$match[1][0]]);
