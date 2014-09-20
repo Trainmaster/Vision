@@ -8,9 +8,6 @@
  */
 namespace Vision\Form;
 
-use Vision\Form\Decorator\DecoratorInterface;
-use Vision\Validator\ValidatorInterface;
-
 /**
  * AbstractCompositeType
  *
