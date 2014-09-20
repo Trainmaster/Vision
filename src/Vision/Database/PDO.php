@@ -3,7 +3,7 @@
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
+ * @copyright 2012-2014 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 namespace Vision\Database;
@@ -90,18 +90,18 @@ class PDO extends \PDO
         $string = 'IN (' . $string . ')';
         return $string;
     }
-    
+
     public function VALUES($data)
     {
         return $this->createMultipleValuesList($data);
     }
-    
+
     public function SET(array $data)
     {
         $values = array_keys($data);
         array_walk($values, function(&$value) {
             $value = $value . ' = ?';
-        }); 
+        });
         $qs = 'SET ' . implode(', ', $values);
         return $qs;
     }

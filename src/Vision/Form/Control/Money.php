@@ -3,7 +3,7 @@
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
+ * @copyright 2012-2014 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 namespace Vision\Form\Control;
@@ -62,8 +62,8 @@ class Money extends Text
                 // convert non-breaking space to space
                 $fmtCurrency->setPattern(str_replace(' ', ' ', $fmtCurrency->getPattern()));
                 $parsedValue = $fmtCurrency->parseCurrency($value, $this->currency);
-            }            
-            
+            }
+
             if (!$parsedValue) {
                 $oldPattern = $fmtCurrency->getPattern();
                 $fmtCurrency->setPattern(str_replace(' ', '', $fmtCurrency->getPattern()));
@@ -84,7 +84,7 @@ class Money extends Text
         }
 
         $this->value = $value;
-        
+
         // convert space to non-breaking space
         $fmtCurrency->setPattern(str_replace(' ', ' ', $fmtCurrency->getPattern()));
 

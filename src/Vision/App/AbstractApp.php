@@ -3,7 +3,7 @@
  * Vision PHP-Framework
  *
  * @author Frank Liepert <contact@frank-liepert.de>
- * @copyright 2012-2013 Frank Liepert
+ * @copyright 2012-2014 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 namespace Vision\App;
@@ -20,8 +20,8 @@ use Vision\Controller\FrontController;
 abstract class AbstractApp
 {
     /** @type bool $debug */
-    protected $debug = true;    
-    
+    protected $debug = true;
+
     /** @type string $fallbackLocale */
     protected $fallbackLocale = 'de_DE';
 
