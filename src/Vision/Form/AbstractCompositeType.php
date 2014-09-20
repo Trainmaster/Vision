@@ -71,4 +71,18 @@ abstract class AbstractCompositeType extends AbstractType
     {
         return parent::getChildren();
     }
+
+    /**
+     * @api
+     *
+     * @param $name
+     */
+    public function removeElementByName($name)
+    {
+        foreach ($this->elements as $key => $element) {
+            if ($element->getName() === $name) {
+                unset($this->elements[$key]);
+            }
+        }
+    }
 }

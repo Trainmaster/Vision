@@ -28,4 +28,15 @@ class AbstractCompositeTest extends \PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf('\Vision\Form\AbstractType', $compositeType->getElements());
         $this->assertCount(2, $compositeType->getElements());
     }
+
+    public function testRemoveElementByName()
+    {
+        $compositeType = $this->getMockForAbstractClass('\Vision\Form\AbstractCompositeType', array('foo'));
+        $element = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+
+        $compositeType->addElement($element);
+        $compositeType->removeElementByName('foo');
+
+        $this->assertCount(0, $compositeType->getElements());
+    }
 }
