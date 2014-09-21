@@ -12,7 +12,6 @@ use Vision\Http\RequestInterface;
 use Vision\Http\RequestAwareInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Http\ResponseAwareInterface;
-use Vision\Session\Session;
 use Vision\Http\Url;
 
 /**
