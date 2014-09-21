@@ -17,7 +17,7 @@ class NodeIterator implements \RecursiveIterator
     private $nodes;
 
     /** @type int $position */
-    private $position;
+    private $position = 0;
 
     /**
      * @param NodeInterface $node
