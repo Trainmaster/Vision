@@ -124,7 +124,7 @@ class File implements StorageInterface
         $filename = realpath($filename);
 
         if (!$filename) {
-            return;
+            return null;
         }
 
         $file = new \SplFileObject($filename, 'r');
@@ -139,7 +139,7 @@ class File implements StorageInterface
         if ($expiration > 0 && $diff > $expiration) {
             unset($file);
             unlink($filename);
-            return;
+            return null;
         }
 
         ob_start();

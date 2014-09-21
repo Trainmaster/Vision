@@ -129,6 +129,7 @@ class PDO extends \PDO
             $list = array_fill(0, $count, $list);
             return implode(',', $list);
         }
+        return '';
     }
 
     /**

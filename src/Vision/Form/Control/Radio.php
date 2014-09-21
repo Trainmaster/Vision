@@ -55,12 +55,12 @@ class Radio extends AbstractOptionControl
      *
      * @param string $value
      *
-     * @return Element
+     * @return null|Element
      */
     public function getButton($value)
     {
         if (!parent::hasOption($value)) {
-            return;
+            return null;
         }
 
         if (isset($this->elements[$value])) {
