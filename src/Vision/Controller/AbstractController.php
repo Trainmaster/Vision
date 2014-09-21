@@ -87,6 +87,7 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      * @api
      *
      * @param string $url
+     * @param int $statusCode
      *
      * @return bool|ResponseInterface
      */
