@@ -83,7 +83,7 @@ class FrontController
     }
 
     /**
-     * @param ExceptionHandlerInterface $handler
+     * @param ExceptionHandlerInterface $exceptionHandler
      *
      * @return $this Provides a fluent interface.
      */

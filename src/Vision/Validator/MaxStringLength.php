@@ -22,7 +22,7 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     protected $max;
 
     /**
-     * @param int $min
+     * @param int $max
      */
     public function __construct($max)
     {

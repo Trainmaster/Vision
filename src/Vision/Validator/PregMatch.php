@@ -34,7 +34,7 @@ class PregMatch extends AbstractValidator
     /**
      * @api
      *
-     * @param string $value
+     * @param string $pattern
      *
      * @return $this Provides a fluent interface.
      */

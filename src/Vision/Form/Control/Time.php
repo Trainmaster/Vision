@@ -24,7 +24,7 @@ class Time extends AbstractInput
     /**
      * @api
      *
-     * @param string $dateFormat
+     * @param string $timeFormat
      *
      * @return $this Provides a fluent interface
      */

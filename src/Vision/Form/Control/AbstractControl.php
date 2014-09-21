@@ -65,7 +65,7 @@ abstract class AbstractControl extends AbstractType
     /**
      * @api
      *
-     * @param string $value
+     * @param string $placeholder
      *
      * @return $this Provides a fluent interface.
      */
@@ -128,7 +128,7 @@ abstract class AbstractControl extends AbstractType
     /**
      * @api
      *
-     * @param bool $value
+     * @param bool $required
      *
      * @return $this Provides a fluent interface.
      */
