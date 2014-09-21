@@ -60,6 +60,22 @@ class Node implements NodeInterface
     /**
      * @api
      *
+     * @param NodeInterface $child
+     *
+     * @return void
+     */
+    public function removeChild(NodeInterface $child)
+    {
+        $key = array_search($child, $this->children, true);
+
+        if ($key !== false) {
+            unset($this->children[$key]);
+        }
+    }
+
+    /**
+     * @api
+     *
      * @return array
      */
     public function getChildren()

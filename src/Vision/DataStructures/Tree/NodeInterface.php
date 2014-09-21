@@ -23,6 +23,15 @@ interface NodeInterface
      * @return $this Provides a fluent interface.
      */
     public function setParent(NodeInterface $parent);
+    
+    /**
+     * @api
+     *
+     * @param NodeInterface$child
+     *
+     * @return void
+     */
+    public function removeChild(NodeInterface $child);
 
     /**
      * @api
