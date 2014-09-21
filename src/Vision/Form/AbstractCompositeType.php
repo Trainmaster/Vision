@@ -15,9 +15,6 @@ namespace Vision\Form;
  */
 abstract class AbstractCompositeType extends AbstractType
 {
-    /** @type array $elements */
-    protected $elements = array();
-
     /**
      * @api
      *
