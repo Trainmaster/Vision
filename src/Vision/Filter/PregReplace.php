@@ -42,10 +42,12 @@ class PregReplace implements FilterInterface
     }
 
     /**
-    * @link http://php.net/manual/de/function.preg-replace.php
-    *
-    * @param mixed $value
-    */
+     * @link http://php.net/manual/de/function.preg-replace.php
+     *
+     * @param mixed $value
+     *
+     * @return mixed
+     */
     public function filter($value)
     {
         return preg_replace($this->pattern, $this->replacement, $value);
