@@ -3,8 +3,6 @@ namespace VisionTest\Form;
 
 require_once 'BasicForm.php';
 
-use Vision\Form\Form;
-
 class BasicFormTest extends \PHPUnit_Framework_TestCase
 {
     protected $defaultData = array(
