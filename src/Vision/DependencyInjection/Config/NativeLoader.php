@@ -23,8 +23,6 @@ class NativeLoader extends ScopeFileLoader
 
     /**
      * @param DI\Container $container
-     *
-     * @return void
      */
     public function __construct(DI\Container $container)
     {

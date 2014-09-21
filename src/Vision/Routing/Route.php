@@ -24,8 +24,6 @@ class Route extends AbstractRoute
     /**
      * @param string $path
      * @param string $controller
-     *
-     * @return void
      */
     public function __construct($path, $controller)
     {
