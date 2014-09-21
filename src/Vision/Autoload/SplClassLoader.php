@@ -157,7 +157,7 @@ class SplClassLoader
      *
      * @param bool $prepend
      *
-     * @return <type>
+     * @return void
      */
     public function register($prepend = false)
     {
