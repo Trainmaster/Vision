@@ -43,7 +43,7 @@ abstract class AbstractCompositeType extends AbstractType
      */
     public function addElement(AbstractType $element)
     {
-        $this->elements[] = $element;
+        $this->elements[] = $element->setParent($this);
         return $this;
     }
 

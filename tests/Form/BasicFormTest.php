@@ -44,6 +44,19 @@ class BasicFormTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Vision\Form\Control\Radio', $form->getElement('radio'));
     }
 
+    public function testRemoveElement()
+    {
+        $form = $this->form;
+
+        $hiddenElement = $form->getElement('hidden');
+
+        $this->assertInstanceOf('Vision\Form\Control\Hidden', $hiddenElement);
+
+        $form->removeElement('hidden');
+
+        $this->assertNull($form->getElement('hidden'));
+    }
+
     public function testSetValues()
     {
         $form = $this->form;

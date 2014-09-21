@@ -25,6 +25,9 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     /** @type array $validators */
     protected $validators = array();
 
+    /** @type null|NodeInterface $parent */
+    private $parent;
+
     /**
      * Constructor
      *
@@ -94,7 +97,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
         return $this;
     }
 
-
     /**
      * @api
      *
@@ -104,7 +106,16 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
      */
     public function setParent(NodeInterface $parent)
     {
+        $this->parent = $parent;
         return $this;
+    }
+
+    /**
+     * @return null|NodeInterface
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**
@@ -115,6 +126,21 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     public function hasChildren()
     {
         return !empty($this->elements);
+    }
+
+    /**
+     * @api
+     *
+     * @param NodeInterface $node
+     *
+     * @return void
+     */
+    public function removeChild(NodeInterface $node)
+    {
+        $key = array_search($node, $this->elements, true);
+        if ($key !== false) {
+            unset($this->elements[$key]);
+        }
     }
 
     /**

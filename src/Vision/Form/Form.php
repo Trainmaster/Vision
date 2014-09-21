@@ -244,6 +244,22 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     /**
      * @api
      *
+     * @param string $name
+     *
+     * @return void
+     */
+    public function removeElement($name)
+    {
+        foreach ($this as $element) {
+            if ($element->getName() === $name) {
+                $element->getParent()->removeChild($element);
+            }
+        }
+    }
+
+    /**
+     * @api
+     *
      * @return bool
      */
     public function isValid()
