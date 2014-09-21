@@ -105,6 +105,8 @@ class ArrayObject implements ArrayAccess, Countable
     }
 
     /**
+     * @param int $mode
+     *
      * @return int
      */
     public function count($mode = COUNT_NORMAL)

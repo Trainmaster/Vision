@@ -87,6 +87,8 @@ class Session extends ArrayObject implements SessionInterface
     }
 
     /**
+     * @param bool $deleteOldSession
+     *
      * @see Extension\ExtensionInterface
      */
     public function regenerateId($deleteOldSession = true)

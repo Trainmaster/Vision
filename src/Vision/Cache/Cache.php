@@ -39,7 +39,7 @@ class Cache implements CacheInterface
      *
      * @param string $key
      * @param mixed $value
-     * @param int $value
+     * @param int $expiration
      *
      * @return Storage\StorageInterface
      */

@@ -18,6 +18,8 @@ interface StrategyInterface
     /**
      * @api
      *
+     * @param array $data
+     *
      * @return \Vision\Authentication\ResultInterface
      */
     public function authenticate(array $data);

@@ -18,6 +18,8 @@ interface StorageInterface
     /**
      * @api
      *
+     * @param $data
+     *
      * @return void
      */
     public function save($data);
