@@ -8,7 +8,6 @@
  */
 namespace Vision\Controller;
 
-use Vision\Crypt\Random;
 use Vision\Http\RequestInterface;
 use Vision\Http\RequestAwareInterface;
 use Vision\Http\ResponseInterface;
@@ -41,7 +40,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
      */
     public function preFilter()
     {
-        $this->initSessionToken();
     }
 
     /**
@@ -104,21 +102,5 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
                        ->setStatusCode($statusCode);
 
         return $this->response;
-    }
-
-    /**
-     * This method is for session token generation and may be overridden.
-     *
-     * @internal
-     *
-     * @return void
-     */
-    protected function initSessionToken()
-    {
-        if (isset($this->session) && empty($this->session['token'])) {
-            $random = new Random;
-            $token = $random->generateHex(128);
-            $this->session['token'] = $token;
-        }
     }
 }
