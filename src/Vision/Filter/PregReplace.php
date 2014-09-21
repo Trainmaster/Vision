@@ -27,8 +27,6 @@ class PregReplace implements FilterInterface
 
     /**
      * @param array $options
-     *
-     * @return void
      */
     public function __construct(array $options = array())
     {
