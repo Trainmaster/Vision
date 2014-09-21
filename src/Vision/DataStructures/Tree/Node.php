@@ -71,6 +71,8 @@ class Node implements NodeInterface
         if ($key !== false) {
             unset($this->children[$key]);
         }
+
+        $this->children = array_values($this->children);
     }
 
     /**

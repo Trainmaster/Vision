@@ -138,9 +138,12 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     public function removeChild(NodeInterface $node)
     {
         $key = array_search($node, $this->elements, true);
+
         if ($key !== false) {
             unset($this->elements[$key]);
         }
+
+        $this->elements = array_values($this->elements);
     }
 
     /**
