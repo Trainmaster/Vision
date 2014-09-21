@@ -19,6 +19,8 @@ interface ResponseInterface
      * @api
      *
      * @param string $body
+     *
+     * @return $this
      */
     public function body($body);
 
@@ -32,6 +34,8 @@ interface ResponseInterface
      * @param string $domain
      * @param bool   $secure
      * @param bool   $httponly
+     *
+     * @return $this
      */
     public function addCookie($name, $value = '', $expire = 0, $path = '',
                               $domain = '', $secure = false, $httponly = false);
@@ -46,6 +50,8 @@ interface ResponseInterface
      * @param string $domain
      * @param bool   $secure
      * @param bool   $httponly
+     *
+     * @return $this
      */
     public function addRawCookie($name, $value = '', $expire = 0, $path = '',
                                  $domain = '', $secure = false, $httponly = false);
@@ -55,6 +61,8 @@ interface ResponseInterface
      *
      * @param string $name
      * @param string $value
+     *
+     * @return $this
      */
     public function addHeader($name, $value);
 
@@ -62,11 +70,15 @@ interface ResponseInterface
      * @api
      *
      * @param int $statusCode
+     *
+     * @return $this
      */
     public function setStatusCode($statusCode);
 
     /**
      * @api
+     *
+     * @return void
      */
     public function send();
 }
