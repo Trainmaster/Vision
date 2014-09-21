@@ -14,9 +14,7 @@ use Vision\Http\RequestAwareInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Http\ResponseAwareInterface;
 use Vision\Session\Session;
-use Vision\Session\SessionAwareInterface;
 use Vision\Http\Url;
-use Vision\Templating\TemplateEngineAwareInterface;
 
 /**
  * AbstractController
@@ -26,7 +24,6 @@ use Vision\Templating\TemplateEngineAwareInterface;
  * @author Frank Liepert
  */
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface,
-                                             TemplateEngineAwareInterface, SessionAwareInterface,
                                              ControllerInterface
 {
     /** @type RequestInterface $request */
@@ -34,12 +31,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
 
     /** @type ResponseInterface $response */
     protected $response;
-
-    /** @type Session $session */
-    protected $session;
-
-    /** @type null|object $template */
-    protected $template;
 
     /**
      * This method will be called right after instantiating the controller.
@@ -87,32 +78,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param Session $session
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setSession(Session $session)
-    {
-        $this->session = $session;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param object $template
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setTemplate($template)
-    {
-        $this->template = $template;
         return $this;
     }
 
