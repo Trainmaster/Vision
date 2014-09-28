@@ -14,15 +14,15 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testContructWhenArgumentIsNoString()
+    public function testConstructWhenArgumentIsNoString()
     {
         $element = new Element(1);
     }
-    
+
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testContructWhenArgumentHasForbiddenCharacters()
+    public function testConstructWhenArgumentHasForbiddenCharacters()
     {
         $element = new Element('h1?');
     }

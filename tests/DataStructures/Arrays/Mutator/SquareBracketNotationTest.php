@@ -58,7 +58,7 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('baz', $mutator->get('foo[bar]'));
     }
 
-    public function testgetArrayCopy()
+    public function testGetArrayCopy()
     {
         $mutator = new SquareBracketNotation(array());
         $this->assertEmpty($mutator->getArrayCopy());
