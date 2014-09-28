@@ -2,7 +2,6 @@
 require_once 'TestClasses.php';
 
 use Vision\DependencyInjection\Container;
-use Vision\DependencyInjection\Definition;
 
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
