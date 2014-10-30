@@ -154,22 +154,6 @@ class Element
     }
 
     /**
-     * Apply htmlspecialchars()
-     *
-     * @param mixed $value
-     *
-     * @return string|null
-     */
-    protected function clean($value)
-    {
-        if (is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
-            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-        }
-
-        return null;
-    }
-
-    /**
      * Render attributes
      *
      * @return string
@@ -180,9 +164,9 @@ class Element
 
         foreach ($this->attributes as $key => $value) {
             if ($value === true) {
-                $html .= ' ' . $this->clean($key);
+                $html .= ' ' . $key;
             } else {
-                $html .= ' ' . $this->clean($key) . '="' . $this->clean($value). '"';
+                $html .= ' ' . $key . '="' . $value . '"';
             }
         }
 
