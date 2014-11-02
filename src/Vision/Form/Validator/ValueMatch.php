@@ -53,7 +53,7 @@ class ValueMatch extends AbstractValidator
             throw new \InvalidArgumentException(sprintf(
                 'Argument 1 passed to %s must be an instance of %s.',
                 __METHOD__,
-                get_class('AbstractCompositeType')
+                'Vision\Form\AbstractCompositeType'
             ));
         }
 
