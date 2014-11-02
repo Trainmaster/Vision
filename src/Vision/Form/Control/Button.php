@@ -13,8 +13,18 @@ namespace Vision\Form\Control;
  *
  * @author Frank Liepert <contact@frank-liepert.de>
  */
-class Button extends AbstractInput
+class Button extends AbstractControl
 {
-    /** @type array $attributes */
-    protected $attributes = array('type' => 'button');
+    /**
+     * Constructor
+     *
+     * @param string $name
+     */
+    public function __construct($name)
+    {
+        parent::__construct($name);
+
+        $this->setTag('button')
+             ->setRequired(true);
+    }
 }

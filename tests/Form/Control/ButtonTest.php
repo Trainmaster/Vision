@@ -14,13 +14,14 @@ class ButtonTest extends \PHPUnit_Framework_TestCase
     {
         $control = $this->control;
 
-        $this->assertInstanceOf('Vision\Form\Control\AbstractInput', $control);
+        $this->assertInstanceOf('Vision\Form\Control\AbstractControl', $control);
     }
 
     public function testDefaultsAfterConstruct()
     {
         $control = $this->control;
 
-        $this->assertSame('button', $control->getAttribute('type'));
+        $this->assertSame('button', $control->getTag());
+        $this->assertTrue($control->isRequired());
     }
 }
