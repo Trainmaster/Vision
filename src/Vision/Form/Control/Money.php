@@ -20,6 +20,9 @@ class Money extends Text
     /** @type string $currency */
     protected $currency = 'EUR';
 
+    /** @type bool $showCurrencySymbol */
+    protected $showCurrencySymbol = false;
+
     /**
      * @api
      *
@@ -41,6 +44,25 @@ class Money extends Text
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * @param bool $showCurrencySymbol
+     *
+     * @return $this
+     */
+    public function setShowCurrencySymbol($showCurrencySymbol)
+    {
+        $this->showCurrencySymbol = (bool) $showCurrencySymbol;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function showCurrencySymbol()
+    {
+        return $this->showCurrencySymbol;
     }
 
     /**
@@ -88,7 +110,18 @@ class Money extends Text
         // convert space to non-breaking space
         $fmtCurrency->setPattern(str_replace(' ', ' ', $fmtCurrency->getPattern()));
 
-        parent::setAttribute('value', $fmtCurrency->formatCurrency($this->value, $this->currency));
+        if ($this->showCurrencySymbol) {
+            $formattedValue = $fmtCurrency->formatCurrency($this->value, $this->currency);
+        } else {
+            $formattedValue = number_format(
+                $this->value,
+                $fmtCurrency->getAttribute(NumberFormatter::MAX_FRACTION_DIGITS),
+                $fmtCurrency->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
+                $fmtCurrency->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL)
+            );
+        }
+
+        parent::setAttribute('value', $formattedValue);
 
         return $this;
     }
