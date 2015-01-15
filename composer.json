@@ -7,7 +7,7 @@
         "php": ">=5.3.8"
     },
     "require-dev": {
-        "phpunit/PHPUnit": "4.3.*"
+        "phpunit/PHPUnit": "4.4.*"
     },
     "authors": [
         {
