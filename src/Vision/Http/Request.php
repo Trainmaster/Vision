@@ -175,10 +175,7 @@ class Request extends AbstractMessage implements RequestInterface
      */
     public function getScheme()
     {
-        if ($this->isSecure()) {
-            return 'https';
-        }
-        return 'http';
+        return $this->isSecure() ? 'https' : 'http';
     }
 
     /**
