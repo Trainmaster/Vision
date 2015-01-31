@@ -285,17 +285,21 @@ class Request extends AbstractMessage implements RequestInterface
      */
     protected function initBasePath()
     {
+        $basePath = '';
+
         if (isset($this->SERVER['SCRIPT_NAME'])) {
-            $path = dirname($this->SERVER['SCRIPT_NAME']);
+            $basePath = dirname($this->SERVER['SCRIPT_NAME']);
         }
 
-        if ($path !== '.') {
-            $this->basePath = $path;
+        if ($basePath === '.') {
+            $basePath = '';
         }
 
-        if ($path === '/') {
-            $this->basePath = '';
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $basePath = str_replace('\\', '/', $basePath);
         }
+
+        $this->basePath = rtrim($basePath, '/');
 
         return $this;
     }
