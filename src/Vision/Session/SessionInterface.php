@@ -24,4 +24,8 @@ interface SessionInterface
     public function getId();
 
     public function regenerateId($deleteOldSession = true);
+
+    public function exchangeArray(array $data);
+
+    public function getArrayCopy();
 }
