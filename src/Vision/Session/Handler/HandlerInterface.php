@@ -17,13 +17,13 @@ interface HandlerInterface
 {
     public function close();
 
-    public function destroy($session_id);
+    public function destroy($sessionId);
 
     public function gc($maxlifetime);
 
-    public function open($save_path, $name);
+    public function open($savePath, $name);
 
-    public function read($session_id);
+    public function read($sessionId);
 
-    public function write($session_id, $session_data);
+    public function write($sessionId, $sessionData);
 }
