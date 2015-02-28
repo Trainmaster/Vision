@@ -9,7 +9,7 @@
 namespace Vision\Session;
 
 /**
- * SessionAwareInterface
+ * SessionInterface
  *
  * @author Frank Liepert
  */
