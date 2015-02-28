@@ -15,9 +15,9 @@ namespace Vision\Form\Control;
  */
 class Range extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'range');
 
-    /** @type array $invalidAttributes */
+    /** @var array $invalidAttributes */
     protected $invalidAttributes = array('required');
 }

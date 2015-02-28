@@ -15,10 +15,10 @@ namespace Vision\Routing;
  */
 class Route extends AbstractRoute
 {
-    /** @type null|string $controller */
+    /** @var null|string $controller */
     protected $controller = null;
 
-    /** @type null|string $path */
+    /** @var null|string $path */
     protected $path = null;
 
     /**

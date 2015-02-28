@@ -17,10 +17,10 @@ use UnexpectedValueException;
  */
 class Authentication
 {
-    /** @type null|Strategy\StrategyInterface $strategy */
+    /** @var null|Strategy\StrategyInterface $strategy */
     protected $strategy;
 
-    /** @type null|Storage\StorageInterface $storage */
+    /** @var null|Storage\StorageInterface $storage */
     protected $storage;
 
     /**

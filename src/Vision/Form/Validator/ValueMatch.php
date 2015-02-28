@@ -18,10 +18,10 @@ use Vision\Validator\AbstractValidator;
  */
 class ValueMatch extends AbstractValidator
 {
-    /** @type string NO_MATCH */
+    /** @var string NO_MATCH */
     const NOT_UNIQUE = 'The given controls %s do not match.';
 
-    /** @type array $controls */
+    /** @var array $controls */
     protected $controls = array();
 
     /**

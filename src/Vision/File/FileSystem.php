@@ -15,10 +15,10 @@ namespace Vision\File;
  */
 class FileSystem
 {
-    /** @type array */
+    /** @var array */
     protected $aliases = array();
 
-    /** @type null|string $dirs */
+    /** @var null|string $dirs */
     protected $currentDir;
 
     /**

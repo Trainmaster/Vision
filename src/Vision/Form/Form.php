@@ -21,26 +21,26 @@ use IteratorAggregate;
  */
 class Form extends AbstractCompositeType implements IteratorAggregate
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array(
         'action' => '',
         'enctype' => 'multipart/form-data',
         'method' => 'post'
     );
 
-    /** @type array */
+    /** @var array */
     protected $data = array();
 
-    /** @type array $errors */
+    /** @var array $errors */
     protected $errors = array();
 
-    /** @type array $values */
+    /** @var array $values */
     protected $values = array();
 
-    /** @type Iterator\ControlsIterator $controlsIterator */
+    /** @var Iterator\ControlsIterator $controlsIterator */
     protected $controlsIterator = null;
 
-    /** @type Iterator\OptionControlsIterator $optionControlsIterator */
+    /** @var Iterator\OptionControlsIterator $optionControlsIterator */
     protected $optionControlsIterator = null;
 
     /**

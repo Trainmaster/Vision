@@ -17,7 +17,7 @@ use Vision\DataStructures\Arrays\ArrayObject;
  */
 class Session extends ArrayObject implements SessionInterface
 {
-    /** @type null|Extension\ExtensionInterface $extension */
+    /** @var null|Extension\ExtensionInterface $extension */
     protected $extension;
 
     /**

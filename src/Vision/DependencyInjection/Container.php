@@ -19,13 +19,13 @@ use RuntimeException;
  */
 class Container implements ContainerInterface
 {
-    /** @type array $definitions */
+    /** @var array $definitions */
     protected $definitions = array();
 
-    /** @type array $parameters */
+    /** @var array $parameters */
     protected $parameters = array();
 
-    /** @type array $objects */
+    /** @var array $objects */
     protected $objects = array();
 
     /**

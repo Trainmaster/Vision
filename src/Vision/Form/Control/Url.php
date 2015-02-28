@@ -15,6 +15,6 @@ namespace Vision\Form\Control;
  */
 class Url extends Text
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'url');
 }

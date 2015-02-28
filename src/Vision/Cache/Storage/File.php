@@ -15,19 +15,19 @@ namespace Vision\Cache\Storage;
  */
 class File implements StorageInterface
 {
-    /** @type string $cacheDir */
+    /** @var string $cacheDir */
     protected $cacheDir;
 
-    /** @type int $cacheDirChmod */
+    /** @var int $cacheDirChmod */
     protected $cacheDirChmod = 0755;
 
-    /** @type string $cacheFileExtension */
+    /** @var string $cacheFileExtension */
     protected $cacheFileExtension = 'cache';
 
     /**
      * @param array $options {
-     *     @type string $cache_dir_chmod      Default chmod when creating the caching directory
-     *     @type string $cache_file_extension An optional file extension
+     *     @var string $cache_dir_chmod      Default chmod when creating the caching directory
+     *     @var string $cache_file_extension An optional file extension
      * }
      */
     public function __construct(array $options = array())

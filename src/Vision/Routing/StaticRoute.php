@@ -15,7 +15,7 @@ namespace Vision\Routing;
  */
 class StaticRoute extends AbstractCompiledRoute
 {
-    /** @type null|string $path */
+    /** @var null|string $path */
     protected $path;
 
     /**

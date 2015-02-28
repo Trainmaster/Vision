@@ -15,7 +15,7 @@ namespace Vision\Validator;
  */
 class NotNull extends AbstractValidator
 {
-    /** @type string NOT_NULL */
+    /** @var string NOT_NULL */
     const NOT_NULL = 'The given value must not be null.';
 
     /**

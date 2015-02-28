@@ -17,7 +17,7 @@ use Vision\Html\Element;
  */
 class Select extends AbstractOptionControl
 {
-    /** @type array $invalidAttributes */
+    /** @var array $invalidAttributes */
     protected $invalidAttributes = array('value');
 
     /**

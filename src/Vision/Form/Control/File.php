@@ -15,10 +15,10 @@ namespace Vision\Form\Control;
  */
 class File extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'file');
 
-    /** @type array $invalidAttributes */
+    /** @var array $invalidAttributes */
     protected $invalidAttributes = array('value');
 
     /**

@@ -19,22 +19,22 @@ use Vision\Http\RequestInterface;
  */
 class Router
 {
-    /** @type CacheInterface|null $cache */
+    /** @var CacheInterface|null $cache */
     protected $cache;
 
-    /** @type RouteCompiler|null $compiler */
+    /** @var RouteCompiler|null $compiler */
     protected $compiler;
 
-    /** @type LoaderInterface|null $loader */
+    /** @var LoaderInterface|null $loader */
     protected $loader;
 
-    /** @type RequestInterface|null $request */
+    /** @var RequestInterface|null $request */
     protected $request;
 
-    /** @type array $resources */
+    /** @var array $resources */
     protected $resources = array();
 
-    /** @type RequestInterface|null $request */
+    /** @var RequestInterface|null $request */
     protected $routes;
 
     /**

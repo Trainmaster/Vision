@@ -16,24 +16,24 @@ use LogicException;
  */
 class Element
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array();
 
-    /** @type array $invalidAttributes */
+    /** @var array $invalidAttributes */
     protected $invalidAttributes = array();
 
-    /** @type array $contents */
+    /** @var array $contents */
     protected $contents = array();
 
-    /** @type array $voidElements */
+    /** @var array $voidElements */
     protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed',
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta',
                                             'param', 'source', 'track', 'wbr');
 
-    /** @type bool $isVoid */
+    /** @var bool $isVoid */
     protected $isVoid = false;
 
-    /** @type string $tag */
+    /** @var string $tag */
     protected $tag;
 
     /**

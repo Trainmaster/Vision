@@ -15,13 +15,13 @@ namespace Vision\Validator;
  */
 class InputInteger extends AbstractValidator
 {
-    /** @type string INPUT_NOT_INTEGER */
+    /** @var string INPUT_NOT_INTEGER */
     const INPUT_NOT_INTEGER = 'The given value could not be validated as integer.';
 
-    /** @type null|int $min */
+    /** @var null|int $min */
     protected $min;
 
-    /** @type null|int $max */
+    /** @var null|int $max */
     protected $max;
 
     /**

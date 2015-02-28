@@ -17,7 +17,7 @@ use Vision\File\File;
  */
 class FileResponse extends Response
 {
-    /** @type string $file */
+    /** @var string $file */
     protected $file;
 
     /**

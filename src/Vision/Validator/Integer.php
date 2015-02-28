@@ -15,7 +15,7 @@ namespace Vision\Validator;
  */
 class Integer extends AbstractValidator
 {
-    /** @type string NO_INTEGER */
+    /** @var string NO_INTEGER */
     const NO_INTEGER = 'The given value is not an integer.';
 
     /**

@@ -15,10 +15,10 @@ namespace Vision\Form\Control;
  */
 class DateTimeLocal extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'datetime-local');
 
-    /** @type string $dateTimeLocalFormat */
+    /** @var string $dateTimeLocalFormat */
     protected $dateTimeLocalFormat = 'Y-m-d\TH:i:s';
 
     /**

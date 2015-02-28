@@ -15,7 +15,7 @@ namespace Vision\Crypt;
  */
 class Bcrypt
 {
-    /** @type int MIN_SALT_LENGTH */
+    /** @var int MIN_SALT_LENGTH */
     const MIN_SALT_LENGTH = 16;
 
     /**

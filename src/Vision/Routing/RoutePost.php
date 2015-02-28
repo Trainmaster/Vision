@@ -15,6 +15,6 @@ namespace Vision\Routing;
  */
 class RoutePost extends Route
 {
-    /** @type null|string $httpMethod */
+    /** @var null|string $httpMethod */
     protected $httpMethod = 'POST';
 }

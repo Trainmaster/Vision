@@ -15,10 +15,10 @@ namespace Vision\Form\Control;
  */
 class Time extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'time');
 
-    /** @type string $timeFormat */
+    /** @var string $timeFormat */
     protected $timeFormat = 'H:i';
 
     /**

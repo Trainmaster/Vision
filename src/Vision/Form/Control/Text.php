@@ -15,6 +15,6 @@ namespace Vision\Form\Control;
  */
 class Text extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'text');
 }

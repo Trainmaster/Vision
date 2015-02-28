@@ -17,7 +17,7 @@ use Vision\Validator;
  */
 abstract class AbstractOptionControl extends AbstractControl
 {
-    /** @type array $options */
+    /** @var array $options */
     protected $options = array();
 
     /**

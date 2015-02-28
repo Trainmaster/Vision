@@ -15,10 +15,10 @@ namespace Vision\Form\Control;
  */
 class Date extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'date');
 
-    /** @type string $dateFormat */
+    /** @var string $dateFormat */
     protected $dateFormat = 'Y-m-d';
 
     /**

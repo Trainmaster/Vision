@@ -15,13 +15,13 @@ namespace Vision\Validator;
  */
 class InArray extends AbstractValidator
 {
-    /** @type string VALUE_NOT_FOUND */
+    /** @var string VALUE_NOT_FOUND */
     const VALUE_NOT_FOUND = 'Value could not be found.';
 
-    /** @type array $haystack */
+    /** @var array $haystack */
     protected $haystack = array();
 
-    /** @type bool $strict */
+    /** @var bool $strict */
     protected $strict = false;
 
     /**

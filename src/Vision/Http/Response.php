@@ -15,25 +15,25 @@ namespace Vision\Http;
  */
 class Response extends AbstractMessage implements ResponseInterface
 {
-    /** @type array $cookies */
+    /** @var array $cookies */
     protected $cookies = array();
 
-    /** @type array $rawCookies */
+    /** @var array $rawCookies */
     protected $rawCookies = array();
 
-    /** @type array $headers */
+    /** @var array $headers */
     protected $headers = array();
 
-    /** @type int $statusCode */
+    /** @var int $statusCode */
     protected $statusCode = 200;
 
-    /** @type string|null $reasonPhrase */
+    /** @var string|null $reasonPhrase */
     protected $reasonPhrase;
 
-    /** @type string|null $body */
+    /** @var string|null $body */
     protected $body;
 
-    /** @type array $statusCodesAndRecommendedReasonPhrases */
+    /** @var array $statusCodesAndRecommendedReasonPhrases */
     protected $statusCodesAndRecommendedReasonPhrases = array(
         100 => 'Continue',
         101 => 'Switching Protocols',

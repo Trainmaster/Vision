@@ -19,13 +19,13 @@ use Vision\Validator\ValidatorInterface;
  */
 abstract class AbstractType extends HtmlElement implements NodeInterface
 {
-    /** @type array $elements */
+    /** @var array $elements */
     protected $elements = array();
 
-    /** @type array $validators */
+    /** @var array $validators */
     protected $validators = array();
 
-    /** @type null|NodeInterface $parent */
+    /** @var null|NodeInterface $parent */
     private $parent;
 
     /**

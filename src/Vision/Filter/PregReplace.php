@@ -16,12 +16,12 @@ namespace Vision\Filter;
 class PregReplace implements FilterInterface
 {
     /**
-     * @type null|string
+     * @var null|string
      */
     protected $pattern;
 
     /**
-     * @type null|mixed
+     * @var null|mixed
      */
     protected $replacement;
 

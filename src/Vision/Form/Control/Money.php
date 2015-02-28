@@ -17,10 +17,10 @@ use NumberFormatter;
  */
 class Money extends Text
 {
-    /** @type string $currency */
+    /** @var string $currency */
     protected $currency = 'EUR';
 
-    /** @type bool $showCurrencySymbol */
+    /** @var bool $showCurrencySymbol */
     protected $showCurrencySymbol = false;
 
     /**

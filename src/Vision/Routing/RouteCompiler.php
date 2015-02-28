@@ -15,19 +15,19 @@ namespace Vision\Routing;
  */
 class RouteCompiler
 {
-    /** @type string $requiredStartingChar */
+    /** @var string $requiredStartingChar */
     protected $requiredStartingChar = '{';
 
-    /** @type string $requiredEndingChar */
+    /** @var string $requiredEndingChar */
     protected $requiredEndingChar = '}';
 
-    /** @type string $optionalStartingChar */
+    /** @var string $optionalStartingChar */
     protected $optionalStartingChar = '<';
 
-    /** @type string $optionalEndingChar */
+    /** @var string $optionalEndingChar */
     protected $optionalEndingChar = '>';
 
-    /** @type string $defaultNamedGroupPattern */
+    /** @var string $defaultNamedGroupPattern */
     protected $defaultNamedGroupPattern = '[\w.~-]+';
 
     /**

@@ -22,19 +22,19 @@ use Vision\Routing\AbstractCompiledRoute;
  */
 class FrontController
 {
-    /** @type null|ContainerInterface $container */
+    /** @var null|ContainerInterface $container */
     protected $container;
 
-    /** @type null|RequestInterface $request */
+    /** @var null|RequestInterface $request */
     protected $request;
 
-    /** @type null|ResponseInterface $response */
+    /** @var null|ResponseInterface $response */
     protected $response;
 
-    /** @type null|Router $router */
+    /** @var null|Router $router */
     protected $router;
 
-    /** @type null|ExceptionHandlerInterface $exceptionHandler */
+    /** @var null|ExceptionHandlerInterface $exceptionHandler */
     protected $exceptionHandler;
 
     /**

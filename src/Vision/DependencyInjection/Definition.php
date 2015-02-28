@@ -15,22 +15,22 @@ namespace Vision\DependencyInjection;
  */
 class Definition
 {
-    /** @type mixed $class */
+    /** @var mixed $class */
     protected $class;
 
-    /** @type bool $shared */
+    /** @var bool $shared */
     protected $shared = true;
 
-    /** @type bool|array $factory */
+    /** @var bool|array $factory */
     protected $factory = false;
 
-    /** @type array $property */
+    /** @var array $property */
     protected $property = array();
 
-    /** @type array $constructor */
+    /** @var array $constructor */
     protected $constructor = array();
 
-    /** @type array $method */
+    /** @var array $method */
     protected $method = array();
 
     /**

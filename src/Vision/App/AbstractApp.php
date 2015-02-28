@@ -19,16 +19,16 @@ use Vision\Controller\FrontController;
  */
 abstract class AbstractApp
 {
-    /** @type bool $debug */
+    /** @var bool $debug */
     protected $debug = true;
 
-    /** @type string $fallbackLocale */
+    /** @var string $fallbackLocale */
     protected $fallbackLocale = 'de_DE';
 
-    /** @type string $environment */
+    /** @var string $environment */
     protected $environment = 'dev';
 
-    /** @type FrontController $frontController */
+    /** @var FrontController $frontController */
     protected $frontController;
 
     /**

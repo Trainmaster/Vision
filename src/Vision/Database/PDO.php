@@ -15,7 +15,7 @@ namespace Vision\Database;
  */
 class PDO extends \PDO
 {
-    /** @type bool $hasActiveTransaction */
+    /** @var bool $hasActiveTransaction */
     protected $hasActiveTransaction = false;
 
     /**

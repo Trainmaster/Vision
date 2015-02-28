@@ -17,13 +17,13 @@ use InvalidArgumentException;
  */
 abstract class AbstractMessage
 {
-    /** @type string VERSION_10 */
+    /** @var string VERSION_10 */
     const VERSION_10 = '1.0';
 
-    /** @type string VERSION_11 */
+    /** @var string VERSION_11 */
     const VERSION_11 = '1.1';
 
-    /** @type string $version */
+    /** @var string $version */
     protected $version = self::VERSION_11;
 
     /**

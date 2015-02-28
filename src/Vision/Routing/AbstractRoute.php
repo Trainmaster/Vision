@@ -15,13 +15,13 @@ namespace Vision\Routing;
  */
 abstract class AbstractRoute
 {
-    /** @type string $httpMethod */
+    /** @var string $httpMethod */
     protected $httpMethod;
 
-    /** @type array $defaults */
+    /** @var array $defaults */
     protected $defaults = array();
 
-    /** @type array $requirements */
+    /** @var array $requirements */
     protected $requirements = array();
 
     /**

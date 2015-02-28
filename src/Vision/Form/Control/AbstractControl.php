@@ -21,22 +21,22 @@ use LogicException;
  */
 abstract class AbstractControl extends AbstractType
 {
-    /** @type null|string $label */
+    /** @var null|string $label */
     protected $label = null;
 
-    /** @type null|mixed $data */
+    /** @var null|mixed $data */
     protected $data = null;
 
-    /** @type null|mixed $value */
+    /** @var null|mixed $value */
     protected $value = null;
 
-    /** @type bool $isValidated */
+    /** @var bool $isValidated */
     protected $isValidated = false;
 
-    /** @type array $filters */
+    /** @var array $filters */
     protected $filters = array();
 
-    /** @type array $errors */
+    /** @var array $errors */
     protected $errors = array();
 
     /**

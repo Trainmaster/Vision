@@ -18,7 +18,7 @@ use Vision\Session\Handler\HandlerInterface;
  */
 class NativeExtension implements ExtensionInterface
 {
-    /** @type bool $started */
+    /** @var bool $started */
     protected $started = false;
 
     /**

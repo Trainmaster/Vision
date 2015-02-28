@@ -15,7 +15,7 @@ namespace Vision\Form\Control;
  */
 class Textarea extends AbstractControl
 {
-    /** @type array $invalidAttributes */
+    /** @var array $invalidAttributes */
     protected $invalidAttributes = array('value');
 
     /**

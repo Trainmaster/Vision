@@ -15,6 +15,6 @@ namespace Vision\Routing;
  */
 class RouteGet extends Route
 {
-    /** @type null|string $httpMethod */
+    /** @var null|string $httpMethod */
     protected $httpMethod = 'GET';
 }

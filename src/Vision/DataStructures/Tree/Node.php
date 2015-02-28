@@ -15,10 +15,10 @@ namespace Vision\DataStructures\Tree;
  */
 class Node implements NodeInterface
 {
-    /** @type null|Node $parent */
+    /** @var null|Node $parent */
     protected $parent;
 
-    /** @type array $children */
+    /** @var array $children */
     protected $children = array();
 
     /**

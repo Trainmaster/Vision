@@ -18,7 +18,7 @@ use Countable;
  */
 class ArrayObject implements ArrayAccess, Countable
 {
-    /** @type array $data */
+    /** @var array $data */
     protected $data = array();
 
     /**

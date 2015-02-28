@@ -15,7 +15,7 @@ namespace Vision\Validator;
  */
 class Email extends AbstractValidator
 {
-    /** @type string INVALID_EMAIL */
+    /** @var string INVALID_EMAIL */
     const INVALID_EMAIL = 'The given e-mail address is not valid.';
 
     /**

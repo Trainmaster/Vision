@@ -17,7 +17,7 @@ use Vision\Html\Element;
  */
 class Checkbox extends AbstractOptionControl
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'checkbox');
 
     /**

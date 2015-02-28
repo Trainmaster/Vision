@@ -15,7 +15,7 @@ namespace Vision\Http;
  */
 class Url
 {
-    /** @type array $components */
+    /** @var array $components */
     protected $components = array();
 
     /**

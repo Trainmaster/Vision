@@ -15,7 +15,7 @@ namespace Vision\Cache;
  */
 class Cache implements CacheInterface
 {
-    /** @type Storage\StorageInterface $storage */
+    /** @var Storage\StorageInterface $storage */
     protected $storage;
 
     /**

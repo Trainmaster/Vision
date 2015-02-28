@@ -18,7 +18,7 @@ use Vision\File\Loader\ScopeFileLoader;
  */
 class NativeLoader extends ScopeFileLoader
 {
-    /** @type string $scopeName */
+    /** @var string $scopeName */
     protected $scopeName = 'container';
 
     /**

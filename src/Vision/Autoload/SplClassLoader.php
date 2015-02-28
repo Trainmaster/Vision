@@ -15,16 +15,16 @@ namespace Vision\Autoload;
  */
 class SplClassLoader
 {
-    /** @type string $fileExtension */
+    /** @var string $fileExtension */
     protected $fileExtension = '.php';
 
-    /** @type string $namespace */
+    /** @var string $namespace */
     protected $namespace;
 
-    /** @type string $namespaceSeparator */
+    /** @var string $namespaceSeparator */
     protected $namespaceSeparator = '\\';
 
-    /** @type string $path */
+    /** @var string $path */
     protected $path;
 
     /**

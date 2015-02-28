@@ -13,10 +13,10 @@ namespace Vision\DataStructures\Tree;
  */
 class NodeIterator implements \RecursiveIterator
 {
-    /** @type array $nodes */
+    /** @var array $nodes */
     private $nodes;
 
-    /** @type int $position */
+    /** @var int $position */
     private $position = 0;
 
     /**

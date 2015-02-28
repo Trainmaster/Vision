@@ -17,10 +17,10 @@ use Vision\Html\Element;
  */
 class Radio extends AbstractOptionControl
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'radio');
 
-    /** @type bool $checkedness */
+    /** @var bool $checkedness */
     protected $checkedness = false;
 
     /**

@@ -15,9 +15,9 @@ namespace Vision\Form\Control;
  */
 class Hidden extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'hidden');
 
-    /** @type array $invalidAttributes */
+    /** @var array $invalidAttributes */
     protected $invalidAttributes = array('required');
 }

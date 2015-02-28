@@ -17,34 +17,34 @@ use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
  */
 class Request extends AbstractMessage implements RequestInterface
 {
-    /** @type null|SquareBracketNotation $GET */
+    /** @var null|SquareBracketNotation $GET */
     protected $GET;
 
-    /** @type null|SquareBracketNotation $POST */
+    /** @var null|SquareBracketNotation $POST */
     protected $POST;
 
-    /** @type null|SquareBracketNotation $FILES */
+    /** @var null|SquareBracketNotation $FILES */
     protected $FILES;
 
-    /** @type null|SquareBracketNotation $COOKIE */
+    /** @var null|SquareBracketNotation $COOKIE */
     protected $COOKIE;
 
-    /** @type null|SquareBracketNotation $SERVER */
+    /** @var null|SquareBracketNotation $SERVER */
     protected $SERVER;
 
-    /** @type null|string $method */
+    /** @var null|string $method */
     protected $method;
 
-    /** @type null|string $host */
+    /** @var null|string $host */
     protected $host;
 
-    /** @type null|string $basePath */
+    /** @var null|string $basePath */
     protected $basePath;
 
-    /** @type null|string $path */
+    /** @var null|string $path */
     protected $path;
 
-    /** @type null|string $pathInfo */
+    /** @var null|string $pathInfo */
     protected $pathInfo;
 
     /**

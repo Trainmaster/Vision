@@ -24,10 +24,10 @@ use Vision\Http\Url;
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface,
                                              ControllerInterface
 {
-    /** @type RequestInterface $request */
+    /** @var RequestInterface $request */
     protected $request;
 
-    /** @type ResponseInterface $response */
+    /** @var ResponseInterface $response */
     protected $response;
 
     /**

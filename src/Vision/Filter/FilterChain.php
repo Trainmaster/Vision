@@ -16,7 +16,7 @@ namespace Vision\Filter;
 class FilterChain implements FilterInterface
 {
     /**
-     * @type array
+     * @var array
      */
     protected $filters = array();
 

@@ -15,7 +15,7 @@ namespace Vision\Validator;
  */
 abstract class AbstractValidator implements ValidatorInterface
 {
-    /** @type array $errors */
+    /** @var array $errors */
     protected $errors = array();
 
     /**

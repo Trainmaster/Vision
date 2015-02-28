@@ -15,6 +15,6 @@ namespace Vision\Form\Control;
  */
 class Password extends AbstractInput
 {
-    /** @type array $attributes */
+    /** @var array $attributes */
     protected $attributes = array('type' => 'password');
 }

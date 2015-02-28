@@ -15,10 +15,10 @@ namespace Vision\Validator;
  */
 class MinStringLength extends AbstractMultibyteStringValidator
 {
-    /** @type string STRING_TOO_SHORT */
+    /** @var string STRING_TOO_SHORT */
     const STRING_TOO_SHORT = 'The given string "%s" is too short. The minimum length is %s.';
 
-    /** @type int $min */
+    /** @var int $min */
     protected $min;
 
     /**
