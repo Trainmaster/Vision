@@ -76,7 +76,7 @@ class Authentication
     /**
      * @api
      *
-     * @return array
+     * @return mixed
      */
     public function getIdentity()
     {
