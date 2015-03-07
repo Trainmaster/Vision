@@ -19,7 +19,7 @@ use RuntimeException;
  */
 class Container implements ContainerInterface
 {
-    /** @var array $definitions */
+    /** @var array|Definition[] $definitions */
     protected $definitions = array();
 
     /** @var array $parameters */
@@ -79,8 +79,9 @@ class Container implements ContainerInterface
 
         if (isset($this->definitions[$alias])) {
             throw new \LogicException(sprintf(
-                'The alias "%s" is already assigned.',
-                $alias
+                'The alias "%s" is already assigned to the class "%s".',
+                $alias,
+                $this->definitions[$alias]->getClass()
             ));
         }
 
