@@ -181,18 +181,6 @@ class Container implements ContainerInterface
      *
      * @param string $alias
      *
-     * @return bool
-     */
-    public function isDefined($alias)
-    {
-        return isset($this->definitions[$alias]);
-    }
-
-    /**
-     * @api
-     *
-     * @param string $alias
-     *
      * @return object
      *
      * @throws RuntimeException
@@ -206,8 +194,9 @@ class Container implements ContainerInterface
             ));
         }
 
-        if ($this->isDefined($alias)) {
-            $definition = $this->definitions[$alias];
+        $definition = $this->getDefinition($alias);
+
+        if ($definition) {
             $isShared = $definition->isShared();
             if ($isShared && isset($this->objects[$alias])) {
                 return $this->objects[$alias];
@@ -253,13 +242,13 @@ class Container implements ContainerInterface
         if (!empty($interfaces)) {
             $methodInjections = array();
             foreach ($interfaces as $interface) {
-                if (!$this->isDefined($interface)) {
+                $interfaceDefinition = $this->getDefinition($interface);
+
+                if (!$interfaceDefinition) {
                     continue;
                 }
 
-                $def = $this->getDefinition($interface);
-
-                $dependencies = $def->getMethodInjections();
+                $dependencies = $interfaceDefinition->getMethodInjections();
 
                 if (empty($dependencies)) {
                     continue;

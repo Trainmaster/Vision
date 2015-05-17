@@ -61,20 +61,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container->register('BasicClass', 'self');
     }
 
-    public function testIsDefined()
-    {
-        $container = new Container;
-
-        $this->assertFalse($container->isDefined('BasicClass'));
-        $this->assertFalse($container->isDefined('Alias'));
-
-        $container->register('BasicClass');
-        $container->register('BasicClass', 'Alias');
-
-        $this->assertTrue($container->isDefined('BasicClass'));
-        $this->assertTrue($container->isDefined('Alias'));
-    }
-
     public function testGetDefinition()
     {
         $container = new Container;
