@@ -201,9 +201,9 @@ class Container implements ContainerInterface
             if ($isShared && isset($this->objects[$alias])) {
                 return $this->objects[$alias];
             } elseif (!$isShared) {
-                return $this->createObject($definition);
+                return $this->createInstance($definition);
             } else {
-                $instance = $this->createObject($definition);
+                $instance = $this->createInstance($definition);
                 $this->objects[$alias] = $instance;
                 return $instance;
             }
@@ -222,7 +222,7 @@ class Container implements ContainerInterface
      *
      * @return mixed
      */
-    protected function createObject(Definition $definition)
+    protected function createInstance(Definition $definition)
     {
         $class = $definition->getClass();
         $factory = $definition->getFactory();
