@@ -270,23 +270,6 @@ class Container implements ContainerInterface
 
         if ($constructor) {
             $constructorInjections = $definition->getConstructorInjections();
-
-            // number of required parameters causes trouble when working with certain PDO
-
-            /*
-            $required = $constructor->getNumberOfRequiredParameters();
-            $given = count($constructorInjections);
-
-            if ($given < $required) {
-                throw new \RuntimeException(sprintf(
-                    'The class "%s" requires %s arguments, %s given.',
-                    $class,
-                    $required,
-                    $given
-                ));
-            }
-            */
-
             $instance = $reflection->newInstanceArgs($this->resolveDependencies($constructorInjections));
         } else {
             $instance = $reflection->newInstance();
