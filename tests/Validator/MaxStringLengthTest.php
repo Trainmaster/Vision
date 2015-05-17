@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Validator;
+
 use Vision\Validator;
 
 class MaxStringLengthTest extends \PHPUnit_Framework_TestCase

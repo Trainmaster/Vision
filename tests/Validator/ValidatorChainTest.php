@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Validator;
+
 use Vision\Validator;
 
 class ValidatorChainTest extends \PHPUnit_Framework_TestCase

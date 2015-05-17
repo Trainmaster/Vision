@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Validator;
+
 use Vision\Validator;
 
 class IntegerTest extends \PHPUnit_Framework_TestCase
@@ -21,7 +23,7 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
 
     public function testFailure()
     {
-        $this->assertFalse(self::$validator->isValid(new stdClass));
+        $this->assertFalse(self::$validator->isValid(new \stdClass));
         $this->assertFalse(self::$validator->isValid(false));
         $this->assertFalse(self::$validator->isValid(null));
         $this->assertFalse(self::$validator->isValid(0.1));

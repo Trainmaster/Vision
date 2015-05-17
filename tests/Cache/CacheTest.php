@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Cache;
+
 use Vision\Cache\Cache;
 
 class CacheTest extends \PHPUnit_Framework_TestCase

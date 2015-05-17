@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\File;
+
 use Vision\File\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase

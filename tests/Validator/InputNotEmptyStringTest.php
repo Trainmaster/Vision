@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Validator;
+
 use Vision\Validator;
 
 class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
@@ -16,7 +18,7 @@ class InputNotEmptyStringTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(self::$validator->isValid('0'));
         $this->assertTrue(self::$validator->isValid(array('0', 0)));
         $this->assertTrue(self::$validator->isValid(array(array('0', 0))));
-        $this->assertTrue(self::$validator->isValid(new stdClass));
+        $this->assertTrue(self::$validator->isValid(new \stdClass));
         $this->assertTrue(self::$validator->isValid(false));
         $this->assertTrue(self::$validator->isValid(null));
         $this->assertTrue(self::$validator->isValid(0));

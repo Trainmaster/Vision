@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Form;
+
 class AbstractCompositeTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetElementsIsEmptyArray()

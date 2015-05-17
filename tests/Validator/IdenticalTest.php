@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Validator;
+
 use Vision\Validator;
 
 class IdenticalTest extends \PHPUnit_Framework_TestCase
@@ -38,7 +40,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $validator->setOperand(1);
         $this->assertTrue($validator->isValid(1));
 
-        $object = new stdClass;
+        $object = new \stdClass;
         $validator->setOperand($object);
         $this->assertTrue($validator->isValid($object));
     }
@@ -51,7 +53,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $validator->setOperand(1);
         $this->assertFalse($validator->isValid('1'));
 
-        $validator->setOperand(new stdClass);
-        $this->assertFalse($validator->isValid(new stdClass));
+        $validator->setOperand(new \stdClass);
+        $this->assertFalse($validator->isValid(new \stdClass));
     }
 }

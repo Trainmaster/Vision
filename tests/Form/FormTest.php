@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Form;
+
 use Vision\Form\Form;
 
 class FormTest extends \PHPUnit_Framework_TestCase

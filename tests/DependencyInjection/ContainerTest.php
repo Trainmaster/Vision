@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\DependencyInjection;
+
 require_once 'TestClasses.php';
 
 use Vision\DependencyInjection\Container;
@@ -17,7 +19,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException');
         $container = new Container;
 
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register(new stdClass));
+        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register(new \BasicClass));
     }
 
     public function testRegisterWhenArgumentTwoIsNoString()
@@ -25,7 +27,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException');
         $container = new Container;
 
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass', new stdClass));
+        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass', new \BasicClass));
     }
 
     public function testRegisterWithTwoArguments()
