@@ -99,11 +99,7 @@ class Container implements ContainerInterface
      */
     public function getDefinition($alias)
     {
-        if (isset($this->definitions[$alias])) {
-            return $this->definitions[$alias];
-        }
-
-        return null;
+        return isset($this->definitions[$alias]) ? $this->definitions[$alias] : null;
     }
 
     /**
