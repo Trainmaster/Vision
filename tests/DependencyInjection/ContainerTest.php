@@ -165,6 +165,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container;
 
+        $this->assertNull($container->getParameter('foo'));
         $this->assertSame($container, $container->setParameter('foo', 'bar'));
         $this->assertSame('bar', $container->getParameter('foo'));
     }

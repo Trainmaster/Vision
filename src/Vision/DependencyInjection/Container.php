@@ -197,16 +197,9 @@ class Container implements ContainerInterface
         $definition = $this->getDefinition($alias);
 
         if ($definition) {
-            $isShared = $definition->isShared();
-            if ($isShared && isset($this->objects[$alias])) {
-                return $this->objects[$alias];
-            } elseif (!$isShared) {
-                return $this->createInstance($definition);
-            } else {
-                $instance = $this->createInstance($definition);
-                $this->objects[$alias] = $instance;
-                return $instance;
-            }
+            return $definition->isShared()
+                ? $this->createSharedInstance($alias, $definition)
+                : $this->createInstance($definition);
         } elseif($alias === 'self') {
             return $this;
         } else {
@@ -215,6 +208,19 @@ class Container implements ContainerInterface
                 $alias
             ));
         }
+    }
+
+    /**
+     * @param string $alias
+     * @param Definition $definition
+     *
+     * @return mixed
+     */
+    private function createSharedInstance($alias, Definition $definition)
+    {
+        return isset($this->objects[$alias])
+            ? $this->objects[$alias]
+            : $this->objects[$alias] = $this->createInstance($definition);
     }
 
     /**
