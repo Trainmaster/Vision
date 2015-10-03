@@ -116,7 +116,7 @@ class RouteCollection implements \IteratorAggregate
     {
         foreach ($this as $route) {
             if ($route->getPath() === $path) {
-                return $path;
+                return $route;
             }
         }
 
