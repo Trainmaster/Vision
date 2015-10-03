@@ -33,8 +33,6 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
-     * @internal
-     *
      * @return void
      */
     public function resetErrors()

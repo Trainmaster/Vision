@@ -11,8 +11,6 @@ namespace Vision\Validator;
 abstract class AbstractMultibyteStringValidator extends AbstractValidator
 {
     /**
-     * @internal
-     *
      * @param string $value
      *
      * @return void

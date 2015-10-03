@@ -69,8 +69,6 @@ class SquareBracketNotation extends ArrayObject
     }
 
     /**
-     * @internal
-     *
      * @param string $name
      *
      * @return string

@@ -228,8 +228,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function sendCookies()
@@ -246,8 +244,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function sendStatusLine()
@@ -265,8 +261,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function sendHeaders()
@@ -278,8 +272,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function sendBody()

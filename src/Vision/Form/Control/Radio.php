@@ -69,8 +69,6 @@ class Radio extends AbstractOptionControl
     }
 
     /**
-     * @internal
-     *
      * @param string $value
      *
      * @return Element

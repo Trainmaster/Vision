@@ -380,8 +380,6 @@ class Element
     }
 
     /**
-     * @internal
-     *
      * @param string $tag
      *
      * @throws InvalidArgumentException

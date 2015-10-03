@@ -121,8 +121,6 @@ class Select extends AbstractOptionControl
     }
 
     /**
-     * @internal
-     *
      * @param string $value
      *
      * @return Element

@@ -66,8 +66,6 @@ class Checkbox extends AbstractOptionControl
     }
 
     /**
-     * @internal
-     *
      * @param string $value
      *
      * @return Element

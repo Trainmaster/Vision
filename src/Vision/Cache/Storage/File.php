@@ -146,8 +146,6 @@ class File implements StorageInterface
     }
 
     /**
-     * @internal
-     *
      * @param string $filename
      *
      * @return string

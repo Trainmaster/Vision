@@ -103,8 +103,6 @@ class RouteCompiler
     }
 
     /**
-     * @internal
-     *
      * @return string
      */
     protected function createRequiredRegex()
@@ -113,8 +111,6 @@ class RouteCompiler
     }
 
     /**
-     * @internal
-     *
      * @return string
      */
     protected function createOptionalRegex()
@@ -123,8 +119,6 @@ class RouteCompiler
     }
 
     /**
-     * @internal
-     *
      * @param string $path
      * @param string $class
      * @param string $method
@@ -137,8 +131,6 @@ class RouteCompiler
     }
 
     /**
-     * @internal
-     *
      * @param string $path
      * @param string $class
      * @param string $method
@@ -153,8 +145,6 @@ class RouteCompiler
     /**
      * Parses a string and returns an array with
      * the corresponding class and method.
-     *
-     * @internal
      *
      * @param string $controller
      *

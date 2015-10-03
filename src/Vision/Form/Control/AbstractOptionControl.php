@@ -51,8 +51,6 @@ abstract class AbstractOptionControl extends AbstractControl
 
 
     /**
-     * @internal
-     *
      * @param string $value
      *
      * @return bool

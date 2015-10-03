@@ -164,8 +164,6 @@ class FrontController
     }
 
     /**
-     * @internal
-     *
      * @param \Exception $e
      *
      * @return void

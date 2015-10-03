@@ -181,8 +181,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function initHost()
@@ -268,8 +266,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function initBasePath()
@@ -309,8 +305,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function initPathInfo()
@@ -344,8 +338,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @internal
-     *
      * @return $this Provides a fluent interface.
      */
     protected function initPath()
@@ -358,8 +350,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @internal
-     *
      * @param array $files
      *
      * @return array

@@ -290,8 +290,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @internal
-     *
      * @return false
      */
     public function hasChildren()
@@ -300,8 +298,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @internal
-     *
      * @return array
      */
     public function getChildren()
