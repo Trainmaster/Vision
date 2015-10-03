@@ -21,8 +21,6 @@ class Select extends AbstractOptionControl
     protected $invalidAttributes = array('value');
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

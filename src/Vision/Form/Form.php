@@ -44,8 +44,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     protected $optionControlsIterator = null;
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

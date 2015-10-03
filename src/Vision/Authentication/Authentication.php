@@ -19,8 +19,6 @@ class Authentication
     protected $storage;
 
     /**
-     * Constructor
-     *
      * @param Strategy\StrategyInterface $strategy
      * @param Storage\StorageInterface $storage
      */

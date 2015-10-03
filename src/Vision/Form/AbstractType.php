@@ -29,8 +29,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     private $parent;
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

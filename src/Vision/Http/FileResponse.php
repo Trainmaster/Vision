@@ -16,8 +16,6 @@ class FileResponse extends Response
     protected $file;
 
     /**
-     * Constructor
-     *
      * @param \Vision\File\File|string $file
      */
     public function __construct($file)

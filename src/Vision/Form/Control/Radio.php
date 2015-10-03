@@ -24,8 +24,6 @@ class Radio extends AbstractOptionControl
     protected $checkedness = false;
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

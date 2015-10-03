@@ -27,8 +27,6 @@ abstract class AbstractApp
     protected $frontController;
 
     /**
-     * Constructor
-     *
      * @param FrontController $frontController
      */
     public function __construct(FrontController $frontController)

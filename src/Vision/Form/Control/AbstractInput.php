@@ -16,8 +16,6 @@ namespace Vision\Form\Control;
 abstract class AbstractInput extends AbstractControl
 {
      /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

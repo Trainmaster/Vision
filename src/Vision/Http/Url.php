@@ -14,8 +14,6 @@ class Url
     protected $components = array();
 
     /**
-     * Constructor
-     *
      * @param string $url
      */
     public function __construct($url)

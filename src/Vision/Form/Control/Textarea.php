@@ -19,8 +19,6 @@ class Textarea extends AbstractControl
     protected $invalidAttributes = array('value');
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

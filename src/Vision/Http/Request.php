@@ -42,9 +42,6 @@ class Request extends AbstractMessage implements RequestInterface
     /** @var null|string $pathInfo */
     protected $pathInfo;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->GET = new SquareBracketNotation($_GET);

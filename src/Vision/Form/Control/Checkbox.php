@@ -21,8 +21,6 @@ class Checkbox extends AbstractOptionControl
     protected $attributes = array('type' => 'checkbox');
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

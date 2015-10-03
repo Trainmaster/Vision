@@ -21,8 +21,6 @@ class Fieldset extends AbstractCompositeType
     protected $legend;
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)

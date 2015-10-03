@@ -13,8 +13,6 @@ use InvalidArgumentException;
 class UploadedFile extends File
 {
     /**
-     * Constructor
-     *
      * @param string $filename
      */
     public function __construct($filename)

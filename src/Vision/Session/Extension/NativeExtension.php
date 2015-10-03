@@ -17,8 +17,6 @@ class NativeExtension implements ExtensionInterface
     protected $started = false;
 
     /**
-     * Constructor
-     *
      * @param null|HandlerInterface $handler
      */
     public function __construct(HandlerInterface $handler = null)

@@ -21,8 +21,6 @@ class Email extends AbstractInput
     protected $attributes = array('type' => 'email');
 
     /**
-     * Constructor
-     *
      * @param string $name
      */
     public function __construct($name)
