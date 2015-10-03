@@ -26,6 +26,12 @@ class Route extends AbstractRoute
         $this->setController($controller);
     }
 
+    /** @return string */
+    public function __toString()
+    {
+        return md5($this->httpMethod . $this->path . $this->controller);
+    }
+
     /**
      * @api
      *

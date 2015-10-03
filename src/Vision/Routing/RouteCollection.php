@@ -71,21 +71,20 @@ class RouteCollection implements \IteratorAggregate
     /**
      * @api
      *
-     * @param string $alias
      * @param Route $route
      *
      * @return $this Provides a fluent interface.
      */
-    public function add($alias, Route $route)
+    public function add(Route $route)
     {
-        if (isset($this->routes[$alias])) {
+        if (isset($this->routes[(string) $route])) {
             throw new \RuntimeException(sprintf(
-                'Route alias "%s" has already been defined.',
-                $alias
+                'Route "%s" has already been defined.',
+                $route->getPath()
             ));
         }
 
-        $this->routes[$alias] = $route;
+        $this->routes[(string) $route] = $route;
 
         return $this;
     }
@@ -99,8 +98,8 @@ class RouteCollection implements \IteratorAggregate
      */
     public function addRouteCollection(RouteCollection $collection)
     {
-        foreach ($collection as $alias => $route) {
-            $this->add($alias, $route);
+        foreach ($collection as $route) {
+            $this->add($route);
         }
 
         return $this;
@@ -109,29 +108,19 @@ class RouteCollection implements \IteratorAggregate
     /**
      * @api
      *
-     * @param string $alias
+     * @param string $path
      *
      * @return Route|null
      */
-    public function get($alias)
+    public function get($path)
     {
-        if (isset($this->routes[$alias])) {
-            return $this->routes[$alias];
+        foreach ($this as $route) {
+            if ($route->getPath() === $path) {
+                return $path;
+            }
         }
 
         return null;
-    }
-
-    /**
-     * @api
-     *
-     * @param string $alias
-     *
-     * @return bool
-     */
-    public function has($alias)
-    {
-        return isset($this->routes[$alias]);
     }
 
     /**
