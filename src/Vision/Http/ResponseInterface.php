@@ -8,11 +8,6 @@
  */
 namespace Vision\Http;
 
-/**
- * ResponseInterface
- *
- * @author Frank Liepert
- */
 interface ResponseInterface
 {
     /**

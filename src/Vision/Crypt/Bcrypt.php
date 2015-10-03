@@ -8,11 +8,6 @@
  */
 namespace Vision\Crypt;
 
-/**
- * Bcrypt
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Bcrypt
 {
     /** @var int MIN_SALT_LENGTH */

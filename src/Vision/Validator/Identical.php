@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * Identical
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Identical extends AbstractValidator
 {
     /** @var string NOT_IDENTICAL */

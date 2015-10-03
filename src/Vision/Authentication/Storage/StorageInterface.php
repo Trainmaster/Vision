@@ -8,11 +8,6 @@
  */
 namespace Vision\Authentication\Storage;
 
-/**
- * StorageInterface
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface StorageInterface
 {
     /**

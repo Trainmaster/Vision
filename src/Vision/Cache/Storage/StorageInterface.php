@@ -8,11 +8,6 @@
  */
 namespace Vision\Cache\Storage;
 
-/**
- * StorageInterface
- *
- * @author Frank Liepert
- */
 interface StorageInterface
 {
     public function set($key, $value, $expiration);

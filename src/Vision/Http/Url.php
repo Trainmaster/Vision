@@ -8,11 +8,6 @@
  */
 namespace Vision\Http;
 
-/**
- * Url
- *
- * @author Frank Liepert
- */
 class Url
 {
     /** @var array $components */

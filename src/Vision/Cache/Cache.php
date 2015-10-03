@@ -8,11 +8,6 @@
  */
 namespace Vision\Cache;
 
-/**
- * Cache
- *
- * @author Frank Liepert
- */
 class Cache implements CacheInterface
 {
     /** @var Storage\StorageInterface $storage */

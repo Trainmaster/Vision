@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * NotNull
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class NotNull extends AbstractValidator
 {
     /** @var string NOT_NULL */

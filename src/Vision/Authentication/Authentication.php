@@ -10,11 +10,6 @@ namespace Vision\Authentication;
 
 use UnexpectedValueException;
 
-/**
- * Authentication
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Authentication
 {
     /** @var null|Strategy\StrategyInterface $strategy */

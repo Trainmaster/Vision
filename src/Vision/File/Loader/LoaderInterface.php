@@ -8,11 +8,6 @@
  */
 namespace Vision\File\Loader;
 
-/**
- * LoaderInterface
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface LoaderInterface
 {
     /**

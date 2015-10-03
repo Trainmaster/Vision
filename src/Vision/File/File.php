@@ -10,11 +10,6 @@ namespace Vision\File;
 
 use finfo;
 
-/**
- * File
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class File extends \SplFileObject
 {
     /**

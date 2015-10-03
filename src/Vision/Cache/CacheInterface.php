@@ -8,11 +8,6 @@
  */
 namespace Vision\Cache;
 
-/**
- * CacheInterface
- *
- * @author Frank Liepert
- */
 interface CacheInterface
 {
     public function getStorage();

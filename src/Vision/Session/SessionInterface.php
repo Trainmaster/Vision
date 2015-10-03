@@ -8,11 +8,6 @@
  */
 namespace Vision\Session;
 
-/**
- * SessionInterface
- *
- * @author Frank Liepert
- */
 interface SessionInterface
 {
     public function clear();

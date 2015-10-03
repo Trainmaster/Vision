@@ -8,11 +8,6 @@
  */
 namespace Vision\File;
 
-/**
- * FileInfo
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class FileInfo extends \SplFileInfo
 {
     /**

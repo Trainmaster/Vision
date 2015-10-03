@@ -8,11 +8,6 @@
  */
 namespace Vision\Filter;
 
-/**
- * FilterChain
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class FilterChain implements FilterInterface
 {
     /**

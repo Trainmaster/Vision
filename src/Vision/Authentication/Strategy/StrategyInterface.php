@@ -8,11 +8,6 @@
  */
 namespace Vision\Authentication\Strategy;
 
-/**
- * StrategyInterface
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface StrategyInterface
 {
     /**

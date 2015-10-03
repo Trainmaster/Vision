@@ -8,11 +8,6 @@
  */
 namespace Vision\Controller;
 
-/**
- * ControllerInterface
- *
- * @author Frank Liepert
- */
 interface ControllerInterface
 {
     public function preFilter();

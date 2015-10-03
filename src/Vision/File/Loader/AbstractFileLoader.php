@@ -8,11 +8,6 @@
  */
 namespace Vision\File\Loader;
 
-/**
- * AbstractFileLoader
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractFileLoader implements LoaderInterface
 {
     /**

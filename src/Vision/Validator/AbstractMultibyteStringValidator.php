@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * AbstractMultibyteStringValidator
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractMultibyteStringValidator extends AbstractValidator
 {
     /**

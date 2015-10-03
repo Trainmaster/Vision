@@ -12,11 +12,6 @@ use Locale;
 
 use Vision\Controller\FrontController;
 
-/**
- * AbstractApp
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractApp
 {
     /** @var bool $debug */

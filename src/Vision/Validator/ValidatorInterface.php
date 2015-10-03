@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * ValidatorInterface
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface ValidatorInterface
 {
     public function isValid($value);

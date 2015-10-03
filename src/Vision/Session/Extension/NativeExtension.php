@@ -11,11 +11,6 @@ namespace Vision\Session\Extension;
 use Vision\Session\SessionInterface;
 use Vision\Session\Handler\HandlerInterface;
 
-/**
- * NativeExtension
- *
- * @author Frank Liepert
- */
 class NativeExtension implements ExtensionInterface
 {
     /** @var bool $started */

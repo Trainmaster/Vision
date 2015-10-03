@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * AbstractRoute
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractRoute
 {
     /** @var string $httpMethod */

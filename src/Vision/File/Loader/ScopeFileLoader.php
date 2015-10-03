@@ -8,11 +8,6 @@
  */
 namespace Vision\File\Loader;
 
-/**
- * ScopeFileLoader
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class ScopeFileLoader extends AbstractFileLoader
 {
     /** @var null|string */

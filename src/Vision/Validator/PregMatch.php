@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * InArray
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class PregMatch extends AbstractValidator
 {
     /** @var string NO_MATCH_FOUND */

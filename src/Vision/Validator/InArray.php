@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * InArray
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class InArray extends AbstractValidator
 {
     /** @var string VALUE_NOT_FOUND */

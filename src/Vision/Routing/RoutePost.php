@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * RoutePost
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class RoutePost extends Route
 {
     /** @var null|string $httpMethod */

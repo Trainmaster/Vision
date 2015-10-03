@@ -8,11 +8,6 @@
  */
 namespace Vision\DataStructures\Tree;
 
-/**
- * Node
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Node implements NodeInterface
 {
     /** @var null|Node $parent */

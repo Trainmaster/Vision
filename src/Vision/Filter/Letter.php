@@ -8,11 +8,6 @@
  */
 namespace Vision\Filter;
 
-/**
- * Letter
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Letter extends PregReplace
 {
     protected $pattern = '/\P{L}/u';

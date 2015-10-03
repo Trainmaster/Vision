@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * StaticRoute
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class StaticRoute extends AbstractCompiledRoute
 {
     /** @var null|string $path */

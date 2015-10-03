@@ -11,11 +11,6 @@ namespace Vision\DataStructures\Arrays;
 use ArrayAccess;
 use Countable;
 
-/**
- * ArrayObject
- *
- * @author Frank Liepert
- */
 class ArrayObject implements ArrayAccess, Countable
 {
     /** @var array $data */

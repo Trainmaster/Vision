@@ -8,11 +8,6 @@
  */
 namespace Vision\File\Loader;
 
-/**
- * ArrayFileLoader
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class ArrayFileLoader extends AbstractFileLoader
 {
     /**

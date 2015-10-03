@@ -8,11 +8,6 @@
  */
 namespace Vision\Session\Handler;
 
-/**
- * HandlerInterface
- *
- * @author Frank Liepert
- */
 interface HandlerInterface
 {
     public function close();

@@ -8,11 +8,6 @@
  */
 namespace Vision\Filter;
 
-/**
- * InputString
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class InputString implements FilterInterface
 {
     protected $options = array();

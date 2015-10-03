@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * InputNotEmptyString
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class InputNotEmptyString extends AbstractValidator
 {
     /** @var string INPUT_NOT_EMPTY_STRING */

@@ -8,11 +8,6 @@
  */
 namespace Vision\Database;
 
-/**
- * PDO
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class PDO extends \PDO
 {
     /** @var bool $hasActiveTransaction */

@@ -14,13 +14,6 @@ use Vision\Http\ResponseInterface;
 use Vision\Http\ResponseAwareInterface;
 use Vision\Http\Url;
 
-/**
- * AbstractController
- *
- * This class provides a base for all controllers and may be customized.
- *
- * @author Frank Liepert
- */
 abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface,
                                              ControllerInterface
 {

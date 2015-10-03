@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * ValidatorChain
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class ValidatorChain
 {
     /** @var array $validators */

@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * AbstractCompiledRoute
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractCompiledRoute extends AbstractRoute
 {
     /** @var null|string $class */

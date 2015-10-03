@@ -8,11 +8,6 @@
  */
 namespace Vision\DataStructures\Tree;
 
-/**
- * NodeInterface
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface NodeInterface
 {
     /**

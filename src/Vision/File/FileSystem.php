@@ -8,11 +8,6 @@
  */
 namespace Vision\File;
 
-/**
- * FileSystem
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class FileSystem
 {
     /** @var array */

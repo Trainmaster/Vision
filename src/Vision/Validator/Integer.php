@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * Integer
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Integer extends AbstractValidator
 {
     /** @var string NO_INTEGER */

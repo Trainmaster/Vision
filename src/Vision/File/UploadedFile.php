@@ -10,11 +10,6 @@ namespace Vision\File;
 
 use InvalidArgumentException;
 
-/**
- * UploadedFile
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class UploadedFile extends File
 {
     /**

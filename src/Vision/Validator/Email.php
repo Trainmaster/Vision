@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * Email
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Email extends AbstractValidator
 {
     /** @var string INVALID_EMAIL */

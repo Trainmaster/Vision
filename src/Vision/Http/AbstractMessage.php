@@ -10,11 +10,6 @@ namespace Vision\Http;
 
 use InvalidArgumentException;
 
-/**
- * AbstractMessage
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractMessage
 {
     /** @var string VERSION_10 */

@@ -10,11 +10,6 @@ namespace Vision\Session;
 
 use Vision\DataStructures\Arrays\ArrayObject;
 
-/**
- * Session
- *
- * @author Frank Liepert
- */
 class Session extends ArrayObject implements SessionInterface
 {
     /** @var null|Extension\ExtensionInterface $extension */

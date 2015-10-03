@@ -8,9 +8,6 @@
  */
 namespace Vision\DataStructures\Tree;
 
-/**
- * @author Frank Liepert
- */
 class NodeIterator implements \RecursiveIterator
 {
     /** @var array $nodes */

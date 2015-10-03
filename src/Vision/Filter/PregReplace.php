@@ -8,11 +8,6 @@
  */
 namespace Vision\Filter;
 
-/**
- * PregReplace
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class PregReplace implements FilterInterface
 {
     /**

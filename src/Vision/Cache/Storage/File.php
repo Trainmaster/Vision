@@ -8,11 +8,6 @@
  */
 namespace Vision\Cache\Storage;
 
-/**
- * File
- *
- * @author Frank Liepert
- */
 class File implements StorageInterface
 {
     /** @var string $cacheDir */

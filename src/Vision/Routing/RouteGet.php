@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * RouteGet
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class RouteGet extends Route
 {
     /** @var null|string $httpMethod */

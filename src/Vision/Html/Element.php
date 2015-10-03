@@ -11,9 +11,6 @@ namespace Vision\Html;
 use InvalidArgumentException;
 use LogicException;
 
-/**
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Element
 {
     /** @var array $attributes */

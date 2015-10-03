@@ -12,11 +12,6 @@ use Vision\Cache\CacheInterface;
 use Vision\File\Loader\LoaderInterface;
 use Vision\Http\RequestInterface;
 
-/**
- * Router
- *
- * @author Frank Liepert
- */
 class Router
 {
     /** @var CacheInterface|null $cache */

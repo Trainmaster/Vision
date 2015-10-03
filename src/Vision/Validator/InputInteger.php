@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * InputInteger
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class InputInteger extends AbstractValidator
 {
     /** @var string INPUT_NOT_INTEGER */

@@ -15,11 +15,6 @@ use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
 use Vision\Routing\AbstractCompiledRoute;
 
-/**
- * FrontController
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class FrontController
 {
     /** @var null|ContainerInterface $container */

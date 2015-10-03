@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * CompiledRouteCollection
- *
- * @author Frank Liepert
- */
 class CompiledRouteCollection implements \IteratorAggregate
 {
     /** @var array $routes */

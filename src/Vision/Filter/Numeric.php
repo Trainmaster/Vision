@@ -8,11 +8,6 @@
  */
 namespace Vision\Filter;
 
-/**
- * Numeric
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Numeric extends PregReplace
 {
     protected $pattern = '/\P{N}/u';

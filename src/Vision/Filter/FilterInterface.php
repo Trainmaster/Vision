@@ -8,11 +8,6 @@
  */
 namespace Vision\Filter;
 
-/**
- * FilterInterface
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface FilterInterface
 {
     /**

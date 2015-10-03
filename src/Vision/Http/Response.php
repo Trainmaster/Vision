@@ -8,11 +8,6 @@
  */
 namespace Vision\Http;
 
-/**
- * Response
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Response extends AbstractMessage implements ResponseInterface
 {
     /** @var array $cookies */

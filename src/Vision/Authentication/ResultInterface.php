@@ -8,11 +8,6 @@
  */
 namespace Vision\Authentication;
 
-/**
- * Authentication
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 interface ResultInterface
 {
     /**

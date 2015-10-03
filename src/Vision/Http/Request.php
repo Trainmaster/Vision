@@ -10,11 +10,6 @@ namespace Vision\Http;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 
-/**
- * Request
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Request extends AbstractMessage implements RequestInterface
 {
     /** @var null|SquareBracketNotation $GET */

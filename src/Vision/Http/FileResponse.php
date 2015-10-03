@@ -10,11 +10,6 @@ namespace Vision\Http;
 
 use Vision\File\File;
 
-/**
- * FileResponse
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class FileResponse extends Response
 {
     /** @var string $file */

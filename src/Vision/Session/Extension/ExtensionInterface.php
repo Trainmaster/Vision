@@ -10,11 +10,6 @@ namespace Vision\Session\Extension;
 
 use Vision\Session\SessionInterface;
 
-/**
- * SessionAwareInterface
- *
- * @author Frank Liepert
- */
 interface ExtensionInterface
 {
     public function start();

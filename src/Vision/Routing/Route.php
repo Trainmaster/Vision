@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * Route
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Route extends AbstractRoute
 {
     /** @var null|string $controller */

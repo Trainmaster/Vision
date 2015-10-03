@@ -8,11 +8,6 @@
  */
 namespace Vision\Validator;
 
-/**
- * MaxStringLength
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class MaxStringLength extends AbstractMultibyteStringValidator
 {
     /** @var string STRING_TOO_SHORT */

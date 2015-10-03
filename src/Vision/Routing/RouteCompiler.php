@@ -8,11 +8,6 @@
  */
 namespace Vision\Routing;
 
-/**
- * RouteCompiler
- *
- * @author Frank Liepert
- */
 class RouteCompiler
 {
     /** @var string $requiredStartingChar */

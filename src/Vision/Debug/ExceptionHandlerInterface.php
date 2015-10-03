@@ -8,11 +8,6 @@
  */
 namespace Vision\Debug;
 
-/**
- * ExceptionHandlerInterface
- *
- * @author Frank Liepert
- */
 interface ExceptionHandlerInterface
 {
     public function handle(\Exception $exception);

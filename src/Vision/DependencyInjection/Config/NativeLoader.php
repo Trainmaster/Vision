@@ -11,11 +11,6 @@ namespace Vision\DependencyInjection\Config;
 use Vision\DependencyInjection as DI;
 use Vision\File\Loader\ScopeFileLoader;
 
-/**
- * NativeLoader
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class NativeLoader extends ScopeFileLoader
 {
     /** @var string $scopeName */

@@ -10,11 +10,6 @@ namespace Vision\DataStructures\Arrays\Mutator;
 
 use Vision\DataStructures\Arrays\ArrayObject;
 
-/**
- * SquareBracketNotation
- *
- * @author Frank Liepert
- */
 class SquareBracketNotation extends ArrayObject
 {
     /**
