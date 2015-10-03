@@ -4,7 +4,7 @@
     "type" : "library",
     "license" : "MIT",
     "require": {
-        "php": ">=5.5.28",
+        "php": ">=5.5",
         "ext-fileinfo": "*",
         "ext-intl": "*",
         "ext-mbstring": "*"
