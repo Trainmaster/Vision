@@ -22,7 +22,7 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     /** @var array $elements */
     protected $elements = array();
 
-    /** @var array $validators */
+    /** @var ValidatorInterface[] $validators */
     protected $validators = array();
 
     /** @var null|NodeInterface $parent */
