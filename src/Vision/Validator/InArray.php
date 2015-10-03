@@ -14,7 +14,7 @@ class InArray extends AbstractValidator
     const VALUE_NOT_FOUND = 'Value could not be found.';
 
     /** @var array $haystack */
-    protected $haystack = array();
+    protected $haystack = [];
 
     /** @var bool $strict */
     protected $strict = false;
@@ -56,11 +56,11 @@ class InArray extends AbstractValidator
         }
 
         $this->addError(self::VALUE_NOT_FOUND);
-        $this->addError(array(
+        $this->addError([
             'needle'   => $value,
             'haystack' => $this->haystack,
             'strict'   => $this->strict
-        ));
+        ]);
 
         return false;
     }

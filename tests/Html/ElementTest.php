@@ -65,14 +65,14 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetAttributes()
     {
-        $attr = array(
+        $attr = [
             'required' => true,
             'id' => 'foo'
-        );
+        ];
 
         $element = new Element('div');
 
-        $this->assertSame(array(), $element->getAttributes());
+        $this->assertSame([], $element->getAttributes());
         $this->assertSame($element, $element->setAttributes($attr));
         $this->assertSame($attr, $element->getAttributes());
     }
@@ -94,17 +94,17 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         $element = new Element('div');
 
-        $this->assertSame(array(), $element->getContents());
+        $this->assertSame([], $element->getContents());
         $this->assertSame($element, $element->addContent('Hello World'));
-        $this->assertSame(array('Hello World'), $element->getContents());
+        $this->assertSame(['Hello World'], $element->getContents());
 
         $content = new Element('p');
 
         $this->assertSame($element, $element->addContent($content));
-        $this->assertSame(array('Hello World', $content), $element->getContents());
+        $this->assertSame(['Hello World', $content], $element->getContents());
 
         $this->assertSame($element, $element->addContent(null));
-        $this->assertSame(array('Hello World', $content), $element->getContents());
+        $this->assertSame(['Hello World', $content], $element->getContents());
     }
 
     /**
@@ -114,7 +114,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         $element = new Element('div');
 
-        $element->addContent(array());
+        $element->addContent([]);
     }
 
     /**
@@ -133,8 +133,8 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 
         $element->addContent('foo');
 
-        $this->assertSame(array('foo'), $element->getContents());
+        $this->assertSame(['foo'], $element->getContents());
         $this->assertSame($element, $element->clearContents());
-        $this->assertSame(array(), $element->getContents());
+        $this->assertSame([], $element->getContents());
     }
 }

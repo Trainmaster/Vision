@@ -367,12 +367,12 @@ class Request extends AbstractMessage implements RequestInterface
     protected function transformFilesArray(array $files)
     {
         foreach ($files as &$value) {
-            $newArray = array();
+            $newArray = [];
 
             foreach ($value as $key => $val) {
                 if (is_array($val)) {
                     array_walk_recursive($val, function(&$item) use($key) {
-                        $item = array($key => $item);
+                        $item = [$key => $item];
                     });
                     $newArray = array_replace_recursive($newArray, $val);
                 }

@@ -19,7 +19,7 @@ class PregMatch extends AbstractValidator
     /**
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         if (isset($options['pattern'])) {
             $this->setPattern($options['pattern']);

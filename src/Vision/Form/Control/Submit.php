@@ -16,8 +16,8 @@ namespace Vision\Form\Control;
 class Submit extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'submit');
+    protected $attributes = ['type' => 'submit'];
 
     /** @var array $invalidAttributes */
-    protected $invalidAttributes = array('required');
+    protected $invalidAttributes = ['required'];
 }

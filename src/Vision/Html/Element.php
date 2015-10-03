@@ -14,18 +14,18 @@ use LogicException;
 class Element
 {
     /** @var array $attributes */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /** @var array $invalidAttributes */
-    protected $invalidAttributes = array();
+    protected $invalidAttributes = [];
 
     /** @var array $contents */
-    protected $contents = array();
+    protected $contents = [];
 
     /** @var array $voidElements */
-    protected static $voidElements = array( 'area', 'base', 'br', 'col', 'command', 'embed',
+    protected static $voidElements = ['area', 'base', 'br', 'col', 'command', 'embed',
                                             'hr', 'img', 'input', 'keygen', 'link', 'meta',
-                                            'param', 'source', 'track', 'wbr');
+                                            'param', 'source', 'track', 'wbr'];
 
     /** @var bool $isVoid */
     protected $isVoid = false;
@@ -231,7 +231,7 @@ class Element
      */
     public function clearContents()
     {
-        $this->contents = array();
+        $this->contents = [];
         return $this;
     }
 

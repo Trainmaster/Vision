@@ -16,7 +16,7 @@ namespace Vision\Form\Control;
 class Time extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'time');
+    protected $attributes = ['type' => 'time'];
 
     /** @var string $timeFormat */
     protected $timeFormat = 'H:i';

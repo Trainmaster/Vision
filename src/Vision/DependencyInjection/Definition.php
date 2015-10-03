@@ -25,13 +25,13 @@ class Definition
     protected $factory = false;
 
     /** @var array $property */
-    protected $property = array();
+    protected $property = [];
 
     /** @var array $constructor */
-    protected $constructor = array();
+    protected $constructor = [];
 
     /** @var array $method */
-    protected $method = array();
+    protected $method = [];
 
     /**
      * @param string $class
@@ -161,9 +161,9 @@ class Definition
      *
      * @return $this Provides a fluent interface.
      */
-    public function factory($dependency, $method, array $args = array())
+    public function factory($dependency, $method, array $args = [])
     {
-        $this->factory = array((string) $dependency, (string) $method, $args);
+        $this->factory = [(string) $dependency, (string) $method, $args];
         return $this;
     }
 

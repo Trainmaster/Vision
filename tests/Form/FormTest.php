@@ -16,9 +16,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $this->form->getAction());
         $this->assertSame('post', $this->form->getMethod());
         $this->assertTrue($this->form->isMethod('post'));
-        $this->assertSame(array(), $this->form->getData());
-        $this->assertSame(array(), $this->form->getValues());
-        $this->assertSame(array(), $this->form->getErrors());
+        $this->assertSame([], $this->form->getData());
+        $this->assertSame([], $this->form->getValues());
+        $this->assertSame([], $this->form->getErrors());
     }
 
     public function testSetAndGetAction()
@@ -48,18 +48,18 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetData()
     {
-        $this->assertSame($this->form, $this->form->setData(array('foo' => 'bar')));
-        $this->assertSame(array('foo' => 'bar'), $this->form->getData());
+        $this->assertSame($this->form, $this->form->setData(['foo' => 'bar']));
+        $this->assertSame(['foo' => 'bar'], $this->form->getData());
     }
 
     public function testSetAndGetValues()
     {
-        $this->assertSame($this->form, $this->form->setValues(array('foo' => 'bar')));
-        $this->assertSame(array(), $this->form->getValues());
+        $this->assertSame($this->form, $this->form->setValues(['foo' => 'bar']));
+        $this->assertSame([], $this->form->getValues());
     }
 
     public function testSetOptions()
     {
-        $this->assertSame($this->form, $this->form->setOptions(array('foo' => 'bar')));
+        $this->assertSame($this->form, $this->form->setOptions(['foo' => 'bar']));
     }
 }

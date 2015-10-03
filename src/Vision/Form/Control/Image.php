@@ -16,5 +16,5 @@ namespace Vision\Form\Control;
 class Image extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'image');
+    protected $attributes = ['type' => 'image'];
 }

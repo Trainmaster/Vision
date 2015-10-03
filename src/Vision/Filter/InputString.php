@@ -10,9 +10,9 @@ namespace Vision\Filter;
 
 class InputString implements FilterInterface
 {
-    protected $options = array();
+    protected $options = [];
 
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->options = $options;
     }

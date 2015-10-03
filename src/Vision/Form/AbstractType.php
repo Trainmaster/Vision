@@ -20,10 +20,10 @@ use Vision\Validator\ValidatorInterface;
 abstract class AbstractType extends HtmlElement implements NodeInterface
 {
     /** @var array $elements */
-    protected $elements = array();
+    protected $elements = [];
 
     /** @var ValidatorInterface[] $validators */
-    protected $validators = array();
+    protected $validators = [];
 
     /** @var null|NodeInterface $parent */
     private $parent;
@@ -91,7 +91,7 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
      */
     public function resetValidators()
     {
-        $this->validators = array();
+        $this->validators = [];
         return $this;
     }
 

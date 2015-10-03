@@ -7,9 +7,9 @@ class MaxStringLengthTest extends \PHPUnit_Framework_TestCase
 {
     static $validatorOne;
 
-    protected $singleBytes = array('$', '$$');
+    protected $singleBytes = ['$', '$$'];
 
-    protected $multiBytes = array('¢', '€', "\xF0\xA4\xAD\xA2", '¢¢', '€€', "\xF0\xA4\xAD\xA2\xF0\xA4\xAD\xA2");
+    protected $multiBytes = ['¢', '€', "\xF0\xA4\xAD\xA2", '¢¢', '€€', "\xF0\xA4\xAD\xA2\xF0\xA4\xAD\xA2"];
 
     public static function setUpBeforeClass()
     {

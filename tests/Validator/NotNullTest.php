@@ -19,7 +19,7 @@ class NotNullTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(self::$validator->isValid(0));
         $this->assertTrue(self::$validator->isValid(''));
         $this->assertTrue(self::$validator->isValid('foo'));
-        $this->assertTrue(self::$validator->isValid(array()));
+        $this->assertTrue(self::$validator->isValid([]));
     }
 
     public function testFailure()

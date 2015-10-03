@@ -18,7 +18,7 @@ use Vision\Html\Element;
 class Checkbox extends AbstractOptionControl
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'checkbox');
+    protected $attributes = ['type' => 'checkbox'];
 
     /**
      * @param string $name
@@ -75,9 +75,9 @@ class Checkbox extends AbstractOptionControl
     protected function createCheckbox($value)
     {
         $checkbox = new Element('input');
-        $checkbox->setAttributes(array(
+        $checkbox->setAttributes([
             'value' => $value,
-        ) + $this->getAttributes());
+            ] + $this->getAttributes());
 
         if (parent::checkCheckedness($checkbox->getAttribute('value'))) {
             $checkbox->setAttribute('checked');

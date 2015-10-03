@@ -27,7 +27,7 @@ class Router
     protected $request;
 
     /** @var array $resources */
-    protected $resources = array();
+    protected $resources = [];
 
     /** @var RequestInterface|null $request */
     protected $routes;

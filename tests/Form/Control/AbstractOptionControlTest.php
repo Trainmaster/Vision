@@ -3,15 +3,15 @@ namespace VisionTest\Form\Control;
 
 class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
 {
-    protected $defaultOptions = array(
+    protected $defaultOptions = [
         1 => 'foo',
         2 => 'bar',
         3 => 'baz'
-    );
+    ];
 
     public function setUp()
     {
-        $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractOptionControl', array('abstract'));
+        $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractOptionControl', ['abstract']);
     }
 
     public function testInheritance()
@@ -26,7 +26,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $control = $this->control;
 
         $this->assertNull($control->getData());
-        $this->assertSame(array(), $control->getOptions());
+        $this->assertSame([], $control->getOptions());
     }
 
     public function testSetOption()
@@ -43,14 +43,14 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOptionsAfterSetOption($control)
     {
-        $this->assertSame(array('foo' => 'bar'), $control->getOptions());
+        $this->assertSame(['foo' => 'bar'], $control->getOptions());
     }
 
     public function testSetOptions()
     {
         $control = $this->control;
 
-        $this->assertSame($control, $control->setOptions(array(1 => 'foo', 2 => 'bar', 3 => 'baz')));
+        $this->assertSame($control, $control->setOptions([1 => 'foo', 2 => 'bar', 3 => 'baz']));
 
         return $control;
     }
@@ -60,7 +60,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOptionsAfterSetOptions($control)
     {
-        $this->assertSame(array(1 => 'foo', 2 => 'bar', 3 => 'baz'), $control->getOptions());
+        $this->assertSame([1 => 'foo', 2 => 'bar', 3 => 'baz'], $control->getOptions());
     }
 
     public function testIsValidWithoutDataAndOptions()
@@ -122,7 +122,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
     {
         $control = $this->control;
 
-        $control->setData(array(1, 2, 3));
+        $control->setData([1, 2, 3]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertTrue($control->isValid());
@@ -133,7 +133,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $control = $this->control;
         $control->setRequired(true);
 
-        $control->setData(array(1, 2, 3));
+        $control->setData([1, 2, 3]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertTrue($control->isValid());
@@ -164,7 +164,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
     {
         $control = $this->control;
 
-        $control->setData(array(1, 3));
+        $control->setData([1, 3]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertTrue($control->isValid());
@@ -175,7 +175,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $control = $this->control;
         $control->setRequired(true);
 
-        $control->setData(array(1, 3));
+        $control->setData([1, 3]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertTrue($control->isValid());
@@ -185,7 +185,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
     {
         $control = $this->control;
 
-        $control->setData(array(1, 2, 4));
+        $control->setData([1, 2, 4]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertFalse($control->isValid());
@@ -196,7 +196,7 @@ class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
         $control = $this->control;
         $control->setRequired(true);
 
-        $control->setData(array(1, 2, 4));
+        $control->setData([1, 2, 4]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertFalse($control->isValid());

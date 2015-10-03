@@ -5,11 +5,11 @@ use Vision\Form\Control\Radio;
 
 class RadioTest extends \PHPUnit_Framework_TestCase
 {
-    protected $defaultOptions = array(
+    protected $defaultOptions = [
         1 => 'foo',
         2 => 'bar',
         3 => 'baz'
-    );
+    ];
 
     public function setUp()
     {
@@ -67,7 +67,7 @@ class RadioTest extends \PHPUnit_Framework_TestCase
     {
         $control = $this->control;
 
-        $control->setValue(array(1, 3));
+        $control->setValue([1, 3]);
         $control->setOptions($this->defaultOptions);
 
         $this->assertNotNull($control->getButton(1)->getAttribute('checked'));

@@ -69,7 +69,7 @@ class RouteCompiler
         if (empty($matches)) {
             $route = $this->createStaticRoute($path, $class, $method);
         } else {
-            $tokens = array();
+            $tokens = [];
             $regex = $path;
 
             foreach ($matches as $match) {
@@ -193,10 +193,10 @@ class RouteCompiler
                 $class = str_replace(':', '\\', $class);
                 $action = (isset($action)) ? $action . 'Action' : 'indexAction';
 
-                return array(
+                return [
                     'class' => $class,
                     'method' => $action
-                );
+                ];
             }
         }
 

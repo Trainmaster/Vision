@@ -11,13 +11,13 @@ namespace Vision\Http;
 class Response extends AbstractMessage implements ResponseInterface
 {
     /** @var array $cookies */
-    protected $cookies = array();
+    protected $cookies = [];
 
     /** @var array $rawCookies */
-    protected $rawCookies = array();
+    protected $rawCookies = [];
 
     /** @var array $headers */
-    protected $headers = array();
+    protected $headers = [];
 
     /** @var int $statusCode */
     protected $statusCode = 200;
@@ -29,7 +29,7 @@ class Response extends AbstractMessage implements ResponseInterface
     protected $body;
 
     /** @var array $statusCodesAndRecommendedReasonPhrases */
-    protected $statusCodesAndRecommendedReasonPhrases = array(
+    protected $statusCodesAndRecommendedReasonPhrases = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         200 => 'OK',
@@ -70,7 +70,7 @@ class Response extends AbstractMessage implements ResponseInterface
         503 => 'Service Unavailable',
         504 => 'Gateway Time-out',
         505 => 'HTTP Version not supported'
-    );
+    ];
 
     /**
      * @api

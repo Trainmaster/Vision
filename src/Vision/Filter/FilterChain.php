@@ -13,7 +13,7 @@ class FilterChain implements FilterInterface
     /**
      * @var array
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * @param FilterInterface $filter

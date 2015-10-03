@@ -180,7 +180,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container;
         $container->register('BasicClass');
-        $container->register('DependentClass')->constructor(array('@BasicClass'));
+        $container->register('DependentClass')->constructor(['@BasicClass']);
 
         $instance = $container->get('DependentClass');
 
@@ -208,7 +208,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetParameters()
     {
-        $params = array('foo' => 'bar');
+        $params = ['foo' => 'bar'];
 
         $container = new Container;
         $container->setParameters($params);

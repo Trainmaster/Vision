@@ -63,10 +63,10 @@ class Identical extends AbstractValidator
         }
 
         $this->addError(self::NOT_IDENTICAL);
-        $this->addError(array(
+        $this->addError([
             'operand1' => $value,
             'operand2' => $this->operand
-        ));
+        ]);
 
         return false;
     }

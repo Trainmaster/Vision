@@ -16,5 +16,5 @@ namespace Vision\Form\Control;
 class Search extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'search');
+    protected $attributes = ['type' => 'search'];
 }

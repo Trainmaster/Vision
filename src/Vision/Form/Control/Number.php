@@ -16,7 +16,7 @@ namespace Vision\Form\Control;
 class Number extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'number');
+    protected $attributes = ['type' => 'number'];
 
     /**
      * @param int $min

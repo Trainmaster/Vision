@@ -11,7 +11,7 @@ namespace Vision\File;
 class FileSystem
 {
     /** @var array */
-    protected $aliases = array();
+    protected $aliases = [];
 
     /** @var null|string $dirs */
     protected $currentDir;

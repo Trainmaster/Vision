@@ -16,5 +16,5 @@ namespace Vision\Form\Control;
 class Week extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'week');
+    protected $attributes = ['type' => 'week'];
 }

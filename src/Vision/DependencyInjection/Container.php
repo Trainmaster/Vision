@@ -20,13 +20,13 @@ use RuntimeException;
 class Container implements ContainerInterface
 {
     /** @var array|Definition[] $definitions */
-    protected $definitions = array();
+    protected $definitions = [];
 
     /** @var array $parameters */
-    protected $parameters = array();
+    protected $parameters = [];
 
     /** @var array $objects */
-    protected $objects = array();
+    protected $objects = [];
 
     /**
      * Constructor
@@ -237,7 +237,7 @@ class Container implements ContainerInterface
             $factoryInstance = $this->resolveReference($factory[0]);
 
             return $factory[2]
-                ? call_user_func_array(array($factoryInstance, $factory[1]), $factory[2])
+                ? call_user_func_array([$factoryInstance, $factory[1]], $factory[2])
                 : $factoryInstance->$factory[1]();
         }
 
@@ -250,7 +250,7 @@ class Container implements ContainerInterface
         $interfaces = $reflection->getInterfaceNames();
 
         if (!empty($interfaces)) {
-            $methodInjections = array();
+            $methodInjections = [];
             foreach ($interfaces as $interface) {
                 $interfaceDefinition = $this->getDefinition($interface);
 

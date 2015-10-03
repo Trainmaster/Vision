@@ -7,7 +7,7 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
 {
     public function testSet()
     {
-        $mutator = new SquareBracketNotation(array());
+        $mutator = new SquareBracketNotation([]);
 
         $mutator->set('foo', '1');
         $mutator->set('bar[baz]', '2');
@@ -20,23 +20,23 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetWithIllegalStringOffset()
     {
-        $mutator = new SquareBracketNotation(array());
+        $mutator = new SquareBracketNotation([]);
 
         $mutator->set('foo[bar]', 2);
         $mutator->set('foo', 1);
 
-        $this->assertSame(array('foo' => 1), $mutator->getArrayCopy());
+        $this->assertSame(['foo' => 1], $mutator->getArrayCopy());
 
 
         $mutator->set('foo', 1);
         $mutator->set('foo[bar]',2);
 
-        $this->assertSame(array('foo' => 1), $mutator->getArrayCopy());
+        $this->assertSame(['foo' => 1], $mutator->getArrayCopy());
     }
 
     public function testGetWithEmptyArray()
     {
-        $mutator = new SquareBracketNotation(array());
+        $mutator = new SquareBracketNotation([]);
 
         $this->assertNull($mutator->get('0'));
         $this->assertNull($mutator->get('foo'));
@@ -47,7 +47,7 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
 
     public function testGetWithOneDimensionalArray()
     {
-        $mutator = new SquareBracketNotation(array('foo' => 'bar', 'baz'));
+        $mutator = new SquareBracketNotation(['foo' => 'bar', 'baz']);
 
         $this->assertSame('bar', $mutator->get('foo'));
         $this->assertSame('baz', $mutator->get('0'));
@@ -55,17 +55,17 @@ class SquareBracketNotationTest extends \PHPUnit_Framework_TestCase
 
     public function testGetWithMultiDimensionalArray()
     {
-        $mutator = new SquareBracketNotation(array('foo' => array('bar' => 'baz')));
+        $mutator = new SquareBracketNotation(['foo' => ['bar' => 'baz']]);
 
         $this->assertSame('baz', $mutator->get('foo[bar]'));
     }
 
     public function testGetArrayCopy()
     {
-        $mutator = new SquareBracketNotation(array());
+        $mutator = new SquareBracketNotation([]);
         $this->assertEmpty($mutator->getArrayCopy());
 
-        $mutator = new SquareBracketNotation(array('foo' => 'bar'));
-        $this->assertSame(array('foo' => 'bar'), $mutator->getArrayCopy());
+        $mutator = new SquareBracketNotation(['foo' => 'bar']);
+        $this->assertSame(['foo' => 'bar'], $mutator->getArrayCopy());
     }
 }

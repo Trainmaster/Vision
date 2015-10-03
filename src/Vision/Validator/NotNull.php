@@ -29,7 +29,7 @@ class NotNull extends AbstractValidator
         }
 
         $this->addError(self::NOT_NULL);
-        $this->addError(array('value' => $value));
+        $this->addError(['value' => $value]);
 
         return false;
     }

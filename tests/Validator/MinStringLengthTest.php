@@ -9,9 +9,9 @@ class MinStringLengthTest extends \PHPUnit_Framework_TestCase
 
     static $validatorTwo;
 
-    protected $singleBytes = array('$');
+    protected $singleBytes = ['$'];
 
-    protected $multiBytes = array('¢', '€');
+    protected $multiBytes = ['¢', '€'];
 
     public static function setUpBeforeClass()
     {

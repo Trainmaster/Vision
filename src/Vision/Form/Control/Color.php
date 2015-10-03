@@ -16,8 +16,8 @@ namespace Vision\Form\Control;
 class Color extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'color');
+    protected $attributes = ['type' => 'color'];
 
     /** @var array $invalidAttributes */
-    protected $invalidAttributes = array('required');
+    protected $invalidAttributes = ['required'];
 }

@@ -17,7 +17,7 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
     {
         $arrayObject = new ArrayObject;
 
-        $this->assertSame(array(), $arrayObject->getArrayCopy());
+        $this->assertSame([], $arrayObject->getArrayCopy());
         $this->assertTrue($arrayObject->isEmpty());
     }
 
@@ -25,11 +25,11 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
     {
         $arrayObject = new ArrayObject;
 
-        $this->assertSame(array(), $arrayObject->exchangeArray(array('foo')));
-        $this->assertSame(array('foo'), $arrayObject->getArrayCopy());
+        $this->assertSame([], $arrayObject->exchangeArray(['foo']));
+        $this->assertSame(['foo'], $arrayObject->getArrayCopy());
 
-        $this->assertSame(array('foo'), $arrayObject->exchangeArray(array()));
-        $this->assertSame(array(), $arrayObject->getArrayCopy());
+        $this->assertSame(['foo'], $arrayObject->exchangeArray([]));
+        $this->assertSame([], $arrayObject->getArrayCopy());
     }
 
 
@@ -39,7 +39,7 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($arrayObject->isEmpty());
 
-        $arrayObject->exchangeArray(array('foo'));
+        $arrayObject->exchangeArray(['foo']);
 
         $this->assertFalse($arrayObject->isEmpty());
     }
@@ -71,15 +71,15 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(0, count($arrayObject));
 
-        $arrayObject->exchangeArray(array('foo'));
+        $arrayObject->exchangeArray(['foo']);
 
         $this->assertSame(1, count($arrayObject));
 
-        $arrayObject->exchangeArray(array('foo', 'bar', 'baz'));
+        $arrayObject->exchangeArray(['foo', 'bar', 'baz']);
 
         $this->assertSame(3, count($arrayObject));
 
-        $arrayObject->exchangeArray(array('foo', 'bar', 'baz', array('Hello', 'World')));
+        $arrayObject->exchangeArray(['foo', 'bar', 'baz', ['Hello', 'World']]);
 
         $this->assertSame(4, count($arrayObject));
     }

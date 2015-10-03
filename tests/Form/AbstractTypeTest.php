@@ -5,21 +5,21 @@ class AbstractTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetName()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
 
         $this->assertSame('foo', $abstractType->getName());
     }
 
     public function testGetValidatorsIsEmptyArray()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
 
-        $this->assertSame(array(), $abstractType->getValidators());
+        $this->assertSame([], $abstractType->getValidators());
     }
 
     public function testAddValidatorAndGetValidators()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
         $validator = $this->getMock('\Vision\Validator\ValidatorInterface');
 
         $this->assertSame($abstractType, $abstractType->addValidator($validator));
@@ -29,18 +29,18 @@ class AbstractTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testAddValidatorsAndGetValidators()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
         $validator1 = $this->getMock('\Vision\Validator\ValidatorInterface');
         $validator2 = clone($validator1);
 
-        $this->assertSame($abstractType, $abstractType->addValidators(array($validator1, $validator2)));
+        $this->assertSame($abstractType, $abstractType->addValidators([$validator1, $validator2]));
         $this->assertContainsOnlyInstancesOf('\Vision\Validator\ValidatorInterface', $abstractType->getValidators());
         $this->assertCount(2, $abstractType->getValidators());
     }
 
     public function testResetValidators()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
         $validator = $this->getMock('\Vision\Validator\ValidatorInterface');
 
         $this->assertCount(0, $abstractType->getValidators());
@@ -56,7 +56,7 @@ class AbstractTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetParent()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
         $node = $this->getMock('\Vision\DataStructures\Tree\NodeInterface');
 
         $this->assertSame($abstractType, $abstractType->setParent($node));
@@ -64,15 +64,15 @@ class AbstractTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testHasChildren()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
 
         $this->assertFalse($abstractType->hasChildren());
     }
 
     public function getChildren()
     {
-        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', array('foo'));
+        $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
 
-        $this->assertSame(array(), $abstractType->getChildren());
+        $this->assertSame([], $abstractType->getChildren());
     }
 }

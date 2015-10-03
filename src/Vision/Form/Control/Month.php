@@ -16,5 +16,5 @@ namespace Vision\Form\Control;
 class Month extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'month');
+    protected $attributes = ['type' => 'month'];
 }

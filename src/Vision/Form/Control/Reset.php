@@ -16,5 +16,5 @@ namespace Vision\Form\Control;
 class Reset extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'reset');
+    protected $attributes = ['type' => 'reset'];
 }

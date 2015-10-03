@@ -25,7 +25,7 @@ class File implements StorageInterface
      *     @var string $cache_file_extension An optional file extension
      * }
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->cacheDir = sys_get_temp_dir();
 

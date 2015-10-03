@@ -26,12 +26,12 @@ class NativeExtension implements ExtensionInterface
                 session_set_save_handler($handler, true);
             } else {
                 session_set_save_handler(
-                    array($handler, 'close'),
-                    array($handler, 'destroy'),
-                    array($handler, 'gc'),
-                    array($handler, 'open'),
-                    array($handler, 'read'),
-                    array($handler, 'write')
+                    [$handler, 'close'],
+                    [$handler, 'destroy'],
+                    [$handler, 'gc'],
+                    [$handler, 'open'],
+                    [$handler, 'read'],
+                    [$handler, 'write']
                 );
 
                 register_shutdown_function('session_write_close');

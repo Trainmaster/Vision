@@ -16,7 +16,7 @@ namespace Vision\Form\Control;
 class Date extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'date');
+    protected $attributes = ['type' => 'date'];
 
     /** @var string $dateFormat */
     protected $dateFormat = 'Y-m-d';

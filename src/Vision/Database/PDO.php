@@ -42,7 +42,7 @@ class PDO extends \PDO
             return $questionMarks;
         }
 
-        return array();
+        return [];
     }
 
     /**

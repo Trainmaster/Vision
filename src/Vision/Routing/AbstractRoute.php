@@ -14,10 +14,10 @@ abstract class AbstractRoute
     protected $httpMethod;
 
     /** @var array $defaults */
-    protected $defaults = array();
+    protected $defaults = [];
 
     /** @var array $requirements */
-    protected $requirements = array();
+    protected $requirements = [];
 
     /**
      * @api

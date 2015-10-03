@@ -22,9 +22,9 @@ class BasicForm extends Form
 
         $radio = new Control\Radio('radio');
 
-        $this->addElements(array(
+        $this->addElements([
             $hidden, $text,
             $checkbox, $select, $radio
-        ));
+        ]);
     }
 }

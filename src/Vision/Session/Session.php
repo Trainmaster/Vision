@@ -20,7 +20,7 @@ class Session extends ArrayObject implements SessionInterface
      */
     public function __construct(Extension\ExtensionInterface $extension)
     {
-        register_shutdown_function(array($this, '__destruct'));
+        register_shutdown_function([$this, '__destruct']);
         $this->extension = $extension;
         $this->extension->start();
         $this->extension->load($this);
@@ -54,7 +54,7 @@ class Session extends ArrayObject implements SessionInterface
      */
     public function clear()
     {
-        return $this->exchangeArray(array());
+        return $this->exchangeArray([]);
     }
 
     /**

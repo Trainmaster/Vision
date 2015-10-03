@@ -11,7 +11,7 @@ namespace Vision\Validator;
 abstract class AbstractValidator implements ValidatorInterface
 {
     /** @var array $errors */
-    protected $errors = array();
+    protected $errors = [];
 
     /**
      * @param string $error
@@ -39,6 +39,6 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     public function resetErrors()
     {
-        $this->errors = array();
+        $this->errors = [];
     }
 }

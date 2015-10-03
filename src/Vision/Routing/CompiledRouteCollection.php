@@ -11,7 +11,7 @@ namespace Vision\Routing;
 class CompiledRouteCollection implements \IteratorAggregate
 {
     /** @var array $routes */
-    protected $routes = array();
+    protected $routes = [];
 
     /**
      * @api

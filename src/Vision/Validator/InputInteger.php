@@ -71,7 +71,7 @@ class InputInteger extends AbstractValidator
     {
         $this->resetErrors();
 
-        $options = array();
+        $options = [];
 
         if (isset($this->min)) {
             $options['options']['min_range'] = $this->min;

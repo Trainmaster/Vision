@@ -16,7 +16,7 @@ namespace Vision\Form\Control;
 class DateTime extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'datetime');
+    protected $attributes = ['type' => 'datetime'];
 
     /**
      * @api

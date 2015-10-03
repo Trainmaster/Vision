@@ -22,7 +22,7 @@ class ValueMatch extends AbstractValidator
     const NOT_UNIQUE = 'The given controls %s do not match.';
 
     /** @var array $controls */
-    protected $controls = array();
+    protected $controls = [];
 
     /**
      * @api

@@ -18,7 +18,7 @@ use Vision\Validator;
 class Email extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'email');
+    protected $attributes = ['type' => 'email'];
 
     /**
      * @param string $name

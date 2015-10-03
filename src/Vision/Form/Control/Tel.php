@@ -16,5 +16,5 @@ namespace Vision\Form\Control;
 class Tel extends AbstractInput
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'tel');
+    protected $attributes = ['type' => 'tel'];
 }

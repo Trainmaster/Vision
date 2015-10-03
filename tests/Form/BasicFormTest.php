@@ -5,25 +5,25 @@ require_once 'BasicForm.php';
 
 class BasicFormTest extends \PHPUnit_Framework_TestCase
 {
-    protected $defaultData = array(
+    protected $defaultData = [
         'hidden' => 'hidden-Element',
         'text' => 'text-Element',
-        'checkbox' => array(
+        'checkbox' => [
             1 => 'Checkbox1',
             2 => 'Checkbox2',
             3 => 'Checkbox3',
-        ),
-        'select' => array(
+        ],
+        'select' => [
             1 => 'Select1',
             2 => 'Select2',
             3 => 'Select3'
-        ),
-        'radio' => array(
+        ],
+        'radio' => [
             1 => 'Radio1',
             2 => 'Radio2',
             3 => 'Radio3'
-        )
-    );
+        ]
+    ];
 
     public function setUp()
     {
@@ -89,7 +89,7 @@ class BasicFormTest extends \PHPUnit_Framework_TestCase
     {
         $form = $this->form;
 
-        $form->setData(array());
+        $form->setData([]);
 
         $this->assertFalse($form->isValid());
         $this->assertCount(4, $form->getErrors());
@@ -99,16 +99,16 @@ class BasicFormTest extends \PHPUnit_Framework_TestCase
     {
         $form = $this->form;
 
-        $form->setData(array(
+        $form->setData([
             'hidden'   => 'hidden',
             'text'     => '',
             'checkbox' => 1,
             'select'   => 1,
             'radio'    => 1
-        ));
+        ]);
 
         $this->assertFalse($form->isValid());
-        $this->assertSame(array(), $form->getValues());
+        $this->assertSame([], $form->getValues());
         $this->assertCount(4, $form->getErrors());
     }
 
@@ -121,25 +121,25 @@ class BasicFormTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEmpty($form->getValues());
 
-        $inputData = array(
+        $inputData = [
             'text'     => 'Hello World',
             'checkbox' => '1',
             'select'   => '1',
             'radio'    => '1'
-        );
+        ];
 
         $form->setData($inputData);
 
         $this->assertTrue($form->isValid());
         $this->assertCount(0, $form->getErrors());
 
-        $values = array(
+        $values = [
             'hidden' => null,
             'text'   => 'Hello World',
             'checkbox' => '1',
             'select'   => '1',
             'radio'    => '1'
-        );
+        ];
 
         $this->assertSame($values, $form->getValues());
         $this->assertSame($inputData, $form->getData());

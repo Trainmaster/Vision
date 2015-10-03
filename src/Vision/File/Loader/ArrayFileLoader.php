@@ -20,7 +20,7 @@ class ArrayFileLoader extends AbstractFileLoader
     public function load($file)
     {
         if (!$this->isLoadable($file)) {
-            return array();
+            return [];
         }
 
         $array = include $file;
@@ -29,6 +29,6 @@ class ArrayFileLoader extends AbstractFileLoader
             return $array;
         }
 
-        return array();
+        return [];
     }
 }

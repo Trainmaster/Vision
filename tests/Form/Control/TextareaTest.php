@@ -43,7 +43,7 @@ class TextareaTest extends \PHPUnit_Framework_TestCase
         $control = $this->control;
 
         $this->assertSame($control, $control->setValue('foo'));
-        $this->assertSame(array('foo'), $control->getContents());
+        $this->assertSame(['foo'], $control->getContents());
     }
     
     public function testSetValueAfterValidatingWithValueAndData()
@@ -54,6 +54,6 @@ class TextareaTest extends \PHPUnit_Framework_TestCase
         $control->isValid();
 
         $this->assertSame('bar', $control->getValue('foo'));
-        $this->assertSame(array('bar'), $control->getContents());
+        $this->assertSame(['bar'], $control->getContents());
     }
 }

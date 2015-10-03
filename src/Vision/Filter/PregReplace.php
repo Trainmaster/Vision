@@ -23,7 +23,7 @@ class PregReplace implements FilterInterface
     /**
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         if (isset($options['pattern'])) {
             $this->pattern = $options['pattern'];

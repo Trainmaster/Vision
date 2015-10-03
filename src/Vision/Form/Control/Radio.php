@@ -18,7 +18,7 @@ use Vision\Html\Element;
 class Radio extends AbstractOptionControl
 {
     /** @var array $attributes */
-    protected $attributes = array('type' => 'radio');
+    protected $attributes = ['type' => 'radio'];
 
     /** @var bool $checkedness */
     protected $checkedness = false;
@@ -78,9 +78,9 @@ class Radio extends AbstractOptionControl
     protected function createRadioButton($value)
     {
         $button = new Element('input');
-        $button->setAttributes(array(
+        $button->setAttributes([
             'value' => $value,
-        ) + $this->getAttributes());
+            ] + $this->getAttributes());
 
         if (!$this->checkedness && parent::checkCheckedness($button->getAttribute('value'))) {
             $button->setAttribute('checked');

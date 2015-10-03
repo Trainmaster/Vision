@@ -11,7 +11,7 @@ namespace Vision\Validator;
 class ValidatorChain
 {
     /** @var array $validators */
-    protected $validators = array();
+    protected $validators = [];
 
     /**
      * @api

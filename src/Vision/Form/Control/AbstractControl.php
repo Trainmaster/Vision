@@ -34,10 +34,10 @@ abstract class AbstractControl extends AbstractType
     protected $isValidated = false;
 
     /** @var array $filters */
-    protected $filters = array();
+    protected $filters = [];
 
     /** @var array $errors */
-    protected $errors = array();
+    protected $errors = [];
 
     /**
      * @api
@@ -306,6 +306,6 @@ abstract class AbstractControl extends AbstractType
      */
     public function getChildren()
     {
-        return array();
+        return [];
     }
 }

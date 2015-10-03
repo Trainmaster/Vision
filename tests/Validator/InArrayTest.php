@@ -9,11 +9,11 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     static $strictValidator = null;
 
-    protected static $haystack = array(
+    protected static $haystack = [
         'foo',
         'bar',
         true
-    );
+    ];
 
     public static function setUpBeforeClass()
     {
@@ -27,9 +27,9 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(self::$validator->isValid('1'));
         $this->assertTrue(self::$validator->isValid(true));
         $this->assertTrue(self::$validator->isValid('foo'));
-        $this->assertTrue(self::$validator->isValid(array('foo', 'bar')));
+        $this->assertTrue(self::$validator->isValid(['foo', 'bar']));
         $this->assertTrue(self::$validator->isValid('baz'));
-        $this->assertTrue(self::$validator->isValid(array('baz')));
+        $this->assertTrue(self::$validator->isValid(['baz']));
     }
 
     public function testFailure()
@@ -37,6 +37,6 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(self::$strictValidator->isValid(1));
         $this->assertFalse(self::$strictValidator->isValid('1'));
         $this->assertFalse(self::$strictValidator->isValid('baz'));
-        $this->assertFalse(self::$strictValidator->isValid(array('baz')));
+        $this->assertFalse(self::$strictValidator->isValid(['baz']));
     }
 }

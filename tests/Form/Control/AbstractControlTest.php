@@ -5,7 +5,7 @@ class AbstractControlTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractControl', array('abstract'));
+        $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractControl', ['abstract']);
     }
 
     public function testDefaultsAfterConstruct()
@@ -17,10 +17,10 @@ class AbstractControlTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($control->isRequired());
         $this->assertNull($control->getData());
         $this->assertNull($control->getValue());
-        $this->assertSame(array(), $control->getFilters());
-        $this->assertSame(array(), $control->getErrors());
+        $this->assertSame([], $control->getFilters());
+        $this->assertSame([], $control->getErrors());
         $this->assertFalse($control->hasChildren());
-        $this->assertSame(array(), $control->getChildren());
+        $this->assertSame([], $control->getChildren());
     }
 
     /**

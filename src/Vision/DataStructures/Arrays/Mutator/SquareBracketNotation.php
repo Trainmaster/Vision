@@ -29,7 +29,7 @@ class SquareBracketNotation extends ArrayObject
             $part = rtrim($part, ']');
 
             if (!isset($data[$part])) {
-                $data[$part] = array();
+                $data[$part] = [];
             }
 
             if (!is_array($data[$part])) {

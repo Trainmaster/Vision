@@ -161,7 +161,7 @@ class SplClassLoader
      */
     public function register($prepend = false)
     {
-        spl_autoload_register(array($this, 'load'), true, (bool) $prepend);
+        spl_autoload_register([$this, 'load'], true, (bool) $prepend);
     }
 
     /**
@@ -171,6 +171,6 @@ class SplClassLoader
      */
     public function unregister()
     {
-        spl_autoload_unregister(array($this, 'load'));
+        spl_autoload_unregister([$this, 'load']);
     }
 }

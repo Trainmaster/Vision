@@ -14,7 +14,7 @@ class Node implements NodeInterface
     protected $parent;
 
     /** @var array $children */
-    protected $children = array();
+    protected $children = [];
 
     /**
      * @api
@@ -97,6 +97,6 @@ class Node implements NodeInterface
      */
     public function removeChildren()
     {
-        return $this->children = array();
+        return $this->children = [];
     }
 }

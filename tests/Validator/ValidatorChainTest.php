@@ -15,7 +15,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $validator = $this->getMock('\Vision\Validator\ValidatorInterface');
         $this->chain->add($validator);
 
-        $this->assertAttributeEquals(array($validator), 'validators', $this->chain);
+        $this->assertAttributeEquals([$validator], 'validators', $this->chain);
         $this->assertInstanceOf('\Vision\Validator\ValidatorChain', $this->chain);
     }
 
