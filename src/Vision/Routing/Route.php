@@ -34,7 +34,7 @@ class Route extends AbstractRoute
     /** @return string */
     public function __toString()
     {
-        return md5($this->httpMethod . $this->path . $this->controller);
+        return md5(serialize($this->httpMethod) . $this->path . $this->controller);
     }
 
     /**
