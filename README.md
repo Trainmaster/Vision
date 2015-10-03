@@ -1,5 +1,7 @@
 # Vision - a PHP framework
 
+[![Build Status](https://travis-ci.org/Trainmaster/Vision.svg?branch=master)](https://travis-ci.org/Trainmaster/Vision)
+
 Vision is a lightweight and easy extensible framework for PHP.
 
 
