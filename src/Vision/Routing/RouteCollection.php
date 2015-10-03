@@ -69,14 +69,15 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
-     * @param Route $route
-     *
-     * @return $this Provides a fluent interface.
+     * @param string|array $httpMethod
+     * @param string $path
+     * @param string $controller
+     * @return $this
      */
-    public function add(Route $route)
+    public function add($httpMethod, $path, $controller)
     {
+        $route = new Route($httpMethod, $path, $controller);
+
         if (isset($this->routes[(string) $route])) {
             throw new \RuntimeException(sprintf(
                 'Route "%s" has already been defined.',
@@ -98,10 +99,7 @@ class RouteCollection implements \IteratorAggregate
      */
     public function addRouteCollection(RouteCollection $collection)
     {
-        foreach ($collection as $route) {
-            $this->add($route);
-        }
-
+        array_push($this->routes, $collection->getAll());
         return $this;
     }
 
