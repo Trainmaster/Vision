@@ -10,7 +10,7 @@ namespace Vision\Routing;
 
 class RouteCollection implements \IteratorAggregate
 {
-    /** @var array $routes */
+    /** @var Route[] $routes */
     protected $routes = [];
 
     /**
