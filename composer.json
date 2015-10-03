@@ -4,7 +4,10 @@
     "type" : "library",
     "license" : "MIT",
     "require": {
-        "php": ">=5.3.8"
+        "php": ">=5.3.8",
+        "ext-fileinfo": "*",
+        "ext-intl": "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "phpunit/PHPUnit": "4.8.10"
