@@ -6,7 +6,7 @@
  * @copyright 2012-2015 Frank Liepert
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
-namespace Vision\Debug;
+namespace Vision\Controller;
 
 interface ExceptionHandlerInterface
 {

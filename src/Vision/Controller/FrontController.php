@@ -9,7 +9,6 @@
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
-use Vision\Debug\ExceptionHandlerInterface;
 use Vision\Http\RequestInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
