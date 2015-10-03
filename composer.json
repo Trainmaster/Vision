@@ -20,8 +20,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Vision\\": "src/"
+        "psr-4": {
+            "Vision\\": "src/Vision/"
         }
     },
     "autoload-dev": {
