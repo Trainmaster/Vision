@@ -151,6 +151,31 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($container, $self);
     }
 
+    public function testGetViaFactory()
+    {
+        $container = new Container;
+        $container->register('VisionTest\DependencyInjection\Fixtures\FooFactory', 'FooFactory');
+        $container->register('VisionTest\DependencyInjection\Fixtures\Foo', 'Foo')
+            ->factory('@FooFactory', 'getInstance');
+
+        $this->assertInstanceOf('VisionTest\DependencyInjection\Fixtures\Foo', $container->get('Foo'));
+    }
+
+    public function testGetWithParametersViaFactory()
+    {
+        $param1 = 'foo';
+
+        $container = new Container;
+        $container->register('VisionTest\DependencyInjection\Fixtures\FooFactory', 'FooFactory');
+        $container->register('VisionTest\DependencyInjection\Fixtures\Foo', 'Foo')
+            ->factory('@FooFactory', 'getInstanceWithParameters', [$param1]);
+
+        $foo = $container->get('Foo');
+
+        $this->assertSame($param1, $foo->param1);
+        $this->assertInstanceOf('VisionTest\DependencyInjection\Fixtures\Foo', $foo);
+    }
+
     public function testDependentClass()
     {
         $container = new Container;

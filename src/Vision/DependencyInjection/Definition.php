@@ -155,14 +155,15 @@ class Definition
     /**
      * @api
      *
+     * @param string $dependency
      * @param string $method
      * @param array  $args
      *
      * @return $this Provides a fluent interface.
      */
-    public function factory($method, array $args)
+    public function factory($dependency, $method, array $args = array())
     {
-        $this->factory = array((string) $method, $args);
+        $this->factory = array((string) $dependency, (string) $method, $args);
         return $this;
     }
 

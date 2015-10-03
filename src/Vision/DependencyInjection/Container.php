@@ -233,11 +233,15 @@ class Container implements ContainerInterface
         $class = $definition->getClass();
         $factory = $definition->getFactory();
 
-        $reflection = new ReflectionClass($class);
-
         if ($factory) {
-            return $reflection->getMethod($factory[0])->invokeArgs(null, $this->resolveDependencies($factory[1]));
+            $factoryInstance = $this->resolveReference($factory[0]);
+
+            return $factory[2]
+                ? call_user_func_array(array($factoryInstance, $factory[1]), $factory[2])
+                : $factoryInstance->$factory[1]();
         }
+
+        $reflection = new ReflectionClass($class);
 
         if (!$reflection->isInstantiable()) {
             return false;
