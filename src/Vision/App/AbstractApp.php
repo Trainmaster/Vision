@@ -112,8 +112,6 @@ abstract class AbstractApp
      */
     public function run()
     {
-        $this->frontController->run();
-        $response = $this->frontController->getResponse();
-        $response->send();
+        $this->frontController->run()->send();
     }
 }
