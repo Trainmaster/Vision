@@ -19,7 +19,7 @@ class RouteCollectionTest extends \PHPUnit_Framework_TestCase
         $route = $collection->get('/');
 
         $this->assertInstanceOf('Vision\Routing\Route', $route);
-        $this->assertSame([$httpMethod], $route->getHttpMethod());
+        $this->assertSame($httpMethod, $route->getHttpMethod());
         $this->assertSame($path, $route->getPath());
         $this->assertSame($controller, $route->getController());
     }
