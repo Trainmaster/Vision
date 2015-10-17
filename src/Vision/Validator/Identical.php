@@ -14,7 +14,7 @@ class Identical extends AbstractValidator
     const NOT_IDENTICAL = 'The given operands are not identical.';
 
     /** @var mixed $operand */
-    protected $operand = null;
+    protected $operand;
 
     /**
      * @param mixed $operand

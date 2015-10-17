@@ -22,13 +22,13 @@ use LogicException;
 abstract class AbstractControl extends AbstractType
 {
     /** @var null|string $label */
-    protected $label = null;
+    protected $label;
 
     /** @var null|mixed $data */
-    protected $data = null;
+    protected $data;
 
     /** @var null|mixed $value */
-    protected $value = null;
+    protected $value;
 
     /** @var bool $isValidated */
     protected $isValidated = false;

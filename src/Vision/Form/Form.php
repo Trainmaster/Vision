@@ -38,10 +38,10 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     protected $values = [];
 
     /** @var Iterator\ControlsIterator $controlsIterator */
-    protected $controlsIterator = null;
+    protected $controlsIterator;
 
     /** @var Iterator\OptionControlsIterator $optionControlsIterator */
-    protected $optionControlsIterator = null;
+    protected $optionControlsIterator;
 
     /**
      * @param string $name

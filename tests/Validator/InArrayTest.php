@@ -5,9 +5,9 @@ use Vision\Validator;
 
 class InArrayTest extends \PHPUnit_Framework_TestCase
 {
-    static $validator = null;
+    static $validator;
 
-    static $strictValidator = null;
+    static $strictValidator;
 
     protected static $haystack = [
         'foo',

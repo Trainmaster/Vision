@@ -14,10 +14,10 @@ class Route extends AbstractRoute
     protected $httpMethod;
 
     /** @var null|string $controller */
-    protected $controller = null;
+    protected $controller;
 
     /** @var null|string $path */
-    protected $path = null;
+    protected $path;
 
     /**
      * @param string $httpMethod
