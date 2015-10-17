@@ -57,6 +57,30 @@ class FrontController
     }
 
     /**
+     * @api
+     *
+     * @throws \RuntimeException
+     *
+     * @return ResponseInterface
+     */
+    public function run()
+    {
+        try {
+            $route = $this->router->resolve();
+
+            if ($route instanceof AbstractCompiledRoute) {
+                $class = $route->getClass();
+                $method = $route->getMethod();
+                return $this->invokeController($class, $method);
+            } else {
+                throw new \RuntimeException('No matching route.');
+            }
+        } catch (\Exception $e) {
+            return $this->handleException($e);
+        }
+    }
+
+    /**
      * @param string $class
      * @param string $method
      *
@@ -65,7 +89,7 @@ class FrontController
      *
      * @return ResponseInterface
      */
-    public function invokeController($class, $method)
+    private function invokeController($class, $method)
     {
         $instance = $this->container->get($class);
 
@@ -109,35 +133,11 @@ class FrontController
     }
 
     /**
-     * @api
-     *
-     * @throws \RuntimeException
-     *
-     * @return ResponseInterface
-     */
-    public function run()
-    {
-        try {
-            $route = $this->router->resolve();
-
-            if ($route instanceof AbstractCompiledRoute) {
-                $class = $route->getClass();
-                $method = $route->getMethod();
-                return $this->invokeController($class, $method);
-            } else {
-                throw new \RuntimeException('No matching route.');
-            }
-        } catch (\Exception $e) {
-            return $this->handleException($e);
-        }
-    }
-
-    /**
      * @param \Exception $e
      *
      * @return ResponseInterface
      */
-    protected function handleException(\Exception $e)
+    private function handleException(\Exception $e)
     {
         $response = new Response();
         if (isset($this->exceptionHandler)) {
