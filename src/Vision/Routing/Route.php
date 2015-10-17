@@ -49,7 +49,7 @@ class Route extends AbstractRoute
 
         if (!in_array($httpMethod, $validHttpMethods)) {
             throw new \UnexpectedValueException(
-                sprintf('Method must be one of: %s', implode(' ', $validHttpMethods))
+                sprintf('Method must be one of: %s', implode(', ', $validHttpMethods))
             );
         }
 
