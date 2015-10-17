@@ -69,24 +69,16 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @param string|array $httpMethod
+     * @param string|string[] $httpMethod
      * @param string $path
      * @param string $controller
      * @return $this
      */
     public function add($httpMethod, $path, $controller)
     {
-        $route = new Route($httpMethod, $path, $controller);
-
-        if (isset($this->routes[(string) $route])) {
-            throw new \RuntimeException(sprintf(
-                'Route "%s" has already been defined.',
-                $route->getPath()
-            ));
+        foreach ((array) $httpMethod as $method) {
+            $this->addRoute(new Route($method, $path, $controller));
         }
-
-        $this->routes[(string) $route] = $route;
-
         return $this;
     }
 
@@ -129,5 +121,21 @@ class RouteCollection implements \IteratorAggregate
     public function getAll()
     {
         return $this->routes;
+    }
+
+    /**
+     * @param Route $route
+     * @return $this
+     */
+    private function addRoute(Route $route)
+    {
+        if (isset($this->routes[(string) $route])) {
+            throw new \RuntimeException(sprintf(
+                'Route "%s" has already been defined.',
+                $route->getPath()
+            ));
+        }
+        $this->routes[(string) $route] = $route;
+        return $this;
     }
 }
