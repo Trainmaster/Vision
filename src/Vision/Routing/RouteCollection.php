@@ -91,7 +91,8 @@ class RouteCollection implements \IteratorAggregate
      */
     public function addRouteCollection(RouteCollection $collection)
     {
-        array_push($this->routes, $collection->getAll());
+        $routes = $collection->getAll();
+        array_walk($routes, [$this, 'addRoute']);
         return $this;
     }
 
