@@ -4,9 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "65217d7cc586fc0894fadabf7701ee81",
-    "content-hash": "7e464dce96411a5f5c1223d797f822d0",
-    "packages": [],
+    "hash": "efbd58d7ab78c6c632f667895396e760",
+    "content-hash": "3057dafcf870d91e2b458d11f5487c83",
+    "packages": [
+        {
+            "name": "paragonie/random_compat",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "df1207683dfbd1399f0fa931a368082a28fed50b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/df1207683dfbd1399f0fa931a368082a28fed50b",
+                "reference": "df1207683dfbd1399f0fa931a368082a28fed50b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2015-10-16 14:10:15"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
