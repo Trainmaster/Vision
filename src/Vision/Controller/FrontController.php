@@ -17,13 +17,13 @@ use Vision\Routing\AbstractCompiledRoute;
 class FrontController
 {
     /** @var null|ContainerInterface $container */
-    protected $container;
+    private $container;
 
     /** @var null|Router $router */
-    protected $router;
+    private $router;
 
     /** @var null|ExceptionHandlerInterface $exceptionHandler */
-    protected $exceptionHandler;
+    private $exceptionHandler;
 
     /**
      * @param Router $router
