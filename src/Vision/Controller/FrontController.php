@@ -9,6 +9,7 @@
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
+use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
 use Vision\Routing\AbstractCompiledRoute;
@@ -18,9 +19,6 @@ class FrontController
     /** @var null|ContainerInterface $container */
     protected $container;
 
-    /** @var null|ResponseInterface $response */
-    protected $response;
-
     /** @var null|Router $router */
     protected $router;
 
@@ -28,26 +26,13 @@ class FrontController
     protected $exceptionHandler;
 
     /**
-     * @param ResponseInterface $response
      * @param Router $router
      * @param ContainerInterface $container
      */
-    public function __construct(ResponseInterface $response,
-                                Router $router, ContainerInterface $container)
+    public function __construct(Router $router, ContainerInterface $container)
     {
-        $this->response = $response;
         $this->router = $router;
         $this->container = $container;
-    }
-
-    /**
-     * @api
-     *
-     * @return ResponseInterface
-     */
-    public function getResponse()
-    {
-        return $this->response;
     }
 
     /**
@@ -128,7 +113,7 @@ class FrontController
      *
      * @throws \RuntimeException
      *
-     * @return void
+     * @return ResponseInterface
      */
     public function run()
     {
@@ -138,26 +123,28 @@ class FrontController
             if ($route instanceof AbstractCompiledRoute) {
                 $class = $route->getClass();
                 $method = $route->getMethod();
-                $this->response = $this->invokeController($class, $method);
+                return $this->invokeController($class, $method);
             } else {
                 throw new \RuntimeException('No matching route.');
             }
         } catch (\Exception $e) {
-            $this->handleException($e);
+            return $this->handleException($e);
         }
     }
 
     /**
      * @param \Exception $e
      *
-     * @return void
+     * @return ResponseInterface
      */
     protected function handleException(\Exception $e)
     {
+        $response = new Response();
         if (isset($this->exceptionHandler)) {
-            $this->response->body($this->exceptionHandler->handle($e));
+            $response->body($this->exceptionHandler->handle($e));
         } else {
-            $this->response->body(highlight_string($e));
+            $response->body(highlight_string($e));
         }
+        return $response;
     }
 }
