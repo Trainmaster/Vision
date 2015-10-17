@@ -9,7 +9,6 @@
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
-use Vision\Http\RequestInterface;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
 use Vision\Routing\AbstractCompiledRoute;
@@ -18,9 +17,6 @@ class FrontController
 {
     /** @var null|ContainerInterface $container */
     protected $container;
-
-    /** @var null|RequestInterface $request */
-    protected $request;
 
     /** @var null|ResponseInterface $response */
     protected $response;
@@ -32,28 +28,16 @@ class FrontController
     protected $exceptionHandler;
 
     /**
-     * @param RequestInterface $request
      * @param ResponseInterface $response
      * @param Router $router
      * @param ContainerInterface $container
      */
-    public function __construct(RequestInterface $request, ResponseInterface $response,
+    public function __construct(ResponseInterface $response,
                                 Router $router, ContainerInterface $container)
     {
-        $this->request = $request;
         $this->response = $response;
         $this->router = $router;
         $this->container = $container;
-    }
-
-    /**
-     * @api
-     *
-     * @return RequestInterface
-     */
-    public function getRequest()
-    {
-        return $this->request;
     }
 
     /**
