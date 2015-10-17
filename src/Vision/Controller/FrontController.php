@@ -36,16 +36,6 @@ class FrontController
     }
 
     /**
-     * @api
-     *
-     * @return Router
-     */
-    public function getRouter()
-    {
-        return $this->router;
-    }
-
-    /**
      * @param ExceptionHandlerInterface $exceptionHandler
      *
      * @return $this Provides a fluent interface.
