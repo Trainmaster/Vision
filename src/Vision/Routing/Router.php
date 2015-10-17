@@ -226,7 +226,7 @@ class Router
                 throw new \InvalidArgumentException(sprintf(
                     'The file %s must return an instance of %s.',
                     $resource,
-                    __NAMESPACE__ . '\RouteCollection'
+                    RouteCollection::class
                 ));
             }
 

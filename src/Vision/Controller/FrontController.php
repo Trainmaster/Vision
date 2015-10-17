@@ -87,7 +87,7 @@ class FrontController
             throw new \UnexpectedValueException(sprintf(
                 '%s must implement interface %s.',
                 $class,
-                __NAMESPACE__ . '\ControllerInterface'
+                ControllerInterface::class
             ));
         }
 

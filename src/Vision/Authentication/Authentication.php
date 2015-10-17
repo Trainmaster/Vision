@@ -45,7 +45,7 @@ class Authentication
             throw new UnexpectedValueException(sprintf(
                 'The method "%s::authenticate" must return an instance of "%s".',
                 get_class($this->strategy),
-                __NAMESPACE__ . '\ResultInterface'
+                ResultInterface::class
             ));
         }
 
