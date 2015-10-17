@@ -234,7 +234,7 @@ class Container implements ContainerInterface
         $factory = $definition->getFactory();
 
         if ($factory) {
-            $factoryInstance = $this->resolveReference($factory[0]);
+            $factoryInstance = $this->resolveDependency($factory[0]);
 
             return $factory[2]
                 ? call_user_func_array([$factoryInstance, $factory[1]], $this->resolveDependencies($factory[2]))
