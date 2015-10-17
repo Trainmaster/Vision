@@ -10,8 +10,8 @@ namespace Vision\Routing;
 
 class Route extends AbstractRoute
 {
-    /** @var array $httpMethod */
-    protected $httpMethod = [];
+    /** @var string $httpMethod */
+    protected $httpMethod;
 
     /** @var null|string $controller */
     protected $controller = null;
@@ -20,7 +20,7 @@ class Route extends AbstractRoute
     protected $path = null;
 
     /**
-     * @param string|array $httpMethod
+     * @param string $httpMethod
      * @param string $path
      * @param string $controller
      */
@@ -38,21 +38,23 @@ class Route extends AbstractRoute
     }
 
     /**
-     * @param string|array $httpMethod
+     * @param string $httpMethod
      * @return $this
      */
     public function setHttpMethod($httpMethod)
     {
         static $validHttpMethods = ['DELETE', 'GET', 'POST', 'PUT'];
-        foreach ((array) $httpMethod as $method) {
-            $method = strtoupper($method);
-            if (!in_array($method, $validHttpMethods)) {
-                throw new \UnexpectedValueException(
-                    sprintf('Method must be one of: %s', implode(' ', $validHttpMethods))
-                );
-            }
-            $this->httpMethod[] = $method;
+
+        $httpMethod = strtoupper($httpMethod);
+
+        if (!in_array($httpMethod, $validHttpMethods)) {
+            throw new \UnexpectedValueException(
+                sprintf('Method must be one of: %s', implode(' ', $validHttpMethods))
+            );
         }
+
+        $this->httpMethod = $httpMethod;
+
         return $this;
     }
 
