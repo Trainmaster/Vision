@@ -1,13 +1,13 @@
 <?php
 namespace VisionTest\Random;
 
-use Vision\Random\String;
+use Vision\Random\RandomString;
 
-class StringTest extends \PHPUnit_Framework_TestCase
+class RandomStringTest extends \PHPUnit_Framework_TestCase
 {
     public function testGenerateHex()
     {
-        $string = new String();
+        $string = new RandomString();
 
         $hex = $string->generateHex(10);
         $this->assertInternalType('string', $hex);
@@ -17,7 +17,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
     public function testGenerateHexWithInvalidLength()
     {
-        $string = new String();
+        $string = new RandomString();
 
         $hex = $string->generateHex(3);
         $this->assertFalse($hex);

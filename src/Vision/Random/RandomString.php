@@ -8,7 +8,7 @@
  */
 namespace Vision\Random;
 
-class String
+class RandomString
 {
     /**
      * @param int $length
