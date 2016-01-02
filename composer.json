@@ -11,7 +11,7 @@
         "ext-mbstring": "*"
     },
     "require-dev": {
-        "phpunit/PHPUnit": "4.8.10"
+        "phpunit/PHPUnit": "4.8.21"
     },
     "authors": [
         {
