@@ -14,8 +14,6 @@ class Integer extends AbstractValidator
     const NO_INTEGER = 'The given value is not an integer.';
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return bool

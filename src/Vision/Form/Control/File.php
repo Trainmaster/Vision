@@ -22,8 +22,6 @@ class File extends AbstractInput
     protected $invalidAttributes = ['value'];
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return $this Provides a fluent interface.

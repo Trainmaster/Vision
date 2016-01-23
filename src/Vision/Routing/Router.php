@@ -34,8 +34,6 @@ class Router
     }
 
     /**
-     * @api
-     *
      * @param CacheInterface $cache
      *
      * @return Router Provides a fluent interface.
@@ -47,8 +45,6 @@ class Router
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      * @param AbstractCompiledRoute $route
      *
@@ -61,8 +57,6 @@ class Router
     }
 
     /**
-     * @api
-     *
      * @param array $routes
      *
      * @return Router Provides a fluent interface.
@@ -77,8 +71,6 @@ class Router
     }
 
     /**
-     * @api
-     *
      * @return CompiledRouteCollection
      */
     public function getRoutes()
@@ -87,8 +79,6 @@ class Router
     }
 
     /**
-     * @api
-     *
      * @param string $resource
      *
      * @return Router Provides a fluent interface.
@@ -100,8 +90,6 @@ class Router
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getResources()

@@ -30,8 +30,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * @api
-     *
      * @param string $key
      * @param mixed $value
      * @param int $expiration
@@ -44,8 +42,6 @@ class Cache implements CacheInterface
     }
 
     /**
-     * @api
-     *
      * @param string $key
      *
      * @return mixed

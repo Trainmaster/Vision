@@ -73,8 +73,6 @@ class Response extends AbstractMessage implements ResponseInterface
     ];
 
     /**
-     * @api
-     *
      * @param string $name
      * @param string $value
      *
@@ -87,8 +85,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @param string $name
      * @param string $value
      * @param int    $expire
@@ -107,8 +103,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getCookies()
@@ -117,8 +111,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @param string $name
      * @param string $value
      * @param int    $expire
@@ -137,8 +129,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getRawCookies()
@@ -147,8 +137,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @param mixed $body
      *
      * @return $this Provides a fluent interface.
@@ -160,8 +148,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @param int $statusCode
      *
      * @return $this Provides a fluent interface.
@@ -178,8 +164,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @return int
      */
     public function getStatusCode()
@@ -188,8 +172,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @param string $reasonPhrase
      *
      * @return Response Provides a fluent interface.
@@ -202,8 +184,6 @@ class Response extends AbstractMessage implements ResponseInterface
 
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getReasonPhrase()
@@ -215,8 +195,6 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
-     * @api
-     *
      * @return void
      */
     public function send()

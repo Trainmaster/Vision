@@ -14,8 +14,6 @@ class InputNotEmptyString extends AbstractValidator
     const INPUT_NOT_EMPTY_STRING = 'The given value contains an empty string.';
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return bool

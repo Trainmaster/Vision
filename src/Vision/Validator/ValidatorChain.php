@@ -14,8 +14,6 @@ class ValidatorChain
     protected $validators = [];
 
     /**
-     * @api
-     *
      * @param ValidatorInterface $validator
      *
      * @return ValidatorChain Provides a fluent interface.
@@ -27,8 +25,6 @@ class ValidatorChain
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return bool

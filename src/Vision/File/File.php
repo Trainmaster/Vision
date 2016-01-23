@@ -13,8 +13,6 @@ use finfo;
 class File extends \SplFileObject
 {
     /**
-     * @api
-     *
      * @todo Possible candidate for trait
      *
      * @return bool
@@ -25,8 +23,6 @@ class File extends \SplFileObject
     }
 
     /**
-     * @api
-     *
      * @return string|false
      */
     public function getMimeType()

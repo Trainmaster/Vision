@@ -83,8 +83,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getAction()
@@ -104,8 +102,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getMethod()
@@ -114,8 +110,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $method
      *
      * @return bool
@@ -137,8 +131,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getData()
@@ -147,8 +139,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param array $data
      *
      * @return $this Provides a fluent interface.
@@ -170,8 +160,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getValues()
@@ -180,8 +168,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param array $data
      *
      * @return $this Provides a fluent interface.
@@ -203,8 +189,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getErrors()
@@ -213,8 +197,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $name
      *
      * @return AbstractType|null
@@ -240,8 +222,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $name
      *
      * @return void
@@ -256,8 +236,6 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isValid()

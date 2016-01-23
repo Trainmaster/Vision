@@ -40,8 +40,6 @@ abstract class AbstractControl extends AbstractType
     protected $errors = [];
 
     /**
-     * @api
-     *
      * @param string $label
      *
      * @return $this Provides a fluent interface.
@@ -53,8 +51,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getLabel()
@@ -63,8 +59,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param string $placeholder
      *
      * @return $this Provides a fluent interface.
@@ -76,8 +70,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getPlaceholder()
@@ -86,8 +78,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param bool $disabled
      *
      * @return $this Provides a fluent interface.
@@ -106,8 +96,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param bool $readOnly
      *
      * @return $this Provides a fluent interface.
@@ -126,8 +114,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param bool $required
      *
      * @return $this Provides a fluent interface.
@@ -146,8 +132,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isRequired()
@@ -156,8 +140,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param mixed $data
      *
      * @return $this Provides a fluent interface.
@@ -169,8 +151,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function getData()
@@ -179,8 +159,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return $this Provides a fluent interface.
@@ -193,8 +171,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function getValue()
@@ -203,8 +179,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isValid()
@@ -241,8 +215,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param FilterInterface $filter
      *
      * @return $this Provides a fluent interface.
@@ -254,8 +226,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param array $filters
      *
      * @return $this Provides a fluent interface.
@@ -269,8 +239,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return array
      */
 
@@ -280,8 +248,6 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getErrors()

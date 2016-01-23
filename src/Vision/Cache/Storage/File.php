@@ -39,8 +39,6 @@ class File implements StorageInterface
     }
 
     /**
-     * @api
-     *
      * @param string $cacheDir
      *
      * @throws \RuntimeException
@@ -78,8 +76,6 @@ class File implements StorageInterface
     }
 
     /**
-     * @api
-     *
      * @param string $key
      * @param bool|int|float|string|array|object $value
      * @param int $expiration
@@ -107,8 +103,6 @@ class File implements StorageInterface
     }
 
     /**
-     * @api
-     *
      * @param string $key
      *
      * @return bool|int|float|string|array|object|null

@@ -11,15 +11,11 @@ namespace Vision\Authentication;
 interface ResultInterface
 {
     /**
-     * @api
-     *
      * @return bool
      */
     public function isSuccess();
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function getIdentity();

@@ -25,8 +25,6 @@ class Identical extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param mixed $operand
      *
      * @return $this Provides a fluent interface.
@@ -38,8 +36,6 @@ class Identical extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function getOperand()
@@ -48,8 +44,6 @@ class Identical extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param string $value
      *
      * @return bool

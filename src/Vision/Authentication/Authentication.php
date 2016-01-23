@@ -29,8 +29,6 @@ class Authentication
     }
 
     /**
-     * @api
-     *
      * @param array $data
      *
      * @return bool
@@ -57,8 +55,6 @@ class Authentication
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isAuthenticated()
@@ -67,8 +63,6 @@ class Authentication
     }
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function getIdentity()
@@ -77,8 +71,6 @@ class Authentication
     }
 
     /**
-     * @api
-     *
      * @return void
      */
     public function clearIdentity()

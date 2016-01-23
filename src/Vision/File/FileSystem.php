@@ -17,8 +17,6 @@ class FileSystem
     protected $currentDir;
 
     /**
-     * @api
-     *
      * @param string $alias
      * @param string $path
      *
@@ -31,8 +29,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      *
      * @return string|null
@@ -46,8 +42,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getAliases()
@@ -56,8 +50,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @param string $dest
      *
      * @return bool
@@ -74,8 +66,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @param string $src
      * @param string $dest
      *
@@ -95,8 +85,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @param string $dir
      *
      * @return bool
@@ -107,8 +95,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @param string $dir
      *
      * @return bool
@@ -123,8 +109,6 @@ class FileSystem
     }
 
     /**
-     * @api
-     *
      * @param string $source
      * @param string $newName
      *

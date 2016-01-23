@@ -14,8 +14,6 @@ class NotNull extends AbstractValidator
     const NOT_NULL = 'The given value must not be null.';
 
     /**
-     * @api
-     *
      * @param string $value
      *
      * @return bool

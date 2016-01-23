@@ -11,8 +11,6 @@ namespace Vision\Authentication\Storage;
 interface StorageInterface
 {
     /**
-     * @api
-     *
      * @param $data
      *
      * @return void
@@ -20,22 +18,16 @@ interface StorageInterface
     public function save($data);
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function load();
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function exists();
 
     /**
-     * @api
-     *
      * @return void
      */
     public function clear();

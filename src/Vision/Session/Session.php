@@ -40,8 +40,6 @@ class Session extends ArrayObject implements SessionInterface
     }
 
     /**
-     * @api
-     *
      * @return Extension\ExtensionInterface $extension
      */
     public function getExtension()

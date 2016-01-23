@@ -14,8 +14,6 @@ class CompiledRouteCollection implements \IteratorAggregate
     protected $routes = [];
 
     /**
-     * @api
-     *
      * @return \ArrayIterator
      */
     public function getIterator()
@@ -24,8 +22,6 @@ class CompiledRouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      * @param AbstractCompiledRoute $route
      *
@@ -39,8 +35,6 @@ class CompiledRouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      *
      * @return AbstractCompiledRoute|null
@@ -55,8 +49,6 @@ class CompiledRouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      *
      * @return bool
@@ -67,8 +59,6 @@ class CompiledRouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getRoutes()

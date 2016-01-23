@@ -22,8 +22,6 @@ class Date extends AbstractInput
     protected $dateFormat = 'Y-m-d';
 
     /**
-     * @api
-     *
      * @param string $dateFormat
      *
      * @return $this Provides a fluent interface
@@ -35,8 +33,6 @@ class Date extends AbstractInput
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getDateFormat()
@@ -45,8 +41,6 @@ class Date extends AbstractInput
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @throws \Exception

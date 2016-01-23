@@ -26,8 +26,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     /**
      * This method will be called right after instantiating the controller.
      *
-     * @api
-     *
      * @return void
      */
     public function preFilter()
@@ -37,8 +35,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     /**
      * This method will be called right after invoking the controller action.
      *
-     * @api
-     *
      * @return void
      */
     public function postFilter()
@@ -46,8 +42,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     }
 
     /**
-     * @api
-     *
      * @param RequestInterface $request
      *
      * @return $this Provides a fluent interface.
@@ -59,8 +53,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
     }
 
     /**
-     * @api
-     *
      * @param ResponseInterface $response
      *
      * @return $this Provides a fluent interface.
@@ -73,8 +65,6 @@ abstract class AbstractController implements RequestAwareInterface, ResponseAwar
 
     /**
      * This is a shorthand method for creating a redirect response.
-     *
-     * @api
      *
      * @param string $url
      * @param int $statusCode

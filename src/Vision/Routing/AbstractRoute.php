@@ -20,8 +20,6 @@ abstract class AbstractRoute
     protected $requirements = [];
 
     /**
-     * @api
-     *
      * @param array $defaults
      *
      * @return $this Provides a fluent interface.
@@ -33,8 +31,6 @@ abstract class AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getDefaults()
@@ -43,8 +39,6 @@ abstract class AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @param array $requirements
      *
      * @return $this Provides a fluent interface.
@@ -56,8 +50,6 @@ abstract class AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getRequirements()
@@ -66,8 +58,6 @@ abstract class AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @param string $httpMethod
      *
      * @return $this Provides a fluent interface.
@@ -79,8 +69,6 @@ abstract class AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getHttpMethod()

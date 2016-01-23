@@ -35,8 +35,6 @@ class InputInteger extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param int $min
      *
      * @return $this Provides a fluent interface.
@@ -48,8 +46,6 @@ class InputInteger extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param int $max
      *
      * @return $this Provides a fluent interface.
@@ -61,8 +57,6 @@ class InputInteger extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return bool

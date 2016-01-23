@@ -31,8 +31,6 @@ class Fieldset extends AbstractCompositeType
     }
 
     /**
-     * @api
-     *
      * @return mixed
      */
     public function getContents()
@@ -49,8 +47,6 @@ class Fieldset extends AbstractCompositeType
     }
 
     /**
-     * @api
-     *
      * @param string $legend
      *
      * @return $this Provides a fluent interface.
@@ -62,8 +58,6 @@ class Fieldset extends AbstractCompositeType
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getLegend()

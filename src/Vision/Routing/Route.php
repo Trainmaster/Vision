@@ -65,8 +65,6 @@ class Route
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getHandler()
@@ -75,8 +73,6 @@ class Route
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getPath()

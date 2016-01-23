@@ -30,8 +30,6 @@ class InArray extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return bool

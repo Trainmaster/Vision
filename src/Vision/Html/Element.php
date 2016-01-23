@@ -59,8 +59,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function renderStartTag()
@@ -84,8 +82,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function start()
@@ -94,8 +90,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function renderContents()
@@ -123,8 +117,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function renderEndTag()
@@ -141,8 +133,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function end()
@@ -171,8 +161,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getTag()
@@ -181,8 +169,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isVoid()
@@ -191,8 +177,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param int|float|string|bool|object|null $content
      *
      * @return $this Provides a fluent interface.
@@ -215,8 +199,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getContents()
@@ -225,8 +207,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return $this Provides a fluent interface.
      */
     public function clearContents()
@@ -236,8 +216,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param string $key
      * @param string|bool $value
      *
@@ -252,8 +230,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param array $attributes
      *
      * @return $this Provides a fluent interface.
@@ -268,8 +244,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param string $key
      *
      * @return Element|null
@@ -284,8 +258,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getAttributes()
@@ -294,8 +266,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param string $key
      *
      * @return bool
@@ -311,8 +281,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param string $id
      *
      * @return $this Provides a fluent interface.
@@ -324,8 +292,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getId()
@@ -334,8 +300,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param string $class
      *
      * @return $this Provides a fluent interface.
@@ -355,8 +319,6 @@ class Element
     }
 
     /**
-     * @api
-     *
      * @param string $class
      *
      * @return $this Provides a fluent interface.

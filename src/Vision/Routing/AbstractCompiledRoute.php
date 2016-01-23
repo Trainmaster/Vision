@@ -17,8 +17,6 @@ abstract class AbstractCompiledRoute extends AbstractRoute
     protected $method;
 
     /**
-     * @api
-     *
      * @param string $class
      *
      * @return $this Provides a fluent interface.
@@ -30,8 +28,6 @@ abstract class AbstractCompiledRoute extends AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getClass()
@@ -40,8 +36,6 @@ abstract class AbstractCompiledRoute extends AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @param string $method
      *
      * @return $this Provides a fluent interface.
@@ -53,8 +47,6 @@ abstract class AbstractCompiledRoute extends AbstractRoute
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getMethod()

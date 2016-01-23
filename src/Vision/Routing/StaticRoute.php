@@ -30,8 +30,6 @@ class StaticRoute extends AbstractCompiledRoute
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getPath()

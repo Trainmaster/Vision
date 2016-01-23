@@ -19,8 +19,6 @@ class DateTime extends AbstractInput
     protected $attributes = ['type' => 'datetime'];
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @throws \Exception

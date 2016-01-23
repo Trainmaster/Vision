@@ -11,8 +11,6 @@ namespace Vision\Authentication\Strategy;
 interface StrategyInterface
 {
     /**
-     * @api
-     *
      * @param array $data
      *
      * @return \Vision\Authentication\ResultInterface
@@ -20,8 +18,6 @@ interface StrategyInterface
     public function authenticate(array $data);
 
     /**
-     * @api
-     *
      * @param mixed $identity
      *
      * @return void

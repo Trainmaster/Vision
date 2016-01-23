@@ -80,8 +80,6 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * Check, if the current request method is POST.
      *
-     * @api
-     *
      * @return bool
      */
     public function isPost()
@@ -91,8 +89,6 @@ class Request extends AbstractMessage implements RequestInterface
 
     /**
      * Check, if the current request method is GET.
-     *
-     * @api
      *
      * @return bool
      */
@@ -104,8 +100,6 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * Check, if the current request method is HEAD.
      *
-     * @api
-     *
      * @return bool
      */
     public function isHead()
@@ -115,8 +109,6 @@ class Request extends AbstractMessage implements RequestInterface
 
     /**
      * Check, if the current request method is PUT.
-     *
-     * @api
      *
      * @return bool
      */
@@ -128,8 +120,6 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * Check, if the current request method is DELETE.
      *
-     * @api
-     *
      * @return bool
      */
     public function isDelete()
@@ -140,8 +130,6 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * @see http://www.php.net/manual/en/reserved.variables.server.php
      *
-     * @api
-     *
      * @return bool
      */
     public function isSecure()
@@ -150,8 +138,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isXmlHttpRequest()
@@ -161,8 +147,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getScheme()
@@ -171,8 +155,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @api
-     *
      * @return null|string
      */
     public function getHost()
@@ -205,8 +187,6 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * Returns the current request method.
      *
-     * @api
-     *
      * @return string
      */
     public function getMethod()
@@ -215,8 +195,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getBaseUrl()
@@ -225,8 +203,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getUrl()
@@ -241,8 +217,6 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getQueryString()
@@ -255,8 +229,6 @@ class Request extends AbstractMessage implements RequestInterface
      *
      * Example: http://www.example.com/foo/index.php/bar
      * Result: "/foo"
-     *
-     * @api
      *
      * @return string
      */
@@ -295,8 +267,6 @@ class Request extends AbstractMessage implements RequestInterface
      * Example: http://www.example.com/foo/index.php/bar
      * Result: "/bar"
      *
-     * @api
-     *
      * @return string
      */
     public function getPathInfo()
@@ -327,8 +297,6 @@ class Request extends AbstractMessage implements RequestInterface
      *
      * Example: http://www.example.com/foo/index.php/bar
      * Result: "/foo/index.php/bar"
-     *
-     * @api
      *
      * @return string
      */

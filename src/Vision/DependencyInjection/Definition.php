@@ -42,8 +42,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param string $class
      *
      * @throws \InvalidArgumentException
@@ -63,8 +61,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getClass()
@@ -73,8 +69,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param bool $shared
      *
      * @return $this Provides a fluent interface.
@@ -86,8 +80,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isShared()
@@ -96,8 +88,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param string $property
      * @param mixed $value
      *
@@ -118,8 +108,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param array $constructor
      *
      * @return $this Provides a fluent interface.
@@ -131,8 +119,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param string $method
      * @param array $dependencies
      *
@@ -153,8 +139,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param string $dependency
      * @param string $method
      * @param array  $args
@@ -168,8 +152,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @return bool|array
      */
     public function getFactory()
@@ -178,8 +160,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @param array $method
      *
      * @return $this Provides a fluent interface.
@@ -191,8 +171,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getPropertyInjections()
@@ -201,8 +179,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getConstructorInjections()
@@ -211,8 +187,6 @@ class Definition
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getMethodInjections()

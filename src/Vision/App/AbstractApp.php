@@ -60,8 +60,6 @@ abstract class AbstractApp
     }
 
     /**
-     * @api
-     *
      * @param string $debug
      *
      * @return $this Provides a fluent interface.
@@ -73,8 +71,6 @@ abstract class AbstractApp
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function getDebug()
@@ -83,8 +79,6 @@ abstract class AbstractApp
     }
 
     /**
-     * @api
-     *
      * @param string $environment
      *
      * @return $this Provides a fluent interface.
@@ -96,8 +90,6 @@ abstract class AbstractApp
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getEnvironment()
@@ -106,8 +98,6 @@ abstract class AbstractApp
     }
 
     /**
-     * @api
-     *
      * @return void
      */
     public function run()

@@ -17,8 +17,6 @@ class Node implements NodeInterface
     protected $children = [];
 
     /**
-     * @api
-     *
      * @param NodeInterface $parent
      *
      * @return $this Provides a fluent interface.
@@ -30,8 +28,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return null|Node
      */
     public function getParent()
@@ -40,8 +36,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @param NodeInterface $child
      *
      * @return $this Provides a fluent interface.
@@ -53,8 +47,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @param NodeInterface $child
      *
      * @return void
@@ -71,8 +63,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getChildren()
@@ -81,8 +71,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function hasChildren()
@@ -91,8 +79,6 @@ class Node implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function removeChildren()

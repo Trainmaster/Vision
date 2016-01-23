@@ -11,8 +11,6 @@ namespace Vision\File\Loader;
 class ArrayFileLoader extends AbstractFileLoader
 {
     /**
-     * @api
-     *
      * @param string $file
      *
      * @return array

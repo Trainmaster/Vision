@@ -22,8 +22,6 @@ class Time extends AbstractInput
     protected $timeFormat = 'H:i';
 
     /**
-     * @api
-     *
      * @param string $timeFormat
      *
      * @return $this Provides a fluent interface
@@ -35,8 +33,6 @@ class Time extends AbstractInput
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getTimeFormat()
@@ -45,8 +41,6 @@ class Time extends AbstractInput
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @throws \Exception

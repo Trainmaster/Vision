@@ -26,8 +26,6 @@ class Url
     }
 
     /**
-     * @api
-     *
      * @param RequestInterface $request
      *
      * @return $this Provides a fluent interface.
@@ -50,8 +48,6 @@ class Url
     }
 
     /**
-     * @api
-     *
      * @return bool|string
      */
     public function build()

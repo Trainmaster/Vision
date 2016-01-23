@@ -25,8 +25,6 @@ class ArrayObject implements ArrayAccess, Countable
     }
 
     /**
-     * @api
-     *
      * @param array $data
      *
      * @return array
@@ -39,8 +37,6 @@ class ArrayObject implements ArrayAccess, Countable
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isEmpty()
@@ -49,8 +45,6 @@ class ArrayObject implements ArrayAccess, Countable
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getArrayCopy()

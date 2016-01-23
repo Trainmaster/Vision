@@ -37,8 +37,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @param string $class
      * @param null|string $alias
      *
@@ -91,8 +89,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      *
      * @return mixed
@@ -103,8 +99,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getDefinitions()
@@ -113,8 +107,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @param string $key
      * @param mixed $value
      *
@@ -135,8 +127,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @param array $parameters
      *
      * @return Container Provides a fluent interface.
@@ -151,8 +141,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @param string $key
      *
      * @return mixed
@@ -167,8 +155,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getParameters()
@@ -177,8 +163,6 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @api
-     *
      * @param string $alias
      *
      * @return object

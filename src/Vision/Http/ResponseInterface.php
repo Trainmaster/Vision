@@ -11,8 +11,6 @@ namespace Vision\Http;
 interface ResponseInterface
 {
     /**
-     * @api
-     *
      * @param string $body
      *
      * @return $this
@@ -20,8 +18,6 @@ interface ResponseInterface
     public function body($body);
 
     /**
-     * @api
-     *
      * @param string $name
      * @param string $value
      * @param int    $expire
@@ -36,8 +32,6 @@ interface ResponseInterface
                               $domain = '', $secure = false, $httponly = false);
 
     /**
-     * @api
-     *
      * @param string $name
      * @param string $value
      * @param int    $expire
@@ -52,8 +46,6 @@ interface ResponseInterface
                                  $domain = '', $secure = false, $httponly = false);
 
     /**
-     * @api
-     *
      * @param string $name
      * @param string $value
      *
@@ -62,8 +54,6 @@ interface ResponseInterface
     public function addHeader($name, $value);
 
     /**
-     * @api
-     *
      * @param int $statusCode
      *
      * @return $this
@@ -71,8 +61,6 @@ interface ResponseInterface
     public function setStatusCode($statusCode);
 
     /**
-     * @api
-     *
      * @return void
      */
     public function send();

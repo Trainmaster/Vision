@@ -11,8 +11,6 @@ namespace Vision\DataStructures\Tree;
 interface NodeInterface
 {
     /**
-     * @api
-     *
      * @param NodeInterface $parent
      *
      * @return $this Provides a fluent interface.
@@ -20,15 +18,11 @@ interface NodeInterface
     public function setParent(NodeInterface $parent);
 
     /**
-     * @api
-     *
      * @return null|NodeInterface
      */
     public function getParent();
 
     /**
-     * @api
-     *
      * @param NodeInterface$child
      *
      * @return void
@@ -36,15 +30,11 @@ interface NodeInterface
     public function removeChild(NodeInterface $child);
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getChildren();
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function hasChildren();

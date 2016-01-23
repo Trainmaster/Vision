@@ -16,8 +16,6 @@ namespace Vision\Form;
 abstract class AbstractCompositeType extends AbstractType
 {
     /**
-     * @api
-     *
      * @return string
      */
     public function getContents()
@@ -32,8 +30,6 @@ abstract class AbstractCompositeType extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param AbstractType $element
      *
      * @return $this Provides a fluent interface.
@@ -45,8 +41,6 @@ abstract class AbstractCompositeType extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param array $elements
      *
      * @return $this Provides a fluent interface.
@@ -60,8 +54,6 @@ abstract class AbstractCompositeType extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getElements()
@@ -70,8 +62,6 @@ abstract class AbstractCompositeType extends AbstractType
     }
 
     /**
-     * @api
-     *
      * @param $name
      */
     public function removeElementByName($name)

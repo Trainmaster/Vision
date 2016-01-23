@@ -25,8 +25,6 @@ class ValueMatch extends AbstractValidator
     protected $controls = [];
 
     /**
-     * @api
-     *
      * @param array $controls
      *
      * @return ValueMatch Provides a fluent interface.
@@ -39,8 +37,6 @@ class ValueMatch extends AbstractValidator
     }
 
     /**
-     * @api
-     *
      * @param AbstractCompositeType $form
      *
      * @throws \InvalidArgumentException

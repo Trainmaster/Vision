@@ -38,8 +38,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @param string $fileExtension
      *
      * @return SplClassLoader Provides a fluent interface.
@@ -51,8 +49,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getFileExtension()
@@ -61,8 +57,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @param string $namespace
      *
      * @return SplClassLoader Provides a fluent interface.
@@ -74,8 +68,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getNamespace()
@@ -84,8 +76,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @param string $namespaceSeparator
      *
      * @return SplClassLoader Provides a fluent interface.
@@ -97,8 +87,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getNamespaceSeparator()
@@ -107,8 +95,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @param string $path
      *
      * @return SplClassLoader Provides a fluent interface.
@@ -120,8 +106,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getPath()
@@ -130,8 +114,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @param string $class
      *
      * @return mixed
@@ -153,8 +135,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @param bool $prepend
      *
      * @return void
@@ -165,8 +145,6 @@ class SplClassLoader
     }
 
     /**
-     * @api
-     *
      * @return void
      */
     public function unregister()

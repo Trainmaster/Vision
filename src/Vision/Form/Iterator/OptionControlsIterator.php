@@ -20,8 +20,6 @@ use FilterIterator;
 class OptionControlsIterator extends FilterIterator
 {
     /**
-     * @api
-     *
      * @return bool
      */
     public function accept()

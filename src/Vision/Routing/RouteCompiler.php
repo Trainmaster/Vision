@@ -26,8 +26,6 @@ class RouteCompiler
     protected $defaultNamedGroupPattern = '[\w.~-]+';
 
     /**
-     * @api
-     *
      * @param string $pattern
      *
      * @return Router Provides a fluent interface.
@@ -39,8 +37,6 @@ class RouteCompiler
     }
 
     /**
-     * @api
-     *
      * @param Route $route
      *
      * @return AbstractCompiledRoute

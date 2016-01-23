@@ -24,8 +24,6 @@ class Money extends Text
     protected $showCurrencySymbol = false;
 
     /**
-     * @api
-     *
      * @param string $currency
      *
      * @return $this Provides a fluent interface.
@@ -37,8 +35,6 @@ class Money extends Text
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getCurrency()
@@ -66,8 +62,6 @@ class Money extends Text
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return $this Provides a fluent interface.

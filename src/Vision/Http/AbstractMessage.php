@@ -22,8 +22,6 @@ abstract class AbstractMessage
     protected $version = self::VERSION_11;
 
     /**
-     * @api
-     *
      * @param string $version
      *
      * @throws InvalidArgumentException
@@ -45,8 +43,6 @@ abstract class AbstractMessage
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getVersion()

@@ -16,8 +16,6 @@ class PDO extends \PDO
     /**
      * This method returns the current driver name (only if it's supported by the driver)
      *
-     * @api
-     *
      * @return string
      */
     public function getDriverName()
@@ -50,8 +48,6 @@ class PDO extends \PDO
      *
      * @todo Support for other drivers.
      *
-     * @api
-     *
      * @return string
      */
     public function createUuid()
@@ -72,8 +68,6 @@ class PDO extends \PDO
      * Another workaround for WHERE IN() queries with array.
      *
      * Example: Passing an array with three elements it will return "IN (?, ?, ?)"
-     *
-     * @api
      *
      * @param array $data
      *
@@ -104,8 +98,6 @@ class PDO extends \PDO
     /**
      * Useful method for Inserts
      *
-     * @api
-     *
      * @param mixed $mixed
      *
      * @return string
@@ -130,8 +122,6 @@ class PDO extends \PDO
     /**
      * Support for nested transactions
      *
-     * @api
-     *
      * @return bool
      */
     public function beginTransaction()
@@ -147,8 +137,6 @@ class PDO extends \PDO
     /**
      * Support for nested transactions
      *
-     * @api
-     *
      * @return bool
      */
     public function commit()
@@ -159,8 +147,6 @@ class PDO extends \PDO
 
     /**
      * Support for nested transactions
-     *
-     * @api
      *
      * @return bool
      */

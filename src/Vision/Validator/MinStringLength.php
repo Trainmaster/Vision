@@ -25,8 +25,6 @@ class MinStringLength extends AbstractMultibyteStringValidator
     }
 
     /**
-     * @api
-     *
      * @return int
      */
     public function getMin()
@@ -35,8 +33,6 @@ class MinStringLength extends AbstractMultibyteStringValidator
     }
 
     /**
-     * @api
-     *
      * @param string $value
      *
      * @return bool

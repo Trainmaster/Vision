@@ -48,8 +48,6 @@ class Select extends AbstractOptionControl
     }
 
     /**
-     * @api
-     *
      * @param int $size
      *
      * @return $this Provides a fluent interface.
@@ -61,8 +59,6 @@ class Select extends AbstractOptionControl
     }
 
     /**
-     * @api
-     *
      * @return int
      */
     public function getSize()
@@ -71,8 +67,6 @@ class Select extends AbstractOptionControl
     }
 
     /**
-     * @api
-     *
      * @param bool $multiple
      *
      * @return $this Provides a fluent interface.
@@ -91,8 +85,6 @@ class Select extends AbstractOptionControl
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function getMultiple()
@@ -101,8 +93,6 @@ class Select extends AbstractOptionControl
     }
 
     /**
-     * @api
-     *
      * @param string $value
      *
      * @return null|Element

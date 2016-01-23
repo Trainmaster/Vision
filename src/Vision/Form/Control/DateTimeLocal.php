@@ -22,8 +22,6 @@ class DateTimeLocal extends AbstractInput
     protected $dateTimeLocalFormat = 'Y-m-d\TH:i:s';
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @throws \Exception

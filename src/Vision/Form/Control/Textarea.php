@@ -29,8 +29,6 @@ class Textarea extends AbstractControl
     }
 
     /**
-     * @api
-     *
      * @param int $rows
      *
      * @return $this Provides a fluent interface.
@@ -42,8 +40,6 @@ class Textarea extends AbstractControl
     }
 
     /**
-     * @api
-     *
      * @param int $cols
      *
      * @return $this Provides a fluent interface.
@@ -55,8 +51,6 @@ class Textarea extends AbstractControl
     }
 
     /**
-     * @api
-     *
      * @param mixed $value
      *
      * @return $this Provides a fluent interface.

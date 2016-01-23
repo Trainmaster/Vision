@@ -20,8 +20,6 @@ use FilterIterator;
 class ControlsIterator extends FilterIterator
 {
     /**
-     * @api
-     *
      * @return bool
      */
     public function accept()

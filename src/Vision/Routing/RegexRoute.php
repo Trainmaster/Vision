@@ -30,8 +30,6 @@ class RegexRoute extends AbstractCompiledRoute
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getRegex()

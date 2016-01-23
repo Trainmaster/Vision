@@ -40,8 +40,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @throws \RuntimeException
      *
      * @return bool
@@ -61,8 +59,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @param SessionInterface $session
      *
      * @return void
@@ -77,8 +73,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @param SessionInterface $session
      *
      * @return void
@@ -98,8 +92,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function isStarted()
@@ -108,8 +100,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @return null|int
      */
     public function getStatus()
@@ -121,8 +111,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getId()
@@ -131,8 +119,6 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @api
-     *
      * @param bool $deleteOldSession
      *
      * @return bool

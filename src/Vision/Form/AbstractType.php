@@ -37,8 +37,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return string
      */
     public function getName()
@@ -47,8 +45,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @param ValidatorInterface $validator
      *
      * @return $this Provides a fluent interface.
@@ -60,8 +56,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @param array $validators
      *
      * @return $this Provides a fluent interface.
@@ -75,8 +69,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getValidators()
@@ -85,8 +77,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return $this Provides a fluent interface.
      */
     public function resetValidators()
@@ -96,8 +86,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @param NodeInterface $parent
      *
      * @return $this Provides a fluent interface.
@@ -117,8 +105,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return bool
      */
     public function hasChildren()
@@ -127,8 +113,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @param NodeInterface $node
      *
      * @return void
@@ -145,8 +129,6 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getChildren()

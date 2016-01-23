@@ -21,8 +21,6 @@ abstract class AbstractOptionControl extends AbstractControl
     protected $options = [];
 
     /**
-     * @api
-     *
      * @param mixed $value
      * @param mixed $label
      *
@@ -35,8 +33,6 @@ abstract class AbstractOptionControl extends AbstractControl
     }
 
     /**
-     * @api
-     *
      * @param array $options
      *
      * @return $this Provides a fluent interface.
@@ -61,8 +57,6 @@ abstract class AbstractOptionControl extends AbstractControl
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getOptions()

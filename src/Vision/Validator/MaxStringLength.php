@@ -25,8 +25,6 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     }
 
     /**
-     * @api
-     *
      * @return int
      */
     public function getMax()
@@ -35,8 +33,6 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     }
 
     /**
-     * @api
-     *
      * @param string $value
      *
      * @return bool

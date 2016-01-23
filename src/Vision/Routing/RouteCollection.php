@@ -14,8 +14,6 @@ class RouteCollection implements \IteratorAggregate
     protected $routes = [];
 
     /**
-     * @api
-     *
      * @return \ArrayIterator
      */
     public function getIterator()
@@ -24,8 +22,6 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $prefix
      *
      * @return $this Provides a fluent interface.
@@ -57,8 +53,6 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param self $collection
      *
      * @return $this Provides a fluent interface.
@@ -71,8 +65,6 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @param string $path
      *
      * @return Route|null
@@ -89,8 +81,6 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @api
-     *
      * @return array
      */
     public function getAll()

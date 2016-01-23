@@ -14,8 +14,6 @@ class Email extends AbstractValidator
     const INVALID_EMAIL = 'The given e-mail address is not valid.';
 
     /**
-     * @api
-     *
      * @param string $email
      *
      * @return bool

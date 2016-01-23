@@ -28,8 +28,6 @@ class FileResponse extends Response
     }
 
     /**
-     * @api
-     *
      * @return void
      */
     public function send()

@@ -11,8 +11,6 @@ namespace Vision\File\Loader;
 abstract class AbstractFileLoader implements LoaderInterface
 {
     /**
-     * @api
-     *
      * @param string $file
      *
      * @return bool

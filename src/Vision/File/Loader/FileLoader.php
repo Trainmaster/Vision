@@ -11,8 +11,6 @@ namespace Vision\File\Loader;
 class FileLoader extends AbstractFileLoader
 {
     /**
-     * @api
-     *
      * @param string $file
      *
      * @return mixed
