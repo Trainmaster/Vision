@@ -104,8 +104,9 @@ class FrontController
 
         if (!($response instanceof ResponseInterface)) {
             throw new \UnexpectedValueException(sprintf(
-                'The handler "%s::%s" must return a response object.',
-                $handler
+                'The handler "%s" must return an instance of "%s".',
+                $handler,
+                ResponseInterface::class
             ));
         }
 
