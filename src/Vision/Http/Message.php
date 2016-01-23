@@ -10,7 +10,7 @@ namespace Vision\Http;
 
 use InvalidArgumentException;
 
-abstract class AbstractMessage
+abstract class Message
 {
     /** @var string VERSION_10 */
     const VERSION_10 = '1.0';
@@ -29,7 +29,7 @@ abstract class AbstractMessage
      *
      * @throws InvalidArgumentException
      *
-     * @return AbstractMessage Provides a fluent interface.
+     * @return Message Provides a fluent interface.
      */
     public function setVersion($version)
     {

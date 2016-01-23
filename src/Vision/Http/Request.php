@@ -10,7 +10,7 @@ namespace Vision\Http;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 
-class Request extends AbstractMessage implements RequestInterface
+class Request extends Message implements RequestInterface
 {
     /** @var null|SquareBracketNotation $GET */
     protected $GET;

@@ -8,7 +8,7 @@
  */
 namespace Vision\Http;
 
-class Response extends AbstractMessage implements ResponseInterface
+class Response extends Message implements ResponseInterface
 {
     /** @var array $cookies */
     protected $cookies = [];
