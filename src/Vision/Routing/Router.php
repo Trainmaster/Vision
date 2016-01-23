@@ -76,14 +76,11 @@ class Router
             $this->loadResources();
         }
 
-        foreach ($this->routes as $route) {
+        if (!isset($this->routes[$request->getMethod()])) {
+            return null;
+        }
 
-            if (isset($route['httpMethod'])) {
-                if (strcasecmp($request->getMethod(), $route['httpMethod']) !== 0) {
-                    continue;
-                }
-            }
-
+        foreach ($this->routes[$request->getMethod()] as $route) {
             if ($route['type'] === CompiledRoute::TYPE_STATIC) {
                 if ($pathInfo === $route['path']) {
                     $match = true;
