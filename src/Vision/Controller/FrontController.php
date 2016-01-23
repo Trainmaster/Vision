@@ -9,6 +9,7 @@
 namespace Vision\Controller;
 
 use Vision\DependencyInjection\ContainerInterface;
+use Vision\Http\RequestInterface;
 use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
@@ -47,16 +48,14 @@ class FrontController
     }
 
     /**
-     * @api
-     *
-     * @throws \RuntimeException
-     *
+     * @param RequestInterface $request
      * @return ResponseInterface
+     * @throws \RuntimeException
      */
-    public function run()
+    public function run(RequestInterface $request)
     {
         try {
-            $route = $this->router->resolve();
+            $route = $this->router->resolve($request);
 
             if ($route instanceof AbstractCompiledRoute) {
                 $class = $route->getClass();

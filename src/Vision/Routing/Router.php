@@ -19,9 +19,6 @@ class Router
     /** @var RouteCompiler $compiler */
     protected $compiler;
 
-    /** @var RequestInterface $request */
-    protected $request;
-
     /** @var array $resources */
     protected $resources = [];
 
@@ -31,9 +28,8 @@ class Router
     /**
      * @param RequestInterface $request
      */
-    public function __construct(RequestInterface $request)
+    public function __construct()
     {
-        $this->request = $request;
         $this->routes = new CompiledRouteCollection;
     }
 
@@ -114,15 +110,14 @@ class Router
     }
 
     /**
-     * @api
-     *
-     * @return mixed
+     * @param RequestInterface $request
+     * @return Route|null
      */
-    public function resolve()
+    public function resolve(RequestInterface $request)
     {
         $match = false;
-        $method = $this->request->getMethod();
-        $pathInfo = $this->request->getPathInfo();
+        $method = $request->getMethod();
+        $pathInfo = $request->getPathInfo();
 
         if (!$this->processCache()) {
             $this->loadResources();
@@ -160,7 +155,7 @@ class Router
         if (!empty($matches)) {
             foreach ($matches as $key => $value) {
                 if (is_string($key)) {
-                    $this->request->GET[$key] = $value;
+                    $request->GET[$key] = $value;
                 }
             }
         }
@@ -169,7 +164,7 @@ class Router
             $defaults = $route->getDefaults();
             if (!empty($defaults)) {
                 foreach ($defaults as $key => $value) {
-                    $this->request->GET[$key] = $value;
+                    $request->GET[$key] = $value;
                 }
             }
             return $route;
