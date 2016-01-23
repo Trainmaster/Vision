@@ -26,21 +26,6 @@ class RouteCollection implements \IteratorAggregate
     /**
      * @api
      *
-     * @param array $defaults
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function applyDefaults(array $defaults)
-    {
-        foreach ($this->routes as &$route) {
-            $route->setDefaults($route->getDefaults() + $defaults);
-        }
-        return $this;
-    }
-
-    /**
-     * @api
-     *
      * @param string $prefix
      *
      * @return $this Provides a fluent interface.
@@ -53,21 +38,6 @@ class RouteCollection implements \IteratorAggregate
                 $prefix . $route->getPath(),
                 $route->getHandler()
             );
-        }
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param array $requirements
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function applyRequirements(array $requirements)
-    {
-        foreach ($this->routes as &$route) {
-            $route->setRequirements($route->getRequirements() + $requirements);
         }
         return $this;
     }
