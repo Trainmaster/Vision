@@ -105,12 +105,6 @@ class Router
         }
 
         if ($match) {
-            $defaults = $route->getDefaults();
-            if (!empty($defaults)) {
-                foreach ($defaults as $key => $value) {
-                    $request->GET[$key] = $value;
-                }
-            }
             return $route;
         }
 
