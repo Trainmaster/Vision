@@ -100,7 +100,7 @@ class FrontController
             return $preFilter;
         }
 
-        $instance();
+        $response = $instance();
 
         if (!($response instanceof ResponseInterface)) {
             throw new \UnexpectedValueException(sprintf(
