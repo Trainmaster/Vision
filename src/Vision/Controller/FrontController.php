@@ -57,16 +57,17 @@ class FrontController
         try {
             $route = $this->router->resolve($request);
 
-            if ($route) {
-                if (isset($route['params'])) {
-                    foreach ($route['params'] as $name => $value) {
-                        $request->GET[(string) $name] = $value;
-                    }
-                }
-                return $this->invokeHandler($route['handler']);
-            } else {
+            if (!$route) {
                 throw new \RuntimeException('No matching route.');
             }
+
+            if (isset($route['params'])) {
+                foreach ($route['params'] as $name => $value) {
+                    $request->GET[(string) $name] = $value;
+                }
+            }
+
+            return $this->invokeHandler($route['handler']);
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
