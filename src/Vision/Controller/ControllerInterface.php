@@ -8,8 +8,13 @@
  */
 namespace Vision\Controller;
 
+use Vision\Http\ResponseInterface;
+
 interface ControllerInterface
 {
+    /**
+     * @return ResponseInterface
+     */
     public function __invoke();
 
     public function preFilter();
