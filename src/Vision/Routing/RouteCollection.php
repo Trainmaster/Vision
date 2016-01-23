@@ -71,13 +71,13 @@ class RouteCollection implements \IteratorAggregate
     /**
      * @param string|string[] $httpMethod
      * @param string $path
-     * @param string $controller
+     * @param string $handler
      * @return $this
      */
-    public function add($httpMethod, $path, $controller)
+    public function add($httpMethod, $path, $handler)
     {
         foreach ((array) $httpMethod as $method) {
-            $this->addRoute(new Route($method, $path, $controller));
+            $this->addRoute(new Route($method, $path, $handler));
         }
         return $this;
     }

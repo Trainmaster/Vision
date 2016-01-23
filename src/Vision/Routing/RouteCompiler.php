@@ -48,7 +48,7 @@ class RouteCompiler
     public function compile(Route $route)
     {
         $path = $route->getPath();
-        $controller = $route->getController();
+        $controller = $route->getHandler();
         $defaults = $route->getDefaults();
         $requirements = $route->getRequirements();
         $httpMethod = $route->getHttpMethod();

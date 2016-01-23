@@ -13,8 +13,8 @@ class Route
     /** @var string $httpMethod */
     protected $httpMethod;
 
-    /** @var null|string $controller */
-    protected $controller;
+    /** @var null|string $handler */
+    protected $handler;
 
     /** @var null|string $path */
     protected $path;
@@ -22,19 +22,19 @@ class Route
     /**
      * @param string $httpMethod
      * @param string $path
-     * @param string $controller
+     * @param string $handler
      */
-    public function __construct($httpMethod, $path, $controller)
+    public function __construct($httpMethod, $path, $handler)
     {
         $this->setHttpMethod($httpMethod);
         $this->setPath($path);
-        $this->setController($controller);
+        $this->setHandler($handler);
     }
 
     /** @return string */
     public function __toString()
     {
-        return md5(serialize($this->httpMethod) . $this->path . $this->controller);
+        return md5(serialize($this->httpMethod) . $this->path . $this->handler);
     }
 
     /**
@@ -69,13 +69,13 @@ class Route
     /**
      * @api
      *
-     * @param string $controller
+     * @param string $handler
      *
      * @return $this Provides a fluent interface.
      */
-    public function setController($controller)
+    public function setHandler($handler)
     {
-        $this->controller = trim($controller);
+        $this->handler = trim($handler);
         return $this;
     }
 
@@ -84,9 +84,9 @@ class Route
      *
      * @return string
      */
-    public function getController()
+    public function getHandler()
     {
-        return $this->controller;
+        return $this->handler;
     }
 
     /**
