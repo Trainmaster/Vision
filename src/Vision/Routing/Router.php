@@ -22,13 +22,8 @@ class Router
     /** @var array $resources */
     protected $resources = [];
 
-    /** @var CompiledRouteCollection $routes */
-    protected $routes;
-
-    public function __construct()
-    {
-        $this->routes = new CompiledRouteCollection;
-    }
+    /** @var array $routes */
+    protected $routes = [];
 
     /**
      * @param CacheInterface $cache
@@ -42,33 +37,7 @@ class Router
     }
 
     /**
-     * @param string $alias
-     * @param AbstractCompiledRoute $route
-     *
-     * @return Router Provides a fluent interface.
-     */
-    public function addRoute($alias, AbstractCompiledRoute $route)
-    {
-        $this->routes->add($alias, $route);
-        return $this;
-    }
-
-    /**
-     * @param array $routes
-     *
-     * @return Router Provides a fluent interface.
-     */
-    public function addRoutes(array $routes)
-    {
-        foreach ($routes as $alias => $route) {
-            $this->addRoute($alias, $route);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return CompiledRouteCollection
+     * @return array
      */
     public function getRoutes()
     {
@@ -101,7 +70,6 @@ class Router
     public function resolve(RequestInterface $request)
     {
         $match = false;
-        $method = $request->getMethod();
         $pathInfo = $request->getPathInfo();
 
         if (!$this->processCache()) {
@@ -110,22 +78,18 @@ class Router
 
         foreach ($this->routes as $route) {
 
-            $allowedMethod = $route->getHttpMethod();
-
-            if (isset($allowedMethod)) {
-                if (strcasecmp($method, $allowedMethod) !== 0) {
+            if (isset($route['httpMethod'])) {
+                if (strcasecmp($request->getMethod(), $route['httpMethod']) !== 0) {
                     continue;
                 }
             }
 
-            if ($route instanceof StaticRoute) {
-                $path = $route->getPath();
-                if ($pathInfo === $path) {
+            if ($route['type'] === CompiledRoute::TYPE_STATIC) {
+                if ($pathInfo === $route['path']) {
                     $match = true;
                 }
-            } elseif ($route instanceof RegexRoute) {
-                $regex = $route->getRegex();
-                if (preg_match($regex, $pathInfo, $matches)) {
+            } elseif ($route['type'] === CompiledRoute::TYPE_REGEX) {
+                if (preg_match($route['path'], $pathInfo, $matches)) {
                     $match = true;
                 }
             }
@@ -200,9 +164,9 @@ class Router
                 ));
             }
 
-            foreach ($collection as $key => $route) {
+            foreach ($collection as $route) {
                 $compiledRoute = $this->compiler->compile($route);
-                $this->addRoute($key, $compiledRoute);
+                $this->routes[array_shift($compiledRoute)] = $compiledRoute;
             }
         }
 
@@ -221,7 +185,7 @@ class Router
         $id = $this->getCacheKey();
         $routes = $this->cache->get($id);
 
-        if ($routes instanceof CompiledRouteCollection) {
+        if ($routes) {
             $this->routes = $routes;
         } else {
             $this->loadResources();

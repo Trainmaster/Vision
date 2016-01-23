@@ -39,13 +39,11 @@ class RouteCompiler
     /**
      * @param Route $route
      *
-     * @return AbstractCompiledRoute
+     * @return array
      */
     public function compile(Route $route)
     {
         $path = $route->getPath();
-        $controller = $route->getHandler();
-        $httpMethod = $route->getHttpMethod();
 
         $reqRegex = $this->createRequiredRegex();
         $optRegex = $this->createOptionalRegex();
@@ -55,17 +53,10 @@ class RouteCompiler
 
         $matches = array_merge($req, $opt);
 
-        $classAndMethod = $this->parseController($controller);
-
-        $class = $classAndMethod['class'];
-        $method = $classAndMethod['method'];
-
         if (empty($matches)) {
-            $route = $this->createStaticRoute($path, $class, $method);
+            $type = CompiledRoute::TYPE_STATIC;
         } else {
             $tokens = [];
-            $regex = $path;
-
             foreach ($matches as $match) {
                 $tmp = sprintf('(?<%s>%s)', $match[1][0], $this->defaultNamedGroupPattern);
 
@@ -75,17 +66,18 @@ class RouteCompiler
 
                 $tokens[] = $match[1][0];
 
-                $regex = str_replace($match[0][0], $tmp, $regex);
+                $path = str_replace($match[0][0], $tmp, $path);
             }
-
-            $regex = '#^' . $regex . '$#Du';
-
-            $route = $this->createRegexRoute($regex, $class, $method);
+            $path = '#^' . $path . '$#Du';
+            $type = CompiledRoute::TYPE_REGEX;
         }
 
-        $route->setHttpMethod($httpMethod);
-
-        return $route;
+        return [
+            'handler' => $route->getHandler(),
+            'httpMethod' => $route->getHttpMethod(),
+            'path' => $path,
+            'type' => $type,
+        ];
     }
 
     /**
@@ -102,83 +94,5 @@ class RouteCompiler
     protected function createOptionalRegex()
     {
         return '#\\' . $this->optionalStartingChar . '([\w\d_=]+)\\' . $this->optionalEndingChar . '#u';
-    }
-
-    /**
-     * @param string $path
-     * @param string $class
-     * @param string $method
-     *
-     * @return StaticRoute
-     */
-    protected function createStaticRoute($path, $class, $method)
-    {
-        return new StaticRoute($path, $class, $method);
-    }
-
-    /**
-     * @param string $path
-     * @param string $class
-     * @param string $method
-     *
-     * @return RegexRoute
-     */
-    protected function createRegexRoute($path, $class, $method)
-    {
-        return new RegexRoute($path, $class, $method);
-    }
-
-    /**
-     * Parses a string and returns an array with
-     * the corresponding class and method.
-     *
-     * @param string $controller
-     *
-     * @throws \InvalidArgumentException If the provided argument is malformed.
-     *
-     * @return array
-     */
-    protected function parseController($controller)
-    {
-        $continue = false;
-        $length = strlen($controller) - 1;
-        $first = strpos($controller, ':');
-        $last = strrpos($controller, ':');
-        $count = substr_count($controller, ':');
-
-        if ($first > 0 && $last < $length) {
-            $doubleColonCount = substr_count($controller, '::');
-            if ($doubleColonCount === 1) {
-                $count -= 2;
-                if ($count > 0) {
-                    list($class, $action) = explode('::', $controller, 2);
-                    if (strpos($action, ':') === false) {
-                        $continue = true;
-                    }
-                }
-            } elseif ($doubleColonCount < 1) {
-                $class = $controller;
-                $continue = true;
-            }
-
-            if ($continue) {
-                $pos = strripos($class, ':') + 1;
-                $rest = substr($class, $pos);
-                $rest = 'Controller:' . $rest . 'Controller';
-                $class = substr_replace($class, $rest, $pos);
-                $class = str_replace(':', '\\', $class);
-                $action = (isset($action)) ? $action . 'Action' : 'indexAction';
-
-                return [
-                    'class' => $class,
-                    'method' => $action
-                ];
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf(
-            'The string "%s" is malformed. Check the syntax.',
-            $controller
-        ));
     }
 }

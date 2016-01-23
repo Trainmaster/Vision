@@ -10,6 +10,8 @@ namespace Vision\Controller;
 
 interface ControllerInterface
 {
+    public function __invoke();
+
     public function preFilter();
 
     public function postFilter();

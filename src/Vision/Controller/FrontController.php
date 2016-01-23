@@ -57,10 +57,8 @@ class FrontController
         try {
             $route = $this->router->resolve($request);
 
-            if ($route instanceof AbstractCompiledRoute) {
-                $class = $route->getClass();
-                $method = $route->getMethod();
-                return $this->invokeController($class, $method);
+            if ($route) {
+                return $this->invokeHandler($route['handler']);
             } else {
                 throw new \RuntimeException('No matching route.');
             }
@@ -70,22 +68,21 @@ class FrontController
     }
 
     /**
-     * @param string $class
-     * @param string $method
+     * @param string $handler
      *
      * @throws \RuntimeException
      * @throws \UnexpectedValueException
      *
      * @return ResponseInterface
      */
-    private function invokeController($class, $method)
+    private function invokeHandler($handler)
     {
-        $instance = $this->container->get($class);
+        $instance = $this->container->get($handler);
 
         if (!$instance instanceof ControllerInterface) {
             throw new \UnexpectedValueException(sprintf(
                 '%s must implement interface %s.',
-                $class,
+                $handler,
                 ControllerInterface::class
             ));
         }
@@ -98,21 +95,12 @@ class FrontController
             return $preFilter;
         }
 
-        if (method_exists($instance, $method)) {
-            $response = $instance->$method();
-        } else {
-            throw new \RuntimeException(sprintf(
-                'The method "%s::%s" does not exist.',
-                $class,
-                $method
-            ));
-        }
+        $instance();
 
         if (!($response instanceof ResponseInterface)) {
             throw new \UnexpectedValueException(sprintf(
-                'The method "%s::%s" must return a response object.',
-                $class,
-                $method
+                'The handler "%s::%s" must return a response object.',
+                $handler
             ));
         }
 
