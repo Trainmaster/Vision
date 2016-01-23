@@ -14,22 +14,22 @@ use Vision\Http\RequestInterface;
 
 class Router
 {
-    /** @var CacheInterface|null $cache */
+    /** @var CacheInterface $cache */
     protected $cache;
 
-    /** @var RouteCompiler|null $compiler */
+    /** @var RouteCompiler $compiler */
     protected $compiler;
 
-    /** @var LoaderInterface|null $loader */
+    /** @var LoaderInterface $loader */
     protected $loader;
 
-    /** @var RequestInterface|null $request */
+    /** @var RequestInterface $request */
     protected $request;
 
     /** @var array $resources */
     protected $resources = [];
 
-    /** @var RequestInterface|null $request */
+    /** @var CompiledRouteCollection $routes */
     protected $routes;
 
     /**
