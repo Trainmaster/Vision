@@ -4,7 +4,7 @@
     "type" : "library",
     "license" : "MIT",
     "require": {
-        "paragonie/random_compat": "1.1.4",
+        "paragonie/random_compat": "1.1.5",
         "php": ">=5.5",
         "ext-fileinfo": "*",
         "ext-intl": "*",
