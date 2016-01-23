@@ -12,7 +12,7 @@ interface CacheInterface
 {
     public function getStorage();
 
-    public function set($key, $value, $expiration);
+    public function set($key, $value, $expiration = 0);
 
     public function get($key);
 }
