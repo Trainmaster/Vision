@@ -279,6 +279,8 @@ class Request extends AbstractMessage implements RequestInterface
      */
     protected function initPathInfo()
     {
+        $pathInfo = '';
+
         if (isset($this->SERVER['PATH_INFO'])) {
             $pathInfo = $this->SERVER['PATH_INFO'];
         } elseif (isset($this->SERVER['ORIG_PATH_INFO'])) {
