@@ -9,13 +9,10 @@
 namespace Vision\Controller;
 
 use Vision\Http\RequestInterface;
-use Vision\Http\RequestAwareInterface;
 use Vision\Http\ResponseInterface;
-use Vision\Http\ResponseAwareInterface;
 use Vision\Http\Url;
 
-abstract class AbstractController implements RequestAwareInterface, ResponseAwareInterface,
-                                             ControllerInterface
+abstract class AbstractController implements ControllerInterface
 {
     /** @var RequestInterface $request */
     protected $request;
