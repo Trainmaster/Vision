@@ -36,6 +36,7 @@ abstract class AbstractApp
     public function __construct(FrontController $frontController, RequestInterface $request)
     {
         $this->frontController = $frontController;
+        $this->request = $request;
         $this->initLocale();
     }
 
