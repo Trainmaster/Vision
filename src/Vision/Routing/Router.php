@@ -137,7 +137,7 @@ class Router
 
             foreach ($collection as $route) {
                 $compiledRoute = $this->compiler->compile($route);
-                $this->routes[array_shift($compiledRoute)] = $compiledRoute;
+                $this->routes[array_shift($compiledRoute)][] = $compiledRoute;
             }
         }
 
