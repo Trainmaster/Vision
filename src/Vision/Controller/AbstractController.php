@@ -9,6 +9,7 @@
 namespace Vision\Controller;
 
 use Vision\Http\RequestInterface;
+use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
 use Vision\Http\Url;
 
@@ -16,9 +17,6 @@ abstract class AbstractController implements ControllerInterface
 {
     /** @var RequestInterface $request */
     protected $request;
-
-    /** @var ResponseInterface $response */
-    protected $response;
 
     /**
      * This method will be called right after instantiating the controller.
@@ -50,17 +48,6 @@ abstract class AbstractController implements ControllerInterface
     }
 
     /**
-     * @param ResponseInterface $response
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setResponse(ResponseInterface $response)
-    {
-        $this->response = $response;
-        return $this;
-    }
-
-    /**
      * This is a shorthand method for creating a redirect response.
      *
      * @param string $url
@@ -73,13 +60,14 @@ abstract class AbstractController implements ControllerInterface
         $url = new Url($url);
         $url = $url->populateFromRequest($this->request)->build();
 
-        if ($this->response === null || $url === false) {
+        if ($url === false) {
             return false;
         }
 
-        $this->response->addHeader('Location', $url)
-                       ->setStatusCode($statusCode);
+        $response = new Response();
+        $response->addHeader('Location', $url)
+            ->setStatusCode($statusCode);
 
-        return $this->response;
+        return $response;
     }
 }
