@@ -81,10 +81,8 @@ class Router
         }
 
         foreach ($this->routes[$request->getMethod()] as $route) {
-            if ($route['type'] === CompiledRoute::TYPE_STATIC) {
-                if ($pathInfo === $route['path']) {
-                    $match = true;
-                }
+            if ($route['type'] === CompiledRoute::TYPE_STATIC && $route['path'] === $pathInfo) {
+                return $route;
             } elseif ($route['type'] === CompiledRoute::TYPE_REGEX) {
                 if (preg_match($route['path'], $pathInfo, $matches)) {
                     $match = true;
