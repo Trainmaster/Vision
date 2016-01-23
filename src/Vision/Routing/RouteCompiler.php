@@ -45,8 +45,6 @@ class RouteCompiler
     {
         $path = $route->getPath();
         $controller = $route->getHandler();
-        $defaults = $route->getDefaults();
-        $requirements = $route->getRequirements();
         $httpMethod = $route->getHttpMethod();
 
         $reqRegex = $this->createRequiredRegex();
@@ -69,13 +67,7 @@ class RouteCompiler
             $regex = $path;
 
             foreach ($matches as $match) {
-                $tmp = '';
-
-                if (isset($requirements[$match[1][0]])) {
-                    $tmp .= sprintf('(?<%s>%s)', $match[1][0], $requirements[$match[1][0]]);
-                } else {
-                    $tmp .= sprintf('(?<%s>%s)', $match[1][0], $this->defaultNamedGroupPattern);
-                }
+                $tmp = sprintf('(?<%s>%s)', $match[1][0], $this->defaultNamedGroupPattern);
 
                 if (strncmp($this->optionalStartingChar, $match[0][0], 1) === 0) {
                     $tmp = '?' . $tmp . '?';
@@ -91,9 +83,7 @@ class RouteCompiler
             $route = $this->createRegexRoute($regex, $class, $method);
         }
 
-        $route->setDefaults($defaults)
-              ->setRequirements($requirements)
-              ->setHttpMethod($httpMethod);
+        $route->setHttpMethod($httpMethod);
 
         return $route;
     }
