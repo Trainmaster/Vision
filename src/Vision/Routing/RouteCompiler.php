@@ -73,8 +73,8 @@ class RouteCompiler
         }
 
         return [
-            'handler' => $route->getHandler(),
             'httpMethod' => $route->getHttpMethod(),
+            'handler' => $route->getHandler(),
             'path' => $path,
             'type' => $type,
         ];
