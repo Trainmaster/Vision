@@ -8,7 +8,7 @@
  */
 namespace Vision\Routing;
 
-class Route extends AbstractRoute
+class Route
 {
     /** @var string $httpMethod */
     protected $httpMethod;
