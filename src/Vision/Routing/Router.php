@@ -69,7 +69,6 @@ class Router
      */
     public function resolve(RequestInterface $request)
     {
-        $match = false;
         $pathInfo = $request->getPathInfo();
 
         if (!$this->processCache()) {
@@ -83,29 +82,12 @@ class Router
         foreach ($this->routes[$request->getMethod()] as $route) {
             if ($route['type'] === CompiledRoute::TYPE_STATIC && $route['path'] === $pathInfo) {
                 return $route;
-            } elseif ($route['type'] === CompiledRoute::TYPE_REGEX) {
-                if (preg_match($route['path'], $pathInfo, $matches)) {
-                    $match = true;
-                }
             }
 
-            if (!$match) {
-                continue;
+            if ($route['type'] === CompiledRoute::TYPE_REGEX && preg_match($route['path'], $pathInfo, $matches)) {
+                $route['params'] = $matches;
+                return $route;
             }
-
-            break;
-        }
-
-        if (!empty($matches)) {
-            foreach ($matches as $key => $value) {
-                if (is_string($key)) {
-                    $request->GET[$key] = $value;
-                }
-            }
-        }
-
-        if ($match) {
-            return $route;
         }
 
         return null;
