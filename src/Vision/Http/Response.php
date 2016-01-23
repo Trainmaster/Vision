@@ -228,7 +228,7 @@ class Response extends Message implements ResponseInterface
     {
         $statusLine = sprintf(
             'HTTP/%s %s %s',
-            $this->getVersion(),
+            $this->getProtocolVersion(),
             $this->getStatusCode(),
             $this->getReasonPhrase()
         );

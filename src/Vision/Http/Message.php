@@ -13,34 +13,35 @@ use InvalidArgumentException;
 abstract class Message
 {
     /** @var string VERSION_10 */
-    const VERSION_10 = '1.0';
+    const PROTOCOL_VERSION_10 = '1.0';
 
     /** @var string VERSION_11 */
-    const VERSION_11 = '1.1';
+    const PROTOCOL_VERSION_11 = '1.1';
 
     /** @var string */
-    const VERSION_2 = '2';
+    const PROTOCOL_VERSION_2 = '2';
 
-    /** @var string $version */
-    protected $version = self::VERSION_11;
+    /** @var string $protocolVersion */
+    protected $protocolVersion = self::PROTOCOL_VERSION_11;
 
     /**
-     * @param string $version
+     * @param string $protocolVersion
      *
      * @throws InvalidArgumentException
      *
      * @return Message Provides a fluent interface.
      */
-    public function setVersion($version)
+    public function setProtocolVersion($protocolVersion)
     {
-        if (in_array($version, [self::VERSION_10, self::VERSION_11, self::VERSION_2])) {
+        $protocolVersions = [self::PROTOCOL_VERSION_10, self::PROTOCOL_VERSION_11, self::PROTOCOL_VERSION_2];
+        if (in_array($protocolVersion, $protocolVersions)) {
             throw new InvalidArgumentException(sprintf(
-                'Not valid or not supported HTTP version: %s.',
-                $version
+                'Not valid or not supported HTTP protocol version: %s.',
+                $protocolVersion
             ));
         }
 
-        $this->version = $version;
+        $this->protocolVersion = $protocolVersion;
 
         return $this;
     }
@@ -48,8 +49,8 @@ abstract class Message
     /**
      * @return string
      */
-    public function getVersion()
+    public function getProtocolVersion()
     {
-        return $this->version;
+        return $this->protocolVersion;
     }
 }
