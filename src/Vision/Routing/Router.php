@@ -25,9 +25,6 @@ class Router
     /** @var CompiledRouteCollection $routes */
     protected $routes;
 
-    /**
-     * @param RequestInterface $request
-     */
     public function __construct()
     {
         $this->routes = new CompiledRouteCollection;
