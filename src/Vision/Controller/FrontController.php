@@ -13,7 +13,6 @@ use Vision\Http\RequestInterface;
 use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
 use Vision\Routing\Router;
-use Vision\Routing\AbstractCompiledRoute;
 
 class FrontController
 {
