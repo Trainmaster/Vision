@@ -289,7 +289,9 @@ class Request extends AbstractMessage implements RequestInterface
             $pathInfo = str_replace($this->getBasePath(), '', $this->SERVER['REQUEST_URI']);
         }
 
-        $this->pathInfo = $pathInfo;
+        $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
+
+        $this->pathInfo = $pathInfoWithoutQueryString ?: $pathInfo;
 
         return $this;
     }
