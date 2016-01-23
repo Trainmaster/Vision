@@ -26,6 +26,14 @@ class Router
     protected $routes = [];
 
     /**
+     * @param RouteCompiler $compiler
+     */
+    public function __construct(RouteCompiler $compiler)
+    {
+        $this->compiler = $compiler;
+    }
+
+    /**
      * @param CacheInterface $cache
      *
      * @return Router Provides a fluent interface.
@@ -94,17 +102,6 @@ class Router
     }
 
     /**
-     * Initializes the route compiler if needed.
-     *
-     * @return Router Provides a fluent interface.
-     */
-    protected function initRouteCompiler()
-    {
-        $this->compiler = new RouteCompiler;
-        return $this;
-    }
-
-    /**
      * @throws \InvalidArgumentException If a configuration file does not return a RouteCollection.
      *
      * @return bool
@@ -114,8 +111,6 @@ class Router
         if (empty($this->resources)) {
             return false;
         }
-
-        $this->initRouteCompiler();
 
         foreach ($this->resources as $resource) {
             if (!is_readable($resource)) {
