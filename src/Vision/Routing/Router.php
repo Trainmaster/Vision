@@ -20,9 +20,6 @@ class Router
     /** @var RouteCompiler $compiler */
     protected $compiler;
 
-    /** @var LoaderInterface $loader */
-    protected $loader;
-
     /** @var RequestInterface $request */
     protected $request;
 
@@ -51,19 +48,6 @@ class Router
     public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
-        return $this;
-    }
-
-    /**
-     * @api
-     *
-     * @param LoaderInterface $loader
-     *
-     * @return Router Provides a fluent interface.
-     */
-    public function setLoader(LoaderInterface $loader)
-    {
-        $this->loader = $loader;
         return $this;
     }
 
@@ -213,14 +197,21 @@ class Router
      */
     protected function loadResources()
     {
-        if (empty($this->resources) || !isset($this->loader)) {
+        if (empty($this->resources)) {
             return false;
         }
 
         $this->initRouteCompiler();
 
         foreach ($this->resources as $resource) {
-            $collection = $this->loader->load($resource);
+            if (!is_readable($resource)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'The file "%s" could not be loaded.',
+                    $resource
+                ));
+            }
+
+            $collection = include $resource;
 
             if (!($collection instanceof RouteCollection)){
                 throw new \InvalidArgumentException(sprintf(
