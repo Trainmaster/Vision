@@ -30,7 +30,7 @@ class RouteCompiler
      *
      * @return Router Provides a fluent interface.
      */
-    public function setdefaultNamedGroupPattern($pattern)
+    public function setDefaultNamedGroupPattern($pattern)
     {
         $this->defaultNamedGroupPattern = $pattern;
         return $this;
