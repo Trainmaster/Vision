@@ -11,6 +11,7 @@ namespace Vision\App;
 use Locale;
 
 use Vision\Controller\FrontController;
+use Vision\Http\RequestInterface;
 
 abstract class AbstractApp
 {
@@ -26,10 +27,13 @@ abstract class AbstractApp
     /** @var FrontController $frontController */
     protected $frontController;
 
+    /** @var RequestInterface $request */
+    protected $request;
+
     /**
      * @param FrontController $frontController
      */
-    public function __construct(FrontController $frontController)
+    public function __construct(FrontController $frontController, RequestInterface $request)
     {
         $this->frontController = $frontController;
         $this->initLocale();
@@ -46,11 +50,13 @@ abstract class AbstractApp
             return false;
         }
 
-        if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        $httpAcceptLanguage = $this->request->SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+        if (empty($httpAcceptLanguage)) {
             return false;
         }
 
-        $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $locale = Locale::acceptFromHttp($httpAcceptLanguage);
 
         if ($locale === null) {
             $locale = $this->fallbackLocale;
@@ -102,6 +108,6 @@ abstract class AbstractApp
      */
     public function run()
     {
-        $this->frontController->run()->send();
+        $this->frontController->run($this->request)->send();
     }
 }
