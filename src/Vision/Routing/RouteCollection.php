@@ -48,7 +48,11 @@ class RouteCollection implements \IteratorAggregate
     public function applyPrefix($prefix)
     {
         foreach ($this->routes as &$route) {
-            $route->setPath($prefix . $route->getPath());
+            $route = new Route(
+                $route->getHttpMethod(),
+                $prefix . $route->getPath(),
+                $route->getHandler()
+            );
         }
         return $this;
     }

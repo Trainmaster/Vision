@@ -27,8 +27,8 @@ class Route
     public function __construct($httpMethod, $path, $handler)
     {
         $this->setHttpMethod($httpMethod);
-        $this->setPath($path);
-        $this->setHandler($handler);
+        $this->path = trim($path);
+        $this->handler = trim($handler);
     }
 
     /** @return string */
@@ -41,7 +41,7 @@ class Route
      * @param string $httpMethod
      * @return $this
      */
-    public function setHttpMethod($httpMethod)
+    private function setHttpMethod($httpMethod)
     {
         static $validHttpMethods = ['DELETE', 'GET', 'POST', 'PUT'];
 
@@ -54,8 +54,6 @@ class Route
         }
 
         $this->httpMethod = $httpMethod;
-
-        return $this;
     }
 
     /**
@@ -69,37 +67,11 @@ class Route
     /**
      * @api
      *
-     * @param string $handler
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setHandler($handler)
-    {
-        $this->handler = trim($handler);
-        return $this;
-    }
-
-    /**
-     * @api
-     *
      * @return string
      */
     public function getHandler()
     {
         return $this->handler;
-    }
-
-    /**
-     * @api
-     *
-     * @param string $path
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setPath($path)
-    {
-        $this->path = trim($path);
-        return $this;
     }
 
     /**
