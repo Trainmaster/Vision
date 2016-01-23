@@ -32,6 +32,7 @@ abstract class AbstractApp
 
     /**
      * @param FrontController $frontController
+     * @param RequestInterface $request
      */
     public function __construct(FrontController $frontController, RequestInterface $request)
     {
