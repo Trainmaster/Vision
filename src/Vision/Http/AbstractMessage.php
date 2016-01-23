@@ -18,6 +18,9 @@ abstract class AbstractMessage
     /** @var string VERSION_11 */
     const VERSION_11 = '1.1';
 
+    /** @var string */
+    const VERSION_2 = '2';
+
     /** @var string $version */
     protected $version = self::VERSION_11;
 
@@ -30,7 +33,7 @@ abstract class AbstractMessage
      */
     public function setVersion($version)
     {
-        if ($version !== self::VERSION_10 || $version !== self::VERSION_11) {
+        if (in_array($version, [self::VERSION_10, self::VERSION_11, self::VERSION_2])) {
             throw new InvalidArgumentException(sprintf(
                 'Not valid or not supported HTTP version: %s.',
                 $version
