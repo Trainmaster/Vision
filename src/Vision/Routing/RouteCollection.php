@@ -79,7 +79,7 @@ class RouteCollection implements \IteratorAggregate
      */
     public function get($path)
     {
-        foreach ($this as $route) {
+        foreach ($this->routes as $route) {
             if ($route->getPath() === $path) {
                 return $route;
             }
