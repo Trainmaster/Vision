@@ -9,7 +9,6 @@
 namespace Vision\Routing;
 
 use Vision\Cache\CacheInterface;
-use Vision\File\Loader\LoaderInterface;
 use Vision\Http\RequestInterface;
 
 class Router
