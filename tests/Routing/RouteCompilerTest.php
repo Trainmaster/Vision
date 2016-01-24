@@ -12,38 +12,38 @@ class RouteCompilerTest extends \PHPUnit_Framework_TestCase
         $compiler = new RouteCompiler();
 
         $expected = [
-            'handler' => 'test',
             'httpMethod' => 'GET',
+            'handler' => 'test',
             'path' => '/',
             'type' => CompiledRoute::TYPE_STATIC,
         ];
 
-        $this->assertEquals($expected, $compiler->compile(new Route('GET', '/', 'test')));
+        $this->assertSame($expected, $compiler->compile(new Route('GET', '/', 'test')));
     }
 
     public function testCompileWithRequiredParameter() {
         $compiler = new RouteCompiler();
 
         $expected = [
-            'handler' => 'test',
             'httpMethod' => 'GET',
+            'handler' => 'test',
             'path' => '#^/(?<id>[\w.~-]+)$#Du',
             'type' => CompiledRoute::TYPE_REGEX,
         ];
 
-        $this->assertEquals($expected, $compiler->compile(new Route('GET', '/{id}', 'test')));
+        $this->assertSame($expected, $compiler->compile(new Route('GET', '/{id}', 'test')));
     }
 
     public function testCompileWithOptionalParameter() {
         $compiler = new RouteCompiler();
 
         $expected = [
-            'handler' => 'test',
             'httpMethod' => 'GET',
+            'handler' => 'test',
             'path' => '#^/?(?<id>[\w.~-]+)?$#Du',
             'type' => CompiledRoute::TYPE_REGEX,
         ];
 
-        $this->assertEquals($expected, $compiler->compile(new Route('GET', '/<id>', 'test')));
+        $this->assertSame($expected, $compiler->compile(new Route('GET', '/<id>', 'test')));
     }
 }
