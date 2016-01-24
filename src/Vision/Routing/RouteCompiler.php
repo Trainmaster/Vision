@@ -53,7 +53,6 @@ class RouteCompiler
         if (empty($matches)) {
             $type = CompiledRoute::TYPE_STATIC;
         } else {
-            $tokens = [];
             foreach ($matches as $match) {
                 if (empty($match[1][0])) {
                     throw new \LogicException(sprintf('Empty "%s" placeholder is not allowed.', $match[0][0]));
@@ -64,8 +63,6 @@ class RouteCompiler
                 if (strncmp($this->optionalStartingChar, $match[0][0], 1) === 0) {
                     $tmp = '?' . $tmp . '?';
                 }
-
-                $tokens[] = $match[1][0];
 
                 $path = str_replace($match[0][0], $tmp, $path);
             }
