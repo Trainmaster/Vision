@@ -1,6 +1,7 @@
 <?php
 namespace VisionTest\Routing;
 
+use Vision\Routing\Route;
 use Vision\Routing\RouteCollection;
 
 class RouteCollectionTest extends \PHPUnit_Framework_TestCase
@@ -33,5 +34,41 @@ class RouteCollectionTest extends \PHPUnit_Framework_TestCase
         $collection = new RouteCollection();
         $collection->add('GET', '/', 'foo');
         $collection->add('GET', '/', 'foo');
+    }
+
+    public function testApplyPrefix()
+    {
+        $collection = new RouteCollection();
+        $collection->add('GET', '/login', 'foo');
+        $collection->add('GET', '/logout', 'bar');
+        $collection->applyPrefix('/administration');
+
+        $this->assertInstanceOf(Route::class, $collection->get('/administration/login'));
+        $this->assertInstanceOf(Route::class, $collection->get('/administration/logout'));
+        $this->assertNull($collection->get('/login'));
+        $this->assertNull($collection->get('/logout'));
+    }
+
+    public function testMerge()
+    {
+        $collectionA = new RouteCollection();
+        $collectionA->add('GET', '/foo', 'foo');
+
+        $collectionB = new RouteCollection();
+        $collectionB->add('GET', '/bar', 'bar');
+
+        $this->assertNull($collectionA->get('/bar'));
+        $collectionA->merge($collectionB);
+        $this->assertInstanceOf(Route::class, $collectionA->get('/bar'));
+    }
+
+    public function testIterable()
+    {
+        $collection = new RouteCollection();
+        $collection->add('GET', '/', 'foo');
+        $this->assertInstanceOf(\IteratorAggregate::class, $collection);
+        foreach ($collection as $route) {
+            $this->assertInstanceOf(Route::class, $route);
+        }
     }
 }
