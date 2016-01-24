@@ -45,11 +45,8 @@ class RouteCompiler
     {
         $path = $route->getPath();
 
-        $reqRegex = $this->createRequiredRegex();
-        $optRegex = $this->createOptionalRegex();
-
-        preg_match_all($reqRegex, $path, $req, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
-        preg_match_all($optRegex, $path, $opt, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all($this->createRequiredRegex(), $path, $req, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all($this->createOptionalRegex(), $path, $opt, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
         $matches = array_merge($req, $opt);
 
