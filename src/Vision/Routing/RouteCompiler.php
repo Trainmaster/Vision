@@ -55,6 +55,10 @@ class RouteCompiler
         } else {
             $tokens = [];
             foreach ($matches as $match) {
+                if (empty($match[1][0])) {
+                    throw new \LogicException(sprintf('Empty "%s" placeholder is not allowed.', $match[0][0]));
+                }
+
                 $tmp = sprintf('(?<%s>%s)', $match[1][0], $this->defaultNamedGroupPattern);
 
                 if (strncmp($this->optionalStartingChar, $match[0][0], 1) === 0) {
@@ -82,7 +86,7 @@ class RouteCompiler
      */
     protected function createRequiredRegex()
     {
-        return '#\\' . $this->requiredStartingChar . '([\w\d_=]+)\\' . $this->requiredEndingChar . '#u';
+        return '#\\' . $this->requiredStartingChar . '([\w\d_=]*)\\' . $this->requiredEndingChar . '#u';
     }
 
     /**
@@ -90,6 +94,6 @@ class RouteCompiler
      */
     protected function createOptionalRegex()
     {
-        return '#\\' . $this->optionalStartingChar . '([\w\d_=]+)\\' . $this->optionalEndingChar . '#u';
+        return '#\\' . $this->optionalStartingChar . '([\w\d_=]*)\\' . $this->optionalEndingChar . '#u';
     }
 }

@@ -46,4 +46,20 @@ class RouteCompilerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($expected, $compiler->compile(new Route('GET', '/<id>', 'test')));
     }
+
+    /**
+     * @expectedException \LogicException
+     * @expectedExceptionMessage Empty "{}" placeholder is not allowed.
+     */
+    public function testCompileWithEmptyRequiredPlaceholderShouldThrowException() {
+        (new RouteCompiler)->compile(new Route('GET', '/{}', 'test'));
+    }
+
+    /**
+     * @expectedException \LogicException
+     * @expectedExceptionMessage Empty "<>" placeholder is not allowed.
+     */
+    public function testCompileWithEmptyOptionalPlaceholderShouldThrowException() {
+        (new RouteCompiler)->compile(new Route('GET', '/<>', 'test'));
+    }
 }
