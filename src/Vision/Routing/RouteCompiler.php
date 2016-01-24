@@ -12,17 +12,9 @@ class RouteCompiler
 {
     const NAMED_GROUP_PATTERN = '[\w.~-]+';
 
-    /** @var string $requiredStartingChar */
-    protected $requiredStartingChar = '{';
+    const OPTIONAL_PLACEHOLDER_PATTERN = '#\<([\w\d_=]*)\>#u';
 
-    /** @var string $requiredEndingChar */
-    protected $requiredEndingChar = '}';
-
-    /** @var string $optionalStartingChar */
-    protected $optionalStartingChar = '<';
-
-    /** @var string $optionalEndingChar */
-    protected $optionalEndingChar = '>';
+    const REQUIRED_PLACEHOLDER_PATTERN = '#\{([\w\d_=]*)\}#u';
 
     /**
      * @param Route $route
@@ -33,8 +25,8 @@ class RouteCompiler
     {
         $path = $route->getPath();
 
-        preg_match_all($this->createRequiredRegex(), $path, $req, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
-        preg_match_all($this->createOptionalRegex(), $path, $opt, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all(self::REQUIRED_PLACEHOLDER_PATTERN, $path, $req, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all(self::OPTIONAL_PLACEHOLDER_PATTERN, $path, $opt, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
         $matches = array_merge($req, $opt);
 
@@ -48,7 +40,7 @@ class RouteCompiler
 
                 $tmp = sprintf('(?<%s>%s)', $match[1][0], self::NAMED_GROUP_PATTERN);
 
-                if (strncmp($this->optionalStartingChar, $match[0][0], 1) === 0) {
+                if (strncmp('<', $match[0][0], 1) === 0) {
                     $tmp = '?' . $tmp . '?';
                 }
 
@@ -64,21 +56,5 @@ class RouteCompiler
             'path' => $path,
             'type' => $type,
         ];
-    }
-
-    /**
-     * @return string
-     */
-    protected function createRequiredRegex()
-    {
-        return '#\\' . $this->requiredStartingChar . '([\w\d_=]*)\\' . $this->requiredEndingChar . '#u';
-    }
-
-    /**
-     * @return string
-     */
-    protected function createOptionalRegex()
-    {
-        return '#\\' . $this->optionalStartingChar . '([\w\d_=]*)\\' . $this->optionalEndingChar . '#u';
     }
 }
