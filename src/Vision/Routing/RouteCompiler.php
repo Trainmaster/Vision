@@ -10,6 +10,8 @@ namespace Vision\Routing;
 
 class RouteCompiler
 {
+    const NAMED_GROUP_PATTERN = '[\w.~-]+';
+
     /** @var string $requiredStartingChar */
     protected $requiredStartingChar = '{';
 
@@ -21,20 +23,6 @@ class RouteCompiler
 
     /** @var string $optionalEndingChar */
     protected $optionalEndingChar = '>';
-
-    /** @var string $defaultNamedGroupPattern */
-    protected $defaultNamedGroupPattern = '[\w.~-]+';
-
-    /**
-     * @param string $pattern
-     *
-     * @return Router Provides a fluent interface.
-     */
-    public function setDefaultNamedGroupPattern($pattern)
-    {
-        $this->defaultNamedGroupPattern = $pattern;
-        return $this;
-    }
 
     /**
      * @param Route $route
@@ -58,7 +46,7 @@ class RouteCompiler
                     throw new \LogicException(sprintf('Empty "%s" placeholder is not allowed.', $match[0][0]));
                 }
 
-                $tmp = sprintf('(?<%s>%s)', $match[1][0], $this->defaultNamedGroupPattern);
+                $tmp = sprintf('(?<%s>%s)', $match[1][0], self::NAMED_GROUP_PATTERN);
 
                 if (strncmp($this->optionalStartingChar, $match[0][0], 1) === 0) {
                     $tmp = '?' . $tmp . '?';
