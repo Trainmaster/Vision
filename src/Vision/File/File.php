@@ -13,16 +13,6 @@ use finfo;
 class File extends \SplFileObject
 {
     /**
-     * @todo Possible candidate for trait
-     *
-     * @return bool
-     */
-    public function isLoadable()
-    {
-        return parent::isFile() && parent::isReadable();
-    }
-
-    /**
      * @return string|false
      */
     public function getMimeType()
