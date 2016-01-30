@@ -35,10 +35,7 @@ class FileSystem
      */
     public function getAlias($alias)
     {
-        if (isset($this->aliases[$alias])) {
-            return $this->aliases[$alias];
-        }
-        return null;
+        return isset($this->aliases[$alias]) ? $this->aliases[$alias] : null;
     }
 
     /**
@@ -56,13 +53,7 @@ class FileSystem
      */
     public function isWritable($dest)
     {
-        if (is_file($dest)) {
-            return is_writable($dest);
-        }
-
-        $dir = pathinfo($dest, PATHINFO_DIRNAME);
-
-        return is_writable($dir);
+        return is_file($dest) ? is_writable($dest) : is_writable(pathinfo($dest, PATHINFO_DIRNAME));
     }
 
     /**
@@ -77,11 +68,7 @@ class FileSystem
             return false;
         }
 
-        if (is_uploaded_file($src)) {
-            return move_uploaded_file($src, $dest);
-        }
-
-        return rename($src, $dest);
+        return is_uploaded_file($src) ? move_uploaded_file($src, $dest) : rename($src, $dest);
     }
 
     /**
