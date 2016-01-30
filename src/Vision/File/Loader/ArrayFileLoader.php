@@ -21,12 +21,8 @@ class ArrayFileLoader implements LoaderInterface
             return [];
         }
 
-        $array = include $file;
+        $data = include $file;
 
-        if (is_array($array)) {
-            return $array;
-        }
-
-        return [];
+        return is_array($data) ? $data : [];
     }
 }
