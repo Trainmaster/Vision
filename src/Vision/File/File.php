@@ -13,7 +13,7 @@ use finfo;
 class File extends \SplFileObject
 {
     /**
-     * @return string|false
+     * @return string
      */
     public function getMimeType()
     {
