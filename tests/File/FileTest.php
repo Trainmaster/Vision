@@ -5,6 +5,7 @@ use Vision\File\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var File $file */
     protected $file;
 
     public function setUp()
