@@ -8,7 +8,7 @@
  */
 namespace Vision\File\Loader;
 
-class ArrayFileLoader extends AbstractFileLoader
+class ArrayFileLoader implements LoaderInterface
 {
     /**
      * @param string $file
@@ -17,7 +17,7 @@ class ArrayFileLoader extends AbstractFileLoader
      */
     public function load($file)
     {
-        if (!$this->isLoadable($file)) {
+        if (!is_readable($file)) {
             return [];
         }
 

@@ -8,7 +8,7 @@
  */
 namespace Vision\File\Loader;
 
-class ScopeFileLoader extends AbstractFileLoader
+class ScopeFileLoader implements LoaderInterface
 {
     /** @var null|string */
     protected $scope;
@@ -23,7 +23,7 @@ class ScopeFileLoader extends AbstractFileLoader
      */
     public function load($file)
     {
-        if ($this->isLoadable($file)) {
+        if (is_readable($file)) {
             ${$this->scopeName} = $this->scope;
             include $file;
         }
