@@ -5,6 +5,8 @@ use Vision\File\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
+    protected $file;
+
     public function setUp()
     {
         $this->file = new File(__DIR__ . '/test.gif');
