@@ -21,7 +21,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
      /**
      * @expectedException \RuntimeException
-     * @expectedExceptionMessage Method must be one of: DELETE, GET, POST, PUT
+     * @expectedExceptionMessage Method must be one of: DELETE, HEAD, GET, OPTIONS, POST, PUT
      */
     public function testInvalidHttpMethod()
     {

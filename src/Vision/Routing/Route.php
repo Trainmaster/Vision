@@ -43,7 +43,7 @@ class Route
      */
     private function setHttpMethod($httpMethod)
     {
-        static $validHttpMethods = ['DELETE', 'GET', 'POST', 'PUT'];
+        static $validHttpMethods = ['DELETE', 'HEAD', 'GET', 'OPTIONS', 'POST', 'PUT'];
 
         $httpMethod = strtoupper($httpMethod);
 
