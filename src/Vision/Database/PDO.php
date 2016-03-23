@@ -153,6 +153,6 @@ class PDO extends \PDO
     public function rollback()
     {
         $this->hasActiveTransaction = false;
-        return parent::rollback();
+        return parent::rollBack();
     }
 }
