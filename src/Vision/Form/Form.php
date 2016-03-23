@@ -43,6 +43,9 @@ class Form extends AbstractCompositeType implements IteratorAggregate
     /** @var Iterator\OptionControlsIterator $optionControlsIterator */
     protected $optionControlsIterator;
 
+    /** @var Node */
+    private $node;
+
     /**
      * @param string $name
      */
