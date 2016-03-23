@@ -53,6 +53,8 @@ class ValueMatch extends AbstractValidator
             ));
         }
 
+        $values = [];
+
         foreach ($this->controls as $control) {
             $values[] = $control->getValue();
         }
@@ -64,6 +66,8 @@ class ValueMatch extends AbstractValidator
         if ($count === 1) {
             return true;
         }
+
+        $names = [];
 
         foreach ($this->controls as $control) {
             $names[] = $control->getLabel();
