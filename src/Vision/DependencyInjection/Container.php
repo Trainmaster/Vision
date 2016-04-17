@@ -289,7 +289,7 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @param string $dependency
+     * @param string|array $dependency
      *
      * @return mixed
      */

@@ -14,7 +14,7 @@ abstract class AbstractValidator implements ValidatorInterface
     protected $errors = [];
 
     /**
-     * @param string $error
+     * @param mixed $error
      *
      * @return $this Provides a fluent interface.
      */

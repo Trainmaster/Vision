@@ -73,7 +73,7 @@ class Router
 
     /**
      * @param RequestInterface $request
-     * @return Route|null
+     * @return array|null
      */
     public function resolve(RequestInterface $request)
     {

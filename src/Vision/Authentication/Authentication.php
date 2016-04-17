@@ -31,7 +31,7 @@ class Authentication
     /**
      * @param array $data
      *
-     * @return bool
+     * @return \Vision\Authentication\ResultInterface
      */
     public function authenticate(array $data)
     {

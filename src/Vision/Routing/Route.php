@@ -57,7 +57,7 @@ class Route
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getHttpMethod()
     {

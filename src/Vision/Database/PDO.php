@@ -48,7 +48,7 @@ class PDO extends \PDO
      *
      * @todo Support for other drivers.
      *
-     * @return string
+     * @return string|null
      */
     public function createUuid()
     {
