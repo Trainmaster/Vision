@@ -126,7 +126,7 @@ class FrontController
         if (isset($this->exceptionHandler)) {
             $response->body($this->exceptionHandler->handle($e));
         } else {
-            $response->body(highlight_string($e));
+            $response->body(highlight_string((string) $e));
         }
         return $response;
     }
