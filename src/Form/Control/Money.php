@@ -68,6 +68,10 @@ class Money extends Text
      */
     public function setValue($value)
     {
+        if ($value === null) {
+            return null;
+        }
+        
         $fmtCurrency = new NumberFormatter(null, NumberFormatter::CURRENCY);
 
         if (!is_float($value)) {
