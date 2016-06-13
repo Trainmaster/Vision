@@ -9,6 +9,8 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
+        Locale::setDefault('de-DE');
+        
         $control = new Money('money');
         $this->assertInstanceOf('Vision\Form\Control\Text', $control);
         $this->assertNull($control->getCurrency());
@@ -17,6 +19,8 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
 
     public function testDifferentInputCurrency()
     {
+        Locale::setDefault('de-DE');
+
         $control = new Money('money');
         $control->setValue('1.234.567,89 $');
 
@@ -26,6 +30,8 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
 
     public function testCurrencySignWithoutEmptySpace()
     {
+        Locale::setDefault('de-DE');
+        
         $control = new Money('money');
         $control->setValue('1.234.567,89$');
 
@@ -42,8 +48,6 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(1234567.89, $control->getValue());
         $this->assertSame('USD', $control->getCurrency());
-
-        Locale::setDefault('de-DE');
     }
 
     /**
@@ -51,6 +55,8 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
      */
     public function testNumericStringsWIthCurrencies($value, $expectedAttribute, $expectedValue, $expectedCurrency)
     {
+        Locale::setDefault('de-DE');
+
         $control = new Money('money');
         $control->setShowCurrencySymbol(true);
         $control->setValue($value);
@@ -80,6 +86,8 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
      */
     public function testNumericStringsWithoutCurrency($value, $expectedAttribute, $expectedValue)
     {
+        Locale::setDefault('de-DE');
+
         $control = new Money('money');
         $control->setShowCurrencySymbol(true);
         $control->setValue($value);
