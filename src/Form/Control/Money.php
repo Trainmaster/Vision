@@ -18,7 +18,7 @@ use NumberFormatter;
 class Money extends Text
 {
     /** @var string $currency */
-    protected $currency = 'EUR';
+    protected $currency;
 
     /** @var bool $showCurrencySymbol */
     protected $showCurrencySymbol = false;
