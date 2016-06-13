@@ -53,7 +53,7 @@ class RouteCollection implements \IteratorAggregate
     }
 
     /**
-     * @param self $collection
+     * @param RouteCollection $collection
      *
      * @return $this Provides a fluent interface.
      */
