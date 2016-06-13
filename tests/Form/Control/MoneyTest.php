@@ -3,253 +3,98 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Money;
 
+use Locale;
+
 class MoneyTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
+    public function testConstruct()
     {
-        $this->control = new Money('money');
-    }
-
-    public function testInheritance()
-    {
-        $control = $this->control;
-
+        $control = new Money('money');
         $this->assertInstanceOf('Vision\Form\Control\Text', $control);
+        $this->assertNull($control->getCurrency());
+        $this->assertFalse($control->showCurrencySymbol());
     }
-
-    public function testDefaultsAfterConstruct()
-    {
-        $control = $this->control;
-
-        $this->assertSame('EUR', $control->getCurrency());
-    }
-
 
     public function testDifferentInputCurrency()
     {
-        $control = $this->control;
-
+        $control = new Money('money');
         $control->setValue('1.234.567,89 $');
 
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-        // $this->assertSame(1234567.89, $control->getValue());
-        // $this->assertSame('USD', $control->getCurrency());
+        $this->assertSame(1234567.89, $control->getValue());
+        $this->assertSame('USD', $control->getCurrency());
     }
 
     public function testCurrencySignWithoutEmptySpace()
     {
-        $control = $this->control;
-
+        $control = new Money('money');
         $control->setValue('1.234.567,89$');
 
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-        // $this->assertSame(1234567.89, $control->getValue());
-        // $this->assertSame('USD', $control->getCurrency());
-    }
-
-    public function testLocalizedCurrencySignWithEmptySpace()
-    {
-        // \Locale::setDefault('en-US');
-
-        // $control = $this->control;
-
-        // $control->setValue('$ 1,234,567.89');
-
-        // $this->assertSame('$1,234,567.89', $control->getAttribute('value'));
-        // $this->assertSame(1234567.89, $control->getValue());
-        // $this->assertSame('USD', $control->getCurrency());
-
-        // \Locale::setDefault('de-DE');
+        $this->assertSame(1234567.89, $control->getValue());
+        $this->assertSame('USD', $control->getCurrency());
     }
 
     public function testLocalizedCurrencySignWithoutEmptySpace()
     {
-        \Locale::setDefault('en-US');
+        Locale::setDefault('en-US');
 
-        $control = $this->control;
-
+        $control = new Money('money');
         $control->setValue('$1,234,567.89');
 
-        // $this->assertSame('$1,234,567.89', $control->getAttribute('value'));
-        // $this->assertSame(1234567.89, $control->getValue());
-        // $this->assertSame('USD', $control->getCurrency());
+        $this->assertSame(1234567.89, $control->getValue());
+        $this->assertSame('USD', $control->getCurrency());
 
-        \Locale::setDefault('de-DE');
+        Locale::setDefault('de-DE');
     }
 
-    public function testEuroFormats()
+    /**
+     * @dataProvider getNumericStringsWithCurrencies
+     */
+    public function testNumericStringsWIthCurrencies($value, $expectedAttribute, $expectedValue, $expectedCurrency)
     {
-        $control = $this->control;
+        $control = new Money('money');
+        $control->setShowCurrencySymbol(true);
+        $control->setValue($value);
 
-        $control->setValue('1.234.567,89 EUR');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-        $control->setValue('1.234.567,89 €');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1.234.567,89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1.234 €');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234,00 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234.0, $control->getValue());
-
-
-        $control->setValue('1.234');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234,00 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234.0, $control->getValue());
-
-
-        $control->setValue('1.234.567,89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1,23 €');
-
-        // contains non-breaking space
-        // $this->assertSame('1,23 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1.23, $control->getValue());
-
-
-        $control->setValue('1,23');
-
-        // contains non-breaking space
-        // $this->assertSame('1,23 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1.23, $control->getValue());
-
-
-        $control->setValue('1.234.567,89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1234567.89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue(1234567.89);
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 €', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
+        $this->assertSame($expectedAttribute, $control->getAttribute('value'));
+        $this->assertSame($expectedValue, $control->getValue());
+        $this->assertSame($expectedCurrency, $control->getCurrency());
     }
 
-    public function testUsDollarFormats()
+    public function getNumericStringsWithCurrencies()
     {
-        $control = $this->control;
-        $control->setCurrency('USD');
+        return [
+            ['1.234.567,89 EUR', '1.234.567,89 €', 1234567.89, 'EUR'],
+            ['1.234.567,89 $', '1.234.567,89 $', 1234567.89, 'USD'],
+            ['1.234.567,89 €', '1.234.567,89 €', 1234567.89, 'EUR'],
+            ['1.234 EUR', '1.234,00 €', 1234.0, 'EUR'],
+            ['1.234 $', '1.234,00 $', 1234.0, 'USD'],
+            ['1.234 €', '1.234,00 €', 1234.0, 'EUR'],
+            ['1,23 EUR', '1,23 €', 1.23, 'EUR'],
+            ['1,23 €', '1,23 €', 1.23, 'EUR'],
+            ['1,23 $', '1,23 $', 1.23, 'USD'],
+        ];
+    }
 
-        $control->setValue('1.234.567,89 $');
+    /**
+     * @dataProvider getNumericStringVariants
+     */
+    public function testNumericStringsWithoutCurrency($value, $expectedAttribute, $expectedValue)
+    {
+        $control = new Money('money');
+        $control->setShowCurrencySymbol(true);
+        $control->setValue($value);
 
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
+        $this->assertSame($expectedAttribute, $control->getAttribute('value'));
+        $this->assertSame($expectedValue, $control->getValue());
+        $this->assertNull($control->getCurrency());
+    }
 
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1.234.567,89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1.234 $');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234,00 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234.0, $control->getValue());
-
-
-        $control->setValue('1.234');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234,00 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234.0, $control->getValue());
-
-
-        $control->setValue('1.234.567,89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1,23 $');
-
-        // contains non-breaking space
-        // $this->assertSame('1,23 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1.23, $control->getValue());
-
-
-        $control->setValue('1,23');
-
-        // contains non-breaking space
-        // $this->assertSame('1,23 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1.23, $control->getValue());
-
-
-        $control->setValue('1.234.567,89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue('1234567.89');
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
-
-
-        $control->setValue(1234567.89);
-
-        // contains non-breaking space
-        // $this->assertSame('1.234.567,89 $', $control->getAttribute('value'));
-
-        // $this->assertSame(1234567.89, $control->getValue());
+    public function getNumericStringVariants()
+    {
+        return [
+            ['1.234.567,89', '1.234.567,89', 1234567.89],
+            ['1.234', '1.234,00', 1234.0],
+            ['1,23', '1,23', 1.23],
+        ];
     }
 }
