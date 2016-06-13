@@ -108,7 +108,7 @@ class Money extends Text
         // convert space to non-breaking space
         $fmtCurrency->setPattern(str_replace(' ', ' ', $fmtCurrency->getPattern()));
 
-        if ($this->showCurrencySymbol) {
+        if ($this->showCurrencySymbol && $this->currency) {
             $formattedValue = $fmtCurrency->formatCurrency($this->value, $this->currency);
         } else {
             $formattedValue = number_format(
