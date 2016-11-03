@@ -10,7 +10,7 @@ namespace Vision\Filter;
 
 class InputString implements FilterInterface
 {
-    protected $options = [];
+    private $options = [];
 
     public function __construct(array $options = [])
     {
