@@ -5,6 +5,9 @@ use Vision\Form\Control\Checkbox;
 
 class CheckboxTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Checkbox */
+    private $control;
+
     protected $defaultOptions = [
         1 => 'foo',
         2 => 'bar',

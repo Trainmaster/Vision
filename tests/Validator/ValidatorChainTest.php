@@ -5,6 +5,9 @@ use Vision\Validator;
 
 class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Validator\ValidatorChain */
+    private $chain;
+
     public function setUp()
     {
         $this->chain = new Validator\ValidatorChain;

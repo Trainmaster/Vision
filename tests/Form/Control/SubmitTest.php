@@ -5,6 +5,10 @@ use Vision\Form\Control\Submit;
 
 class SubmitTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Submit */
+    private $control;
+
+
     public function setUp()
     {
         $this->control = new Submit('submit');

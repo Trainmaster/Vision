@@ -5,6 +5,9 @@ use Vision\Form\Control\Url;
 
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Url */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Url('url');

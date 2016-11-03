@@ -5,6 +5,9 @@ use Vision\Form\Control\Tel;
 
 class TelTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Tel */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Tel('tel');

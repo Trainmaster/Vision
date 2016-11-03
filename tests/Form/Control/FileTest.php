@@ -5,6 +5,9 @@ use Vision\Form\Control\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var File */
+    private $control;
+
     public function setUp()
     {
         $this->control = new File('file');

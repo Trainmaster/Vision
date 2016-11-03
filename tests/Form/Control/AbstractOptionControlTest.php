@@ -1,8 +1,13 @@
 <?php
 namespace VisionTest\Form\Control;
 
+use Vision\Form\Control\AbstractOptionControl;
+
 class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var AbstractOptionControl */
+    private $control;
+
     protected $defaultOptions = [
         1 => 'foo',
         2 => 'bar',

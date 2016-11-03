@@ -5,6 +5,9 @@ use Vision\Form\Control\Select;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Select */
+    private $control;
+
     protected $defaultOptions = [
         1 => 'foo',
         2 => 'bar',

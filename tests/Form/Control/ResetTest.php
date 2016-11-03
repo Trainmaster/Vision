@@ -5,6 +5,9 @@ use Vision\Form\Control\Reset;
 
 class ResetTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Reset */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Reset('reset');

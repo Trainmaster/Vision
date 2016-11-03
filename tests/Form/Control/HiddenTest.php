@@ -5,6 +5,9 @@ use Vision\Form\Control\Hidden;
 
 class HiddenTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Hidden */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Hidden('hidden');

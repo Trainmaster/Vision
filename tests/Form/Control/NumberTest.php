@@ -5,6 +5,9 @@ use Vision\Form\Control\Number;
 
 class NumberTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Number */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Number('number');

@@ -5,6 +5,9 @@ use Vision\Form\Control\DateTimeLocal;
 
 class DateTimeLocalTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var DateTimeLocal */
+    private $control;
+
     public function setUp()
     {
         $this->control = new DateTimeLocal('datetime-local');

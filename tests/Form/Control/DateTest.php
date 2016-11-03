@@ -7,6 +7,9 @@ use DateTime;
 
 class DateTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Date */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Date('date');

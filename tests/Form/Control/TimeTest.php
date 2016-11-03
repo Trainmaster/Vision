@@ -5,6 +5,9 @@ use Vision\Form\Control\Time;
 
 class TimeTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Time */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Time('time');

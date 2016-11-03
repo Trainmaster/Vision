@@ -5,6 +5,9 @@ use Vision\Form\Control\DateTime;
 
 class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var DateTime */
+    private $control;
+
     public function setUp()
     {
         $this->control = new DateTime('datetime');

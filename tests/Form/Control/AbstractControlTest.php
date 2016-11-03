@@ -1,8 +1,13 @@
 <?php
 namespace VisionTest\Form\Control;
 
+use Vision\Form\Control\AbstractControl;
+
 class AbstractControlTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var AbstractControl */
+    private $control;
+
     public function setUp()
     {
         $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractControl', ['abstract']);

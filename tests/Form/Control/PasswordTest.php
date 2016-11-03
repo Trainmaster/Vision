@@ -5,6 +5,9 @@ use Vision\Form\Control\Password;
 
 class PasswordTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Password */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Password('password');

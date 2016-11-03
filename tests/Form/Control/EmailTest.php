@@ -5,6 +5,9 @@ use Vision\Form\Control\Email;
 
 class EmailTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Email */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Email('email');

@@ -5,6 +5,9 @@ use Vision\Form\Control\Textarea;
 
 class TextareaTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Textarea */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Textarea('textarea');

@@ -5,6 +5,9 @@ use Vision\Form\Control\Button;
 
 class ButtonTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Button */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Button('button');

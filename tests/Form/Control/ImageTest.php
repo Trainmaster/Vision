@@ -5,6 +5,9 @@ use Vision\Form\Control\Image;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Image */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Image('image');

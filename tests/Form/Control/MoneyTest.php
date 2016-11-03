@@ -7,6 +7,9 @@ use Locale;
 
 class MoneyTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Money */
+    private $control;
+
     public function testConstruct()
     {
         Locale::setDefault('de-DE');

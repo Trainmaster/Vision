@@ -5,6 +5,9 @@ use Vision\Form\Control\Range;
 
 class RangeTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Range*/
+    private $control;
+
     public function setUp()
     {
         $this->control = new Range('range');

@@ -1,10 +1,15 @@
 <?php
 namespace VisionTest\Form;
 
+use Vision\Form\Form;
+
 require_once 'BasicForm.php';
 
 class BasicFormTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Form */
+    private $form;
+
     protected $defaultData = [
         'hidden' => 'hidden-Element',
         'text' => 'text-Element',

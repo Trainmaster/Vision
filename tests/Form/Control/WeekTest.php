@@ -5,6 +5,9 @@ use Vision\Form\Control\Week;
 
 class WeekTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Week */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Week('week');

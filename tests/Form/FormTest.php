@@ -5,6 +5,9 @@ use Vision\Form\Form;
 
 class FormTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Form */
+    private $form;
+
     public function setUp()
     {
         $this->form = new Form('form');

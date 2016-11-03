@@ -5,6 +5,9 @@ use Vision\Form\Control\Text;
 
 class TextTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Text */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Text('text');

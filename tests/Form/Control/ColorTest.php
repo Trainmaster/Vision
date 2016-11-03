@@ -5,6 +5,9 @@ use Vision\Form\Control\Color;
 
 class ColorTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Color */
+    private $control;
+
     public function setUp()
     {
         $this->control = new Color('color');

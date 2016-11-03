@@ -3,6 +3,9 @@ use Vision\Form\Control\Month;
 
 class MonthTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Month*/
+    private $control;
+
     public function setUp()
     {
         $this->control = new Month('month');

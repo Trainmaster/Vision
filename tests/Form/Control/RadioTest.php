@@ -5,6 +5,9 @@ use Vision\Form\Control\Radio;
 
 class RadioTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Radio */
+    private $control;
+
     protected $defaultOptions = [
         1 => 'foo',
         2 => 'bar',
