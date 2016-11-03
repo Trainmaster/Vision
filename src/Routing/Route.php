@@ -39,7 +39,6 @@ class Route
 
     /**
      * @param string $httpMethod
-     * @return $this
      */
     private function setHttpMethod($httpMethod)
     {
