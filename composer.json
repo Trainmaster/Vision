@@ -5,7 +5,7 @@
     "license" : "MIT",
     "require": {
         "paragonie/random_compat": "2.0.3",
-        "php": ">=5.5",
+        "php": "^5.5 || ^7.0",
         "ext-fileinfo": "*",
         "ext-intl": "*",
         "ext-mbstring": "*"
