@@ -3,7 +3,6 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Date;
 
-use DateTime;
 use Exception;
 
 class DateTest extends \PHPUnit_Framework_TestCase
