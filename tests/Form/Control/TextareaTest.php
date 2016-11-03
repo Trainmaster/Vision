@@ -56,7 +56,7 @@ class TextareaTest extends \PHPUnit_Framework_TestCase
         $control->setData('bar');
         $control->isValid();
 
-        $this->assertSame('bar', $control->getValue('foo'));
+        $this->assertSame('bar', $control->getValue());
         $this->assertSame(['bar'], $control->getContents());
     }
 }
