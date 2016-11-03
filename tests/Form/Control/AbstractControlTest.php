@@ -3,6 +3,8 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\AbstractControl;
 
+use LogicException;
+
 class AbstractControlTest extends \PHPUnit_Framework_TestCase
 {
     /** @var AbstractControl */

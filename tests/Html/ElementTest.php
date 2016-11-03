@@ -3,6 +3,9 @@ namespace VisionTest\Html;
 
 use Vision\Html\Element;
 
+use InvalidArgumentException;
+use LogicException;
+
 class ElementTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructWithValidArgument()
