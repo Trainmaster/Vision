@@ -8,7 +8,7 @@
  */
 namespace Vision\Filter;
 
-class InputString implements FilterInterface
+class InputString implements Filter
 {
     private $options = [];
 

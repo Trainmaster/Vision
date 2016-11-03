@@ -8,7 +8,7 @@
  */
 namespace Vision\Filter;
 
-interface FilterInterface
+interface Filter
 {
     /**
      * @param mixed $value

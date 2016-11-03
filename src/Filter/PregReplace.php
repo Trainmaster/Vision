@@ -8,7 +8,7 @@
  */
 namespace Vision\Filter;
 
-class PregReplace implements FilterInterface
+class PregReplace implements Filter
 {
     /** @var string|string[] */
     private $pattern;

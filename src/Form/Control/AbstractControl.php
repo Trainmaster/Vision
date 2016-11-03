@@ -9,7 +9,7 @@
 namespace Vision\Form\Control;
 
 use Vision\Form\AbstractType;
-use Vision\Filter\FilterInterface;
+use Vision\Filter\Filter;
 use Vision\Validator;
 
 use LogicException;
@@ -215,11 +215,11 @@ abstract class AbstractControl extends AbstractType
     }
 
     /**
-     * @param FilterInterface $filter
+     * @param Filter $filter
      *
      * @return $this Provides a fluent interface.
      */
-    public function addFilter(FilterInterface $filter)
+    public function addFilter(Filter $filter)
     {
         $this->filters[] = $filter;
         return $this;

@@ -8,7 +8,7 @@
  */
 namespace Vision\Filter;
 
-class FilterChain implements FilterInterface
+class FilterChain implements Filter
 {
     /**
      * @var array
@@ -16,11 +16,11 @@ class FilterChain implements FilterInterface
     protected $filters = [];
 
     /**
-     * @param FilterInterface $filter
+     * @param Filter $filter
      *
      * @return FilterChain
      */
-    public function add(FilterInterface $filter)
+    public function add(Filter $filter)
     {
         $this->filters[] = $filter;
         return $this;
