@@ -10,28 +10,20 @@ namespace Vision\Filter;
 
 class PregReplace implements FilterInterface
 {
-    /**
-     * @var null|string
-     */
-    protected $pattern;
+    /** @var string|string[] */
+    private $pattern;
+
+    /** @var string|\string[] */
+    private $replacement;
 
     /**
-     * @var null|mixed
+     * @param string|string[] $pattern
+     * @param string|string[] $replacement
      */
-    protected $replacement;
-
-    /**
-     * @param array $options
-     */
-    public function __construct(array $options = [])
+    public function __construct($pattern, $replacement)
     {
-        if (isset($options['pattern'])) {
-            $this->pattern = $options['pattern'];
-        }
-
-        if (isset($options['replacement'])) {
-            $this->replacement = $options['replacement'];
-        }
+        $this->pattern = $pattern;
+        $this->replacement = $replacement;
     }
 
     /**
