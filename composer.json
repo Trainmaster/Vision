@@ -4,14 +4,14 @@
     "type" : "library",
     "license" : "MIT",
     "require": {
-        "paragonie/random_compat": "2.0.2",
+        "paragonie/random_compat": "2.0.3",
         "php": ">=5.5",
         "ext-fileinfo": "*",
         "ext-intl": "*",
         "ext-mbstring": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.8.26"
+        "phpunit/phpunit": "4.8.27"
     },
     "authors": [
         {
