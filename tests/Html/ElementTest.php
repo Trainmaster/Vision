@@ -19,7 +19,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWhenArgumentIsNoString()
     {
-        $element = new Element(1);
+        new Element(1);
     }
 
     /**
@@ -27,7 +27,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructWhenArgumentHasForbiddenCharacters()
     {
-        $element = new Element('h1?');
+        new Element('h1?');
     }
 
     public function testGetTag()

@@ -25,6 +25,6 @@ class RouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidHttpMethod()
     {
-        $route = new Route('FOO', '/', 'foo');
+        new Route('FOO', '/', 'foo');
     }
 }
