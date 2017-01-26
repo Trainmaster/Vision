@@ -9,10 +9,9 @@ class SquareBracketNotation extends ArrayObject
 {
     public function set(string $name, $value): SquareBracketNotation
     {
-        $parts = explode('[', $this->prepareName($name));
         $data =& $this->data;
 
-        foreach ($parts as $part) {
+        foreach ($this->extractPartsFromName($name) as $part) {
             $part = rtrim($part, ']');
 
             if (!isset($data[$part])) {
@@ -32,10 +31,9 @@ class SquareBracketNotation extends ArrayObject
 
     public function get(string $name)
     {
-        $parts = explode('[', $this->prepareName($name));
         $data = $this->data;
 
-        foreach ($parts as $part) {
+        foreach ($this->extractPartsFromName($name) as $part) {
             $part = rtrim($part, ']');
             if (isset($data[$part])) {
                 $data = $data[$part];
@@ -47,12 +45,12 @@ class SquareBracketNotation extends ArrayObject
         return $data;
     }
 
-    protected function prepareName(string $name): string
+    private function extractPartsFromName(string $name): array
     {
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
         }
 
-        return $name;
+        return explode('[', $name);
     }
 }
