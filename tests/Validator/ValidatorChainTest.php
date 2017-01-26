@@ -15,7 +15,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAddValidator()
     {
-        $validator = $this->getMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
         $this->chain->add($validator);
 
         $this->assertAttributeEquals([$validator], 'validators', $this->chain);
@@ -40,7 +40,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     protected function createTrueValidator()
     {
-        $validator = $this->getMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
         $validator->expects($this->once())
                   ->method('isValid')
                   ->will($this->returnValue(true));
@@ -49,7 +49,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     protected function createFalseValidator()
     {
-        $validator = $this->getMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
         $validator->expects($this->once())
                   ->method('isValid')
                   ->will($this->returnValue(false));
