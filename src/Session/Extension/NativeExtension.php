@@ -29,7 +29,7 @@ class NativeExtension implements ExtensionInterface
      */
     public function start()
     {
-        if ($this->started) {
+        if ($this->started && $this->isActive()) {
             return true;
         }
 
@@ -48,10 +48,7 @@ class NativeExtension implements ExtensionInterface
      */
     public function load(SessionInterface $session)
     {
-        if (!$this->started) {
-            $this->start();
-        }
-
+        $this->start();
         $session->exchangeArray($_SESSION);
     }
 
@@ -62,15 +59,7 @@ class NativeExtension implements ExtensionInterface
      */
     public function save(SessionInterface $session)
     {
-        $status = $this->getStatus();
-
-        if (isset($status) && $status !== PHP_SESSION_ACTIVE) {
-            $this->started = false;
-            $this->start();
-        } else {
-            @session_start();
-        }
-
+        $this->start();
         $_SESSION = $session->getArrayCopy();
     }
 
@@ -80,6 +69,11 @@ class NativeExtension implements ExtensionInterface
     public function isStarted()
     {
         return (bool) $this->started;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->getStatus() === PHP_SESSION_ACTIVE;
     }
 
     /**
