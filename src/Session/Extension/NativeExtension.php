@@ -7,14 +7,12 @@ use Vision\Session\SessionInterface;
 
 use SessionHandlerInterface;
 
+use RuntimeException;
+
 class NativeExtension implements ExtensionInterface
 {
-    /** @var bool $started */
-    protected $started = false;
+    private $started = false;
 
-    /**
-     * @param SessionHandlerInterface|null $handler
-     */
     public function __construct(SessionHandlerInterface $handler = null)
     {
         if (isset($handler)) {
@@ -23,11 +21,9 @@ class NativeExtension implements ExtensionInterface
     }
 
     /**
-     * @throws \RuntimeException
-     *
-     * @return bool
+     * @throws RuntimeException
      */
-    public function start()
+    public function start(): bool
     {
         if ($this->started && $this->isActive()) {
             return true;
@@ -35,38 +31,25 @@ class NativeExtension implements ExtensionInterface
 
         if (session_start()) {
             $this->started = true;
-            return true;
+            return $this->started;
         } else {
             throw new \RuntimeException('Session could not be started.');
         }
     }
 
-    /**
-     * @param SessionInterface $session
-     *
-     * @return void
-     */
     public function load(SessionInterface $session)
     {
         $this->start();
         $session->exchangeArray($_SESSION);
     }
 
-    /**
-     * @param SessionInterface $session
-     *
-     * @return void
-     */
     public function save(SessionInterface $session)
     {
         $this->start();
         $_SESSION = $session->getArrayCopy();
     }
 
-    /**
-     * @return bool
-     */
-    public function isStarted()
+    public function isStarted(): bool
     {
         return (bool) $this->started;
     }
@@ -76,28 +59,17 @@ class NativeExtension implements ExtensionInterface
         return $this->getStatus() === PHP_SESSION_ACTIVE;
     }
 
-    /**
-     * @return null|int
-     */
-    public function getStatus()
+    public function getStatus(): int
     {
         return session_status();
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return session_id();
     }
 
-    /**
-     * @param bool $deleteOldSession
-     *
-     * @return bool
-     */
-    public function regenerateId($deleteOldSession = true)
+    public function regenerateId($deleteOldSession = true): bool
     {
         return session_regenerate_id($deleteOldSession);
     }
