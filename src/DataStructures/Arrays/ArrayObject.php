@@ -8,59 +8,40 @@ use Countable;
 
 class ArrayObject implements ArrayAccess, Countable
 {
-    /** @var array $data */
-    protected $data = [];
+    protected $data;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data = [])
     {
         $this->data = $data;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    public function exchangeArray(array $data)
+    public function exchangeArray(array $data): array
     {
         $oldArray = $this->data;
         $this->data = $data;
         return $oldArray;
     }
 
-    /**
-     * @return bool
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->data);
     }
 
-    /**
-     * @return array
-     */
-    public function getArrayCopy()
+    public function getArrayCopy(): array
     {
         return $this->data;
     }
 
     /**
      * @param int|string $offset
-     *
-     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->data[$offset]);
     }
 
     /**
      * @param int|string $offset
-     *
-     * @return mixed
      */
     public function &offsetGet($offset)
     {
@@ -70,8 +51,6 @@ class ArrayObject implements ArrayAccess, Countable
     /**
      * @param int|string $offset
      * @param mixed $value
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -80,20 +59,13 @@ class ArrayObject implements ArrayAccess, Countable
 
     /**
      * @param int|string $offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
     }
 
-    /**
-     * @param int $mode
-     *
-     * @return int
-     */
-    public function count($mode = COUNT_NORMAL)
+    public function count(int $mode = COUNT_NORMAL): int
     {
         return count($this->data, $mode);
     }
