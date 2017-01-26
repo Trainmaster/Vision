@@ -7,17 +7,9 @@ use Vision\DataStructures\Arrays\ArrayObject;
 
 class SquareBracketNotation extends ArrayObject
 {
-    /**
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @return mixed
-     */
-    public function set($name, $value)
+    public function set(string $name, $value): SquareBracketNotation
     {
-        $name = $this->prepareName($name);
-
-        $parts = explode('[', $name);
+        $parts = explode('[', $this->prepareName($name));
         $data =& $this->data;
 
         foreach ($parts as $part) {
@@ -35,20 +27,12 @@ class SquareBracketNotation extends ArrayObject
         }
 
         $data = $value;
-
         return $this;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function get($name)
+    public function get(string $name)
     {
-        $name = $this->prepareName($name);
-
-        $parts = explode('[', $name);
+        $parts = explode('[', $this->prepareName($name));
         $data = $this->data;
 
         foreach ($parts as $part) {
@@ -63,15 +47,8 @@ class SquareBracketNotation extends ArrayObject
         return $data;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function prepareName($name)
+    protected function prepareName(string $name): string
     {
-        $name = (string) $name;
-
         if (strpos($name, '[]') !== false) {
             $name = str_replace('[]', '', $name);
         }
