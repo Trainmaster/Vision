@@ -87,10 +87,7 @@ class NativeExtension implements ExtensionInterface
      */
     public function getStatus()
     {
-        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-            return session_status();
-        }
-        return null;
+        return session_status();
     }
 
     /**
