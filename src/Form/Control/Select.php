@@ -5,11 +5,6 @@ namespace Vision\Form\Control;
 
 use Vision\Html\Element;
 
-/**
- * Select
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Select extends AbstractOptionControl
 {
     /** @var array $invalidAttributes */

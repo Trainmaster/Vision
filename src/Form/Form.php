@@ -9,11 +9,6 @@ use Vision\DataStructures\Tree\NodeIterator;
 
 use IteratorAggregate;
 
-/**
- * Form
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Form extends AbstractCompositeType implements IteratorAggregate
 {
     /** @var array $attributes */

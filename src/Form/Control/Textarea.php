@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Textarea
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Textarea extends AbstractControl
 {
     /** @var array $invalidAttributes */

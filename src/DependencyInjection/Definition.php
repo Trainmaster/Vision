@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\DependencyInjection;
 
-/**
- * Definition
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Definition
 {
     /** @var mixed $class */

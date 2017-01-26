@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Button
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Button extends AbstractControl
 {
     /**

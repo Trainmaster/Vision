@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Color
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Color extends AbstractInput
 {
     /** @var array $attributes */

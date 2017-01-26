@@ -7,11 +7,6 @@ use Vision\DataStructures\Tree\NodeInterface;
 use Vision\Html\Element as HtmlElement;
 use Vision\Validator\ValidatorInterface;
 
-/**
- * AbstractType
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractType extends HtmlElement implements NodeInterface
 {
     /** @var array $elements */

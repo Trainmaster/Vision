@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Autoload;
 
-/**
- * SplClassLoader
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class SplClassLoader
 {
     /** @var string $fileExtension */

@@ -5,11 +5,6 @@ namespace Vision\Form\Control;
 
 use Vision\Html\Element;
 
-/**
- * Checkbox
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Checkbox extends AbstractOptionControl
 {
     /** @var array $attributes */

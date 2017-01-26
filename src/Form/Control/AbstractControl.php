@@ -9,11 +9,6 @@ use Vision\Validator;
 
 use LogicException;
 
-/**
- * AbstractControl
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractControl extends AbstractType
 {
     /** @var null|string $label */

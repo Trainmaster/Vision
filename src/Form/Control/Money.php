@@ -6,11 +6,6 @@ namespace Vision\Form\Control;
 use Locale;
 use NumberFormatter;
 
-/**
- * Money
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Money extends Text
 {
     /** @var string $currency */

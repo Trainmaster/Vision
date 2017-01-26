@@ -5,11 +5,6 @@ namespace Vision\Form\Control;
 
 use Vision\Html\Element;
 
-/**
- * Radio
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Radio extends AbstractOptionControl
 {
     /** @var array $attributes */

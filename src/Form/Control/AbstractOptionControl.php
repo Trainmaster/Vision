@@ -5,11 +5,6 @@ namespace Vision\Form\Control;
 
 use Vision\Validator;
 
-/**
- * AbstractOptionControl
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractOptionControl extends AbstractControl
 {
     /** @var array $options */

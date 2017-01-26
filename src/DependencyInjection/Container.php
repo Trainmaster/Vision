@@ -7,11 +7,6 @@ use InvalidArgumentException;
 use ReflectionClass;
 use RuntimeException;
 
-/**
- * Container
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Container implements ContainerInterface
 {
     /** @var array|Definition[] $definitions */

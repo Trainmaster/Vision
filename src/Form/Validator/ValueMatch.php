@@ -6,11 +6,6 @@ namespace Vision\Form\Validator;
 use Vision\Form\AbstractCompositeType;
 use Vision\Validator\AbstractValidator;
 
-/**
- * ValueMatch
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class ValueMatch extends AbstractValidator
 {
     /** @var string NO_MATCH */

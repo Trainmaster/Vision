@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Range
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Range extends AbstractInput
 {
     /** @var array $attributes */

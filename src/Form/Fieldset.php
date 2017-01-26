@@ -5,11 +5,6 @@ namespace Vision\Form;
 
 use Vision\Html\Element;
 
-/**
- * Fieldset
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Fieldset extends AbstractCompositeType
 {
     /** @var null|string $legend */

@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * AbstractInput
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 abstract class AbstractInput extends AbstractControl
 {
      /**

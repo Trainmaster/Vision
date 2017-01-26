@@ -7,11 +7,6 @@ use Vision\Form\Control\AbstractControl;
 
 use FilterIterator;
 
-/**
- * ControlsIterator
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class ControlsIterator extends FilterIterator
 {
     /**

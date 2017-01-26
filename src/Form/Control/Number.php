@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Number
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Number extends AbstractInput
 {
     /** @var array $attributes */

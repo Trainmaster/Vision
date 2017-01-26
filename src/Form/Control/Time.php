@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Time
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Time extends AbstractInput
 {
     /** @var array $attributes */

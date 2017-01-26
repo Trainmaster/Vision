@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * File
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class File extends AbstractInput
 {
     /** @var array $attributes */

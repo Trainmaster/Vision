@@ -3,11 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
-/**
- * Submit
- *
- * @author Frank Liepert <contact@frank-liepert.de>
- */
 class Submit extends AbstractInput
 {
     /** @var array $attributes */
