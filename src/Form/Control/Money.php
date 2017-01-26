@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
+use Locale;
 use NumberFormatter;
 
 /**
@@ -67,7 +68,7 @@ class Money extends Text
             return null;
         }
         
-        $fmtCurrency = new NumberFormatter(null, NumberFormatter::CURRENCY);
+        $fmtCurrency = new NumberFormatter(Locale::getDefault(), NumberFormatter::CURRENCY);
 
         if (!is_float($value)) {
 
@@ -87,7 +88,7 @@ class Money extends Text
             }
 
             if (!$parsedValue) {
-                $fmtDecimal = new NumberFormatter(null, NumberFormatter::DECIMAL);
+                $fmtDecimal = new NumberFormatter(Locale::getDefault(), NumberFormatter::DECIMAL);
                 $parsedValue = $fmtDecimal->parse($value);
             }
 
