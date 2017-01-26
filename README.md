@@ -12,7 +12,6 @@ See ``composer.json`` for requirements.
 
 ## Documentation
 
-*  [Autoload](/docs/autoload.md)
 *  [Cache](/docs/cache.md)
 *  [Dependency Injection](/docs/dependency-injection.md)
 *  [Form](/docs/form.md)
