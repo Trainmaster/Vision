@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Vision\DataStructures\Tree;
 
 class NodeIterator implements \RecursiveIterator

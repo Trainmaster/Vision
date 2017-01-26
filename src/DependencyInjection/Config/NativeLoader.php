@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Vision\DependencyInjection\Config;
 
 use Vision\DependencyInjection as DI;
