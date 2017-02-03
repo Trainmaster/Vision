@@ -9,5 +9,8 @@ sudo: false
 install:
   - composer install
 
+script:
+  - ./vendor/bin/phpunit
+
 notifications:
   email: false
