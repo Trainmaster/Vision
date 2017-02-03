@@ -5,7 +5,7 @@ use Vision\Routing\CompiledRoute;
 use Vision\Routing\Route;
 use Vision\Routing\RouteCompiler;
 
-class RouteCompilerTest extends \PHPUnit_Framework_TestCase
+class RouteCompilerTest extends \PHPUnit\Framework\TestCase
 {
     public function testCompileAndExpectStaticRoute()
     {

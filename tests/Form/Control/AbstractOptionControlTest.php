@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\AbstractOptionControl;
 
-class AbstractOptionControlTest extends \PHPUnit_Framework_TestCase
+class AbstractOptionControlTest extends \PHPUnit\Framework\TestCase
 {
     /** @var AbstractOptionControl */
     private $control;

@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Time;
 
-class TimeTest extends \PHPUnit_Framework_TestCase
+class TimeTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Time */
     private $control;

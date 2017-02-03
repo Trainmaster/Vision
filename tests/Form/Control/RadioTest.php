@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Radio;
 
-class RadioTest extends \PHPUnit_Framework_TestCase
+class RadioTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Radio */
     private $control;

@@ -6,7 +6,7 @@ use Vision\Html\Element;
 use InvalidArgumentException;
 use LogicException;
 
-class ElementTest extends \PHPUnit_Framework_TestCase
+class ElementTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructWithValidArgument()
     {

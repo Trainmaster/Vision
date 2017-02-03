@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Email;
 
-class EmailTest extends \PHPUnit_Framework_TestCase
+class EmailTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Email */
     private $control;

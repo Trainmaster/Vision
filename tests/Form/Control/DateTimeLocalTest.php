@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\DateTimeLocal;
 
-class DateTimeLocalTest extends \PHPUnit_Framework_TestCase
+class DateTimeLocalTest extends \PHPUnit\Framework\TestCase
 {
     /** @var DateTimeLocal */
     private $control;

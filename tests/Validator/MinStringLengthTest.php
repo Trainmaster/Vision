@@ -3,7 +3,7 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class MinStringLengthTest extends \PHPUnit_Framework_TestCase
+class MinStringLengthTest extends \PHPUnit\Framework\TestCase
 {
     static $validatorOne;
 

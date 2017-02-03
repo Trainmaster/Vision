@@ -5,7 +5,7 @@ require_once 'TestClasses.php';
 
 use Vision\DependencyInjection\Container;
 
-class ContainerTest extends \PHPUnit_Framework_TestCase
+class ContainerTest extends \PHPUnit\Framework\TestCase
 {
     public function testRegisterWithOneArgument()
     {
@@ -16,7 +16,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterWhenArgumentOneIsNoString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $container = new Container;
 
         $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register(new \BasicClass));
@@ -24,7 +24,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterWhenArgumentTwoIsNoString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $container = new Container;
 
         $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass', new \BasicClass));
@@ -39,7 +39,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterWithOneArgumentWhenClassIsAlreadyDefined()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
 
         $container = new Container;
         $container->register('BasicClass');
@@ -48,7 +48,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterWithTwoArgumentsWhenClassIsAlreadyDefined()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
 
         $container = new Container;
         $container->register('BasicClass', 'Alias');
@@ -57,7 +57,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterWithReservedAlias()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
 
         $container = new Container;
         $container->register('BasicClass', 'self');
@@ -95,7 +95,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     /*
     public function testGetWhenNotRegisteredWithRequiredParameterCountForConstructor()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
 
         $container = new Container;
         $container->register('DependentClass');
@@ -106,7 +106,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetWhenArgumentIsNoString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         $container = new Container;
         $container->get(1);
@@ -114,7 +114,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetWhenIsNotDefined()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
 
         $container = new Container;
         $container->get('BasicClass');
@@ -213,7 +213,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetParameterWhenKeyIsNoString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         $container = new Container;
 

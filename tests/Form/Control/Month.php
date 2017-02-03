@@ -1,7 +1,7 @@
 <?php
 use Vision\Form\Control\Month;
 
-class MonthTest extends \PHPUnit_Framework_TestCase
+class MonthTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Month*/
     private $control;

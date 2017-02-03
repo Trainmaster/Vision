@@ -3,7 +3,7 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class InArrayTest extends \PHPUnit_Framework_TestCase
+class InArrayTest extends \PHPUnit\Framework\TestCase
 {
     static $validator;
 

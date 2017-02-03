@@ -3,7 +3,7 @@ namespace VisionTest\DataStructures\Arrays;
 
 use Vision\DataStructures\Arrays\ArrayObject;
 
-class ArrayObjectTest extends \PHPUnit_Framework_TestCase
+class ArrayObjectTest extends \PHPUnit\Framework\TestCase
 {
     public function testHasInterfacesImplemented()
     {

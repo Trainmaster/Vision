@@ -3,7 +3,7 @@ namespace VisionTest\File;
 
 use Vision\File\File;
 
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit\Framework\TestCase
 {
     /** @var File $file */
     protected $file;

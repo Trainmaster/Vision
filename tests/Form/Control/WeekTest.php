@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Week;
 
-class WeekTest extends \PHPUnit_Framework_TestCase
+class WeekTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Week */
     private $control;

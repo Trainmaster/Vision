@@ -3,7 +3,7 @@ namespace VisionTest\Random;
 
 use Vision\Random\RandomString;
 
-class RandomStringTest extends \PHPUnit_Framework_TestCase
+class RandomStringTest extends \PHPUnit\Framework\TestCase
 {
     public function testGenerateHex()
     {

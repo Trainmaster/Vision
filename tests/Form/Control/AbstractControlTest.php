@@ -5,7 +5,7 @@ use Vision\Form\Control\AbstractControl;
 
 use LogicException;
 
-class AbstractControlTest extends \PHPUnit_Framework_TestCase
+class AbstractControlTest extends \PHPUnit\Framework\TestCase
 {
     /** @var AbstractControl */
     private $control;

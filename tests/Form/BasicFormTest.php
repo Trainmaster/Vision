@@ -5,7 +5,7 @@ use Vision\Form\Form;
 
 require_once 'BasicForm.php';
 
-class BasicFormTest extends \PHPUnit_Framework_TestCase
+class BasicFormTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Form */
     private $form;

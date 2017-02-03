@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Tel;
 
-class TelTest extends \PHPUnit_Framework_TestCase
+class TelTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Tel */
     private $control;

@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Textarea;
 
-class TextareaTest extends \PHPUnit_Framework_TestCase
+class TextareaTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Textarea */
     private $control;

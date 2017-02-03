@@ -3,7 +3,7 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class IdenticalTest extends \PHPUnit_Framework_TestCase
+class IdenticalTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructEmpty()
     {

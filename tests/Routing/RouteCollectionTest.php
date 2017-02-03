@@ -4,7 +4,7 @@ namespace VisionTest\Routing;
 use Vision\Routing\Route;
 use Vision\Routing\RouteCollection;
 
-class RouteCollectionTest extends \PHPUnit_Framework_TestCase
+class RouteCollectionTest extends \PHPUnit\Framework\TestCase
 {
     public function testAddAndGet()
     {

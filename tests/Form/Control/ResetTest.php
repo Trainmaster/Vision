@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Reset;
 
-class ResetTest extends \PHPUnit_Framework_TestCase
+class ResetTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Reset */
     private $control;

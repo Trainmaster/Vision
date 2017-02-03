@@ -3,7 +3,7 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class NotNullTest extends \PHPUnit_Framework_TestCase
+class NotNullTest extends \PHPUnit\Framework\TestCase
 {
     static $validator;
 

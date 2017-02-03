@@ -5,7 +5,7 @@ use Vision\Form\Control\Money;
 
 use Locale;
 
-class MoneyTest extends \PHPUnit_Framework_TestCase
+class MoneyTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstruct()
     {

@@ -3,7 +3,7 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Checkbox;
 
-class CheckboxTest extends \PHPUnit_Framework_TestCase
+class CheckboxTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Checkbox */
     private $control;
