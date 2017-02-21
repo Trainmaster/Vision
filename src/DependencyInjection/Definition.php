@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Vision\DependencyInjection;
 
@@ -11,8 +11,8 @@ class Definition
     /** @var bool $shared */
     private $shared = true;
 
-    /** @var bool|array $factory */
-    private $factory = false;
+    /** @var array $factory */
+    private $factory = [];
 
     /** @var array $property */
     private $property = [];
@@ -68,12 +68,14 @@ class Definition
         return $this;
     }
 
-    /**
-     * @return bool|array
-     */
-    public function getFactory()
+    public function getFactory(): array
     {
         return $this->factory;
+    }
+
+    public function hasFactory(): bool
+    {
+        return !empty($this->factory);
     }
 
     public function setMethod(array $method): Definition

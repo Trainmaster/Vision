@@ -195,9 +195,9 @@ class Container implements ContainerInterface
     protected function createInstance(Definition $definition)
     {
         $class = $definition->getClass();
-        $factory = $definition->getFactory();
 
-        if ($factory) {
+        if ($definition->hasFactory()) {
+            $factory = $definition->getFactory();
             $dependency = $this->resolveDependency($factory[0]);
 
             return $factory[2]
