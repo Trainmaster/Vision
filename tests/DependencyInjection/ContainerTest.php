@@ -3,117 +3,105 @@ declare(strict_types=1);
 
 namespace VisionTest\DependencyInjection;
 
-require_once 'TestClasses.php';
-
 use Vision\DependencyInjection\Container;
+use Vision\DependencyInjection\Definition;
 use Vision\DependencyInjection\NotFoundException;
+use VisionTest\DependencyInjection\Fixtures\BasicClass;
+use VisionTest\DependencyInjection\Fixtures\DependentClass;
+use VisionTest\DependencyInjection\Fixtures\Foo;
+use VisionTest\DependencyInjection\Fixtures\FooFactory;
+
+use InvalidArgumentException;
+use LogicException;
 
 class ContainerTest extends \PHPUnit\Framework\TestCase
 {
     public function testRegisterWithOneArgument()
     {
-        $container = new Container;
-
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass'));
+        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class));
     }
 
     public function testRegisterWhenArgumentTwoIsNoString()
     {
-        $this->expectException('InvalidArgumentException');
-        $container = new Container;
+        $this->expectException(InvalidArgumentException::class);
 
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass', new \BasicClass));
+        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, new BasicClass()));
     }
 
     public function testRegisterWithTwoArguments()
     {
-        $container = new Container;
-
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass', 'Alias'));
+        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, 'alias'));
     }
 
     public function testRegisterWithOneArgumentWhenClassIsAlreadyDefined()
     {
-        $this->expectException('LogicException');
+        $this->expectException(LogicException::class);
 
         $container = new Container;
-        $container->register('BasicClass');
-        $container->register('BasicClass');
+        $container->register(BasicClass::class);
+        $container->register(BasicClass::class);
     }
 
     public function testRegisterWithTwoArgumentsWhenClassIsAlreadyDefined()
     {
-        $this->expectException('LogicException');
+        $this->expectException(LogicException::class);
 
         $container = new Container;
-        $container->register('BasicClass', 'Alias');
-        $container->register('BasicClass', 'Alias');
+        $container->register(BasicClass::class, 'Alias');
+        $container->register(BasicClass::class, 'Alias');
     }
 
     public function testRegisterWithReservedAlias()
     {
-        $this->expectException('LogicException');
+        $this->expectException(LogicException::class);
 
         $container = new Container;
-        $container->register('BasicClass', 'self');
+        $container->register(BasicClass::class, 'self');
     }
 
     public function testGetDefinition()
     {
         $container = new Container;
 
-        $this->assertSame(null, $container->getDefinition('BasicClass'));
+        $this->assertSame(null, $container->getDefinition(BasicClass::class));
 
-        $container->register('BasicClass');
+        $container->register(BasicClass::class);
 
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->getDefinition('BasicClass'));
+        $this->assertInstanceOf(Definition::class, $container->getDefinition(BasicClass::class));
     }
 
     public function testGetDefinitions()
     {
         $container = new Container;
 
-        $container->register('BasicClass');
-        $container->register('BasicClass', 'Alias');
+        $container->register(BasicClass::class);
+        $container->register(BasicClass::class, 'Alias');
 
-        $this->assertContainsOnlyInstancesOf('\Vision\DependencyInjection\Definition', $container->getDefinitions());
+        $this->assertContainsOnlyInstancesOf(Definition::class, $container->getDefinitions());
     }
 
     public function testGet()
     {
         $container = new Container;
-        $container->register('BasicClass');
+        $container->register(BasicClass::class);
 
-        $this->assertInstanceOf('BasicClass', $container->get('BasicClass'));
+        $this->assertInstanceOf(BasicClass::class, $container->get(BasicClass::class));
     }
-
-    /*
-    public function testGetWhenNotRegisteredWithRequiredParameterCountForConstructor()
-    {
-        $this->expectException('RuntimeException');
-
-        $container = new Container;
-        $container->register('DependentClass');
-
-        $container->get('DependentClass');
-    }
-    */
 
     public function testGetWhenIsNotDefined()
     {
         $this->expectException(NotFoundException::class);
 
-        $container = new Container;
-        $container->get('BasicClass');
+        (new Container)->get(BasicClass::class);
     }
 
     public function testGetShared()
     {
         $container = new Container;
-        $container->register('BasicClass')->setShared(true);
+        $container->register(BasicClass::class)->setShared(true);
 
-        $instanceOne = $container->get('BasicClass');
-        $instanceTwo = $container->get('BasicClass');
+        $instanceOne = $container->get(BasicClass::class);
+        $instanceTwo = $container->get(BasicClass::class);
 
         $this->assertSame($instanceOne, $instanceTwo);
     }
@@ -121,10 +109,10 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
     public function testGetNonShared()
     {
         $container = new Container;
-        $container->register('BasicClass')->setShared(false);
+        $container->register(BasicClass::class)->setShared(false);
 
-        $instanceOne = $container->get('BasicClass');
-        $instanceTwo = $container->get('BasicClass');
+        $instanceOne = $container->get(BasicClass::class);
+        $instanceTwo = $container->get(BasicClass::class);
 
         $this->assertNotSame($instanceOne, $instanceTwo);
     }
@@ -141,11 +129,11 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
     public function testGetViaFactory()
     {
         $container = new Container;
-        $container->register('VisionTest\DependencyInjection\Fixtures\FooFactory', 'FooFactory');
-        $container->register('VisionTest\DependencyInjection\Fixtures\Foo', 'Foo')
+        $container->register(FooFactory::class, 'FooFactory');
+        $container->register(Foo::class, 'Foo')
             ->factory('@FooFactory', 'getInstance');
 
-        $this->assertInstanceOf('VisionTest\DependencyInjection\Fixtures\Foo', $container->get('Foo'));
+        $this->assertInstanceOf(Foo::class, $container->get('Foo'));
     }
 
     public function testGetWithParametersViaFactory()
@@ -153,14 +141,14 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $param1 = 'foo';
 
         $container = new Container;
-        $container->register('VisionTest\DependencyInjection\Fixtures\FooFactory', 'FooFactory');
-        $container->register('VisionTest\DependencyInjection\Fixtures\Foo', 'Foo')
+        $container->register(FooFactory::class, 'FooFactory');
+        $container->register(Foo::class, 'Foo')
             ->factory('@FooFactory', 'getInstanceWithParameters', [$param1]);
 
         $foo = $container->get('Foo');
 
         $this->assertSame($param1, $foo->param1);
-        $this->assertInstanceOf('VisionTest\DependencyInjection\Fixtures\Foo', $foo);
+        $this->assertInstanceOf(Foo::class, $foo);
     }
 
     public function testGetWithParametersViaFactoryStatic()
@@ -168,25 +156,25 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $param1 = 'foo';
 
         $container = new Container;
-        $container->register('VisionTest\DependencyInjection\Fixtures\Foo', 'Foo')
-            ->factory('VisionTest\DependencyInjection\Fixtures\FooFactory', 'createViaStaticMethod', [$param1]);
+        $container->register(Foo::class, 'Foo')
+            ->factory(FooFactory::class, 'createViaStaticMethod', [$param1]);
 
         $foo = $container->get('Foo');
 
         $this->assertSame($param1, $foo->param1);
-        $this->assertInstanceOf('VisionTest\DependencyInjection\Fixtures\Foo', $foo);
+        $this->assertInstanceOf(Foo::class, $foo);
     }
 
     public function testDependentClass()
     {
         $container = new Container;
-        $container->register('BasicClass');
-        $container->register('DependentClass')->constructor(['@BasicClass']);
+        $container->register(BasicClass::class);
+        $container->register(DependentClass::class)->constructor(['@' . BasicClass::class]);
 
-        $instance = $container->get('DependentClass');
+        $instance = $container->get(DependentClass::class);
 
-        $this->assertInstanceOf('DependentClass', $instance);
-        $this->assertInstanceOf('BasicClass', $instance->getBasicClass());
+        $this->assertInstanceOf(DependentClass::class, $instance);
+        $this->assertInstanceOf(BasicClass::class, $instance->getBasicClass());
     }
 
     public function testSetAndGetParameter()

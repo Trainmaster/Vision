@@ -1,7 +1,5 @@
 <?php
-class BasicClass
-{
-}
+namespace VisionTest\DependencyInjection\Fixtures;
 
 class DependentClass
 {
