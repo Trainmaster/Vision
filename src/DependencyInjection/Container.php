@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Vision\DependencyInjection;
 
 use InvalidArgumentException;
+
 use ReflectionClass;
-use RuntimeException;
 
 class Container implements ContainerInterface
 {
-    /** @var array|Definition[] $definitions */
+    /** @var Definition[] $definitions */
     protected $definitions = [];
 
     /** @var array $parameters */
@@ -35,15 +35,8 @@ class Container implements ContainerInterface
      *
      * @return Definition
      */
-    public function register($class, $alias = null)
+    public function register(string $class, $alias = null)
     {
-        if (!is_string($class)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string.',
-                __METHOD__
-            ));
-        }
-
         $class = $this->resolveParameter($class);
         $definition = new Definition($class);
 
@@ -80,12 +73,11 @@ class Container implements ContainerInterface
 
     /**
      * @param string $alias
-     *
-     * @return mixed
+     * @return Definition|null
      */
     public function getDefinition($alias)
     {
-        return isset($this->definitions[$alias]) ? $this->definitions[$alias] : null;
+        return $this->has($alias) ? $this->definitions[$alias] : null;
     }
 
     /**
@@ -102,17 +94,9 @@ class Container implements ContainerInterface
      *
      * @return Container Provides a fluent interface.
      */
-    public function setParameter($key, $value)
+    public function setParameter(string $key, $value)
     {
-        if (!is_string($key)) {
-            throw new InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string.',
-                __METHOD__
-            ));
-        }
-
         $this->parameters[$key] = $this->resolveParameter($value);
-
         return $this;
     }
 
@@ -154,12 +138,10 @@ class Container implements ContainerInterface
 
     /**
      * @param string $alias
-     *
-     * @return object
-     *
-     * @throws RuntimeException
+     * @return mixed
+     * @throws NotFoundException
      */
-    public function get($alias)
+    public function get(string $alias)
     {
         if (!is_string($alias)) {
             throw new InvalidArgumentException(sprintf(
@@ -177,11 +159,19 @@ class Container implements ContainerInterface
         } elseif($alias === 'self') {
             return $this;
         } else {
-            throw new RuntimeException(sprintf(
-                'No definition for %s. Double-check the container configuration file(s).',
+            throw new NotFoundException(sprintf(
+                'No definition for "%s". Double-check the container configuration file(s).',
                 $alias
             ));
         }
+    }
+
+    /**
+     * @param string $alias
+     * @return bool
+     */
+    public function has(string $alias) {
+        return isset($this->definitions[$alias]);
     }
 
     /**

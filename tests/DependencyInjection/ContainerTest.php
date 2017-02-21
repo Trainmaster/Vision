@@ -1,9 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace VisionTest\DependencyInjection;
 
 require_once 'TestClasses.php';
 
 use Vision\DependencyInjection\Container;
+use Vision\DependencyInjection\NotFoundException;
 
 class ContainerTest extends \PHPUnit\Framework\TestCase
 {
@@ -12,14 +15,6 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $container = new Container;
 
         $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register('BasicClass'));
-    }
-
-    public function testRegisterWhenArgumentOneIsNoString()
-    {
-        $this->expectException('InvalidArgumentException');
-        $container = new Container;
-
-        $this->assertInstanceOf('\Vision\DependencyInjection\Definition', $container->register(new \BasicClass));
     }
 
     public function testRegisterWhenArgumentTwoIsNoString()
@@ -104,17 +99,9 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
     }
     */
 
-    public function testGetWhenArgumentIsNoString()
-    {
-        $this->expectException('InvalidArgumentException');
-
-        $container = new Container;
-        $container->get(1);
-    }
-
     public function testGetWhenIsNotDefined()
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(NotFoundException::class);
 
         $container = new Container;
         $container->get('BasicClass');
@@ -209,15 +196,6 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($container->getParameter('foo'));
         $this->assertSame($container, $container->setParameter('foo', 'bar'));
         $this->assertSame('bar', $container->getParameter('foo'));
-    }
-
-    public function testSetParameterWhenKeyIsNoString()
-    {
-        $this->expectException('InvalidArgumentException');
-
-        $container = new Container;
-
-        $this->assertSame($container, $container->setParameter(1, 'bar'));
     }
 
     public function testSetAndGetParameters()
