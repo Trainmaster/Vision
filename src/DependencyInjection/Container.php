@@ -143,27 +143,24 @@ class Container implements ContainerInterface
      */
     public function get(string $alias)
     {
-        if (!is_string($alias)) {
-            throw new InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string.',
-                __METHOD__
-            ));
+        if ($alias === 'self') {
+            return $this;
         }
 
-        $definition = $this->getDefinition($alias);
-
-        if ($definition) {
-            return $definition->isShared()
-                ? $this->createSharedInstance($alias, $definition)
-                : $this->createInstance($definition);
-        } elseif($alias === 'self') {
-            return $this;
-        } else {
+        if (!$this->has($alias)) {
             throw new NotFoundException(sprintf(
                 'No definition for "%s". Double-check the container configuration file(s).',
                 $alias
             ));
         }
+
+        $definition = $this->getDefinition($alias);
+
+        if ($definition->isShared()) {
+            return $this->createSharedInstance($alias, $definition);
+        }
+
+        return $this->createInstance($definition);
     }
 
     /**
