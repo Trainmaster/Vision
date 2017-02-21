@@ -6,138 +6,65 @@ namespace Vision\DependencyInjection;
 class Definition
 {
     /** @var mixed $class */
-    protected $class;
+    private $class;
 
     /** @var bool $shared */
-    protected $shared = true;
+    private $shared = true;
 
     /** @var bool|array $factory */
-    protected $factory = false;
+    private $factory = false;
 
     /** @var array $property */
-    protected $property = [];
+    private $property = [];
 
     /** @var array $constructor */
-    protected $constructor = [];
+    private $constructor = [];
 
     /** @var array $method */
-    protected $method = [];
+    private $method = [];
 
-    /**
-     * @param string $class
-     */
-    public function __construct($class)
+    public function __construct(string $class)
     {
-        $this->setClass($class);
-    }
-
-    /**
-     * @param string $class
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setClass($class)
-    {
-        if (!is_string($class)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string.',
-                __METHOD__
-            ));
-        }
         $this->class = $class;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getClass()
+    public function getClass(): string
     {
         return $this->class;
     }
 
-    /**
-     * @param bool $shared
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setShared($shared)
+    public function setShared(bool $shared): Definition
     {
-        $this->shared = (bool) $shared;
+        $this->shared = $shared;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isShared()
+    public function isShared(): bool
     {
         return $this->shared;
     }
 
-    /**
-     * @param string $property
-     * @param mixed $value
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function property($property, $value)
+    public function property(string $property, $value): Definition
     {
-        if (!is_string($property)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string.',
-                __METHOD__
-            ));
-        }
         $this->property[$property] = $value;
         return $this;
     }
 
-    /**
-     * @param array $constructor
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function constructor(array $constructor)
+    public function constructor(array $constructor): Definition
     {
         $this->constructor = $constructor;
         return $this;
     }
 
-    /**
-     * @param string $method
-     * @param array $dependencies
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function method($method, array $dependencies)
+    public function method(string $method, array $dependencies): Definition
     {
-        if (!is_string($method)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string.',
-                __METHOD__
-            ));
-        }
         $this->method[][$method] = $dependencies;
         return $this;
     }
 
-    /**
-     * @param string $dependency
-     * @param string $method
-     * @param array  $args
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function factory($dependency, $method, array $args = [])
+    public function factory(string $dependency, string $method, array $args = []): Definition
     {
-        $this->factory = [(string) $dependency, (string) $method, $args];
+        $this->factory = [$dependency, $method, $args];
         return $this;
     }
 
@@ -149,37 +76,23 @@ class Definition
         return $this->factory;
     }
 
-    /**
-     * @param array $method
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setMethod(array $method)
+    public function setMethod(array $method): Definition
     {
         $this->method = $method;
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getPropertyInjections()
+    public function getPropertyInjections(): array
     {
         return $this->property;
     }
 
-    /**
-     * @return array
-     */
-    public function getConstructorInjections()
+    public function getConstructorInjections(): array
     {
         return $this->constructor;
     }
 
-    /**
-     * @return array
-     */
-    public function getMethodInjections()
+    public function getMethodInjections(): array
     {
         return $this->method;
     }
