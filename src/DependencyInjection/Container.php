@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Vision\DependencyInjection;
 
-use InvalidArgumentException;
-
 use ReflectionClass;
 
 class Container implements ContainerInterface
@@ -18,9 +16,6 @@ class Container implements ContainerInterface
     /** @var array $objects */
     protected $objects = [];
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->objects['dic'] = $this;
@@ -71,41 +66,23 @@ class Container implements ContainerInterface
         return $definition;
     }
 
-    /**
-     * @param string $alias
-     * @return Definition|null
-     */
-    public function getDefinition($alias)
+    public function getDefinition(string $alias)
     {
-        return $this->has($alias) ? $this->definitions[$alias] : null;
+        return $this->definitions[$alias] ?? null;
     }
 
-    /**
-     * @return array
-     */
-    public function getDefinitions()
+    public function getDefinitions(): array
     {
         return $this->definitions;
     }
 
-    /**
-     * @param string $key
-     * @param mixed $value
-     *
-     * @return Container Provides a fluent interface.
-     */
-    public function setParameter(string $key, $value)
+    public function setParameter(string $key, $value): Container
     {
         $this->parameters[$key] = $this->resolveParameter($value);
         return $this;
     }
 
-    /**
-     * @param array $parameters
-     *
-     * @return Container Provides a fluent interface.
-     */
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters): Container
     {
         foreach ($parameters as $key => $value) {
             $this->setParameter($key, $value);
@@ -114,33 +91,16 @@ class Container implements ContainerInterface
         return $this;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return mixed
-     */
-    public function getParameter($key)
+    public function getParameter(string $key)
     {
-        if (isset($this->parameters[$key])) {
-            return $this->parameters[$key];
-        }
-
-        return null;
+        return $this->parameters[$key] ?? null;
     }
 
-    /**
-     * @return array
-     */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
 
-    /**
-     * @param string $alias
-     * @return mixed
-     * @throws NotFoundException
-     */
     public function get(string $alias)
     {
         if ($alias === 'self') {
@@ -163,33 +123,19 @@ class Container implements ContainerInterface
         return $this->createInstance($definition);
     }
 
-    /**
-     * @param string $alias
-     * @return bool
-     */
-    public function has(string $alias) {
+    public function has(string $alias): bool
+    {
         return isset($this->definitions[$alias]);
     }
 
-    /**
-     * @param string $alias
-     * @param Definition $definition
-     *
-     * @return mixed
-     */
-    private function createSharedInstance($alias, Definition $definition)
+    private function createSharedInstance(string $alias, Definition $definition)
     {
         return isset($this->objects[$alias])
             ? $this->objects[$alias]
             : $this->objects[$alias] = $this->createInstance($definition);
     }
 
-    /**
-     * @param Definition $definition
-     *
-     * @return mixed
-     */
-    protected function createInstance(Definition $definition)
+    private function createInstance(Definition $definition)
     {
         if ($definition->hasFactory()) {
             return $this->createInstanceFromFactory($definition);
@@ -266,12 +212,7 @@ class Container implements ContainerInterface
             : call_user_func([$dependency, $factory[1]]);
     }
 
-    /**
-     * @param string|array $dependency
-     *
-     * @return mixed
-     */
-    protected function resolveDependency($dependency)
+    private function resolveDependency($dependency)
     {
         if (is_string($dependency)) {
             $dependency = $this->resolveParameter($dependency);
@@ -285,12 +226,7 @@ class Container implements ContainerInterface
         return $dependency;
     }
 
-    /**
-     * @param array $dependencies
-     *
-     * @return array
-     */
-    protected function resolveDependencies(array $dependencies)
+    private function resolveDependencies(array $dependencies): array
     {
         foreach ($dependencies as &$dependency) {
             $dependency = $this->resolveDependency($dependency);
@@ -302,12 +238,8 @@ class Container implements ContainerInterface
     /**
      * @todo Compiler for caching.
      * @todo Support for other parameter types (currently, only string is supported)
-     *
-     * @param string $dependency
-     *
-     * @return mixed
      */
-    protected function resolveParameter($dependency)
+    private function resolveParameter(string $dependency)
     {
         $i = substr_count($dependency, '%');
 
@@ -330,14 +262,9 @@ class Container implements ContainerInterface
         return $dependency;
     }
 
-    /**
-     * @param string $dependency
-     *
-     * @return mixed
-     */
-    protected function resolveReference($dependency)
+    private function resolveReference(string $dependency)
     {
-        if (is_string($dependency) && strpos($dependency, '@') === 0) {
+        if (strpos($dependency, '@') === 0) {
             $dependency = substr($dependency, 1);
             return $this->get($dependency);
         }
