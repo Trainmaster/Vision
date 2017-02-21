@@ -47,15 +47,15 @@ class Container implements ContainerInterface
         }
 
         if ($alias === 'self') {
-            throw new \LogicException(sprintf(
+            throw new AliasReservedException(sprintf(
                 'The alias "%s" is reserved.',
                 $alias
             ));
         }
 
-        if (isset($this->definitions[$alias])) {
-            throw new \LogicException(sprintf(
-                'The alias "%s" is already assigned to the class "%s".',
+        if ($this->has($alias)) {
+            throw new AliasAlreadyRegisteredException(sprintf(
+                'The alias "%s" is already registered with class "%s".',
                 $alias,
                 $this->definitions[$alias]->getClass()
             ));

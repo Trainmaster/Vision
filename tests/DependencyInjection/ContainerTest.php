@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace VisionTest\DependencyInjection;
 
+use Vision\DependencyInjection\AliasAlreadyRegisteredException;
+use Vision\DependencyInjection\AliasReservedException;
 use Vision\DependencyInjection\Container;
 use Vision\DependencyInjection\Definition;
 use Vision\DependencyInjection\NotFoundException;
@@ -12,7 +14,6 @@ use VisionTest\DependencyInjection\Fixtures\Foo;
 use VisionTest\DependencyInjection\Fixtures\FooFactory;
 
 use InvalidArgumentException;
-use LogicException;
 
 class ContainerTest extends \PHPUnit\Framework\TestCase
 {
@@ -35,7 +36,7 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
 
     public function testRegisterWithOneArgumentWhenClassIsAlreadyDefined()
     {
-        $this->expectException(LogicException::class);
+        $this->expectException(AliasAlreadyRegisteredException::class);
 
         $container = new Container;
         $container->register(BasicClass::class);
@@ -44,7 +45,7 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
 
     public function testRegisterWithTwoArgumentsWhenClassIsAlreadyDefined()
     {
-        $this->expectException(LogicException::class);
+        $this->expectException(AliasAlreadyRegisteredException::class);
 
         $container = new Container;
         $container->register(BasicClass::class, 'Alias');
@@ -53,7 +54,7 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
 
     public function testRegisterWithReservedAlias()
     {
-        $this->expectException(LogicException::class);
+        $this->expectException(AliasReservedException::class);
 
         $container = new Container;
         $container->register(BasicClass::class, 'self');
