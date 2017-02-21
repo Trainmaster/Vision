@@ -230,9 +230,7 @@ class Container implements ContainerInterface
             }
         }
 
-        $constructor = $reflection->getConstructor();
-
-        if ($constructor) {
+        if ($reflection->getConstructor()) {
             $constructorInjections = $definition->getConstructorInjections();
             $instance = $reflection->newInstanceArgs($this->resolveDependencies($constructorInjections));
         } else {
