@@ -4,11 +4,9 @@
 
 Vision is a lightweight and easy extensible framework for PHP.
 
-
 ## Requirements
 
 See ``composer.json`` for requirements.
-
 
 ## Documentation
 
