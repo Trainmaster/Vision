@@ -191,18 +191,11 @@ class Container implements ContainerInterface
      */
     protected function createInstance(Definition $definition)
     {
-        $class = $definition->getClass();
-
         if ($definition->hasFactory()) {
-            $factory = $definition->getFactory();
-            $dependency = $this->resolveDependency($factory[0]);
-
-            return $factory[2]
-                ? call_user_func_array([$dependency, $factory[1]], $this->resolveDependencies($factory[2]))
-                : call_user_func([$dependency, $factory[1]]);
+            return $this->createInstanceFromFactory($definition);
         }
 
-        $reflection = new ReflectionClass($class);
+        $reflection = new ReflectionClass($definition->getClass());
 
         if (!$reflection->isInstantiable()) {
             return false;
@@ -263,6 +256,16 @@ class Container implements ContainerInterface
         }
 
         return $instance;
+    }
+
+    private function createInstanceFromFactory(Definition $definition)
+    {
+        $factory = $definition->getFactory();
+        $dependency = $this->resolveDependency($factory[0]);
+
+        return $factory[2]
+            ? call_user_func_array([$dependency, $factory[1]], $this->resolveDependencies($factory[2]))
+            : call_user_func([$dependency, $factory[1]]);
     }
 
     /**
