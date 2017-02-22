@@ -248,12 +248,11 @@ class Container implements ContainerInterface
                 $parameter = $this->getParameter($match[1]);
                 if ($parameter !== null) {
                     return $parameter;
-                } else {
-                    throw new NotFoundException(sprintf(
-                        'No parameter definition for "%s". Double-check the container configuration file(s).',
-                        $match[1]
-                    ));
                 }
+                throw new NotFoundException(sprintf(
+                    'No parameter definition for "%s". Double-check the container configuration file(s).',
+                    $match[1]
+                ));
             }, $dependency);
             $dependency = $value;
         }
