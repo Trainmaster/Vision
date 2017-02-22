@@ -249,7 +249,7 @@ class Container implements ContainerInterface
                 if ($parameter !== null) {
                     return $parameter;
                 } else {
-                    throw new \OutOfRangeException(sprintf(
+                    throw new NotFoundException(sprintf(
                         'No parameter definition for "%s". Double-check the container configuration file(s).',
                         $match[1]
                     ));
