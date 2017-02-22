@@ -244,9 +244,8 @@ class Container implements ContainerInterface
         $i = substr_count($dependency, '%');
 
         if ($i % 2 === 0 && $i >= 2) {
-            $di = $this;
-            $value = preg_replace_callback("#%([\w.-]+)%#u", function($match) use (&$di) {
-                $parameter = $di->getParameter($match[1]);
+            $value = preg_replace_callback("#%([\w.-]+)%#u", function($match) {
+                $parameter = $this->getParameter($match[1]);
                 if ($parameter !== null) {
                     return $parameter;
                 } else {
