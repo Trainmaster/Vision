@@ -241,10 +241,8 @@ class Container implements ContainerInterface
      */
     private function resolveParameter(string $dependency)
     {
-        $i = substr_count($dependency, '%');
-
-        if ($i % 2 === 0 && $i >= 2) {
-            $value = preg_replace_callback("#%([\w.-]+)%#u", function($match) {
+        if ($this->containsParameterPlaceholders($dependency)) {
+            $value = preg_replace_callback("#%([\w.-]+)%#u", function ($match) {
                 $parameter = $this->getParameter($match[1]);
                 if ($parameter !== null) {
                     return $parameter;
@@ -258,6 +256,12 @@ class Container implements ContainerInterface
         }
 
         return $dependency;
+    }
+
+    private function containsParameterPlaceholders(string $dependency): bool
+    {
+        $i = substr_count($dependency, '%');
+        return $i % 2 === 0 && $i >= 2;
     }
 
     private function resolveReference(string $dependency)
