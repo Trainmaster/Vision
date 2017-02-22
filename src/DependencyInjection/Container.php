@@ -16,11 +16,6 @@ class Container implements ContainerInterface
     /** @var array $objects */
     private $objects = [];
 
-    public function __construct()
-    {
-        $this->objects['dic'] = $this;
-    }
-
     /**
      * @param string $class
      * @param null|string $alias
