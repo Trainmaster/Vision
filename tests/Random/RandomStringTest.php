@@ -3,26 +3,32 @@ namespace VisionTest\Random;
 
 use Vision\Random\RandomString;
 
-class RandomStringTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+use DomainException;
+
+class RandomStringTest extends TestCase
 {
     public function testGenerateHex()
     {
-        $string = new RandomString();
-
-        $hex = $string->generateHex(10);
-        $this->assertInternalType('string', $hex);
+        $hex = (new RandomString)->generateHex(10);
         $this->assertSame(10, strlen($hex));
         $this->assertTrue(ctype_xdigit($hex));
     }
 
-    public function testGenerateHexWithInvalidLength()
+    public function testGenerateHexWithLengthTooSmall()
     {
-        $string = new RandomString();
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('Length must be greater than or equal to 2.');
 
-        $hex = $string->generateHex(3);
-        $this->assertFalse($hex);
+        (new RandomString)->generateHex(1);
+    }
 
-        $hex = $string->generateHex(1);
-        $this->assertFalse($hex);
+    public function testGenerateHexWithLengthNotMultipleOfTwo()
+    {
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('Length must be a multiple of 2.');
+
+        (new RandomString)->generateHex(3);
     }
 }

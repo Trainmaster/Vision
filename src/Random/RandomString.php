@@ -3,23 +3,20 @@ declare(strict_types=1);
 
 namespace Vision\Random;
 
+use DomainException;
+
 class RandomString
 {
-    /**
-     * @param int $length
-     *
-     * @return bool|string
-     */
-    public function generateHex($length)
+    public function generateHex(int $length): string
     {
-        $length = (int) $length;
-
-        if ($length < 2 || (($length % 2) === 1)) {
-            return false;
+        if ($length < 2) {
+            throw new DomainException('Length must be greater than or equal to 2.');
         }
 
-        $bytes = random_bytes($length / 2);
+        if (($length % 2) === 1) {
+            throw new DomainException('Length must be a multiple of 2.');
+        }
 
-        return $bytes ? bin2hex($bytes) : false;
+        return bin2hex(random_bytes($length / 2));
     }
 }
