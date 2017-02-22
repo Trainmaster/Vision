@@ -2,7 +2,7 @@
 
 ## Usage
 
-### Simple example
+### Constructor injection
 
 ```php
 use Vision\DependencyInjection\Container;
@@ -20,10 +20,10 @@ class Bar
 
 $container = new Container;
 
-$container->register('Foo');
-$container->register('Bar')->constructor('@Foo'));
+$container->register(Foo::class);
+$container->register(Bar::class)->constructor('@Foo'));
 
-$bar = $container->get('Bar');
+$bar = $container->get(Bar::class);
 ```
 
 ### Interface injection
@@ -57,9 +57,9 @@ class Bar implements FooInterface
 
 $container = new Container;
 
-$container->register('Foo');
-$container->register('FooInterface')->method('setFoo', '@Foo'));
-$container->register('Bar');
+$container->register(Foo::class);
+$container->register(FooInterface::class)->method('setFoo', '@Foo'));
+$container->register(Bar::class);
 
-$bar = $container->get('Bar');
+$bar = $container->get(Bar::class);
 ```
