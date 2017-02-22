@@ -8,13 +8,13 @@ use ReflectionClass;
 class Container implements ContainerInterface
 {
     /** @var Definition[] $definitions */
-    protected $definitions = [];
+    private $definitions = [];
 
     /** @var array $parameters */
-    protected $parameters = [];
+    private $parameters = [];
 
     /** @var array $objects */
-    protected $objects = [];
+    private $objects = [];
 
     public function __construct()
     {
