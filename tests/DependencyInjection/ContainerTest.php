@@ -17,24 +17,24 @@ use InvalidArgumentException;
 
 class ContainerTest extends \PHPUnit\Framework\TestCase
 {
-    public function testRegisterWithOneArgument()
+    public function testRegisterWithClass()
     {
         $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class));
     }
 
-    public function testRegisterWhenArgumentTwoIsNoString()
+    public function testRegisterWithClassAndAlias()
+    {
+        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, 'alias'));
+    }
+
+    public function testRegisterWithClassAndInvalidAlias()
     {
         $this->expectException(InvalidArgumentException::class);
 
         $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, new BasicClass()));
     }
 
-    public function testRegisterWithTwoArguments()
-    {
-        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, 'alias'));
-    }
-
-    public function testRegisterWithOneArgumentWhenClassIsAlreadyDefined()
+    public function testRegisterWhenClassIsAlreadyDefined()
     {
         $this->expectException(AliasAlreadyRegisteredException::class);
 
@@ -43,7 +43,7 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $container->register(BasicClass::class);
     }
 
-    public function testRegisterWithTwoArgumentsWhenClassIsAlreadyDefined()
+    public function testRegisterWhenAliasIsAlreadyDefined()
     {
         $this->expectException(AliasAlreadyRegisteredException::class);
 
@@ -89,7 +89,7 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(BasicClass::class, $container->get(BasicClass::class));
     }
 
-    public function testGetWhenIsNotDefined()
+    public function testGetWhenAliasIsNotDefined()
     {
         $this->expectException(NotFoundException::class);
 
