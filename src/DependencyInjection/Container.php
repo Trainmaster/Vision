@@ -218,9 +218,7 @@ class Container implements ContainerInterface
             $dependency = $this->resolveParameter($dependency);
             $dependency = $this->resolveReference($dependency);
         } elseif (is_array($dependency)) {
-            foreach ($dependency as &$value) {
-                $value = $this->resolveDependency($value);
-            }
+            $dependency = $this->resolveDependencies($dependency);
         }
 
         return $dependency;
