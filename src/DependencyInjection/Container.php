@@ -30,7 +30,7 @@ class Container implements ContainerInterface
      *
      * @return Definition
      */
-    public function register(string $class, $alias = null)
+    public function register(string $class, $alias = null): Definition
     {
         $class = $this->resolveParameter($class);
         $definition = new Definition($class);
