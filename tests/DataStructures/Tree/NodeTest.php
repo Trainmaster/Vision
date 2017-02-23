@@ -9,8 +9,9 @@ class NodeTest extends TestCase {
 
     public function testParent() {
         $nodeA = new Node;
-        $nodeB = (new Node)->setParent($nodeA);
+        $this->assertNull($nodeA->getParent());
 
+        $nodeB = (new Node)->setParent($nodeA);
         $this->assertSame($nodeA, $nodeB->getParent());
     }
 
