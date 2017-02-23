@@ -245,18 +245,12 @@ abstract class AbstractControl extends AbstractType
         return $this->errors;
     }
 
-    /**
-     * @return false
-     */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return false;
     }
 
-    /**
-     * @return array
-     */
-    public function getChildren()
+    public function getChildren(): array
     {
         return [];
     }

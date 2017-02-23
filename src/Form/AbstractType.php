@@ -75,12 +75,7 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
         return $this;
     }
 
-    /**
-     * @param NodeInterface $parent
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setParent(NodeInterface $parent)
+    public function setParent(NodeInterface $parent): NodeInterface
     {
         $this->parent = $parent;
         return $this;
@@ -94,10 +89,7 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
         return $this->parent;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return !empty($this->elements);
     }
@@ -118,10 +110,7 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
         $this->elements = array_values($this->elements);
     }
 
-    /**
-     * @return array
-     */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->elements;
     }

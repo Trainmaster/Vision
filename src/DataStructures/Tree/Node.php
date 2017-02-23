@@ -11,12 +11,7 @@ class Node implements NodeInterface
     /** @var array $children */
     protected $children = [];
 
-    /**
-     * @param NodeInterface $parent
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setParent(NodeInterface $parent)
+    public function setParent(NodeInterface $parent): NodeInterface
     {
         $this->parent = $parent;
         return $this;
@@ -30,22 +25,12 @@ class Node implements NodeInterface
         return $this->parent;
     }
 
-    /**
-     * @param NodeInterface $child
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function addChild(NodeInterface $child)
+    public function addChild(NodeInterface $child): NodeInterface
     {
         $this->children[] = $child->setParent($this);
         return $this;
     }
 
-    /**
-     * @param NodeInterface $child
-     *
-     * @return void
-     */
     public function removeChild(NodeInterface $child)
     {
         $key = array_search($child, $this->children, true);
@@ -57,26 +42,17 @@ class Node implements NodeInterface
         $this->children = array_values($this->children);
     }
 
-    /**
-     * @return array
-     */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return !empty($this->children);
     }
 
-    /**
-     * @return array
-     */
-    public function removeChildren()
+    public function removeChildren(): array
     {
         return $this->children = [];
     }

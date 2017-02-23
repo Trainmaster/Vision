@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Vision\DataStructures\Tree;
 
-class NodeIterator implements \RecursiveIterator
+use RecursiveIterator;
+
+class NodeIterator implements RecursiveIterator
 {
     /** @var array $nodes */
     private $nodes;
@@ -11,30 +13,27 @@ class NodeIterator implements \RecursiveIterator
     /** @var int $position */
     private $position = 0;
 
-    /**
-     * @param NodeInterface $node
-     */
     public function __construct(NodeInterface $node)
     {
         $this->nodes = $node->getChildren();
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return $this->current()->hasChildren();
     }
 
-    public function getChildren()
+    public function getChildren(): NodeIterator
     {
         return new self($this->current());
     }
 
-    public function current()
+    public function current(): NodeInterface
     {
         return $this->nodes[$this->position];
     }
 
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
@@ -49,7 +48,7 @@ class NodeIterator implements \RecursiveIterator
         $this->position = 0;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->nodes[$this->position]);
     }
