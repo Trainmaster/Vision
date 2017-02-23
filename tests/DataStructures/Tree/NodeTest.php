@@ -1,9 +1,10 @@
 <?php
 namespace VisionTest\DataStructures\Tree;
 
-use PHPUnit\Framework\TestCase;
 use Vision\DataStructures\Tree\Node;
 use Vision\DataStructures\Tree\NodeInterface;
+
+use PHPUnit\Framework\TestCase;
 
 class NodeTest extends TestCase {
 
