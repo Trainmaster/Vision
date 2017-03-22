@@ -1,33 +1,33 @@
 {
-    "name" : "vision/vision",
-    "description" : "Vision - a PHP framework",
-    "type" : "library",
-    "license" : "MIT",
-    "require": {
-        "ext-fileinfo": "*",
-        "ext-intl": "*",
-        "ext-mbstring": "*",
-        "php": "^7.0",
-        "psr/container": "1.0.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "6.0.10"
-    },
-    "authors": [
-        {
-            "name": "Frank Liepert",
-            "email": "contact@frank-liepert.de",
-            "role": "Developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Vision\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "VisionTest\\": "tests/"
-        }
+  "name": "vision/vision",
+  "description": "Vision - a PHP framework",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "ext-fileinfo": "*",
+    "ext-intl": "*",
+    "ext-mbstring": "*",
+    "php": "^7.0",
+    "psr/container": "1.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.0.10"
+  },
+  "authors": [
+    {
+      "name": "Frank Liepert",
+      "email": "contact@frank-liepert.de",
+      "role": "Developer"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Vision\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VisionTest\\": "tests/"
+    }
+  }
 }
