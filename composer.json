@@ -3,6 +3,13 @@
   "description": "Vision - a PHP framework",
   "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Frank Liepert",
+      "email": "contact@frank-liepert.de",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "ext-fileinfo": "*",
     "ext-intl": "*",
@@ -13,13 +20,6 @@
   "require-dev": {
     "phpunit/phpunit": "6.0.10"
   },
-  "authors": [
-    {
-      "name": "Frank Liepert",
-      "email": "contact@frank-liepert.de",
-      "role": "Developer"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "Vision\\": "src/"
