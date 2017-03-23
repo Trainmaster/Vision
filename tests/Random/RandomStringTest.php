@@ -11,7 +11,7 @@ class RandomStringTest extends TestCase
 {
     public function testGenerateHex()
     {
-        $hex = (new RandomString)->generateHex(10);
+        $hex = RandomString::generateHex(10);
         $this->assertSame(10, strlen($hex));
         $this->assertTrue(ctype_xdigit($hex));
     }
@@ -21,7 +21,7 @@ class RandomStringTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('Length must be greater than or equal to 2.');
 
-        (new RandomString)->generateHex(1);
+        RandomString::generateHex(1);
     }
 
     public function testGenerateHexWithLengthNotMultipleOfTwo()
@@ -29,6 +29,6 @@ class RandomStringTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('Length must be a multiple of 2.');
 
-        (new RandomString)->generateHex(3);
+        RandomString::generateHex(3);
     }
 }

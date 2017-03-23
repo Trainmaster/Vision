@@ -7,7 +7,7 @@ use DomainException;
 
 class RandomString
 {
-    public function generateHex(int $length): string
+    public static function generateHex(int $length): string
     {
         if ($length < 2) {
             throw new DomainException('Length must be greater than or equal to 2.');
