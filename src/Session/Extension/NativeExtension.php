@@ -68,7 +68,7 @@ class NativeExtension implements ExtensionInterface
         return session_id();
     }
 
-    public function regenerateId($deleteOldSession = true): bool
+    public function regenerateId(bool $deleteOldSession = true): bool
     {
         return session_regenerate_id($deleteOldSession);
     }

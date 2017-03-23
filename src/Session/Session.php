@@ -47,28 +47,17 @@ class Session extends ArrayObject implements SessionInterface
         $this->extension->start();
     }
 
-    /**
-     * @see Extension\ExtensionInterface
-     */
     public function getStatus(): int
     {
         return $this->extension->getStatus();
     }
 
-    /**
-     * @see Extension\ExtensionInterface
-     */
     public function getId(): string
     {
         return $this->extension->getId();
     }
 
-    /**
-     * @param bool $deleteOldSession
-     *
-     * @see Extension\ExtensionInterface
-     */
-    public function regenerateId($deleteOldSession = true): bool
+    public function regenerateId(bool $deleteOldSession = true): bool
     {
         return $this->extension->regenerateId($deleteOldSession);
     }

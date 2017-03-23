@@ -13,7 +13,7 @@ interface SessionInterface
 
     public function getId(): string;
 
-    public function regenerateId($deleteOldSession = true): bool;
+    public function regenerateId(bool $deleteOldSession = true): bool;
 
     public function exchangeArray(array $data): array;
 

@@ -17,5 +17,5 @@ interface ExtensionInterface
 
     public function getId(): string;
 
-    public function regenerateId($deleteOldSession = true): bool;
+    public function regenerateId(bool $deleteOldSession = true): bool;
 }
