@@ -50,7 +50,7 @@ class NativeExtension implements ExtensionInterface
 
     public function isStarted(): bool
     {
-        return (bool) $this->started;
+        return $this->started;
     }
 
     public function isActive(): bool
