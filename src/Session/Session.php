@@ -16,6 +16,7 @@ class Session extends ArrayObject implements SessionInterface
      */
     public function __construct(Extension\ExtensionInterface $extension)
     {
+        parent::__construct();
         register_shutdown_function([$this, '__destruct']);
         $this->extension = $extension;
         $this->extension->start();
