@@ -5,9 +5,9 @@ namespace Vision\Random;
 
 use DomainException;
 
-class RandomString
+final class RandomString
 {
-    public static function generateHex(int $length): string
+    final public static function generateHex(int $length): string
     {
         if ($length < 2) {
             throw new DomainException('Length must be greater than or equal to 2.');
