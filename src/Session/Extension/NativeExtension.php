@@ -41,6 +41,7 @@ class NativeExtension implements ExtensionInterface
     {
         $this->start($session);
         $_SESSION = $session->getArrayCopy();
+        session_write_close();
     }
 
     public function isStarted(): bool
