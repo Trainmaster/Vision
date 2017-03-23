@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace Vision\Session;
 
 use Vision\DataStructures\Arrays\ArrayObject;
-use Vision\Session\Extension\ExtensionInterface;
 
 class Session extends ArrayObject implements SessionInterface
 {
-    /** @var null|Extension\ExtensionInterface $extension */
+    /** @var Extension\ExtensionInterface $extension */
     private $extension;
 
     /**
