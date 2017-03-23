@@ -3,7 +3,9 @@ namespace VisionTest\File;
 
 use Vision\File\File;
 
-class FileTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class FileTest extends TestCase
 {
     /** @var File $file */
     protected $file;

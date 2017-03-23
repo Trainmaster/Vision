@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Url;
 
-class UrlTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class UrlTest extends TestCase
 {
     /** @var Url */
     private $control;

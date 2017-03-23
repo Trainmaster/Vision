@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\DateTime;
 
-class DateTimeTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class DateTimeTest extends TestCase
 {
     /** @var DateTime */
     private $control;

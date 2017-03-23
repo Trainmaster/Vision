@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Number;
 
-class NumberTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class NumberTest extends TestCase
 {
     /** @var Number */
     private $control;

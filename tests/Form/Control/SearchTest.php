@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Search;
 
-class SearchTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class SearchTest extends TestCase
 {
     /** @var Search */
     private $control;

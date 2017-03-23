@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Checkbox;
 
-class CheckboxTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class CheckboxTest extends TestCase
 {
     /** @var Checkbox */
     private $control;

@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Submit;
 
-class SubmitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class SubmitTest extends TestCase
 {
     /** @var Submit */
     private $control;

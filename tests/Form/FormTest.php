@@ -3,7 +3,9 @@ namespace VisionTest\Form;
 
 use Vision\Form\Form;
 
-class FormTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class FormTest extends TestCase
 {
     /** @var Form */
     private $form;

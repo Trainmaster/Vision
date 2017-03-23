@@ -6,7 +6,9 @@ use Vision\Html\Element;
 use InvalidArgumentException;
 use LogicException;
 
-class ElementTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ElementTest extends TestCase
 {
     public function testConstructWithValidArgument()
     {

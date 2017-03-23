@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator\Email;
 
-class EmailTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class EmailTest extends TestCase
 {
     static $validator;
 

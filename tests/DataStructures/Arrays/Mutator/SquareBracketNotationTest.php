@@ -3,7 +3,9 @@ namespace VisionTest\DataStructures\Arrays\Mutator;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 
-class SquareBracketNotationTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class SquareBracketNotationTest extends TestCase
 {
     public function testSet()
     {

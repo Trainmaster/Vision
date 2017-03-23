@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class ValidatorChainTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ValidatorChainTest extends TestCase
 {
     /** @var Validator\ValidatorChain */
     private $chain;

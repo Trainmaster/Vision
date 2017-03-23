@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class MinStringLengthTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class MinStringLengthTest extends TestCase
 {
     static $validatorOne;
 

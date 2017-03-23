@@ -3,7 +3,9 @@ namespace VisionTest\Routing;
 
 use Vision\Routing\Route;
 
-class RouteTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class RouteTest extends TestCase
 {
     public function testConstructor()
     {

@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Password;
 
-class PasswordTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class PasswordTest extends TestCase
 {
     /** @var Password */
     private $control;

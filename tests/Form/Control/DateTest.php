@@ -5,7 +5,9 @@ use Vision\Form\Control\Date;
 
 use Exception;
 
-class DateTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class DateTest extends TestCase
 {
     /** @var Date */
     private $control;

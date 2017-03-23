@@ -4,7 +4,9 @@ namespace VisionTest\Routing;
 use Vision\Routing\Route;
 use Vision\Routing\RouteCollection;
 
-class RouteCollectionTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class RouteCollectionTest extends TestCase
 {
     public function testAddAndGet()
     {

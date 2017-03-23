@@ -15,7 +15,9 @@ use VisionTest\DependencyInjection\Fixtures\FooFactory;
 
 use InvalidArgumentException;
 
-class ContainerTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ContainerTest extends TestCase
 {
     public function testRegisterWithClass()
     {

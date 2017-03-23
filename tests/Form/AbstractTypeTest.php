@@ -1,7 +1,9 @@
 <?php
 namespace VisionTest\Form;
 
-class AbstractTypeTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class AbstractTypeTest extends TestCase
 {
     public function testGetName()
     {

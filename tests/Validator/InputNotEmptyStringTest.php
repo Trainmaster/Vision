@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class InputNotEmptyStringTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class InputNotEmptyStringTest extends TestCase
 {
     static $validator;
 

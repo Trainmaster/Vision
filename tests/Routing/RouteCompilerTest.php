@@ -5,7 +5,9 @@ use Vision\Routing\CompiledRoute;
 use Vision\Routing\Route;
 use Vision\Routing\RouteCompiler;
 
-class RouteCompilerTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class RouteCompilerTest extends TestCase
 {
     public function testCompileAndExpectStaticRoute()
     {

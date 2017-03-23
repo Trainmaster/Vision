@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class InArrayTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class InArrayTest extends TestCase
 {
     static $validator;
 

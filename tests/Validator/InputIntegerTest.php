@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator\InputInteger;
 
-class InputIntegerTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class InputIntegerTest extends TestCase
 {
     static $validator;
 

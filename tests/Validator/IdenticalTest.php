@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class IdenticalTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class IdenticalTest extends TestCase
 {
     public function testConstructEmpty()
     {

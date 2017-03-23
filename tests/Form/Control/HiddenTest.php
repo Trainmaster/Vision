@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Hidden;
 
-class HiddenTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class HiddenTest extends TestCase
 {
     /** @var Hidden */
     private $control;

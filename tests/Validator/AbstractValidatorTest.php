@@ -1,7 +1,9 @@
 <?php
 namespace VisionTest\Validator;
 
-class AbstractValidatorTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class AbstractValidatorTest extends TestCase
 {
     public function testGetErrors()
     {

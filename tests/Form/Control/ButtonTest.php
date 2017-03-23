@@ -3,7 +3,9 @@ namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Button;
 
-class ButtonTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ButtonTest extends TestCase
 {
     /** @var Button */
     private $control;

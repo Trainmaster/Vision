@@ -3,7 +3,9 @@ namespace VisionTest\Cache;
 
 use Vision\Cache\Cache;
 
-class CacheTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class CacheTest extends TestCase
 {
     public function testGetStorage()
     {

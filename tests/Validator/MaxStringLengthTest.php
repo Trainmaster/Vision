@@ -3,7 +3,9 @@ namespace VisionTest\Validator;
 
 use Vision\Validator;
 
-class MaxStringLengthTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class MaxStringLengthTest extends TestCase
 {
     static $validatorOne;
 

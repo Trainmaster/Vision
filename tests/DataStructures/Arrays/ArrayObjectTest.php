@@ -3,7 +3,9 @@ namespace VisionTest\DataStructures\Arrays;
 
 use Vision\DataStructures\Arrays\ArrayObject;
 
-class ArrayObjectTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ArrayObjectTest extends TestCase
 {
     public function testHasInterfacesImplemented()
     {
