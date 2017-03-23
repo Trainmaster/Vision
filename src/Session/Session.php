@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Vision\Session;
 
 use Vision\DataStructures\Arrays\ArrayObject;
+use Vision\Session\Extension\ExtensionInterface;
 
 class Session extends ArrayObject implements SessionInterface
 {
@@ -26,42 +27,30 @@ class Session extends ArrayObject implements SessionInterface
         $this->extension->save($this);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return serialize($this->getArrayCopy());
     }
 
-    /**
-     * @return Extension\ExtensionInterface $extension
-     */
-    public function getExtension()
+    public function getExtension(): ExtensionInterface
     {
         return $this->extension;
     }
 
-    /**
-     * @return array
-     */
     public function clear()
     {
-        return $this->exchangeArray([]);
+        $this->exchangeArray([]);
     }
 
-    /**
-     * @see Extension\ExtensionInterface
-     */
     public function start()
     {
-        return $this->extension->start();
+        $this->extension->start();
     }
 
     /**
      * @see Extension\ExtensionInterface
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->extension->getStatus();
     }
@@ -69,7 +58,7 @@ class Session extends ArrayObject implements SessionInterface
     /**
      * @see Extension\ExtensionInterface
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->extension->getId();
     }
@@ -79,7 +68,7 @@ class Session extends ArrayObject implements SessionInterface
      *
      * @see Extension\ExtensionInterface
      */
-    public function regenerateId($deleteOldSession = true)
+    public function regenerateId($deleteOldSession = true): bool
     {
         return $this->extension->regenerateId($deleteOldSession);
     }

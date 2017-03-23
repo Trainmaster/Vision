@@ -9,13 +9,13 @@ interface SessionInterface
 
     public function start();
 
-    public function getStatus();
+    public function getStatus(): int;
 
-    public function getId();
+    public function getId(): string;
 
-    public function regenerateId($deleteOldSession = true);
+    public function regenerateId($deleteOldSession = true): bool;
 
-    public function exchangeArray(array $data);
+    public function exchangeArray(array $data): array;
 
-    public function getArrayCopy();
+    public function getArrayCopy(): array;
 }

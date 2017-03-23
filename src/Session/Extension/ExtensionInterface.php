@@ -13,9 +13,9 @@ interface ExtensionInterface
 
     public function save(SessionInterface $session);
 
-    public function getStatus();
+    public function getStatus(): int;
 
-    public function getId();
+    public function getId(): string;
 
-    public function regenerateId($deleteOldSession = true);
+    public function regenerateId($deleteOldSession = true): bool;
 }

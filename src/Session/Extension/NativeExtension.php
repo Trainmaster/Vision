@@ -23,15 +23,15 @@ class NativeExtension implements ExtensionInterface
     /**
      * @throws RuntimeException
      */
-    public function start(): bool
+    public function start()
     {
         if ($this->started && $this->isActive()) {
-            return true;
+            return;
         }
 
         if (session_start()) {
             $this->started = true;
-            return $this->started;
+            return;
         } else {
             throw new \RuntimeException('Session could not be started.');
         }
