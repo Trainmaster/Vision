@@ -18,8 +18,7 @@ class Session extends ArrayObject implements SessionInterface
         parent::__construct();
         register_shutdown_function([$this, '__destruct']);
         $this->extension = $extension;
-        $this->extension->start();
-        $this->extension->load($this);
+        $this->extension->start($this);
     }
 
     public function __destruct()
@@ -32,19 +31,9 @@ class Session extends ArrayObject implements SessionInterface
         return serialize($this->getArrayCopy());
     }
 
-    public function getExtension(): ExtensionInterface
-    {
-        return $this->extension;
-    }
-
     public function clear()
     {
         $this->exchangeArray([]);
-    }
-
-    public function start()
-    {
-        $this->extension->start();
     }
 
     public function getStatus(): int

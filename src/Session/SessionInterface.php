@@ -7,8 +7,6 @@ interface SessionInterface
 {
     public function clear();
 
-    public function start();
-
     public function getStatus(): int;
 
     public function getId(): string;

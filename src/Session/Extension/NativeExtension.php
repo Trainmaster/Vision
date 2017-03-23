@@ -22,29 +22,24 @@ class NativeExtension implements ExtensionInterface
     /**
      * @throws RuntimeException
      */
-    public function start()
+    public function start(SessionInterface $session): void
     {
         if ($this->started && $this->isActive()) {
             return;
         }
 
-        if (session_start()) {
-            $this->started = true;
-            return;
+        if (!session_start()) {
+            throw new RuntimeException('Session could not be started.');
         }
 
-        throw new RuntimeException('Session could not be started.');
-    }
-
-    public function load(SessionInterface $session)
-    {
-        $this->start();
         $session->exchangeArray($_SESSION);
+
+        $this->started = true;
     }
 
     public function save(SessionInterface $session)
     {
-        $this->start();
+        $this->start($session);
         $_SESSION = $session->getArrayCopy();
     }
 
