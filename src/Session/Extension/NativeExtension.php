@@ -6,7 +6,6 @@ namespace Vision\Session\Extension;
 use Vision\Session\SessionInterface;
 
 use SessionHandlerInterface;
-
 use RuntimeException;
 
 class NativeExtension implements ExtensionInterface
@@ -32,9 +31,9 @@ class NativeExtension implements ExtensionInterface
         if (session_start()) {
             $this->started = true;
             return;
-        } else {
-            throw new \RuntimeException('Session could not be started.');
         }
+
+        throw new RuntimeException('Session could not be started.');
     }
 
     public function load(SessionInterface $session)
