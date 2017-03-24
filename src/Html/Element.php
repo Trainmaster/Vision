@@ -29,18 +29,12 @@ class Element
     /** @var string $tag */
     protected $tag;
 
-    /**
-     * @param string $tag
-     */
-    public function __construct($tag)
+    public function __construct(string $tag)
     {
         $this->setTag($tag);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         $html = $this->renderStartTag();
 
@@ -54,10 +48,7 @@ class Element
         return $html;
     }
 
-    /**
-     * @return string
-     */
-    public function renderStartTag()
+    public function renderStartTag(): string
     {
         $slash = '';
 
@@ -68,18 +59,12 @@ class Element
         return sprintf('<%s%s%s>', $this->tag, $this->renderAttributes(), $slash);
     }
 
-    /**
-     * @return string
-     */
-    public function start()
+    public function start(): string
     {
         return $this->renderStartTag();
     }
 
-    /**
-     * @return string
-     */
-    public function renderContents()
+    public function renderContents(): string
     {
         $html = '';
         $contents = $this->getContents();
@@ -102,20 +87,12 @@ class Element
         return $this->isVoid ? '' : "</$this->tag>";
     }
 
-    /**
-     * @return string
-     */
-    public function end()
+    public function end(): string
     {
         return $this->renderEndTag();
     }
 
-    /**
-     * Render attributes
-     *
-     * @return string
-     */
-    protected function renderAttributes()
+    protected function renderAttributes(): string
     {
         $html = '';
 
@@ -130,18 +107,12 @@ class Element
         return $html;
     }
 
-    /**
-     * @return string
-     */
-    public function getTag()
+    public function getTag(): string
     {
         return $this->tag;
     }
 
-    /**
-     * @return bool
-     */
-    public function isVoid()
+    public function isVoid(): bool
     {
         return $this->isVoid;
     }
@@ -149,9 +120,9 @@ class Element
     /**
      * @param int|float|string|bool|object|null $content
      *
-     * @return $this Provides a fluent interface.
+     * @return self Provides a fluent interface.
      */
-    public function addContent($content)
+    public function addContent($content): self
     {
         if ($this->isVoid) {
             throw new LogicException('Void elements can\'t have any contents.');
@@ -176,22 +147,13 @@ class Element
         return $this->contents;
     }
 
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    public function clearContents()
+    public function clearContents(): self
     {
         $this->contents = [];
         return $this;
     }
 
-    /**
-     * @param string $key
-     * @param string|bool $value
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setAttribute($key, $value = true)
+    public function setAttribute(string $key, $value = true): self
     {
         if (!in_array($key, $this->invalidAttributes)) {
             $this->attributes[$key] = $value;
@@ -199,12 +161,7 @@ class Element
         return $this;
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): self
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
@@ -213,30 +170,17 @@ class Element
         return $this;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return mixed|null
-     */
-    public function getAttribute($key)
+    public function getAttribute(string $key)
     {
         return $this->attributes[$key] ?? null;
     }
 
-    /**
-     * @return array
-     */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function removeAttribute($key)
+    public function removeAttribute(string $key): bool
     {
         if (array_key_exists($key, $this->attributes)) {
             unset($this->attributes[$key]);
@@ -246,12 +190,7 @@ class Element
         return false;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setId($id)
+    public function setId($id): self
     {
         $this->setAttribute('id', $id);
         return $this;
@@ -265,12 +204,7 @@ class Element
         return $this->getAttribute('id');
     }
 
-    /**
-     * @param string $class
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function addClass($class)
+    public function addClass(string $class): self
     {
         $attribute = $this->getAttribute('class');
         $class = trim($class);
@@ -284,12 +218,7 @@ class Element
         return $this;
     }
 
-    /**
-     * @param string $class
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function removeClass($class)
+    public function removeClass(string $class): self
     {
         $attribute = $this->getAttribute('class');
         $class = trim($class);

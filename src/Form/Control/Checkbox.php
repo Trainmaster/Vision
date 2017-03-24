@@ -21,10 +21,7 @@ class Checkbox extends AbstractOptionControl
         $this->setRequired(true);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         $html = '';
 

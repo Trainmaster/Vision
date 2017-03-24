@@ -21,10 +21,7 @@ class Select extends AbstractOptionControl
         $this->setRequired(true);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         if (empty($this->options)) {
             return '';
