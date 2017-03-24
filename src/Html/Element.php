@@ -119,7 +119,7 @@ class Element
     {
         $tag = $this->getTag();
 
-        if (empty($tag) || $this->isVoid) {
+        if ($this->isVoid) {
             return '';
         }
 
