@@ -10,10 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class ElementTest extends TestCase
 {
-    public function testConstructWithValidArgument()
+    public function testConstructWithValidTagName()
     {
-        $element = new Element('h1');
-        $this->assertInstanceOf('\Vision\Html\Element', $element);
+        $this->assertInstanceOf(Element::class, new Element('h1'));
     }
 
     public function testConstructWithForbiddenCharacterInTagName()
@@ -72,58 +71,71 @@ class ElementTest extends TestCase
         $this->assertSame('foo', $element->getAttribute('id'));
     }
 
-    public function testSetAndGetAttributes()
+    public function testSetAttributesShouldProvideFluentInterface()
     {
-        $attr = [
-            'required' => true,
-            'id' => 'foo'
-        ];
-
         $element = new Element('div');
 
-        $this->assertSame([], $element->getAttributes());
-        $this->assertSame($element, $element->setAttributes($attr));
-        $this->assertSame($attr, $element->getAttributes());
+        $this->assertSame($element, $element->setAttributes([]));
+    }
+
+    public function testGetAttributes()
+    {
+        $attributes = ['required' => true, 'id' => 'foo'];
+        $element = (new Element('div'))->setAttributes($attributes);
+
+        $this->assertSame($attributes, $element->getAttributes());
     }
 
     public function testRemoveAttribute()
     {
+        $element = (new Element('div'))->setAttribute('id', 'foo');
+
+        $this->assertTrue($element->removeAttribute('id'));
+    }
+
+    public function testRemoveAttributeIfAttributeWasNotSetBefore()
+    {
         $element = new Element('div');
 
         $this->assertFalse($element->removeAttribute('id'));
+    }
 
-        $element->setAttribute('id', 'foo');
+    public function testInitializeWithEmptyContents()
+    {
+        $element = new Element('div');
 
-        $this->assertSame('foo', $element->getAttribute('id'));
-        $this->assertTrue($element->removeAttribute('id'));
-        $this->assertSame(null, $element->getAttribute('id'));
+        $this->assertSame([], $element->getContents());
+    }
+
+    public function testAddContentShouldProvideFluentInterface()
+    {
+        $element = new Element('div');
+
+        $this->assertSame($element, $element->addContent('Hello World'));
     }
 
     public function testAddAndGetContents()
     {
         $element = new Element('div');
 
-        $this->assertSame([], $element->getContents());
-        $this->assertSame($element, $element->addContent('Hello World'));
+        $element->addContent('Hello World');
         $this->assertSame(['Hello World'], $element->getContents());
 
         $content = new Element('p');
 
-        $this->assertSame($element, $element->addContent($content));
+        $element->addContent($content);
         $this->assertSame(['Hello World', $content], $element->getContents());
 
-        $this->assertSame($element, $element->addContent(null));
+        $element->addContent(null);
         $this->assertSame(['Hello World', $content], $element->getContents());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testAddContentWhenArgumentIsArray()
     {
-        $element = new Element('div');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unsupported argument type.');
 
-        $element->addContent([]);
+        (new Element('div'))->addContent([]);
     }
 
     public function testAddContentWhenElementIsVoid()
@@ -134,14 +146,19 @@ class ElementTest extends TestCase
         (new Element('area'))->addContent('foo');
     }
 
-    public function testClearContents()
+    public function testClearContentsShouldProvideFluentInterface()
     {
         $element = new Element('div');
 
-        $element->addContent('foo');
-
-        $this->assertSame(['foo'], $element->getContents());
         $this->assertSame($element, $element->clearContents());
+    }
+
+    public function testClearContents()
+    {
+        $element = (new Element('div'))->addContent('foo');
+
+        $element->clearContents();
+
         $this->assertSame([], $element->getContents());
     }
 }
