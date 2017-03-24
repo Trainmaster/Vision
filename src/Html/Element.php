@@ -242,15 +242,11 @@ class Element
     /**
      * @param string $key
      *
-     * @return Element|null
+     * @return mixed|null
      */
     public function getAttribute($key)
     {
-        if (isset($this->attributes[$key])) {
-            return $this->attributes[$key];
-        }
-
-        return null;
+        return $this->attributes[$key] ?? null;
     }
 
     /**
