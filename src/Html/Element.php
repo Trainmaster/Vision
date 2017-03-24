@@ -59,16 +59,13 @@ class Element
      */
     public function renderStartTag()
     {
-        $html = '<%s%s%s>';
-
-        $attributes = $this->renderAttributes();
         $slash = '';
 
         if ($this->isVoid) {
             $slash = ' /';
         }
 
-        return sprintf($html, $this->tag, $attributes, $slash);
+        return sprintf('<%s%s%s>', $this->tag, $this->renderAttributes(), $slash);
     }
 
     /**
