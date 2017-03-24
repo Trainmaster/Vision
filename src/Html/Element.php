@@ -180,7 +180,7 @@ class Element
     public function addContent($content)
     {
         if ($this->isVoid) {
-            throw new LogicException('Void elements are not allowed to have contents.');
+            throw new LogicException('Void elements can\'t have any contents.');
         }
 
         if (is_scalar($content) || (is_object($content) && method_exists($content, '__toString'))) {

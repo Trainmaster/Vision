@@ -126,14 +126,12 @@ class ElementTest extends TestCase
         $element->addContent([]);
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testAddContentWhenElementIsVoid()
     {
-        $element = new Element('area');
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Void elements can\'t have any contents.');
 
-        $element->addContent('foo');
+        (new Element('area'))->addContent('foo');
     }
 
     public function testClearContents()
