@@ -112,20 +112,9 @@ class Element
         return $html;
     }
 
-    /**
-     * @return string
-     */
-    public function renderEndTag()
+    public function renderEndTag(): string
     {
-        $tag = $this->getTag();
-
-        if ($this->isVoid) {
-            return '';
-        }
-
-        $html = '</%s>';
-
-        return sprintf($html, $tag);
+        return $this->isVoid ? '' : "</$this->tag>";
     }
 
     /**
