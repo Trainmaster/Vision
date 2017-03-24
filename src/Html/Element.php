@@ -18,9 +18,10 @@ class Element
     protected $contents = [];
 
     /** @var array $voidElements */
-    protected static $voidElements = ['area', 'base', 'br', 'col', 'command', 'embed',
-                                            'hr', 'img', 'input', 'keygen', 'link', 'meta',
-                                            'param', 'source', 'track', 'wbr'];
+    protected static $voidElements = [
+        'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+        'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'
+    ];
 
     /** @var bool $isVoid */
     protected $isVoid = false;
@@ -48,7 +49,7 @@ class Element
         }
 
         $html .= $this->renderContents()
-              .  $this->renderEndTag();
+            . $this->renderEndTag();
 
         return $html;
     }
