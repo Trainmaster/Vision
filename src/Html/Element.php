@@ -59,12 +59,6 @@ class Element
      */
     public function renderStartTag()
     {
-        $tag = $this->getTag();
-
-        if (empty($tag)) {
-            return '';
-        }
-
         $html = '<%s%s%s>';
 
         $attributes = $this->renderAttributes();
@@ -74,7 +68,7 @@ class Element
             $slash = ' /';
         }
 
-        return sprintf($html, $tag, $attributes, $slash);
+        return sprintf($html, $this->tag, $attributes, $slash);
     }
 
     /**
@@ -90,12 +84,6 @@ class Element
      */
     public function renderContents()
     {
-        $tag = $this->getTag();
-
-        if (empty($tag)) {
-            return '';
-        }
-
         $html = '';
         $contents = $this->getContents();
 
