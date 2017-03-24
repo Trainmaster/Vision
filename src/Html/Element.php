@@ -337,29 +337,17 @@ class Element
         return $this;
     }
 
-    /**
-     * @param string $tag
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return $this Provides a fluent interface.
-     */
-    protected function setTag($tag)
+    protected function setTag(string $tag): self
     {
-        if (!is_string($tag) || !preg_match('#^\w+$#', $tag)) {
+        if (preg_match('#^\w+$#', $tag) !== 1) {
             throw new InvalidArgumentException(sprintf(
-                'Argument 1 passed to %s must be a string and only use characters in the range 0–9, a–z, and A–Z.',
-                __METHOD__
+                'Invalid tag name "%s". Only alphanumeric ASCII characters [A-Za-z0-9] are allowed.',
+                $tag
             ));
         }
 
-        $tag = trim($tag);
-        $tag = strtolower($tag);
-        $this->tag = $tag;
-
-        if (in_array($tag, self::$voidElements)) {
-            $this->isVoid = true;
-        }
+        $this->tag = strtolower($tag);
+        $this->isVoid = in_array($this->tag, self::$voidElements);
 
         return $this;
     }

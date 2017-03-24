@@ -16,20 +16,24 @@ class ElementTest extends TestCase
         $this->assertInstanceOf('\Vision\Html\Element', $element);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testConstructWhenArgumentIsNoString()
+    public function testConstructWithForbiddenCharacterInTagName()
     {
-        new Element(1);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Invalid tag name "h1?". Only alphanumeric ASCII characters [A-Za-z0-9] are allowed.'
+        );
+
+        new Element('h1?');
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testConstructWhenArgumentHasForbiddenCharacters()
+    public function testConstructWithSpaceInTagName()
     {
-        new Element('h1?');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Invalid tag name " h1". Only alphanumeric ASCII characters [A-Za-z0-9] are allowed.'
+        );
+
+        new Element(' h1');
     }
 
     public function testGetTag()
