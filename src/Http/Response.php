@@ -6,25 +6,25 @@ namespace Vision\Http;
 class Response extends Message implements ResponseInterface
 {
     /** @var array $cookies */
-    protected $cookies = [];
+    private $cookies = [];
 
     /** @var array $rawCookies */
-    protected $rawCookies = [];
+    private $rawCookies = [];
 
     /** @var array $headers */
-    protected $headers = [];
+    private $headers = [];
 
     /** @var int $statusCode */
-    protected $statusCode = 200;
+    private $statusCode = 200;
 
     /** @var string|null $reasonPhrase */
-    protected $reasonPhrase;
+    private $reasonPhrase;
 
     /** @var string|null $body */
-    protected $body;
+    private $body;
 
     /** @var array $statusCodesAndRecommendedReasonPhrases */
-    protected $statusCodesAndRecommendedReasonPhrases = [
+    private $statusCodesAndRecommendedReasonPhrases = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         200 => 'OK',
