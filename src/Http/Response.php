@@ -68,6 +68,30 @@ class Response extends Message implements ResponseInterface
     ];
 
     /**
+     * @param int $statusCode
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function setStatusCode($statusCode)
+    {
+        $statusCode = (int) $statusCode;
+
+        if (isset($this->statusCodesAndRecommendedReasonPhrases[$statusCode])) {
+            $this->statusCode = $statusCode;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
+    }
+
+    /**
      * @param string $name
      * @param string $value
      *
@@ -140,30 +164,6 @@ class Response extends Message implements ResponseInterface
     {
         $this->body .= $body;
         return $this;
-    }
-
-    /**
-     * @param int $statusCode
-     *
-     * @return $this Provides a fluent interface.
-     */
-    public function setStatusCode($statusCode)
-    {
-        $statusCode = (int) $statusCode;
-
-        if (isset($this->statusCodesAndRecommendedReasonPhrases[$statusCode])) {
-            $this->statusCode = $statusCode;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
     }
 
     /**
