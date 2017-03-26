@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Vision\Http;
 
+use RuntimeException;
+
 class Response extends Message implements ResponseInterface
 {
     /** @var array $cookies */
@@ -165,6 +167,10 @@ class Response extends Message implements ResponseInterface
 
     public function send()
     {
+        if (headers_sent()) {
+            throw new RuntimeException('Headers already sent.');
+        }
+
         $this->sendCookies();
         $this->sendStatusLine();
         $this->sendHeaders();
