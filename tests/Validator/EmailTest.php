@@ -7,20 +7,21 @@ use PHPUnit\Framework\TestCase;
 
 class EmailTest extends TestCase
 {
-    static $validator;
+    /** @var Email */
+    protected $validator;
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$validator = new Email;
+        $this->validator = new Email;
     }
 
     public function testSuccess()
     {
-        $this->assertTrue(self::$validator->isValid('foo@bar.com'));
+        $this->assertTrue($this->validator->isValid('foo@bar.com'));
     }
 
     public function testFailure()
     {
-        $this->assertFalse(self::$validator->isValid(''));
+        $this->assertFalse($this->validator->isValid(''));
     }
 }

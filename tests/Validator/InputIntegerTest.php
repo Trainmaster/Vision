@@ -7,79 +7,83 @@ use PHPUnit\Framework\TestCase;
 
 class InputIntegerTest extends TestCase
 {
-    static $validator;
+    /** @var InputInteger */
+    protected $validator;
 
-    static $minValidator;
+    /** @var InputInteger */
+    protected $minValidator;
 
-    static $maxValidator;
+    /** @var InputInteger */
+    protected $maxValidator;
 
-    static $minAndMaxValidator;
+    /** @var InputInteger */
+    protected $minAndMaxValidator;
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$validator = new InputInteger;
-        self::$minValidator = new InputInteger(1);
-        self::$maxValidator = new InputInteger(null, 1);
-        self::$minAndMaxValidator = new InputInteger(1, 2);
+        $this->validator = new InputInteger;
+        $this->minValidator = new InputInteger(1);
+        $this->maxValidator = new InputInteger(null, 1);
+        $this->minAndMaxValidator = new InputInteger(1, 2);
     }
 
     public function testSuccess()
     {
-        $this->assertTrue(self::$validator->isValid('-1'));
-        $this->assertTrue(self::$validator->isValid('0'));
-        $this->assertTrue(self::$validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid('-1'));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid('1'));
 
         if (version_compare(PHP_VERSION, '5.4.11') >= 0) {
-            $this->assertTrue(self::$validator->isValid('-0'));
-            $this->assertTrue(self::$validator->isValid('+0'));
+            $this->assertTrue($this->validator->isValid('-0'));
+            $this->assertTrue($this->validator->isValid('+0'));
         }
     }
 
     public function testFailure()
     {
-        $this->assertFalse(self::$validator->isValid(''));
-        $this->assertFalse(self::$validator->isValid('1.0'));
+        $this->assertFalse($this->validator->isValid(''));
+        $this->assertFalse($this->validator->isValid('1.0'));
 
         if (version_compare(PHP_VERSION, '5.4.11') < 0) {
-            $this->assertFalse(self::$validator->isValid('-0'));
-            $this->assertFalse(self::$validator->isValid('+0'));
+            $this->assertFalse($this->validator->isValid('-0'));
+            $this->assertFalse($this->validator->isValid('+0'));
         }
     }
 
     public function testMinSuccess()
     {
-        $this->assertTrue(self::$minValidator->isValid('1'));
-        $this->assertTrue(self::$minValidator->isValid('2'));
+        $this->assertTrue($this->minValidator->isValid('1'));
+        $this->assertTrue($this->minValidator->isValid('2'));
     }
 
     public function testMinFailure()
     {
-        $this->assertFalse(self::$minValidator->isValid('-1'));
-        $this->assertFalse(self::$minValidator->isValid('0'));
+        $this->assertFalse($this->minValidator->isValid('-1'));
+        $this->assertFalse($this->minValidator->isValid('0'));
     }
 
     public function testMaxSuccess()
     {
-        $this->assertTrue(self::$maxValidator->isValid('-1'));
-        $this->assertTrue(self::$maxValidator->isValid('0'));
-        $this->assertTrue(self::$maxValidator->isValid('1'));
+        $this->assertTrue($this->maxValidator->isValid('-1'));
+        $this->assertTrue($this->maxValidator->isValid('0'));
+        $this->assertTrue($this->maxValidator->isValid('1'));
     }
 
     public function testMaxFailure()
     {
-        $this->assertFalse(self::$maxValidator->isValid('2'));
+        $this->assertFalse($this->maxValidator->isValid('2'));
     }
 
     public function testMinAndMaxSuccess()
     {
-        $this->assertTrue(self::$minAndMaxValidator->isValid('1'));
-        $this->assertTrue(self::$minAndMaxValidator->isValid('2'));
+        $this->assertTrue($this->minAndMaxValidator->isValid('1'));
+        $this->assertTrue($this->minAndMaxValidator->isValid('2'));
     }
 
     public function testMinAndMaxFailure()
     {
-        $this->assertFalse(self::$minAndMaxValidator->isValid('-1'));
-        $this->assertFalse(self::$minAndMaxValidator->isValid('0'));
-        $this->assertFalse(self::$minAndMaxValidator->isValid('3'));
+        $this->assertFalse($this->minAndMaxValidator->isValid('-1'));
+        $this->assertFalse($this->minAndMaxValidator->isValid('0'));
+        $this->assertFalse($this->minAndMaxValidator->isValid('3'));
     }
 }

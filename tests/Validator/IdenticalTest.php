@@ -5,57 +5,62 @@ use Vision\Validator;
 
 use PHPUnit\Framework\TestCase;
 
+use stdClass;
+
 class IdenticalTest extends TestCase
 {
+    /** @var Validator\Identical */
+    protected $validator;
+    
+    protected function setUp()
+    {
+        $this->validator = new Validator\Identical;
+    }
+
     public function testConstructEmpty()
     {
-        $validator = new Validator\Identical;
-        $this->assertNull($validator->getOperand());
+        $this->assertNull($this->validator->getOperand());
     }
 
     public function testConstructWithOperand()
     {
-        $validator = new Validator\Identical('foo');
-        $this->assertSame('foo', $validator->getOperand());
+        $this->assertSame('foo', (new Validator\Identical('foo'))->getOperand());
     }
 
     public function testSetAndGetOperand()
     {
-        $validator = new Validator\Identical;
-        $this->assertNull($validator->getOperand());
+        $this->assertNull($this->validator->getOperand());
 
-        $validator->setOperand('foo');
-        $this->assertSame('foo', $validator->getOperand());
+        $this->validator->setOperand('foo');
+        $this->assertSame('foo', $this->validator->getOperand());
     }
 
     public function testSuccess()
     {
-        $validator = new Validator\Identical;
-        $this->assertTrue($validator->isValid(null));
+        $this->assertTrue($this->validator->isValid(null));
 
-        $validator->setOperand('');
-        $this->assertTrue($validator->isValid(''));
+        $this->validator->setOperand('');
+        $this->assertTrue($this->validator->isValid(''));
 
-        $validator->setOperand('foo');
-        $this->assertTrue($validator->isValid('foo'));
+        $this->validator->setOperand('foo');
+        $this->assertTrue($this->validator->isValid('foo'));
 
-        $validator->setOperand(1);
-        $this->assertTrue($validator->isValid(1));
+        $this->validator->setOperand(1);
+        $this->assertTrue($this->validator->isValid(1));
 
-        $object = new \stdClass;
-        $validator->setOperand($object);
-        $this->assertTrue($validator->isValid($object));
+        $object = new stdClass;
+        $this->validator->setOperand($object);
+        $this->assertTrue($this->validator->isValid($object));
     }
 
     public function testFailure()
     {
-        $validator = new Validator\Identical;
-        $this->assertFalse($validator->isValid(''));
+        $this->assertFalse($this->validator->isValid(''));
 
-        $validator->setOperand(1);
-        $this->assertFalse($validator->isValid('1'));
+        $this->validator->setOperand(1);
+        $this->assertFalse($this->validator->isValid('1'));
 
-        $validator->setOperand(new \stdClass);
-        $this->assertFalse($validator->isValid(new \stdClass));
+        $this->validator->setOperand(new stdClass);
+        $this->assertFalse($this->validator->isValid(new stdClass));
     }
 }

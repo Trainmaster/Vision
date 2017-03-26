@@ -17,11 +17,12 @@ class ValidatorChainTest extends TestCase
 
     public function testAddValidator()
     {
-        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
+        /** @var Validator\ValidatorInterface $validator */
+        $validator = $this->createMock(Validator\ValidatorInterface::class);
+
         $this->chain->add($validator);
 
-//        $this->assertAttributeEquals([$validator], 'validators', $this->chain);
-        $this->assertInstanceOf('\Vision\Validator\ValidatorChain', $this->chain);
+        $this->assertInstanceOf(Validator\ValidatorChain::class, $this->chain);
     }
 
     public function testSuccess()
@@ -42,19 +43,19 @@ class ValidatorChainTest extends TestCase
 
     protected function createTrueValidator()
     {
-        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock(Validator\ValidatorInterface::class);
         $validator->expects($this->once())
-                  ->method('isValid')
-                  ->will($this->returnValue(true));
+            ->method('isValid')
+            ->will($this->returnValue(true));
         return $validator;
     }
 
     protected function createFalseValidator()
     {
-        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock(Validator\ValidatorInterface::class);
         $validator->expects($this->once())
-                  ->method('isValid')
-                  ->will($this->returnValue(false));
+            ->method('isValid')
+            ->will($this->returnValue(false));
         return $validator;
     }
 }

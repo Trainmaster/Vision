@@ -7,33 +7,34 @@ use PHPUnit\Framework\TestCase;
 
 class InputNotEmptyStringTest extends TestCase
 {
-    static $validator;
+    /** @var Validator\InputNotEmptyString */
+    protected $validator;
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$validator = new Validator\InputNotEmptyString;
+        $this->validator = new Validator\InputNotEmptyString;
     }
 
     public function testSuccess()
     {
-        $this->assertTrue(self::$validator->isValid(' '));
-        $this->assertTrue(self::$validator->isValid('0'));
-        $this->assertTrue(self::$validator->isValid(['0', 0]));
-        $this->assertTrue(self::$validator->isValid([['0', 0]]));
-        $this->assertTrue(self::$validator->isValid(new \stdClass));
-        $this->assertTrue(self::$validator->isValid(false));
-        $this->assertTrue(self::$validator->isValid(null));
-        $this->assertTrue(self::$validator->isValid(0));
-        $this->assertTrue(self::$validator->isValid(0.1));
-        $this->assertTrue(self::$validator->isValid([]));
-        $this->assertTrue(self::$validator->isValid([[]]));
+        $this->assertTrue($this->validator->isValid(' '));
+        $this->assertTrue($this->validator->isValid('0'));
+        $this->assertTrue($this->validator->isValid(['0', 0]));
+        $this->assertTrue($this->validator->isValid([['0', 0]]));
+        $this->assertTrue($this->validator->isValid(new \stdClass));
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(null));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(0.1));
+        $this->assertTrue($this->validator->isValid([]));
+        $this->assertTrue($this->validator->isValid([[]]));
     }
 
     public function testFailure()
     {
-        $this->assertFalse(self::$validator->isValid(''));
-        $this->assertFalse(self::$validator->isValid(['']));
-        $this->assertFalse(self::$validator->isValid(['foo', '']));
-        $this->assertFalse(self::$validator->isValid([['']]));
+        $this->assertFalse($this->validator->isValid(''));
+        $this->assertFalse($this->validator->isValid(['']));
+        $this->assertFalse($this->validator->isValid(['foo', '']));
+        $this->assertFalse($this->validator->isValid([['']]));
     }
 }

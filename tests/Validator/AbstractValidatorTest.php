@@ -1,23 +1,29 @@
 <?php
 namespace VisionTest\Validator;
 
+use Vision\Validator\AbstractValidator;
+
 use PHPUnit\Framework\TestCase;
 
 class AbstractValidatorTest extends TestCase
 {
+    /** @var AbstractValidator */
+    protected $validator;
+
+    protected function setUp()
+    {
+        $this->validator = $this->getMockForAbstractClass(AbstractValidator::class);
+    }
+
     public function testGetErrors()
     {
-        $validator = $this->getMockForAbstractClass('\Vision\Validator\AbstractValidator');
-
-        $this->assertCount(0, $validator->getErrors());
-        $validator->addError('foo');
-        $this->assertCount(1, $validator->getErrors());
+        $this->assertCount(0, $this->validator->getErrors());
+        $this->validator->addError('foo');
+        $this->assertCount(1, $this->validator->getErrors());
     }
 
     public function testFluentInterface()
     {
-        $validator = $this->getMockForAbstractClass('\Vision\Validator\AbstractValidator');
-
-        $this->assertSame($validator, $validator->addError('foo'));
+        $this->assertSame($this->validator, $this->validator->addError('foo'));
     }
 }

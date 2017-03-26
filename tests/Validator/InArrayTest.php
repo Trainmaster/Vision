@@ -7,38 +7,40 @@ use PHPUnit\Framework\TestCase;
 
 class InArrayTest extends TestCase
 {
-    static $validator;
+    /** @var Validator\InArray */
+    protected $validator;
 
-    static $strictValidator;
+    /** @var Validator\InArray */
+    protected $strictValidator;
 
-    protected static $haystack = [
+    protected $haystack = [
         'foo',
         'bar',
         true
     ];
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$strictValidator = new Validator\InArray(self::$haystack);
-        self::$validator = new Validator\InArray(self::$haystack, false);
+        $this->strictValidator = new Validator\InArray($this->haystack);
+        $this->validator = new Validator\InArray($this->haystack, false);
     }
 
     public function testSuccess()
     {
-        $this->assertTrue(self::$validator->isValid(1));
-        $this->assertTrue(self::$validator->isValid('1'));
-        $this->assertTrue(self::$validator->isValid(true));
-        $this->assertTrue(self::$validator->isValid('foo'));
-        $this->assertTrue(self::$validator->isValid(['foo', 'bar']));
-        $this->assertTrue(self::$validator->isValid('baz'));
-        $this->assertTrue(self::$validator->isValid(['baz']));
+        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid('foo'));
+        $this->assertTrue($this->validator->isValid(['foo', 'bar']));
+        $this->assertTrue($this->validator->isValid('baz'));
+        $this->assertTrue($this->validator->isValid(['baz']));
     }
 
     public function testFailure()
     {
-        $this->assertFalse(self::$strictValidator->isValid(1));
-        $this->assertFalse(self::$strictValidator->isValid('1'));
-        $this->assertFalse(self::$strictValidator->isValid('baz'));
-        $this->assertFalse(self::$strictValidator->isValid(['baz']));
+        $this->assertFalse($this->strictValidator->isValid(1));
+        $this->assertFalse($this->strictValidator->isValid('1'));
+        $this->assertFalse($this->strictValidator->isValid('baz'));
+        $this->assertFalse($this->strictValidator->isValid(['baz']));
     }
 }

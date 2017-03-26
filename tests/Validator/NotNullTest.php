@@ -7,25 +7,26 @@ use PHPUnit\Framework\TestCase;
 
 class NotNullTest extends TestCase
 {
-    static $validator;
+    /** @var Validator\NotNull */
+    protected $validator;
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$validator = new Validator\NotNull;
+        $this->validator = new Validator\NotNull;
     }
 
     public function testSuccess()
     {
-        $this->assertTrue(self::$validator->isValid(true));
-        $this->assertTrue(self::$validator->isValid(false));
-        $this->assertTrue(self::$validator->isValid(0));
-        $this->assertTrue(self::$validator->isValid(''));
-        $this->assertTrue(self::$validator->isValid('foo'));
-        $this->assertTrue(self::$validator->isValid([]));
+        $this->assertTrue($this->validator->isValid(true));
+        $this->assertTrue($this->validator->isValid(false));
+        $this->assertTrue($this->validator->isValid(0));
+        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->isValid('foo'));
+        $this->assertTrue($this->validator->isValid([]));
     }
 
     public function testFailure()
     {
-        $this->assertFalse(self::$validator->isValid(null));
+        $this->assertFalse($this->validator->isValid(null));
     }
 }

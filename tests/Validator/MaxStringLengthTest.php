@@ -7,20 +7,21 @@ use PHPUnit\Framework\TestCase;
 
 class MaxStringLengthTest extends TestCase
 {
-    static $validatorOne;
+    /** @var Validator\MaxStringLength */
+    protected $validator;
 
     protected $singleBytes = ['$', '$$'];
 
     protected $multiBytes = ['¢', '€', "\xF0\xA4\xAD\xA2", '¢¢', '€€', "\xF0\xA4\xAD\xA2\xF0\xA4\xAD\xA2"];
 
-    public static function setUpBeforeClass()
+    protected function setUp()
     {
-        self::$validatorOne = new Validator\MaxStringLength(1);
+        $this->validator = new Validator\MaxStringLength(1);
     }
 
     public function testGetMax()
     {
-        $this->assertSame(1, self::$validatorOne->getMax());
+        $this->assertSame(1, $this->validator->getMax());
     }
 
     public function testCastToInteger()
@@ -32,37 +33,37 @@ class MaxStringLengthTest extends TestCase
 
     public function testSingleByteSuccess()
     {
-        $this->assertTrue(self::$validatorOne->isValid($this->singleBytes[0]));
+        $this->assertTrue($this->validator->isValid($this->singleBytes[0]));
     }
 
     public function testSingleByteFailure()
     {
-        $this->assertFalse(self::$validatorOne->isValid($this->singleBytes[1]));
+        $this->assertFalse($this->validator->isValid($this->singleBytes[1]));
     }
 
     public function testMultiByteSuccess()
     {
-        $this->assertTrue(self::$validatorOne->isValid($this->multiBytes[0]));
-        $this->assertTrue(self::$validatorOne->isValid($this->multiBytes[1]));
-        $this->assertTrue(self::$validatorOne->isValid($this->multiBytes[2]));
+        $this->assertTrue($this->validator->isValid($this->multiBytes[0]));
+        $this->assertTrue($this->validator->isValid($this->multiBytes[1]));
+        $this->assertTrue($this->validator->isValid($this->multiBytes[2]));
     }
 
     public function testMultiByteFailure()
     {
-        $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[3]));
-        $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[4]));
-        $this->assertFalse(self::$validatorOne->isValid($this->multiBytes[5]));
+        $this->assertFalse($this->validator->isValid($this->multiBytes[3]));
+        $this->assertFalse($this->validator->isValid($this->multiBytes[4]));
+        $this->assertFalse($this->validator->isValid($this->multiBytes[5]));
     }
 
     public function testGetErrors()
     {
-        self::$validatorOne->isValid($this->singleBytes[0]);
-        $this->assertEmpty(self::$validatorOne->getErrors());
+        $this->validator->isValid($this->singleBytes[0]);
+        $this->assertEmpty($this->validator->getErrors());
 
-        self::$validatorOne->isValid($this->singleBytes[1]);
-        $this->assertNotEmpty(self::$validatorOne->getErrors());
+        $this->validator->isValid($this->singleBytes[1]);
+        $this->assertNotEmpty($this->validator->getErrors());
 
-        self::$validatorOne->isValid($this->singleBytes[0]);
-        $this->assertEmpty(self::$validatorOne->getErrors());
+        $this->validator->isValid($this->singleBytes[0]);
+        $this->assertEmpty($this->validator->getErrors());
     }
 }
