@@ -174,11 +174,11 @@ class Response extends Message implements ResponseInterface
     protected function sendCookies()
     {
         foreach ($this->cookies as $cookie) {
-            call_user_func_array('setcookie', $cookie);
+            setcookie(...$cookie);
         }
 
         foreach ($this->rawCookies as $rawCookie) {
-            call_user_func_array('setrawcookie', $rawCookie);
+            setrawcookie(...$rawCookie);
         }
     }
 
