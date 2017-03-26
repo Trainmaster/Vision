@@ -5,58 +5,27 @@ namespace Vision\Http;
 
 interface ResponseInterface
 {
-    /**
-     * @param int $statusCode
-     *
-     * @return $this
-     */
-    public function setStatusCode($statusCode);
+    public function setStatusCode(int $statusCode): ResponseInterface;
 
-    /**
-     * @param string $name
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function addHeader($name, $value);
+    public function addHeader(string $name, string $value): ResponseInterface;
 
-    /**
-     * @param string $body
-     *
-     * @return $this
-     */
-    public function body($body);
+    public function body(string $body): ResponseInterface;
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param int $expire
-     * @param string $path
-     * @param string $domain
-     * @param bool $secure
-     * @param bool $httponly
-     *
-     * @return $this
-     */
-    public function addCookie($name, $value = '', $expire = 0, $path = '',
-                              $domain = '', $secure = false, $httponly = false);
+    public function addCookie(string $name,
+                              string $value = '',
+                              int $expire = 0,
+                              string $path = '',
+                              string $domain = '',
+                              bool $secure = false,
+                              bool $httponly = false): ResponseInterface;
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param int $expire
-     * @param string $path
-     * @param string $domain
-     * @param bool $secure
-     * @param bool $httponly
-     *
-     * @return $this
-     */
-    public function addRawCookie($name, $value = '', $expire = 0, $path = '',
-                                 $domain = '', $secure = false, $httponly = false);
+    public function addRawCookie(string $name,
+                                 string $value = '',
+                                 int $expire = 0,
+                                 string $path = '',
+                                 string $domain = '',
+                                 bool $secure = false,
+                                 bool $httponly = false): ResponseInterface;
 
-    /**
-     * @return void
-     */
     public function send();
 }
