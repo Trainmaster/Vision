@@ -83,7 +83,7 @@ class Response extends Message implements ResponseInterface
 
     public function addHeader(string $name, string $value): ResponseInterface
     {
-        $this->headers[(string) $name] = (string) $value;
+        $this->headers[$name] = $value;
         return $this;
     }
 
