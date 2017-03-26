@@ -143,13 +143,13 @@ class Response extends Message implements ResponseInterface
 
     public function send()
     {
-        $this->sendCookies()
-             ->sendStatusLine()
-             ->sendHeaders()
-             ->sendBody();
+        $this->sendCookies();
+        $this->sendStatusLine();
+        $this->sendHeaders();
+        $this->sendBody();
     }
 
-    protected function sendCookies(): self
+    protected function sendCookies()
     {
         foreach ($this->cookies as $cookie) {
             call_user_func_array('setcookie', $cookie);
@@ -158,11 +158,9 @@ class Response extends Message implements ResponseInterface
         foreach ($this->rawCookies as $rawCookie) {
             call_user_func_array('setrawcookie', $rawCookie);
         }
-
-        return $this;
     }
 
-    protected function sendStatusLine(): self
+    protected function sendStatusLine()
     {
         $statusLine = sprintf(
             'HTTP/%s %s %s',
@@ -172,21 +170,17 @@ class Response extends Message implements ResponseInterface
         );
 
         header($statusLine);
-
-        return $this;
     }
 
-    protected function sendHeaders(): self
+    protected function sendHeaders()
     {
         foreach ($this->headers as $key => $value) {
             header($key . ': ' . $value);
         }
-        return $this;
     }
 
-    protected function sendBody(): self
+    protected function sendBody()
     {
         echo $this->body;
-        return $this;
     }
 }

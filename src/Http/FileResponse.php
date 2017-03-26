@@ -30,8 +30,8 @@ class FileResponse extends Response
         $this->addHeader('Content-Type', $this->file->getMimeType());
         $this->addHeader('Content-Length', (string) $this->file->getSize());
 
-        $this->sendStatusLine()
-             ->sendHeaders();
+        $this->sendStatusLine();
+        $this->sendHeaders();
 
         $this->file->fpassthru();
         exit;
