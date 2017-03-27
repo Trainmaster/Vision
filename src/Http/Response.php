@@ -171,8 +171,8 @@ class Response extends Message implements ResponseInterface
             throw new RuntimeException('Headers already sent.');
         }
 
-        $this->sendCookies();
         $this->sendStatusLine();
+        $this->sendCookies();
         $this->sendHeaders();
         $this->sendBody();
     }
