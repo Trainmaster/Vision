@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Vision\Validator;
 
-abstract class AbstractValidator implements ValidatorInterface
+abstract class AbstractValidator implements Validator
 {
     /** @var array $errors */
     protected $errors = [];

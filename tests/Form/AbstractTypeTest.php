@@ -22,28 +22,28 @@ class AbstractTypeTest extends TestCase
     public function testAddValidatorAndGetValidators()
     {
         $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
-        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock('\Vision\Validator\Validator');
 
         $this->assertSame($abstractType, $abstractType->addValidator($validator));
-        $this->assertContainsOnlyInstancesOf('\Vision\Validator\ValidatorInterface', $abstractType->getValidators());
+        $this->assertContainsOnlyInstancesOf('\Vision\Validator\Validator', $abstractType->getValidators());
         $this->assertCount(1, $abstractType->getValidators());
     }
 
     public function testAddValidatorsAndGetValidators()
     {
         $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
-        $validator1 = $this->createMock('\Vision\Validator\ValidatorInterface');
+        $validator1 = $this->createMock('\Vision\Validator\Validator');
         $validator2 = clone($validator1);
 
         $this->assertSame($abstractType, $abstractType->addValidators([$validator1, $validator2]));
-        $this->assertContainsOnlyInstancesOf('\Vision\Validator\ValidatorInterface', $abstractType->getValidators());
+        $this->assertContainsOnlyInstancesOf('\Vision\Validator\Validator', $abstractType->getValidators());
         $this->assertCount(2, $abstractType->getValidators());
     }
 
     public function testResetValidators()
     {
         $abstractType = $this->getMockForAbstractClass('\Vision\Form\AbstractType', ['foo']);
-        $validator = $this->createMock('\Vision\Validator\ValidatorInterface');
+        $validator = $this->createMock('\Vision\Validator\Validator');
 
         $this->assertCount(0, $abstractType->getValidators());
 

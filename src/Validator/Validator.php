@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Vision\Validator;
 
-interface ValidatorInterface
+interface Validator
 {
     public function validate($value);
 

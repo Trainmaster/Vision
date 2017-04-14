@@ -5,14 +5,14 @@ namespace Vision\Form;
 
 use Vision\DataStructures\Tree\NodeInterface;
 use Vision\Html\Element as HtmlElement;
-use Vision\Validator\ValidatorInterface;
+use Vision\Validator\Validator;
 
 abstract class AbstractType extends HtmlElement implements NodeInterface
 {
     /** @var array $elements */
     protected $elements = [];
 
-    /** @var ValidatorInterface[] $validators */
+    /** @var Validator[] $validators */
     protected $validators = [];
 
     /** @var null|NodeInterface $parent */
@@ -35,11 +35,11 @@ abstract class AbstractType extends HtmlElement implements NodeInterface
     }
 
     /**
-     * @param ValidatorInterface $validator
+     * @param Validator $validator
      *
      * @return $this Provides a fluent interface.
      */
-    public function addValidator(ValidatorInterface $validator)
+    public function addValidator(Validator $validator)
     {
         $this->validators[] = $validator;
         return $this;

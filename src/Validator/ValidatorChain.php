@@ -5,15 +5,15 @@ namespace Vision\Validator;
 
 class ValidatorChain
 {
-    /** @var ValidatorInterface[] $validators */
+    /** @var Validator[] $validators */
     protected $validators = [];
 
     /**
-     * @param ValidatorInterface $validator
+     * @param Validator $validator
      *
      * @return ValidatorChain Provides a fluent interface.
      */
-    public function add(ValidatorInterface $validator)
+    public function add(Validator $validator)
     {
         $this->validators[] = $validator;
         return $this;
