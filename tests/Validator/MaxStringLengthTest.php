@@ -33,37 +33,37 @@ class MaxStringLengthTest extends TestCase
 
     public function testSingleByteSuccess()
     {
-        $this->assertTrue($this->validator->isValid($this->singleBytes[0]));
+        $this->assertTrue($this->validator->validate($this->singleBytes[0]));
     }
 
     public function testSingleByteFailure()
     {
-        $this->assertFalse($this->validator->isValid($this->singleBytes[1]));
+        $this->assertFalse($this->validator->validate($this->singleBytes[1]));
     }
 
     public function testMultiByteSuccess()
     {
-        $this->assertTrue($this->validator->isValid($this->multiBytes[0]));
-        $this->assertTrue($this->validator->isValid($this->multiBytes[1]));
-        $this->assertTrue($this->validator->isValid($this->multiBytes[2]));
+        $this->assertTrue($this->validator->validate($this->multiBytes[0]));
+        $this->assertTrue($this->validator->validate($this->multiBytes[1]));
+        $this->assertTrue($this->validator->validate($this->multiBytes[2]));
     }
 
     public function testMultiByteFailure()
     {
-        $this->assertFalse($this->validator->isValid($this->multiBytes[3]));
-        $this->assertFalse($this->validator->isValid($this->multiBytes[4]));
-        $this->assertFalse($this->validator->isValid($this->multiBytes[5]));
+        $this->assertFalse($this->validator->validate($this->multiBytes[3]));
+        $this->assertFalse($this->validator->validate($this->multiBytes[4]));
+        $this->assertFalse($this->validator->validate($this->multiBytes[5]));
     }
 
     public function testGetErrors()
     {
-        $this->validator->isValid($this->singleBytes[0]);
+        $this->validator->validate($this->singleBytes[0]);
         $this->assertEmpty($this->validator->getErrors());
 
-        $this->validator->isValid($this->singleBytes[1]);
+        $this->validator->validate($this->singleBytes[1]);
         $this->assertNotEmpty($this->validator->getErrors());
 
-        $this->validator->isValid($this->singleBytes[0]);
+        $this->validator->validate($this->singleBytes[0]);
         $this->assertEmpty($this->validator->getErrors());
     }
 }

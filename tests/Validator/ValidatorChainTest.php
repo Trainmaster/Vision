@@ -30,7 +30,7 @@ class ValidatorChainTest extends TestCase
         $validator = $this->createTrueValidator();
         $this->chain->add($validator);
 
-        $this->assertTrue($this->chain->isValid(''));
+        $this->assertTrue($this->chain->validate(''));
     }
 
     public function testFailure()
@@ -38,14 +38,14 @@ class ValidatorChainTest extends TestCase
         $validator = $this->createFalseValidator();
         $this->chain->add($validator);
 
-        $this->assertFalse($this->chain->isValid(''));
+        $this->assertFalse($this->chain->validate(''));
     }
 
     protected function createTrueValidator()
     {
         $validator = $this->createMock(Validator\ValidatorInterface::class);
         $validator->expects($this->once())
-            ->method('isValid')
+            ->method('validate')
             ->will($this->returnValue(true));
         return $validator;
     }
@@ -54,7 +54,7 @@ class ValidatorChainTest extends TestCase
     {
         $validator = $this->createMock(Validator\ValidatorInterface::class);
         $validator->expects($this->once())
-            ->method('isValid')
+            ->method('validate')
             ->will($this->returnValue(false));
         return $validator;
     }

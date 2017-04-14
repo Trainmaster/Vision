@@ -33,7 +33,7 @@ class ValueMatch extends AbstractValidator
      *
      * @return bool
      */
-    public function isValid($form)
+    public function validate($form)
     {
         if (!($form instanceof AbstractCompositeType)) {
             throw new \InvalidArgumentException(sprintf(

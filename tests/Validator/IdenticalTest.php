@@ -37,30 +37,30 @@ class IdenticalTest extends TestCase
 
     public function testSuccess()
     {
-        $this->assertTrue($this->validator->isValid(null));
+        $this->assertTrue($this->validator->validate(null));
 
         $this->validator->setOperand('');
-        $this->assertTrue($this->validator->isValid(''));
+        $this->assertTrue($this->validator->validate(''));
 
         $this->validator->setOperand('foo');
-        $this->assertTrue($this->validator->isValid('foo'));
+        $this->assertTrue($this->validator->validate('foo'));
 
         $this->validator->setOperand(1);
-        $this->assertTrue($this->validator->isValid(1));
+        $this->assertTrue($this->validator->validate(1));
 
         $object = new stdClass;
         $this->validator->setOperand($object);
-        $this->assertTrue($this->validator->isValid($object));
+        $this->assertTrue($this->validator->validate($object));
     }
 
     public function testFailure()
     {
-        $this->assertFalse($this->validator->isValid(''));
+        $this->assertFalse($this->validator->validate(''));
 
         $this->validator->setOperand(1);
-        $this->assertFalse($this->validator->isValid('1'));
+        $this->assertFalse($this->validator->validate('1'));
 
         $this->validator->setOperand(new stdClass);
-        $this->assertFalse($this->validator->isValid(new stdClass));
+        $this->assertFalse($this->validator->validate(new stdClass));
     }
 }

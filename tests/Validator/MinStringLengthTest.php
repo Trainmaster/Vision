@@ -37,37 +37,37 @@ class MinStringLengthTest extends TestCase
 
     public function testSingleByteSuccess()
     {
-        $this->assertTrue($this->validatorOne->isValid($this->singleBytes[0]));
+        $this->assertTrue($this->validatorOne->validate($this->singleBytes[0]));
     }
 
     public function testSingleByteFailure()
     {
-        $this->assertFalse($this->validatorTwo->isValid($this->singleBytes[0]));
+        $this->assertFalse($this->validatorTwo->validate($this->singleBytes[0]));
     }
 
     public function testMultiByteSuccess()
     {
         foreach ($this->multiBytes as $byte) {
-            $this->assertTrue($this->validatorOne->isValid($byte));
+            $this->assertTrue($this->validatorOne->validate($byte));
         }
     }
 
     public function testMultiByteFailure()
     {
         foreach ($this->multiBytes as $byte) {
-            $this->assertFalse($this->validatorTwo->isValid($byte));
+            $this->assertFalse($this->validatorTwo->validate($byte));
         }
     }
 
     public function testGetErrors()
     {
-        $this->validatorOne->isValid($this->singleBytes[0]);
+        $this->validatorOne->validate($this->singleBytes[0]);
         $this->assertEmpty($this->validatorOne->getErrors());
 
-        $this->validatorOne->isValid('');
+        $this->validatorOne->validate('');
         $this->assertNotEmpty($this->validatorOne->getErrors());
 
-        $this->validatorOne->isValid($this->singleBytes[0]);
+        $this->validatorOne->validate($this->singleBytes[0]);
         $this->assertEmpty($this->validatorOne->getErrors());
     }
 }

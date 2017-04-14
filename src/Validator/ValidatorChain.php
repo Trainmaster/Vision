@@ -5,7 +5,7 @@ namespace Vision\Validator;
 
 class ValidatorChain
 {
-    /** @var array $validators */
+    /** @var ValidatorInterface[] $validators */
     protected $validators = [];
 
     /**
@@ -24,12 +24,12 @@ class ValidatorChain
      *
      * @return bool
      */
-    public function isValid($value)
+    public function validate($value)
     {
         $isValid = true;
 
         foreach ($this->validators as $validator) {
-            $isValid = $validator->isValid($value);
+            $isValid = $validator->validate($value);
             if (!$isValid) {
                 break;
             }

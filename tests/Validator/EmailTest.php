@@ -17,11 +17,11 @@ class EmailTest extends TestCase
 
     public function testSuccess()
     {
-        $this->assertTrue($this->validator->isValid('foo@bar.com'));
+        $this->assertTrue($this->validator->validate('foo@bar.com'));
     }
 
     public function testFailure()
     {
-        $this->assertFalse($this->validator->isValid(''));
+        $this->assertFalse($this->validator->validate(''));
     }
 }

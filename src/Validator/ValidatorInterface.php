@@ -5,7 +5,7 @@ namespace Vision\Validator;
 
 interface ValidatorInterface
 {
-    public function isValid($value);
+    public function validate($value);
 
     public function addError($error);
 

@@ -246,7 +246,7 @@ class Form extends AbstractCompositeType implements IteratorAggregate
         }
 
         foreach ($this->validators as $validator) {
-            if (!$validator->isValid($this)) {
+            if (!$validator->validate($this)) {
                 $key = get_class($validator);
                 $this->errors[$key] = $validator->getErrors();
             }

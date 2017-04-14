@@ -29,61 +29,61 @@ class InputIntegerTest extends TestCase
 
     public function testSuccess()
     {
-        $this->assertTrue($this->validator->isValid('-1'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
+        $this->assertTrue($this->validator->validate('-1'));
+        $this->assertTrue($this->validator->validate('0'));
+        $this->assertTrue($this->validator->validate('1'));
 
         if (version_compare(PHP_VERSION, '5.4.11') >= 0) {
-            $this->assertTrue($this->validator->isValid('-0'));
-            $this->assertTrue($this->validator->isValid('+0'));
+            $this->assertTrue($this->validator->validate('-0'));
+            $this->assertTrue($this->validator->validate('+0'));
         }
     }
 
     public function testFailure()
     {
-        $this->assertFalse($this->validator->isValid(''));
-        $this->assertFalse($this->validator->isValid('1.0'));
+        $this->assertFalse($this->validator->validate(''));
+        $this->assertFalse($this->validator->validate('1.0'));
 
         if (version_compare(PHP_VERSION, '5.4.11') < 0) {
-            $this->assertFalse($this->validator->isValid('-0'));
-            $this->assertFalse($this->validator->isValid('+0'));
+            $this->assertFalse($this->validator->validate('-0'));
+            $this->assertFalse($this->validator->validate('+0'));
         }
     }
 
     public function testMinSuccess()
     {
-        $this->assertTrue($this->minValidator->isValid('1'));
-        $this->assertTrue($this->minValidator->isValid('2'));
+        $this->assertTrue($this->minValidator->validate('1'));
+        $this->assertTrue($this->minValidator->validate('2'));
     }
 
     public function testMinFailure()
     {
-        $this->assertFalse($this->minValidator->isValid('-1'));
-        $this->assertFalse($this->minValidator->isValid('0'));
+        $this->assertFalse($this->minValidator->validate('-1'));
+        $this->assertFalse($this->minValidator->validate('0'));
     }
 
     public function testMaxSuccess()
     {
-        $this->assertTrue($this->maxValidator->isValid('-1'));
-        $this->assertTrue($this->maxValidator->isValid('0'));
-        $this->assertTrue($this->maxValidator->isValid('1'));
+        $this->assertTrue($this->maxValidator->validate('-1'));
+        $this->assertTrue($this->maxValidator->validate('0'));
+        $this->assertTrue($this->maxValidator->validate('1'));
     }
 
     public function testMaxFailure()
     {
-        $this->assertFalse($this->maxValidator->isValid('2'));
+        $this->assertFalse($this->maxValidator->validate('2'));
     }
 
     public function testMinAndMaxSuccess()
     {
-        $this->assertTrue($this->minAndMaxValidator->isValid('1'));
-        $this->assertTrue($this->minAndMaxValidator->isValid('2'));
+        $this->assertTrue($this->minAndMaxValidator->validate('1'));
+        $this->assertTrue($this->minAndMaxValidator->validate('2'));
     }
 
     public function testMinAndMaxFailure()
     {
-        $this->assertFalse($this->minAndMaxValidator->isValid('-1'));
-        $this->assertFalse($this->minAndMaxValidator->isValid('0'));
-        $this->assertFalse($this->minAndMaxValidator->isValid('3'));
+        $this->assertFalse($this->minAndMaxValidator->validate('-1'));
+        $this->assertFalse($this->minAndMaxValidator->validate('0'));
+        $this->assertFalse($this->minAndMaxValidator->validate('3'));
     }
 }

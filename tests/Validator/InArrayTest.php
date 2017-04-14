@@ -27,20 +27,20 @@ class InArrayTest extends TestCase
 
     public function testSuccess()
     {
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid('foo'));
-        $this->assertTrue($this->validator->isValid(['foo', 'bar']));
-        $this->assertTrue($this->validator->isValid('baz'));
-        $this->assertTrue($this->validator->isValid(['baz']));
+        $this->assertTrue($this->validator->validate(1));
+        $this->assertTrue($this->validator->validate('1'));
+        $this->assertTrue($this->validator->validate(true));
+        $this->assertTrue($this->validator->validate('foo'));
+        $this->assertTrue($this->validator->validate(['foo', 'bar']));
+        $this->assertTrue($this->validator->validate('baz'));
+        $this->assertTrue($this->validator->validate(['baz']));
     }
 
     public function testFailure()
     {
-        $this->assertFalse($this->strictValidator->isValid(1));
-        $this->assertFalse($this->strictValidator->isValid('1'));
-        $this->assertFalse($this->strictValidator->isValid('baz'));
-        $this->assertFalse($this->strictValidator->isValid(['baz']));
+        $this->assertFalse($this->strictValidator->validate(1));
+        $this->assertFalse($this->strictValidator->validate('1'));
+        $this->assertFalse($this->strictValidator->validate('baz'));
+        $this->assertFalse($this->strictValidator->validate(['baz']));
     }
 }

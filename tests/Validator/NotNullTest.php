@@ -17,16 +17,16 @@ class NotNullTest extends TestCase
 
     public function testSuccess()
     {
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('foo'));
-        $this->assertTrue($this->validator->isValid([]));
+        $this->assertTrue($this->validator->validate(true));
+        $this->assertTrue($this->validator->validate(false));
+        $this->assertTrue($this->validator->validate(0));
+        $this->assertTrue($this->validator->validate(''));
+        $this->assertTrue($this->validator->validate('foo'));
+        $this->assertTrue($this->validator->validate([]));
     }
 
     public function testFailure()
     {
-        $this->assertFalse($this->validator->isValid(null));
+        $this->assertFalse($this->validator->validate(null));
     }
 }

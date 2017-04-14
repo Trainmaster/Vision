@@ -184,7 +184,7 @@ abstract class AbstractControl extends AbstractType
         }
 
         foreach ($this->validators as $validator) {
-            if (!$validator->isValid($value)) {
+            if (!$validator->validate($value)) {
                 $key = get_class($validator);
                 $this->errors[$key] = $validator->getErrors();
             }

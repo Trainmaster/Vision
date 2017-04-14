@@ -13,7 +13,7 @@ class InputNotEmptyString extends AbstractValidator
      *
      * @return bool
      */
-    public function isValid($value)
+    public function validate($value)
     {
         $this->resetErrors();
 
