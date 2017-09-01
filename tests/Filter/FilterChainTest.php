@@ -18,21 +18,45 @@ class FilterChainTest extends TestCase
 
     public function testAddShouldProvideFluentInterface()
     {
-        $this->assertSame($this->filterChain, $this->filterChain->add($this->getFilterMock()));
+        $this->assertSame($this->filterChain, $this->filterChain->add($this->createMock(Filter::class)));
     }
 
     public function testFilterShouldCallAddedFilter()
     {
-        $filterMock = $this->getFilterMock();
+        $value = 'foo';
+
+        $filterMock = $this->createMock(Filter::class);
         $filterMock->expects($this->once())
-            ->method('filter');
+            ->method('filter')
+            ->with($value)
+            ->willReturn($value);
 
         $this->filterChain->add($filterMock);
-        $this->filterChain->filter('foo');
+
+        $this->assertSame($value, $this->filterChain->filter($value));
     }
 
-    private function getFilterMock()
+    public function testFilterShouldPassFilteredValue()
     {
-        return $this->createMock(Filter::class);
+        $value = 'foo';
+        $valueAfterFirstFilter = 'fo';
+        $valueAfterSecondFilter = 'f';
+
+        $filterMockA = $this->createMock(Filter::class);
+        $filterMockA->expects($this->once())
+            ->method('filter')
+            ->with($value)
+            ->willReturn($valueAfterFirstFilter);
+
+        $filterMockB = $this->createMock(Filter::class);
+        $filterMockB->expects($this->once())
+            ->method('filter')
+            ->with($valueAfterFirstFilter)
+            ->willReturn($valueAfterSecondFilter);
+
+        $this->filterChain->add($filterMockA);
+        $this->filterChain->add($filterMockB);
+
+        $this->assertSame($valueAfterSecondFilter, $this->filterChain->filter($value));
     }
 }
