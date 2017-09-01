@@ -54,7 +54,7 @@ class SessionTest extends TestCase
         $this->assertSame(PHP_SESSION_ACTIVE, $status);
     }
 
-    public function testGetID()
+    public function testGetId()
     {
         $someId = '123abc';
 
