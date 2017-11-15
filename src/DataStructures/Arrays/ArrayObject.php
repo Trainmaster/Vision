@@ -34,6 +34,7 @@ class ArrayObject implements ArrayAccess, Countable
 
     /**
      * @param int|string $offset
+     * @return bool
      */
     public function offsetExists($offset): bool
     {
@@ -42,6 +43,7 @@ class ArrayObject implements ArrayAccess, Countable
 
     /**
      * @param int|string $offset
+     * @return mixed
      */
     public function &offsetGet($offset)
     {
