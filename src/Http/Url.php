@@ -34,17 +34,8 @@ class Url
      */
     public function __construct($url = '')
     {
-        $components = parse_url($url);
-
-        if (!empty($components)) {
-            $this->scheme = $components['scheme'] ?? '';
-            $this->host = $components['host'] ?? '';
-            $this->port = $components['port'] ?? '';
-            $this->user = $components['user'] ?? '';
-            $this->pass = $components['pass'] ?? '';
-            $this->path = $components['path'] ?? '';
-            $this->query = $components['query'] ?? '';
-            $this->fragment = $components['fragment'] ?? '';
+        if (!empty($url)) {
+            $this->parseUrl($url);
         }
     }
 
@@ -106,5 +97,27 @@ class Url
         }
 
         return $url;
+    }
+
+    /**
+     * @param string $url
+     * @return void
+     */
+    private function parseUrl(string $url): void
+    {
+        $components = parse_url($url);
+
+        if ($components === false) {
+            return;
+        }
+
+        $this->scheme = $components['scheme'] ?? '';
+        $this->host = $components['host'] ?? '';
+        $this->port = $components['port'] ?? null;
+        $this->user = $components['user'] ?? null;
+        $this->pass = $components['pass'] ?? null;
+        $this->path = $components['path'] ?? '';
+        $this->query = $components['query'] ?? null;
+        $this->fragment = $components['fragment'] ?? null;
     }
 }
