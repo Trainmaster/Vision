@@ -40,44 +40,22 @@ class Url
     }
 
     /**
-     * @param RequestInterface $request
-     *
-     * @return $this Provides a fluent interface.
+     * @return string
      */
-    public function populateFromRequest(RequestInterface $request)
-    {
-        if (!isset($this->scheme)) {
-            $this->scheme = $request->getScheme();
-        }
-
-        if (!isset($this->host)) {
-            $this->host = $request->getHost();
-        }
-
-        if (!isset($this->path)) {
-            $this->path = $request->getBasePath();
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return bool|string
-     */
-    public function build()
+    public function __toString()
     {
         $url = '';
 
         if (isset($this->scheme)) {
             $url .= $this->scheme . '://';
         } else {
-            return false;
+            return '';
         }
 
         if (isset($this->host)) {
             $url .= $this->host;
         } else {
-            return false;
+            return '';
         }
 
         if (isset($this->path)) {
@@ -97,6 +75,28 @@ class Url
         }
 
         return $url;
+    }
+
+    /**
+     * @param RequestInterface $request
+     *
+     * @return $this Provides a fluent interface.
+     */
+    public function populateFromRequest(RequestInterface $request)
+    {
+        if (!isset($this->scheme)) {
+            $this->scheme = $request->getScheme();
+        }
+
+        if (!isset($this->host)) {
+            $this->host = $request->getHost();
+        }
+
+        if (!isset($this->path)) {
+            $this->path = $request->getBasePath();
+        }
+
+        return $this;
     }
 
     /**
