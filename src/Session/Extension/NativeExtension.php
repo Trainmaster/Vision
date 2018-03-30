@@ -10,8 +10,6 @@ use RuntimeException;
 
 class NativeExtension implements ExtensionInterface
 {
-    private $started = false;
-
     public function __construct(SessionHandlerInterface $handler = null)
     {
         if (isset($handler)) {
@@ -24,7 +22,7 @@ class NativeExtension implements ExtensionInterface
      */
     public function start(SessionInterface $session): void
     {
-        if ($this->started && $this->isActive()) {
+        if ($this->isActive()) {
             return;
         }
 
@@ -33,8 +31,6 @@ class NativeExtension implements ExtensionInterface
         }
 
         $session->exchangeArray($_SESSION);
-
-        $this->started = true;
     }
 
     public function writeClose(SessionInterface $session): void
@@ -42,11 +38,6 @@ class NativeExtension implements ExtensionInterface
         $this->start($session);
         $_SESSION = $session->getArrayCopy();
         session_write_close();
-    }
-
-    public function isStarted(): bool
-    {
-        return $this->started;
     }
 
     public function isActive(): bool
