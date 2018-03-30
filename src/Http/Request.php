@@ -166,7 +166,7 @@ class Request extends Message implements RequestInterface
      *
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -174,7 +174,7 @@ class Request extends Message implements RequestInterface
     /**
      * @return string
      */
-    public function getBaseUrl()
+    public function getBaseUrl(): string
     {
         return $this->getUrl()->getScheme() . '://' . $this->getUrl()->getHost() . $this->getBasePath();
     }
@@ -187,7 +187,7 @@ class Request extends Message implements RequestInterface
      *
      * @return string
      */
-    public function getBasePath()
+    public function getBasePath(): string
     {
         return $this->basePath;
     }
@@ -224,7 +224,7 @@ class Request extends Message implements RequestInterface
      *
      * @return string
      */
-    public function getPathInfo()
+    public function getPathInfo(): string
     {
         return $this->pathInfo;
     }
