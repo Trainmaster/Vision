@@ -11,22 +11,22 @@ class Url
     /** @var string */
     private $host;
 
-    /** @var string */
+    /** @var int|null */
     private $port;
 
-    /** @var string */
+    /** @var string|null */
     private $user;
 
-    /** @var string */
+    /** @var string|null */
     private $pass;
 
     /** @var string */
     private $path;
 
-    /** @var string */
+    /** @var string|null */
     private $query;
 
-    /** @var string */
+    /** @var string|null */
     private $fragment;
 
     /**
@@ -75,6 +75,150 @@ class Url
         }
 
         return $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScheme(): string
+    {
+        return $this->scheme;
+    }
+
+    /**
+     * @param string $scheme
+     * @return Url
+     */
+    public function setScheme(string $scheme): Url
+    {
+        $this->scheme = $scheme;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHost(): string
+    {
+        return $this->host;
+    }
+
+    /**
+     * @param string $host
+     * @return Url
+     */
+    public function setHost(string $host): Url
+    {
+        $this->host = $host;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPort(): ?int
+    {
+        return $this->port;
+    }
+
+    /**
+     * @param int|null $port
+     * @return Url
+     */
+    public function setPort(?int $port): Url
+    {
+        $this->port = $port;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param null|string $user
+     * @return Url
+     */
+    public function setUser(?string $user): Url
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPass(): ?string
+    {
+        return $this->pass;
+    }
+
+    /**
+     * @param null|string $pass
+     * @return Url
+     */
+    public function setPass(?string $pass): Url
+    {
+        $this->pass = $pass;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $path
+     * @return Url
+     */
+    public function setPath(string $path): Url
+    {
+        $this->path = $path;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getQuery(): ?string
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param null|string $query
+     * @return Url
+     */
+    public function setQuery(?string $query): Url
+    {
+        $this->query = $query;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getFragment(): ?string
+    {
+        return $this->fragment;
+    }
+
+    /**
+     * @param null|string $fragment
+     * @return Url
+     */
+    public function setFragment(?string $fragment): Url
+    {
+        $this->fragment = $fragment;
+        return $this;
     }
 
     /**
