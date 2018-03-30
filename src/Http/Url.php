@@ -5,8 +5,29 @@ namespace Vision\Http;
 
 class Url
 {
-    /** @var array $components */
-    protected $components = [];
+    /** @var string */
+    private $scheme;
+
+    /** @var string */
+    private $host;
+
+    /** @var string */
+    private $port;
+
+    /** @var string */
+    private $user;
+
+    /** @var string */
+    private $pass;
+
+    /** @var string */
+    private $path;
+
+    /** @var string */
+    private $query;
+
+    /** @var string */
+    private $fragment;
 
     /**
      * @param string $url
@@ -16,7 +37,14 @@ class Url
         $components = parse_url($url);
 
         if (!empty($components)) {
-            $this->components = $components;
+            $this->scheme = $components['scheme'] ?? '';
+            $this->host = $components['host'] ?? '';
+            $this->port = $components['port'] ?? '';
+            $this->user = $components['user'] ?? '';
+            $this->pass = $components['pass'] ?? '';
+            $this->path = $components['path'] ?? '';
+            $this->query = $components['query'] ?? '';
+            $this->fragment = $components['fragment'] ?? '';
         }
     }
 
@@ -27,16 +55,16 @@ class Url
      */
     public function populateFromRequest(RequestInterface $request)
     {
-        if (!isset($this->components['scheme'])) {
-            $this->components['scheme'] = $request->getScheme();
+        if (!isset($this->scheme)) {
+            $this->scheme = $request->getScheme();
         }
 
-        if (!isset($this->components['host'])) {
-            $this->components['host'] = $request->getHost();
+        if (!isset($this->host)) {
+            $this->host = $request->getHost();
         }
 
-        if (!isset($this->components['path'])) {
-            $this->components['path'] = $request->getBasePath();
+        if (!isset($this->path)) {
+            $this->path = $request->getBasePath();
         }
 
         return $this;
@@ -49,32 +77,32 @@ class Url
     {
         $url = '';
 
-        if (isset($this->components['scheme'])) {
-            $url .= $this->components['scheme'] . '://';
+        if (isset($this->scheme)) {
+            $url .= $this->scheme . '://';
         } else {
             return false;
         }
 
-        if (isset($this->components['host'])) {
-            $url .= $this->components['host'];
+        if (isset($this->host)) {
+            $url .= $this->host;
         } else {
             return false;
         }
 
-        if (isset($this->components['path'])) {
-            $path = $this->components['path'];
+        if (isset($this->path)) {
+            $path = $this->path;
             if (strpos($path, '/') !== 0) {
                 $path = '/' . $path;
             }
             $url .= $path;
         }
 
-        if (isset($this->components['host'], $this->components['query'])) {
-            $url .= '?' . $this->components['query'];
+        if (isset($this->host, $this->query)) {
+            $url .= '?' . $this->query;
         }
 
-        if (isset($this->components['host'], $this->components['fragment'])) {
-            $url .= '#' . $this->components['fragment'];
+        if (isset($this->host, $this->fragment)) {
+            $url .= '#' . $this->fragment;
         }
 
         return $url;
