@@ -88,11 +88,11 @@ class Url
             $url .= $path;
         }
 
-        if (isset($this->host, $this->query)) {
+        if (isset($this->query)) {
             $url .= '?' . $this->query;
         }
 
-        if (isset($this->host, $this->fragment)) {
+        if (isset($this->fragment)) {
             $url .= '#' . $this->fragment;
         }
 
