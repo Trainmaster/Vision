@@ -63,7 +63,6 @@ class Request extends Message implements RequestInterface
         $this->FILES = new SquareBracketNotation($files);
         $this->COOKIE = new SquareBracketNotation($cookies);
 
-        // Set $this->method
         if (isset($this->SERVER['REQUEST_METHOD'])) {
             $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
         }
