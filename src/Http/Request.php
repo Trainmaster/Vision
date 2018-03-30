@@ -7,6 +7,9 @@ use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 
 class Request extends Message implements RequestInterface
 {
+    /** @var Url */
+    private $url;
+
     /** @var null|SquareBracketNotation $GET */
     protected $GET;
 
@@ -38,6 +41,7 @@ class Request extends Message implements RequestInterface
     protected $pathInfo;
 
     /**
+     * @param Url $url
      * @param array $queryParams
      * @param array $bodyParams
      * @param array $serverParams
@@ -45,12 +49,14 @@ class Request extends Message implements RequestInterface
      * @param array $cookies
      */
     public function __construct(
+        Url $url,
         array $queryParams,
         array $bodyParams,
         array $serverParams,
         array $files,
         array $cookies)
     {
+        $this->url = $url;
         $this->GET = new SquareBracketNotation($queryParams);
         $this->POST = new SquareBracketNotation($bodyParams);
         $this->SERVER = new SquareBracketNotation($serverParams);
@@ -82,6 +88,14 @@ class Request extends Message implements RequestInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return Url
+     */
+    public function getUrl(): Url
+    {
+        return $this->url;
     }
 
     /**
@@ -207,20 +221,6 @@ class Request extends Message implements RequestInterface
     public function getBaseUrl()
     {
         return $this->getScheme() . '://' . $this->getHost() . $this->getBasePath();
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        $url = $this->getScheme() . '://' . $this->getHost() . $this->getPath();
-
-        if ($this->getQueryString()) {
-            $url .= '?' . $this->getQueryString();
-        }
-
-        return $url;
     }
 
     /**

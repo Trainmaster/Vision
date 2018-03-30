@@ -11,6 +11,7 @@ class RequestFactory
     public function make(): Request
     {
         return new Request(
+            new Url(),
             $_GET,
             $_POST,
             $_SERVER,

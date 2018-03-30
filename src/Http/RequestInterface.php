@@ -5,11 +5,11 @@ namespace Vision\Http;
 
 interface RequestInterface
 {
+    public function getUrl(): Url;
+
     public function getHost();
 
     public function getMethod();
-
-    public function getUrl();
 
     public function getBaseUrl();
 
