@@ -37,13 +37,25 @@ class Request extends Message implements RequestInterface
     /** @var null|string $pathInfo */
     protected $pathInfo;
 
-    public function __construct()
+    /**
+     * @param array $queryParams
+     * @param array $bodyParams
+     * @param array $serverParams
+     * @param array $files
+     * @param array $cookies
+     */
+    public function __construct(
+        array $queryParams,
+        array $bodyParams,
+        array $serverParams,
+        array $files,
+        array $cookies)
     {
-        $this->GET = new SquareBracketNotation($_GET);
-        $this->POST = new SquareBracketNotation($_POST);
-        $this->FILES = new SquareBracketNotation($this->transformFilesArray($_FILES));
-        $this->COOKIE = new SquareBracketNotation($_COOKIE);
-        $this->SERVER = new SquareBracketNotation($_SERVER);
+        $this->GET = new SquareBracketNotation($queryParams);
+        $this->POST = new SquareBracketNotation($bodyParams);
+        $this->SERVER = new SquareBracketNotation($serverParams);
+        $this->FILES = new SquareBracketNotation($files);
+        $this->COOKIE = new SquareBracketNotation($cookies);
 
         // Set $this->method
         if (isset($this->SERVER['REQUEST_METHOD'])) {
@@ -312,32 +324,5 @@ class Request extends Message implements RequestInterface
         $this->path = rtrim($path, '/');
 
         return $this;
-    }
-
-    /**
-     * @param array $files
-     *
-     * @return array
-     */
-    protected function transformFilesArray(array $files)
-    {
-        foreach ($files as &$value) {
-            $newArray = [];
-
-            foreach ($value as $key => $val) {
-                if (is_array($val)) {
-                    array_walk_recursive($val, function(&$item) use($key) {
-                        $item = [$key => $item];
-                    });
-                    $newArray = array_replace_recursive($newArray, $val);
-                }
-            }
-
-            if (!empty($newArray)) {
-                $value = $newArray;
-            }
-        }
-
-        return $files;
     }
 }
