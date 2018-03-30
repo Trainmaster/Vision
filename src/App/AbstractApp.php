@@ -47,7 +47,7 @@ abstract class AbstractApp
             return false;
         }
 
-        $httpAcceptLanguage = $this->request->SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $httpAcceptLanguage = $this->request->getServerParams()['HTTP_ACCEPT_LANGUAGE'];
 
         if (empty($httpAcceptLanguage)) {
             return false;

@@ -10,20 +10,20 @@ class Request extends Message implements RequestInterface
     /** @var Url */
     private $url;
 
-    /** @var null|SquareBracketNotation $GET */
-    protected $GET;
+    /** @var SquareBracketNotation $queryParams */
+    private $queryParams;
 
-    /** @var null|SquareBracketNotation $POST */
-    protected $POST;
+    /** @var SquareBracketNotation $bodyParams */
+    private $bodyParams;
 
-    /** @var null|SquareBracketNotation $FILES */
-    protected $FILES;
+    /** @var SquareBracketNotation $serverParams */
+    private $serverParams;
 
-    /** @var null|SquareBracketNotation $COOKIE */
-    protected $COOKIE;
+    /** @var SquareBracketNotation $files */
+    private $files;
 
-    /** @var null|SquareBracketNotation $SERVER */
-    protected $SERVER;
+    /** @var SquareBracketNotation $cookies */
+    private $cookies;
 
     /** @var null|string $method */
     protected $method;
@@ -57,14 +57,14 @@ class Request extends Message implements RequestInterface
         array $cookies)
     {
         $this->url = $url;
-        $this->GET = new SquareBracketNotation($queryParams);
-        $this->POST = new SquareBracketNotation($bodyParams);
-        $this->SERVER = new SquareBracketNotation($serverParams);
-        $this->FILES = new SquareBracketNotation($files);
-        $this->COOKIE = new SquareBracketNotation($cookies);
+        $this->queryParams = new SquareBracketNotation($queryParams);
+        $this->bodyParams = new SquareBracketNotation($bodyParams);
+        $this->serverParams = new SquareBracketNotation($serverParams);
+        $this->files = new SquareBracketNotation($files);
+        $this->cookies = new SquareBracketNotation($cookies);
 
-        if (isset($this->SERVER['REQUEST_METHOD'])) {
-            $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
+        if (isset($this->serverParams['REQUEST_METHOD'])) {
+            $this->method = strtoupper($this->serverParams['REQUEST_METHOD']);
         }
 
         $this->initHost()
@@ -74,27 +74,51 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * @param string $key
-     *
-     * @return mixed
-     */
-    public function __get($key)
-    {
-        $key = strtoupper($key);
-
-        if (isset($this->$key)) {
-            return $this->$key;
-        }
-
-        return null;
-    }
-
-    /**
      * @return Url
      */
     public function getUrl(): Url
     {
         return $this->url;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getQueryParams(): SquareBracketNotation
+    {
+        return $this->queryParams;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getBodyParams(): SquareBracketNotation
+    {
+        return $this->bodyParams;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getServerParams(): SquareBracketNotation
+    {
+        return $this->serverParams;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getFiles(): SquareBracketNotation
+    {
+        return $this->files;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getCookies(): SquareBracketNotation
+    {
+        return $this->cookies;
     }
 
     /**
@@ -154,7 +178,7 @@ class Request extends Message implements RequestInterface
      */
     public function isSecure()
     {
-        return (!empty($this->SERVER['HTTPS']) && $this->SERVER['HTTPS'] !== 'off');
+        return (!empty($this->serverParams['HTTPS']) && $this->serverParams['HTTPS'] !== 'off');
     }
 
     /**
@@ -162,8 +186,8 @@ class Request extends Message implements RequestInterface
      */
     public function isXmlHttpRequest()
     {
-        return (isset($this->SERVER['HTTP_X_REQUESTED_WITH'])
-                && $this->SERVER['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest");
+        return (isset($this->serverParams['HTTP_X_REQUESTED_WITH'])
+                && $this->serverParams['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest");
     }
 
     /**
@@ -187,7 +211,7 @@ class Request extends Message implements RequestInterface
      */
     protected function initHost()
     {
-        $host = $this->SERVER['HTTP_HOST'];
+        $host = $this->serverParams['HTTP_HOST'];
 
         if ($host === null) {
             return $this;
@@ -227,7 +251,7 @@ class Request extends Message implements RequestInterface
      */
     public function getQueryString()
     {
-        return $this->SERVER['QUERY_STRING'];
+        return $this->serverParams['QUERY_STRING'];
     }
 
     /**
@@ -250,8 +274,8 @@ class Request extends Message implements RequestInterface
     {
         $basePath = '';
 
-        if (isset($this->SERVER['SCRIPT_NAME'])) {
-            $basePath = dirname($this->SERVER['SCRIPT_NAME']);
+        if (isset($this->serverParams['SCRIPT_NAME'])) {
+            $basePath = dirname($this->serverParams['SCRIPT_NAME']);
         }
 
         if ($basePath === '.') {
@@ -287,10 +311,10 @@ class Request extends Message implements RequestInterface
     {
         $pathInfo = '';
 
-        if (isset($this->SERVER['PATH_INFO'])) {
-            $pathInfo = $this->SERVER['PATH_INFO'];
-        } elseif (isset($this->SERVER['REQUEST_URI'])) {
-            $pathInfo = str_replace($this->SERVER['SCRIPT_NAME'] ?? '', '', $this->SERVER['REQUEST_URI']);
+        if (isset($this->serverParams['PATH_INFO'])) {
+            $pathInfo = $this->serverParams['PATH_INFO'];
+        } elseif (isset($this->serverParams['REQUEST_URI'])) {
+            $pathInfo = str_replace($this->serverParams['SCRIPT_NAME'] ?? '', '', $this->serverParams['REQUEST_URI']);
         }
 
         $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
