@@ -172,15 +172,6 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isXmlHttpRequest()
-    {
-        return (isset($this->serverParams['HTTP_X_REQUESTED_WITH'])
-                && $this->serverParams['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest");
-    }
-
-    /**
      * Returns the current request method.
      *
      * @return string
