@@ -25,14 +25,14 @@ class Request extends Message implements RequestInterface
     /** @var SquareBracketNotation $cookies */
     private $cookies;
 
-    /** @var null|string $method */
-    protected $method;
+    /** @var string|null $method */
+    private $method;
 
-    /** @var null|string $basePath */
-    protected $basePath;
+    /** @var string|null $basePath */
+    private $basePath;
 
-    /** @var null|string $pathInfo */
-    protected $pathInfo;
+    /** @var string|null $pathInfo */
+    private $pathInfo;
 
     /**
      * @param Url $url
