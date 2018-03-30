@@ -16,19 +16,19 @@ class Session extends ArrayObject implements SessionInterface
     public function __construct(Extension\ExtensionInterface $extension)
     {
         parent::__construct();
-        register_shutdown_function([$this, '__destruct']);
         $this->extension = $extension;
         $this->extension->start($this);
-    }
-
-    public function __destruct()
-    {
-        $this->extension->writeClose($this);
+        register_shutdown_function([$this, 'writeClose']);
     }
 
     public function __toString(): string
     {
         return serialize($this->getArrayCopy());
+    }
+
+    public function writeClose()
+    {
+        $this->extension->writeClose($this);
     }
 
     public function clear()

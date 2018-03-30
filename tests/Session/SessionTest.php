@@ -20,17 +20,6 @@ class SessionTest extends TestCase
         (new Session($extensionMock));
     }
 
-    public function testDestructor()
-    {
-        $extensionMock = $this->getExtensionMock();
-        $extensionMock
-            ->expects($this->once())
-            ->method('writeClose')
-            ->with($this->isInstanceOf(SessionInterface::class));
-
-        (new Session($extensionMock))->__destruct();
-    }
-
     public function testClear()
     {
         $session = new Session($this->getExtensionMock());
