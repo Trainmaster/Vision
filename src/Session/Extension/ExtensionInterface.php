@@ -9,7 +9,7 @@ interface ExtensionInterface
 {
     public function start(SessionInterface $session): void;
 
-    public function save(SessionInterface $session);
+    public function writeClose(SessionInterface $session);
 
     public function getStatus(): int;
 

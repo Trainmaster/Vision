@@ -23,7 +23,7 @@ class Session extends ArrayObject implements SessionInterface
 
     public function __destruct()
     {
-        $this->extension->save($this);
+        $this->extension->writeClose($this);
     }
 
     public function __toString(): string

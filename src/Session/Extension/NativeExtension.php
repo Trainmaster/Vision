@@ -37,7 +37,7 @@ class NativeExtension implements ExtensionInterface
         $this->started = true;
     }
 
-    public function save(SessionInterface $session)
+    public function writeClose(SessionInterface $session)
     {
         $this->start($session);
         $_SESSION = $session->getArrayCopy();

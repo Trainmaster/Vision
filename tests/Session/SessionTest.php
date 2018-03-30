@@ -25,7 +25,7 @@ class SessionTest extends TestCase
         $extensionMock = $this->getExtensionMock();
         $extensionMock
             ->expects($this->once())
-            ->method('save')
+            ->method('writeClose')
             ->with($this->isInstanceOf(SessionInterface::class));
 
         (new Session($extensionMock))->__destruct();
