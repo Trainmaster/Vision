@@ -19,19 +19,11 @@ interface RequestInterface
 
     public function getCookies(): SquareBracketNotation;
 
-    public function getHost();
-
     public function getMethod();
 
     public function getBaseUrl();
 
-    public function getQueryString();
-
     public function getBasePath();
 
-    public function getPath();
-
     public function getPathInfo();
-
-    public function getScheme();
 }

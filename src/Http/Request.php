@@ -28,14 +28,8 @@ class Request extends Message implements RequestInterface
     /** @var null|string $method */
     protected $method;
 
-    /** @var null|string $host */
-    protected $host;
-
     /** @var null|string $basePath */
     protected $basePath;
-
-    /** @var null|string $path */
-    protected $path;
 
     /** @var null|string $pathInfo */
     protected $pathInfo;
@@ -67,10 +61,8 @@ class Request extends Message implements RequestInterface
             $this->method = strtoupper($this->serverParams['REQUEST_METHOD']);
         }
 
-        $this->initHost()
-             ->initBasePath()
-             ->initPathInfo()
-             ->initPath();
+        $this->initBasePath()
+             ->initPathInfo();
     }
 
     /**
@@ -172,13 +164,11 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * @see http://www.php.net/manual/en/reserved.variables.server.php
-     *
      * @return bool
      */
     public function isSecure()
     {
-        return (!empty($this->serverParams['HTTPS']) && $this->serverParams['HTTPS'] !== 'off');
+        return $this->getUrl()->getScheme() === 'https';
     }
 
     /**
@@ -188,44 +178,6 @@ class Request extends Message implements RequestInterface
     {
         return (isset($this->serverParams['HTTP_X_REQUESTED_WITH'])
                 && $this->serverParams['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest");
-    }
-
-    /**
-     * @return string
-     */
-    public function getScheme()
-    {
-        return $this->isSecure() ? 'https' : 'http';
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getHost()
-    {
-        return $this->host;
-    }
-
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    protected function initHost()
-    {
-        $host = $this->serverParams['HTTP_HOST'];
-
-        if ($host === null) {
-            return $this;
-        }
-
-        if (strlen($host) > 255) {
-            return $this;
-        }
-
-        if (preg_match('#^[-._A-Za-z0-9]+$#D', $host)) {
-            $this->host = $host;
-        }
-
-        return $this;
     }
 
     /**
@@ -243,15 +195,7 @@ class Request extends Message implements RequestInterface
      */
     public function getBaseUrl()
     {
-        return $this->getScheme() . '://' . $this->getHost() . $this->getBasePath();
-    }
-
-    /**
-     * @return string
-     */
-    public function getQueryString()
-    {
-        return $this->serverParams['QUERY_STRING'];
+        return $this->getUrl()->getScheme() . '://' . $this->getUrl()->getHost() . $this->getBasePath();
     }
 
     /**
@@ -320,31 +264,6 @@ class Request extends Message implements RequestInterface
         $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
 
         $this->pathInfo = $pathInfoWithoutQueryString ?: $pathInfo;
-
-        return $this;
-    }
-
-    /**
-     * Get path of current url.
-     *
-     * Example: http://www.example.com/foo/index.php/bar
-     * Result: "/foo/index.php/bar"
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    protected function initPath()
-    {
-        $path = $this->getBasePath() . $this->getPathInfo();
-
-        $this->path = rtrim($path, '/');
 
         return $this;
     }

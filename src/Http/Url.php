@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Vision\Http;
 
+use Vision\Http\RequestInterface;
+
 class Url
 {
     /** @var string */
@@ -232,11 +234,11 @@ class Url
     public function populateFromRequest(RequestInterface $request): self
     {
         if (!isset($this->scheme)) {
-            $this->scheme = $request->getScheme();
+            $this->scheme = $request->getUrl()->getScheme();
         }
 
         if (!isset($this->host)) {
-            $this->host = $request->getHost();
+            $this->host = $request->getUrl()->getHost();
         }
 
         if (!isset($this->path)) {
