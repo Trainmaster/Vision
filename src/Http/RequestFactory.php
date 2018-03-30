@@ -11,7 +11,7 @@ class RequestFactory
     public function make(): Request
     {
         return new Request(
-            new Url(),
+            UrlFromServerFactory::make($_SERVER),
             $_GET,
             $_POST,
             $_SERVER,

@@ -58,6 +58,10 @@ class Url
             return '';
         }
 
+        if (isset($this->port)) {
+            $url .= ":{$this->port}";
+        }
+
         if (isset($this->path)) {
             $path = $this->path;
             if (strpos($path, '/') !== 0) {
