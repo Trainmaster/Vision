@@ -291,7 +291,7 @@ class Request extends Message implements RequestInterface
         if (isset($this->SERVER['PATH_INFO'])) {
             $pathInfo = $this->SERVER['PATH_INFO'];
         } elseif (isset($this->SERVER['REQUEST_URI'])) {
-            $pathInfo = str_replace($this->getBasePath(), '', $this->SERVER['REQUEST_URI']);
+            $pathInfo = str_replace($this->SERVER['SCRIPT_NAME'] ?? '', '', $this->SERVER['REQUEST_URI']);
         }
 
         $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
