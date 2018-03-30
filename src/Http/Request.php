@@ -114,51 +114,41 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * Check, if the current request method is POST.
-     *
      * @return bool
      */
-    public function isPost()
+    public function isPost(): bool
     {
         return $this->method === 'POST';
     }
 
     /**
-     * Check, if the current request method is GET.
-     *
      * @return bool
      */
-    public function isGet()
+    public function isGet(): bool
     {
         return $this->method === 'GET';
     }
 
     /**
-     * Check, if the current request method is HEAD.
-     *
      * @return bool
      */
-    public function isHead()
+    public function isHead(): bool
     {
         return $this->method === 'HEAD';
     }
 
     /**
-     * Check, if the current request method is PUT.
-     *
      * @return bool
      */
-    public function isPut()
+    public function isPut(): bool
     {
         return $this->method === 'PUT';
     }
 
     /**
-     * Check, if the current request method is DELETE.
-     *
      * @return bool
      */
-    public function isDelete()
+    public function isDelete(): bool
     {
         return $this->method === 'DELETE';
     }
