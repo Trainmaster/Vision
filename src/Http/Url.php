@@ -42,7 +42,7 @@ class Url
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $url = '';
 
@@ -79,10 +79,9 @@ class Url
 
     /**
      * @param RequestInterface $request
-     *
-     * @return $this Provides a fluent interface.
+     * @return Url
      */
-    public function populateFromRequest(RequestInterface $request)
+    public function populateFromRequest(RequestInterface $request): self
     {
         if (!isset($this->scheme)) {
             $this->scheme = $request->getScheme();
