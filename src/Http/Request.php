@@ -176,7 +176,11 @@ class Request extends Message implements RequestInterface
      */
     public function getBaseUrl(): string
     {
-        return $this->getUrl()->getScheme() . '://' . $this->getUrl()->getHost() . $this->getBasePath();
+        return (clone $this->getUrl())
+            ->setPath($this->getBasePath())
+            ->setQuery(null)
+            ->setFragment(null)
+            ->__toString();
     }
 
     /**

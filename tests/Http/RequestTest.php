@@ -17,6 +17,24 @@ class RequestTest extends TestCase
         $this->assertSame($requestMethod, $request->getMethod());
     }
 
+    public function testGetBaseUrlWithSimpleUrl()
+    {
+        $url = (new Url('http://localhost/foo'));
+        $serverParams = ['SCRIPT_NAME' => '/index.php'];
+        $request = new Request($url, [], [], $serverParams, [], []);
+
+        $this->assertSame('http://localhost', $request->getBaseUrl());
+    }
+
+    public function testGetBaseUrlWithComplexUrl()
+    {
+        $url = (new Url('http://localhost:8080/foo/bar?key=value#fragment'));
+        $serverParams = ['SCRIPT_NAME' => '/foo/index.php'];
+        $request = new Request($url, [], [], $serverParams, [], []);
+
+        $this->assertSame('http://localhost:8080/foo', $request->getBaseUrl());
+    }
+
     public function testItShouldSetBasePath()
     {
         $serverParams = ['SCRIPT_NAME' => '/foo/index.php'];
