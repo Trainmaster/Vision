@@ -60,7 +60,7 @@ class Url
             return '';
         }
 
-        if (isset($this->port)) {
+        if (isset($this->port) && $this->isNoDefaultPort()) {
             $url .= ":{$this->port}";
         }
 
@@ -268,5 +268,18 @@ class Url
         $this->path = $components['path'] ?? '';
         $this->query = $components['query'] ?? null;
         $this->fragment = $components['fragment'] ?? null;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isNoDefaultPort(): bool
+    {
+        $defaultPorts = [
+            'http' => 80,
+            'https' => 443,
+        ];
+        $expectedDefaultPort = $defaultPorts[$this->scheme] ?? null;
+        return $this->port !== $expectedDefaultPort;
     }
 }
