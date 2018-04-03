@@ -44,4 +44,45 @@ class UrlTest extends TestCase
 
         $this->assertSame($expectedUrl, $url->__toString());
     }
+
+    public function testShouldRenderUser()
+    {
+        $expectedUrl = 'https://user@localhost:8080';
+
+        $url = (new Url())
+            ->setScheme('https')
+            ->setUser('user')
+            ->setHost('localhost')
+            ->setPort(8080);
+
+        $this->assertSame($expectedUrl, $url->__toString());
+    }
+
+    public function testShouldRenderUserButNotEmptyStringPass()
+    {
+        $expectedUrl = 'https://user@localhost:8080';
+
+        $url = (new Url())
+            ->setScheme('https')
+            ->setUser('user')
+            ->setPass('')
+            ->setHost('localhost')
+            ->setPort(8080);
+
+        $this->assertSame($expectedUrl, $url->__toString());
+    }
+
+    public function testShouldRenderUserAndPass()
+    {
+        $expectedUrl = 'https://user:pass@localhost:8080';
+
+        $url = (new Url())
+            ->setScheme('https')
+            ->setUser('user')
+            ->setPass('pass')
+            ->setHost('localhost')
+            ->setPort(8080);
+
+        $this->assertSame($expectedUrl, $url->__toString());
+    }
 }

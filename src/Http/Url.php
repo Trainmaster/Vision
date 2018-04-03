@@ -55,6 +55,7 @@ class Url
         }
 
         if (isset($this->host)) {
+            $url = $this->appendUserAndPass($url);
             $url .= $this->host;
         } else {
             return '';
@@ -268,6 +269,25 @@ class Url
         $this->path = $components['path'] ?? '';
         $this->query = $components['query'] ?? null;
         $this->fragment = $components['fragment'] ?? null;
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    private function appendUserAndPass(string $url): string
+    {
+        if (!isset($this->user)) {
+            return $url;
+        }
+
+        $url .= $this->user;
+
+        if (isset($this->pass) && $this->pass !== '') {
+            $url .= ':' . $this->pass;
+        }
+
+        return $url . '@';
     }
 
     /**
