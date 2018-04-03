@@ -231,8 +231,11 @@ class Container implements ContainerInterface
     /**
      * @todo Compiler for caching.
      * @todo Support for other parameter types (currently, only string is supported)
+     *
+     * @param string $dependency
+     * @return string
      */
-    private function resolveParameter(string $dependency)
+    private function resolveParameter(string $dependency): string
     {
         if ($this->containsParameterPlaceholders($dependency)) {
             $value = preg_replace_callback("#%([\w.-]+)%#u", function ($match) {
