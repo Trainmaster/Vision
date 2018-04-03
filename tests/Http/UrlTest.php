@@ -85,4 +85,16 @@ class UrlTest extends TestCase
 
         $this->assertSame($expectedUrl, $url->__toString());
     }
+
+    public function testShouldAllowEmptyPath()
+    {
+        $expectedUrl = 'https://localhost';
+
+        $url = (new Url())
+            ->setScheme('https')
+            ->setHost('localhost')
+            ->setPath('');
+
+        $this->assertSame($expectedUrl, $url->__toString());
+    }
 }

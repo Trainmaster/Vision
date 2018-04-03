@@ -66,11 +66,7 @@ class Url
         }
 
         if (isset($this->path)) {
-            $path = $this->path;
-            if (strpos($path, '/') !== 0) {
-                $path = '/' . $path;
-            }
-            $url .= $path;
+            $url .= $this->path;
         }
 
         if (isset($this->query)) {
