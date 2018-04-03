@@ -2,7 +2,7 @@
 namespace VisionTest\Http;
 
 use Vision\Http\Request;
-use Vision\Http\Url;
+use Vision\Url\Url;
 
 use PHPUnit\Framework\TestCase;
 

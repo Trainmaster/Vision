@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Vision\Http;
 
+use Vision\Url\UrlFromServerFactory;
+
 class RequestFactory
 {
     /**

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Vision\Http;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
+use Vision\Url\Url;
 
 interface RequestInterface
 {

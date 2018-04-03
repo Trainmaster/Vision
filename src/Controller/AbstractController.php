@@ -6,7 +6,7 @@ namespace Vision\Controller;
 use Vision\Http\RequestInterface;
 use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
-use Vision\Http\Url;
+use Vision\Url\Url;
 
 abstract class AbstractController implements ControllerInterface
 {

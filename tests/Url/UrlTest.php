@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace VisionTest\Http;
+namespace VisionTest\Url;
 
-use Vision\Http\Url;
+use Vision\Url\Url;
 
 use PHPUnit\Framework\TestCase;
 

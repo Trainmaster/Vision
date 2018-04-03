@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Vision\Http;
+namespace Vision\Url;
 
 use Vision\Http\RequestInterface;
 
