@@ -49,10 +49,9 @@ class RouteCollection implements \IteratorAggregate
 
     /**
      * @param RouteCollection $collection
-     *
-     * @return $this Provides a fluent interface.
+     * @return $this
      */
-    public function merge(self $collection)
+    public function merge(RouteCollection $collection)
     {
         $routes = $collection->getAll();
         array_walk($routes, [$this, 'addRoute']);
