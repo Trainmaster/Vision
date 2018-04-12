@@ -7,6 +7,11 @@ use DomainException;
 
 final class RandomString
 {
+    /**
+     * @param int $length
+     * @return string
+     * @throws \Exception If an appropriate source of randomness cannot be found
+     */
     final public static function generateHex(int $length): string
     {
         if ($length < 2) {
