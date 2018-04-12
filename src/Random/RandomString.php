@@ -15,7 +15,7 @@ final class RandomString
     final public static function generateHex(int $length): string
     {
         if ($length < 2) {
-            throw new DomainException('Length must be greater than or equal to 2.');
+            throw new DomainException('Length must be > 1.');
         }
 
         if (($length % 2) === 1) {

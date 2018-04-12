@@ -19,7 +19,7 @@ class RandomStringTest extends TestCase
     public function testGenerateHexWithLengthTooSmall()
     {
         $this->expectException(DomainException::class);
-        $this->expectExceptionMessage('Length must be greater than or equal to 2.');
+        $this->expectExceptionMessage('Length must be > 1.');
 
         RandomString::generateHex(1);
     }
