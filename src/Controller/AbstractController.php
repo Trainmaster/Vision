@@ -18,7 +18,7 @@ abstract class AbstractController implements ControllerInterface
      *
      * @return void
      */
-    public function preFilter()
+    public function preFilter(): void
     {
     }
 
@@ -27,7 +27,7 @@ abstract class AbstractController implements ControllerInterface
      *
      * @return void
      */
-    public function postFilter()
+    public function postFilter(): void
     {
     }
 

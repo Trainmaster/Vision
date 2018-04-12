@@ -24,7 +24,7 @@ class Identical extends AbstractValidator
      *
      * @return $this Provides a fluent interface.
      */
-    public function setOperand($operand)
+    public function setOperand($operand): self
     {
         $this->operand = $operand;
         return $this;
@@ -43,7 +43,7 @@ class Identical extends AbstractValidator
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $this->resetErrors();
 

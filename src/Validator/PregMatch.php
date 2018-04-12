@@ -26,7 +26,7 @@ class PregMatch extends AbstractValidator
      *
      * @return $this Provides a fluent interface.
      */
-    public function setPattern($pattern)
+    public function setPattern($pattern): self
     {
         $this->pattern = (string) $pattern;
         return $this;
@@ -37,7 +37,7 @@ class PregMatch extends AbstractValidator
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $this->resetErrors();
 

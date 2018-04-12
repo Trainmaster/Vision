@@ -22,7 +22,7 @@ class MinStringLength extends AbstractMultibyteStringValidator
     /**
      * @return int
      */
-    public function getMin()
+    public function getMin(): int
     {
         return $this->min;
     }
@@ -32,7 +32,7 @@ class MinStringLength extends AbstractMultibyteStringValidator
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $this->resetErrors();
 

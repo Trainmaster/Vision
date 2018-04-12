@@ -41,7 +41,7 @@ abstract class AbstractApp
      *
      * @return bool
      */
-    public function initLocale()
+    public function initLocale(): bool
     {
         if (class_exists('Locale') === false) {
             return false;
@@ -67,7 +67,7 @@ abstract class AbstractApp
      *
      * @return $this Provides a fluent interface.
      */
-    public function setDebug($debug)
+    public function setDebug($debug): self
     {
         $this->debug = (bool) $debug;
         return $this;
@@ -76,7 +76,7 @@ abstract class AbstractApp
     /**
      * @return bool
      */
-    public function getDebug()
+    public function getDebug(): bool
     {
         return $this->debug;
     }
@@ -86,7 +86,7 @@ abstract class AbstractApp
      *
      * @return $this Provides a fluent interface.
      */
-    public function setEnvironment($environment)
+    public function setEnvironment($environment): self
     {
         $this->environment = $environment;
         return $this;
@@ -95,7 +95,7 @@ abstract class AbstractApp
     /**
      * @return string
      */
-    public function getEnvironment()
+    public function getEnvironment(): string
     {
         return $this->environment;
     }
@@ -103,7 +103,7 @@ abstract class AbstractApp
     /**
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->frontController->run($this->request)->send();
     }

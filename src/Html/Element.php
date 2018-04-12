@@ -199,9 +199,9 @@ class Element
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
-        return $this->getAttribute('id');
+        return (string) $this->getAttribute('id');
     }
 
     public function addClass(string $class): self

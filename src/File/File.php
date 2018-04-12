@@ -10,7 +10,7 @@ class File extends \SplFileObject
     /**
      * @return string
      */
-    public function getMimeType()
+    public function getMimeType(): string
     {
         $finfo = new finfo(FILEINFO_MIME);
         return $finfo->file(parent::getPathname());

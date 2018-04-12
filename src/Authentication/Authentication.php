@@ -52,7 +52,7 @@ class Authentication
     /**
      * @return bool
      */
-    public function isAuthenticated()
+    public function isAuthenticated(): bool
     {
         return $this->storage->exists();
     }
@@ -68,7 +68,7 @@ class Authentication
     /**
      * @return void
      */
-    public function clearIdentity()
+    public function clearIdentity(): void
     {
         $this->strategy->invalidate($this->getIdentity());
         $this->storage->clear();

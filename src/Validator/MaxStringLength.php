@@ -22,7 +22,7 @@ class MaxStringLength extends AbstractMultibyteStringValidator
     /**
      * @return int
      */
-    public function getMax()
+    public function getMax(): int
     {
         return $this->max;
     }
@@ -32,7 +32,7 @@ class MaxStringLength extends AbstractMultibyteStringValidator
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $this->resetErrors();
 

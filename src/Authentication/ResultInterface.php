@@ -8,7 +8,7 @@ interface ResultInterface
     /**
      * @return bool
      */
-    public function isSuccess();
+    public function isSuccess(): bool;
 
     /**
      * @return mixed

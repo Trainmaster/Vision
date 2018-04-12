@@ -5,5 +5,5 @@ namespace Vision\Controller;
 
 interface ExceptionHandlerInterface
 {
-    public function handle(\Exception $exception);
+    public function handle(\Exception $exception): string;
 }

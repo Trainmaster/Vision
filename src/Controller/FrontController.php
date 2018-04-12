@@ -35,7 +35,7 @@ class FrontController
      *
      * @return $this Provides a fluent interface.
      */
-    public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
+    public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler): self
     {
         $this->exceptionHandler = $exceptionHandler;
         return $this;
@@ -46,7 +46,7 @@ class FrontController
      * @return ResponseInterface
      * @throws \RuntimeException
      */
-    public function run(RequestInterface $request)
+    public function run(RequestInterface $request): ResponseInterface
     {
         try {
             $route = $this->router->resolve($request);
@@ -75,7 +75,7 @@ class FrontController
      *
      * @return ResponseInterface
      */
-    private function invokeHandler($handler)
+    private function invokeHandler($handler): ResponseInterface
     {
         $instance = $this->container->get($handler);
 
@@ -115,7 +115,7 @@ class FrontController
      *
      * @return ResponseInterface
      */
-    private function handleException(\Exception $e)
+    private function handleException(\Exception $e): ResponseInterface
     {
         $response = new Response();
         if (isset($this->exceptionHandler)) {

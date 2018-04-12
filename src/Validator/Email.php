@@ -13,7 +13,7 @@ class Email extends AbstractValidator
      *
      * @return bool
      */
-    public function validate($email)
+    public function validate($email): bool
     {
         $this->resetErrors();
 

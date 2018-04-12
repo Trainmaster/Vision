@@ -7,6 +7,7 @@ interface LoaderInterface
 {
     /**
      * @param string $resource
+     * @return mixed
      */
     public function load($resource);
 }

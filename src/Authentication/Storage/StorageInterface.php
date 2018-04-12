@@ -20,10 +20,10 @@ interface StorageInterface
     /**
      * @return bool
      */
-    public function exists();
+    public function exists(): bool;
 
     /**
      * @return void
      */
-    public function clear();
+    public function clear(): void;
 }

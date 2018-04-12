@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Vision\Authentication\Strategy;
 
+use Vision\Authentication\ResultInterface;
+
 interface StrategyInterface
 {
     /**
@@ -10,12 +12,12 @@ interface StrategyInterface
      *
      * @return \Vision\Authentication\ResultInterface
      */
-    public function authenticate(array $data);
+    public function authenticate(array $data): ResultInterface;
 
     /**
      * @param mixed $identity
      *
      * @return void
      */
-    public function invalidate($identity);
+    public function invalidate($identity): void;
 }

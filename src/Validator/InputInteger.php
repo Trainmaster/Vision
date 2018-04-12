@@ -34,7 +34,7 @@ class InputInteger extends AbstractValidator
      *
      * @return $this Provides a fluent interface.
      */
-    public function setMin($min)
+    public function setMin($min): self
     {
         $this->min = (int) $min;
         return $this;
@@ -45,7 +45,7 @@ class InputInteger extends AbstractValidator
      *
      * @return $this Provides a fluent interface.
      */
-    public function setMax($max)
+    public function setMax($max): self
     {
         $this->max = (int) $max;
         return $this;
@@ -56,7 +56,7 @@ class InputInteger extends AbstractValidator
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $this->resetErrors();
 

@@ -16,7 +16,7 @@ class ScopeFileLoader implements LoaderInterface
      *
      * @return void
      */
-    public function load($file)
+    public function load($file): void
     {
         if (is_readable($file)) {
             ${$this->scopeName} = $this->scope;

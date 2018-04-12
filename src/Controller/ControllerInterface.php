@@ -12,7 +12,7 @@ interface ControllerInterface
      */
     public function __invoke();
 
-    public function preFilter();
+    public function preFilter(): void;
 
-    public function postFilter();
+    public function postFilter(): void;
 }

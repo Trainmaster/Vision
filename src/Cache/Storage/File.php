@@ -40,7 +40,7 @@ class File implements StorageInterface
      *
      * @return $this Provides a fluent interface.
      */
-    public function setCacheDir($cacheDir)
+    public function setCacheDir($cacheDir): StorageInterface
     {
         $cacheDir = rtrim($cacheDir, '\\/');
 
@@ -77,7 +77,7 @@ class File implements StorageInterface
      *
      * @return $this Provides a fluent interface.
      */
-    public function set($key, $value, $expiration = 0)
+    public function set($key, $value, $expiration = 0): self
     {
         $data = serialize($value);
 

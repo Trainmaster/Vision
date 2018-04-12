@@ -10,7 +10,7 @@ class ArrayFileLoader implements LoaderInterface
      *
      * @return array
      */
-    public function load($file)
+    public function load($file): array
     {
         if (!is_readable($file)) {
             return [];

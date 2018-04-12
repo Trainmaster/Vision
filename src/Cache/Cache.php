@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Vision\Cache;
 
+use Vision\Cache\Storage\StorageInterface;
+
 class Cache implements CacheInterface
 {
     /** @var Storage\StorageInterface $storage */
@@ -19,7 +21,7 @@ class Cache implements CacheInterface
     /**
      * @return Storage\StorageInterface
      */
-    public function getStorage()
+    public function getStorage(): StorageInterface
     {
         return $this->storage;
     }
@@ -31,7 +33,7 @@ class Cache implements CacheInterface
      *
      * @return Storage\StorageInterface
      */
-    public function set($key, $value, $expiration = 0)
+    public function set($key, $value, $expiration = 0): StorageInterface
     {
         return $this->storage->set($key, $value, $expiration);
     }

@@ -13,7 +13,7 @@ abstract class AbstractValidator implements Validator
      *
      * @return $this Provides a fluent interface.
      */
-    public function addError($error)
+    public function addError($error): Validator
     {
         $this->errors[] = $error;
         return $this;
@@ -22,7 +22,7 @@ abstract class AbstractValidator implements Validator
     /**
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -30,7 +30,7 @@ abstract class AbstractValidator implements Validator
     /**
      * @return void
      */
-    public function resetErrors()
+    public function resetErrors(): void
     {
         $this->errors = [];
     }

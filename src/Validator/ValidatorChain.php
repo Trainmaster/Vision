@@ -13,7 +13,7 @@ class ValidatorChain
      *
      * @return ValidatorChain Provides a fluent interface.
      */
-    public function add(Validator $validator)
+    public function add(Validator $validator): self
     {
         $this->validators[] = $validator;
         return $this;
@@ -24,7 +24,7 @@ class ValidatorChain
      *
      * @return bool
      */
-    public function validate($value)
+    public function validate($value): bool
     {
         $isValid = true;
 

@@ -17,7 +17,7 @@ class FileSystem
      *
      * @return FileSystem Provides a fluent interface.
      */
-    public function addAlias($alias, $path)
+    public function addAlias($alias, $path): self
     {
         $this->aliases[$alias] = $path;
         return $this;
@@ -28,7 +28,7 @@ class FileSystem
      *
      * @return string|null
      */
-    public function getAlias($alias)
+    public function getAlias($alias): ?string
     {
         return isset($this->aliases[$alias]) ? $this->aliases[$alias] : null;
     }
@@ -36,7 +36,7 @@ class FileSystem
     /**
      * @return array
      */
-    public function getAliases()
+    public function getAliases(): array
     {
         return $this->aliases;
     }
@@ -46,7 +46,7 @@ class FileSystem
      *
      * @return bool
      */
-    public function isWritable($dest)
+    public function isWritable($dest): bool
     {
         return is_file($dest) ? is_writable($dest) : is_writable(pathinfo($dest, PATHINFO_DIRNAME));
     }
@@ -57,7 +57,7 @@ class FileSystem
      *
      * @return bool
      */
-    public function move($src, $dest)
+    public function move($src, $dest): bool
     {
         if ($this->isWritable($dest) === false) {
             return false;
@@ -71,7 +71,7 @@ class FileSystem
      *
      * @return bool
      */
-    public function chdir($dir)
+    public function chdir($dir): bool
     {
         return $this->setCurrentDir($dir);
     }
@@ -81,7 +81,7 @@ class FileSystem
      *
      * @return bool
      */
-    public function setCurrentDir($dir)
+    public function setCurrentDir($dir): bool
     {
         if (is_dir($dir)) {
             $this->currentDir = $dir;
@@ -96,7 +96,7 @@ class FileSystem
      *
      * @return bool
      */
-    public function moveHere($source, $newName = null)
+    public function moveHere($source, $newName = null): bool
     {
         if ($this->currentDir === null) {
             return false;

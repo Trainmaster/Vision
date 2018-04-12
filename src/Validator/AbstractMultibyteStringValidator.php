@@ -10,7 +10,7 @@ abstract class AbstractMultibyteStringValidator extends AbstractValidator
      *
      * @return void
      */
-    protected function checkEncoding($value)
+    protected function checkEncoding($value): void
     {
         $internalEncoding = mb_internal_encoding();
         $externalEncoding = mb_detect_encoding($value);
