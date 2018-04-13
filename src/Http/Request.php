@@ -239,17 +239,14 @@ class Request extends Message implements RequestInterface
      */
     protected function initPathInfo()
     {
-        $pathInfo = '';
-
         if (isset($this->serverParams['PATH_INFO'])) {
-            $pathInfo = $this->serverParams['PATH_INFO'];
+            $this->pathInfo = $this->serverParams['PATH_INFO'];
         } elseif (isset($this->serverParams['REQUEST_URI'])) {
-            $pathInfo = str_replace($this->serverParams['SCRIPT_NAME'] ?? '', '', $this->serverParams['REQUEST_URI']);
+            $scriptName = $this->serverParams['SCRIPT_NAME'] ?? '';
+            $pathInfo = str_replace($scriptName, '', $this->serverParams['REQUEST_URI']);
+            $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
+            $this->pathInfo = $pathInfoWithoutQueryString ?: $pathInfo;
         }
-
-        $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
-
-        $this->pathInfo = $pathInfoWithoutQueryString ?: $pathInfo;
 
         return $this;
     }
