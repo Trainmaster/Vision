@@ -200,7 +200,7 @@ class Request extends Message implements RequestInterface
     /**
      * @return Request
      */
-    protected function initBasePath(): self
+    private function initBasePath(): self
     {
         $basePath = '';
 
@@ -237,7 +237,7 @@ class Request extends Message implements RequestInterface
     /**
      * @return Request
      */
-    protected function initPathInfo(): self
+    private function initPathInfo(): self
     {
         if (isset($this->serverParams['PATH_INFO'])) {
             $this->pathInfo = $this->serverParams['PATH_INFO'];
