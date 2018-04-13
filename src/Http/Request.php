@@ -198,6 +198,19 @@ class Request extends Message implements RequestInterface
     }
 
     /**
+     * Get path info of current url.
+     *
+     * Example: http://www.example.com/foo/index.php/bar
+     * Result: "/bar"
+     *
+     * @return string
+     */
+    public function getPathInfo(): string
+    {
+        return $this->pathInfo;
+    }
+
+    /**
      * @return Request
      */
     private function initBasePath(): self
@@ -219,19 +232,6 @@ class Request extends Message implements RequestInterface
         $this->basePath = rtrim($basePath, '/');
 
         return $this;
-    }
-
-    /**
-     * Get path info of current url.
-     *
-     * Example: http://www.example.com/foo/index.php/bar
-     * Result: "/bar"
-     *
-     * @return string
-     */
-    public function getPathInfo(): string
-    {
-        return $this->pathInfo;
     }
 
     /**
