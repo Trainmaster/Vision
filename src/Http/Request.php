@@ -157,7 +157,7 @@ class Request extends Message implements RequestInterface
     /**
      * @return bool
      */
-    public function isSecure()
+    public function isSecure(): bool
     {
         return $this->getUrl()->getScheme() === 'https';
     }
@@ -198,9 +198,9 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * @return $this Provides a fluent interface.
+     * @return Request
      */
-    protected function initBasePath()
+    protected function initBasePath(): self
     {
         $basePath = '';
 
@@ -235,9 +235,9 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * @return $this Provides a fluent interface.
+     * @return Request
      */
-    protected function initPathInfo()
+    protected function initPathInfo(): self
     {
         if (isset($this->serverParams['PATH_INFO'])) {
             $this->pathInfo = $this->serverParams['PATH_INFO'];
