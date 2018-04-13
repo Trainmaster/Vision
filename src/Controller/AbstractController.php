@@ -6,7 +6,7 @@ namespace Vision\Controller;
 use Vision\Http\RequestInterface;
 use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
-use Vision\Http\Url;
+use Vision\Url\Url;
 
 abstract class AbstractController implements ControllerInterface
 {
@@ -52,10 +52,9 @@ abstract class AbstractController implements ControllerInterface
      */
     public function redirect($url, $statusCode = 302)
     {
-        $url = new Url($url);
-        $url = $url->populateFromRequest($this->request)->build();
+        $url = (new Url($url))->populateFromRequest($this->request)->__toString();
 
-        if ($url === false) {
+        if (empty($url)) {
             return false;
         }
 

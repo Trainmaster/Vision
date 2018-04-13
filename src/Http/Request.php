@@ -4,179 +4,162 @@ declare(strict_types = 1);
 namespace Vision\Http;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
+use Vision\Url\Url;
 
 class Request extends Message implements RequestInterface
 {
-    /** @var null|SquareBracketNotation $GET */
-    protected $GET;
+    /** @var Url */
+    private $url;
 
-    /** @var null|SquareBracketNotation $POST */
-    protected $POST;
+    /** @var SquareBracketNotation $queryParams */
+    private $queryParams;
 
-    /** @var null|SquareBracketNotation $FILES */
-    protected $FILES;
+    /** @var SquareBracketNotation $bodyParams */
+    private $bodyParams;
 
-    /** @var null|SquareBracketNotation $COOKIE */
-    protected $COOKIE;
+    /** @var SquareBracketNotation $serverParams */
+    private $serverParams;
 
-    /** @var null|SquareBracketNotation $SERVER */
-    protected $SERVER;
+    /** @var SquareBracketNotation $files */
+    private $files;
 
-    /** @var null|string $method */
-    protected $method;
+    /** @var SquareBracketNotation $cookies */
+    private $cookies;
 
-    /** @var null|string $host */
-    protected $host;
+    /** @var string|null $method */
+    private $method;
 
-    /** @var null|string $basePath */
-    protected $basePath;
+    /** @var string|null $basePath */
+    private $basePath;
 
-    /** @var null|string $path */
-    protected $path;
-
-    /** @var null|string $pathInfo */
-    protected $pathInfo;
-
-    public function __construct()
-    {
-        $this->GET = new SquareBracketNotation($_GET);
-        $this->POST = new SquareBracketNotation($_POST);
-        $this->FILES = new SquareBracketNotation($this->transformFilesArray($_FILES));
-        $this->COOKIE = new SquareBracketNotation($_COOKIE);
-        $this->SERVER = new SquareBracketNotation($_SERVER);
-
-        // Set $this->method
-        if (isset($this->SERVER['REQUEST_METHOD'])) {
-            $this->method = strtoupper($this->SERVER['REQUEST_METHOD']);
-        }
-
-        $this->initHost()
-             ->initBasePath()
-             ->initPathInfo()
-             ->initPath();
-    }
+    /** @var string|null $pathInfo */
+    private $pathInfo;
 
     /**
-     * @param string $key
-     *
-     * @return mixed
+     * @param Url $url
+     * @param array $queryParams
+     * @param array $bodyParams
+     * @param array $serverParams
+     * @param array $files
+     * @param array $cookies
      */
-    public function __get($key)
+    public function __construct(
+        Url $url,
+        array $queryParams,
+        array $bodyParams,
+        array $serverParams,
+        array $files,
+        array $cookies)
     {
-        $key = strtoupper($key);
+        $this->url = $url;
+        $this->queryParams = new SquareBracketNotation($queryParams);
+        $this->bodyParams = new SquareBracketNotation($bodyParams);
+        $this->serverParams = new SquareBracketNotation($serverParams);
+        $this->files = new SquareBracketNotation($files);
+        $this->cookies = new SquareBracketNotation($cookies);
 
-        if (isset($this->$key)) {
-            return $this->$key;
+        if (isset($this->serverParams['REQUEST_METHOD'])) {
+            $this->method = strtoupper($this->serverParams['REQUEST_METHOD']);
         }
 
-        return null;
+        $this->initBasePath()
+             ->initPathInfo();
     }
 
     /**
-     * Check, if the current request method is POST.
-     *
+     * @return Url
+     */
+    public function getUrl(): Url
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getQueryParams(): SquareBracketNotation
+    {
+        return $this->queryParams;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getBodyParams(): SquareBracketNotation
+    {
+        return $this->bodyParams;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getServerParams(): SquareBracketNotation
+    {
+        return $this->serverParams;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getFiles(): SquareBracketNotation
+    {
+        return $this->files;
+    }
+
+    /**
+     * @return SquareBracketNotation
+     */
+    public function getCookies(): SquareBracketNotation
+    {
+        return $this->cookies;
+    }
+
+    /**
      * @return bool
      */
-    public function isPost()
+    public function isPost(): bool
     {
         return $this->method === 'POST';
     }
 
     /**
-     * Check, if the current request method is GET.
-     *
      * @return bool
      */
-    public function isGet()
+    public function isGet(): bool
     {
         return $this->method === 'GET';
     }
 
     /**
-     * Check, if the current request method is HEAD.
-     *
      * @return bool
      */
-    public function isHead()
+    public function isHead(): bool
     {
         return $this->method === 'HEAD';
     }
 
     /**
-     * Check, if the current request method is PUT.
-     *
      * @return bool
      */
-    public function isPut()
+    public function isPut(): bool
     {
         return $this->method === 'PUT';
     }
 
     /**
-     * Check, if the current request method is DELETE.
-     *
      * @return bool
      */
-    public function isDelete()
+    public function isDelete(): bool
     {
         return $this->method === 'DELETE';
     }
 
     /**
-     * @see http://www.php.net/manual/en/reserved.variables.server.php
-     *
      * @return bool
      */
-    public function isSecure()
+    public function isSecure(): bool
     {
-        return (!empty($this->SERVER['HTTPS']) && $this->SERVER['HTTPS'] !== 'off');
-    }
-
-    /**
-     * @return bool
-     */
-    public function isXmlHttpRequest()
-    {
-        return (isset($this->SERVER['HTTP_X_REQUESTED_WITH'])
-                && $this->SERVER['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest");
-    }
-
-    /**
-     * @return string
-     */
-    public function getScheme()
-    {
-        return $this->isSecure() ? 'https' : 'http';
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getHost()
-    {
-        return $this->host;
-    }
-
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    protected function initHost()
-    {
-        $host = $this->SERVER['HTTP_HOST'];
-
-        if ($host === null) {
-            return $this;
-        }
-
-        if (strlen($host) > 255) {
-            return $this;
-        }
-
-        if (preg_match('#^[-._A-Za-z0-9]+$#D', $host)) {
-            $this->host = $host;
-        }
-
-        return $this;
+        return $this->getUrl()->getScheme() === 'https';
     }
 
     /**
@@ -184,7 +167,7 @@ class Request extends Message implements RequestInterface
      *
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -192,31 +175,13 @@ class Request extends Message implements RequestInterface
     /**
      * @return string
      */
-    public function getBaseUrl()
+    public function getBaseUrl(): string
     {
-        return $this->getScheme() . '://' . $this->getHost() . $this->getBasePath();
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        $url = $this->getScheme() . '://' . $this->getHost() . $this->getPath();
-
-        if ($this->getQueryString()) {
-            $url .= '?' . $this->getQueryString();
-        }
-
-        return $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getQueryString()
-    {
-        return $this->SERVER['QUERY_STRING'];
+        return (clone $this->getUrl())
+            ->setPath($this->getBasePath() . '/')
+            ->setQuery(null)
+            ->setFragment(null)
+            ->__toString();
     }
 
     /**
@@ -227,20 +192,33 @@ class Request extends Message implements RequestInterface
      *
      * @return string
      */
-    public function getBasePath()
+    public function getBasePath(): string
     {
         return $this->basePath;
     }
 
     /**
-     * @return $this Provides a fluent interface.
+     * Get path info of current url.
+     *
+     * Example: http://www.example.com/foo/index.php/bar
+     * Result: "/bar"
+     *
+     * @return string
      */
-    protected function initBasePath()
+    public function getPathInfo(): string
+    {
+        return $this->pathInfo;
+    }
+
+    /**
+     * @return Request
+     */
+    private function initBasePath(): self
     {
         $basePath = '';
 
-        if (isset($this->SERVER['SCRIPT_NAME'])) {
-            $basePath = dirname($this->SERVER['SCRIPT_NAME']);
+        if (isset($this->serverParams['SCRIPT_NAME'])) {
+            $basePath = dirname($this->serverParams['SCRIPT_NAME']);
         }
 
         if ($basePath === '.') {
@@ -257,87 +235,19 @@ class Request extends Message implements RequestInterface
     }
 
     /**
-     * Get path info of current url.
-     *
-     * Example: http://www.example.com/foo/index.php/bar
-     * Result: "/bar"
-     *
-     * @return string
+     * @return Request
      */
-    public function getPathInfo()
+    private function initPathInfo(): self
     {
-        return $this->pathInfo;
-    }
-
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    protected function initPathInfo()
-    {
-        $pathInfo = '';
-
-        if (isset($this->SERVER['PATH_INFO'])) {
-            $pathInfo = $this->SERVER['PATH_INFO'];
-        } elseif (isset($this->SERVER['REQUEST_URI'])) {
-            $pathInfo = str_replace($this->getBasePath(), '', $this->SERVER['REQUEST_URI']);
+        if (isset($this->serverParams['PATH_INFO'])) {
+            $this->pathInfo = $this->serverParams['PATH_INFO'];
+        } elseif (isset($this->serverParams['REQUEST_URI'])) {
+            $scriptName = $this->serverParams['SCRIPT_NAME'] ?? '';
+            $pathInfo = str_replace($scriptName, '', $this->serverParams['REQUEST_URI']);
+            $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
+            $this->pathInfo = $pathInfoWithoutQueryString ?: $pathInfo;
         }
 
-        $pathInfoWithoutQueryString = strstr($pathInfo, '?', true);
-
-        $this->pathInfo = $pathInfoWithoutQueryString ?: $pathInfo;
-
         return $this;
-    }
-
-    /**
-     * Get path of current url.
-     *
-     * Example: http://www.example.com/foo/index.php/bar
-     * Result: "/foo/index.php/bar"
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @return $this Provides a fluent interface.
-     */
-    protected function initPath()
-    {
-        $path = $this->getBasePath() . $this->getPathInfo();
-
-        $this->path = rtrim($path, '/');
-
-        return $this;
-    }
-
-    /**
-     * @param array $files
-     *
-     * @return array
-     */
-    protected function transformFilesArray(array $files)
-    {
-        foreach ($files as &$value) {
-            $newArray = [];
-
-            foreach ($value as $key => $val) {
-                if (is_array($val)) {
-                    array_walk_recursive($val, function(&$item) use($key) {
-                        $item = [$key => $item];
-                    });
-                    $newArray = array_replace_recursive($newArray, $val);
-                }
-            }
-
-            if (!empty($newArray)) {
-                $value = $newArray;
-            }
-        }
-
-        return $files;
     }
 }

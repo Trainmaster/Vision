@@ -57,7 +57,7 @@ class FrontController
 
             if (isset($route['params'])) {
                 foreach ($route['params'] as $name => $value) {
-                    $request->GET[(string) $name] = $value;
+                    $request->getQueryParams()[(string) $name] = $value;
                 }
             }
 

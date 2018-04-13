@@ -3,23 +3,28 @@ declare(strict_types = 1);
 
 namespace Vision\Http;
 
+use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
+use Vision\Url\Url;
+
 interface RequestInterface
 {
-    public function getHost();
+    public function getUrl(): Url;
 
-    public function getMethod();
+    public function getQueryParams(): SquareBracketNotation;
 
-    public function getUrl();
+    public function getBodyParams(): SquareBracketNotation;
 
-    public function getBaseUrl();
+    public function getServerParams(): SquareBracketNotation;
 
-    public function getQueryString();
+    public function getFiles(): SquareBracketNotation;
 
-    public function getBasePath();
+    public function getCookies(): SquareBracketNotation;
 
-    public function getPath();
+    public function getMethod(): string;
 
-    public function getPathInfo();
+    public function getBaseUrl(): string;
 
-    public function getScheme();
+    public function getBasePath(): string;
+
+    public function getPathInfo(): string;
 }
