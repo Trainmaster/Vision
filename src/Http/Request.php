@@ -178,7 +178,7 @@ class Request extends Message implements RequestInterface
     public function getBaseUrl(): string
     {
         return (clone $this->getUrl())
-            ->setPath($this->getBasePath())
+            ->setPath($this->getBasePath() . '/')
             ->setQuery(null)
             ->setFragment(null)
             ->__toString();

@@ -23,7 +23,7 @@ class RequestTest extends TestCase
         $serverParams = ['SCRIPT_NAME' => '/index.php'];
         $request = new Request($url, [], [], $serverParams, [], []);
 
-        $this->assertSame('http://localhost', $request->getBaseUrl());
+        $this->assertSame('http://localhost/', $request->getBaseUrl());
     }
 
     public function testGetBaseUrlWithComplexUrl()
@@ -32,7 +32,7 @@ class RequestTest extends TestCase
         $serverParams = ['SCRIPT_NAME' => '/foo/index.php'];
         $request = new Request($url, [], [], $serverParams, [], []);
 
-        $this->assertSame('http://localhost:8080/foo', $request->getBaseUrl());
+        $this->assertSame('http://localhost:8080/foo/', $request->getBaseUrl());
     }
 
     public function testItShouldSetBasePath()
