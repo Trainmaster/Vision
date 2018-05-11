@@ -13,3 +13,4 @@ See `composer.json` for requirements.
 *  [Cache](/docs/cache.md)
 *  [Dependency Injection](/docs/dependency-injection.md)
 *  [Form](/docs/form.md)
+*  [Routing](/docs/routing.md)
