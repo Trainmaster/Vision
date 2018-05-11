@@ -4,164 +4,75 @@ declare(strict_types=1);
 
 namespace Vision\Routing;
 
-use Vision\Cache\CacheInterface;
-use Vision\Http\RequestInterface;
+use FastRoute\Dispatcher;
 
 class Router
 {
-    /** @var CacheInterface $cache */
-    protected $cache;
+    /** @var DispatcherFactory */
+    private $dispatcherFactory;
 
-    /** @var RouteCompiler $compiler */
-    protected $compiler;
+    /** @var DefinitionLoaderInterface */
+    private $definitionLoader;
 
-    /** @var array $resources */
-    protected $resources = [];
-
-    /** @var array $routes */
-    protected $routes = [];
+    /** @var string[] $resources */
+    private $resources = [];
 
     /**
-     * @param RouteCompiler $compiler
+     * @param DispatcherFactory $dispatcherFactory
+     * @param DefinitionLoaderInterface $definitionLoader
      */
-    public function __construct(RouteCompiler $compiler)
+    public function __construct(DispatcherFactory $dispatcherFactory, DefinitionLoaderInterface $definitionLoader)
     {
-        $this->compiler = $compiler;
-    }
-
-    /**
-     * @param CacheInterface $cache
-     *
-     * @return Router Provides a fluent interface.
-     */
-    public function setCache(CacheInterface $cache)
-    {
-        $this->cache = $cache;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRoutes()
-    {
-        return $this->routes;
+        $this->dispatcherFactory = $dispatcherFactory;
+        $this->definitionLoader = $definitionLoader;
     }
 
     /**
      * @param string $resource
-     *
-     * @return Router Provides a fluent interface.
+     * @return Router
      */
-    public function addResource($resource)
+    public function addResource(string $resource): self
     {
-        $this->resources[] = (string) $resource;
+        $this->resources[] = $resource;
         return $this;
     }
 
     /**
-     * @return array
-     */
-    public function getResources()
-    {
-        return $this->resources;
-    }
-
-    /**
-     * @param RequestInterface $request
+     * @param string $httpMethod
+     * @param string $uri
      * @return array|null
      */
-    public function resolve(RequestInterface $request)
+    public function resolve(string $httpMethod, string $uri): ?array
     {
-        $pathInfo = $request->getPathInfo();
-
-        if (!$this->processCache()) {
-            $this->loadResources();
-        }
-
-        if (!isset($this->routes[$request->getMethod()])) {
-            return null;
-        }
-
-        foreach ($this->routes[$request->getMethod()] as $route) {
-            if ($route['type'] === CompiledRoute::TYPE_STATIC && $route['path'] === $pathInfo) {
-                return $route;
-            }
-
-            if ($route['type'] === CompiledRoute::TYPE_REGEX && preg_match($route['path'], $pathInfo, $matches)) {
-                $route['params'] = $matches;
-                return $route;
-            }
-        }
-
-        return null;
+        return $this->makeResult(
+            $this->dispatcherFactory
+                ->make($this->definitionLoader->load($this->resources))
+                ->dispatch($httpMethod, $uri)
+        );
     }
 
     /**
-     * @throws \InvalidArgumentException If a configuration file does not return a RouteCollection.
-     *
-     * @return bool
+     * @param array $dispatchResult
+     * @return array|null
      */
-    protected function loadResources()
+    private function makeResult(array $dispatchResult): ?array
     {
-        if (empty($this->resources)) {
-            return false;
+        $status = $dispatchResult[0] ?? Dispatcher::NOT_FOUND;
+        switch ($status) {
+            case Dispatcher::FOUND:
+                return [
+                    'handler' => $dispatchResult[1] ?? [],
+                    'parameters' => $dispatchResult[2] ?? [],
+                ];
+
+            case Dispatcher::METHOD_NOT_ALLOWED:
+                return [
+                    'allowedMethods' => $dispatchResult[1] ?? [],
+                ];
+
+            case Dispatcher::NOT_FOUND:
+            default:
+                return null;
         }
-
-        foreach ($this->resources as $resource) {
-            if (!is_readable($resource)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'The file "%s" could not be loaded.',
-                    $resource
-                ));
-            }
-
-            $collection = include $resource;
-
-            if (!($collection instanceof RouteCollection)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'The file %s must return an instance of %s.',
-                    $resource,
-                    RouteCollection::class
-                ));
-            }
-
-            foreach ($collection as $route) {
-                $compiledRoute = $this->compiler->compile($route);
-                $this->routes[array_shift($compiledRoute)][] = $compiledRoute;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function processCache()
-    {
-        if (!isset($this->cache)) {
-            return false;
-        }
-
-        $id = $this->getCacheKey();
-        $routes = $this->cache->get($id);
-
-        if ($routes) {
-            $this->routes = $routes;
-        } else {
-            $this->loadResources();
-            $this->cache->set($id, $this->routes);
-        }
-
-        return true;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCacheKey()
-    {
-        return __CLASS__ . serialize($this->resources);
     }
 }

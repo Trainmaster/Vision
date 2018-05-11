@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Vision\Routing;
 
 use Vision\Cache\CacheInterface;
-use Vision\File\Loader\IncludeFileLoader;
 use Closure;
 
 class CachedDefinitionLoader implements DefinitionLoaderInterface
