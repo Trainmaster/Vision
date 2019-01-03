@@ -4,7 +4,11 @@ php:
   - 7.1
   - 7.2
   - 7.3
-  - nightly
+  - master
+
+matrix:
+  allow_failures:
+      - php: master
 
 sudo: false
 
