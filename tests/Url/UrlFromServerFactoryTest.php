@@ -43,7 +43,7 @@ class UrlFromServerFactoryTest extends TestCase
     {
         $expectedUrl = 'http://localhost:8080/path/to/index.php?key=value';
         $server = [
-            'HTTP_HOST' => 'localhost:8080',
+            'HTTP_HOST' => 'localhost:8090',
             'SERVER_PORT' => '8080',
             'REQUEST_URI' => '/path/to/index.php?key=value',
             'QUERY_STRING' => 'key=value'
