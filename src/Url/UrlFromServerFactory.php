@@ -36,7 +36,7 @@ class UrlFromServerFactory
      */
     private static function extractHost(array $server): string
     {
-        $host = $server['SERVER_NAME'] ?? $server['HTTP_HOST'] ?? '';
+        $host = $server['HTTP_HOST'] ?? $server['SERVER_NAME'] ?? '';
 
         if (strlen($host) > 255) {
             return '';

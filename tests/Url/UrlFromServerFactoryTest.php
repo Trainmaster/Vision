@@ -68,4 +68,20 @@ class UrlFromServerFactoryTest extends TestCase
 
         $this->assertSame($expectedUrl, $url->__toString());
     }
+
+    public function testShouldPreferHttpHost()
+    {
+        $expectedUrl = 'https://subdomain.example.com/path/to/index.php';
+        $server = [
+            'HTTP_HOST' => 'subdomain.example.com',
+            'HTTPS' => 'on',
+            'SERVER_NAME' => 'example.com',
+            'SERVER_PORT' => '443',
+            'REQUEST_URI' => '/path/to/index.php',
+        ];
+
+        $url = UrlFromServerFactory::make($server);
+
+        $this->assertSame($expectedUrl, $url->__toString());
+    }
 }
