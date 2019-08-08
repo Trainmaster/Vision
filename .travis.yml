@@ -9,7 +9,7 @@ php:
 
 matrix:
   allow_failures:
-      - php: master
+      - php: 7.4snapshot
 
 sudo: false
 
