@@ -73,6 +73,7 @@ class UrlFromServerFactory
      */
     private static function extractQuery(array $server): ?string
     {
-        return $server['QUERY_STRING'] ?? null;
+        $queryString = $server['QUERY_STRING'] ?? null;
+        return $queryString !== '' ? $queryString : null;
     }
 }
