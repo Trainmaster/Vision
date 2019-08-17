@@ -117,7 +117,7 @@ class Router
 
             $collection = include $resource;
 
-            if (!($collection instanceof RouteCollection)){
+            if (!($collection instanceof RouteCollection)) {
                 throw new \InvalidArgumentException(sprintf(
                     'The file %s must return an instance of %s.',
                     $resource,
