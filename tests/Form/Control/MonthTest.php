@@ -1,4 +1,6 @@
 <?php
+namespace VisionTest\Form\Control;
+
 use Vision\Form\Control\Month;
 
 use PHPUnit\Framework\TestCase;
