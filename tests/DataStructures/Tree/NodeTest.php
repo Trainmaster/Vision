@@ -6,9 +6,10 @@ use Vision\DataStructures\Tree\NodeInterface;
 
 use PHPUnit\Framework\TestCase;
 
-class NodeTest extends TestCase {
-
-    public function testParent() {
+class NodeTest extends TestCase
+{
+    public function testParent()
+    {
         $nodeA = new Node();
         $this->assertNull($nodeA->getParent());
 
@@ -16,21 +17,24 @@ class NodeTest extends TestCase {
         $this->assertSame($nodeA, $nodeB->getParent());
     }
 
-    public function testAddChild() {
+    public function testAddChild()
+    {
         $nodeA = new Node();
         $nodeB = (new Node())->addChild($nodeA);
 
         $this->assertSame($nodeB->getChildren(), [$nodeA]);
     }
 
-    public function testdAddChildShouldSetParent() {
+    public function testdAddChildShouldSetParent()
+    {
         $nodeA = new Node();
         $nodeB = (new Node())->addChild($nodeA);
 
         $this->assertSame($nodeA->getParent(), $nodeB);
     }
 
-    public function testGetChildren() {
+    public function testGetChildren()
+    {
         $node = new Node();
         $this->assertSame($node->getChildren(), []);
 
@@ -39,7 +43,8 @@ class NodeTest extends TestCase {
         $this->assertCount(1, $node->getChildren());
     }
 
-    public function testRemoveChild() {
+    public function testRemoveChild()
+    {
         $nodeA = new Node();
         $nodeB = (new Node())->addChild($nodeA);
         $nodeB->removeChild($nodeA);
@@ -47,7 +52,8 @@ class NodeTest extends TestCase {
         $this->assertEmpty($nodeB->getChildren());
     }
 
-    public function testHasChildren() {
+    public function testHasChildren()
+    {
         $node = new Node();
         $this->assertSame($node->hasChildren(), false);
 

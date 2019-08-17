@@ -23,7 +23,8 @@ class RouteCompilerTest extends TestCase
         $this->assertSame($expected, $compiler->compile(new Route('GET', '/', 'test')));
     }
 
-    public function testCompileWithRequiredParameter() {
+    public function testCompileWithRequiredParameter()
+    {
         $compiler = new RouteCompiler();
 
         $expected = [
@@ -36,7 +37,8 @@ class RouteCompilerTest extends TestCase
         $this->assertSame($expected, $compiler->compile(new Route('GET', '/{id}', 'test')));
     }
 
-    public function testCompileWithOptionalParameter() {
+    public function testCompileWithOptionalParameter()
+    {
         $compiler = new RouteCompiler();
 
         $expected = [
@@ -53,7 +55,8 @@ class RouteCompilerTest extends TestCase
      * @expectedException \LogicException
      * @expectedExceptionMessage Empty "{}" placeholder is not allowed.
      */
-    public function testCompileWithEmptyRequiredPlaceholderShouldThrowException() {
+    public function testCompileWithEmptyRequiredPlaceholderShouldThrowException()
+    {
         (new RouteCompiler())->compile(new Route('GET', '/{}', 'test'));
     }
 
@@ -61,7 +64,8 @@ class RouteCompilerTest extends TestCase
      * @expectedException \LogicException
      * @expectedExceptionMessage Empty "<>" placeholder is not allowed.
      */
-    public function testCompileWithEmptyOptionalPlaceholderShouldThrowException() {
+    public function testCompileWithEmptyOptionalPlaceholderShouldThrowException()
+    {
         (new RouteCompiler())->compile(new Route('GET', '/<>', 'test'));
     }
 }

@@ -5,5 +5,6 @@ use Psr\Container\ContainerExceptionInterface;
 
 use LogicException;
 
-class AliasReservedException extends LogicException implements ContainerExceptionInterface {
+class AliasReservedException extends LogicException implements ContainerExceptionInterface
+{
 }

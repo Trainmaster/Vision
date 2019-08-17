@@ -5,5 +5,6 @@ use Psr\Container\ContainerExceptionInterface;
 
 use LogicException;
 
-class AliasAlreadyRegisteredException extends LogicException implements ContainerExceptionInterface {
+class AliasAlreadyRegisteredException extends LogicException implements ContainerExceptionInterface
+{
 }
