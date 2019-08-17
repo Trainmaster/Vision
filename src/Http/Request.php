@@ -49,8 +49,8 @@ class Request extends Message implements RequestInterface
         array $bodyParams,
         array $serverParams,
         array $files,
-        array $cookies)
-    {
+        array $cookies
+    ) {
         $this->url = $url;
         $this->queryParams = new SquareBracketNotation($queryParams);
         $this->bodyParams = new SquareBracketNotation($bodyParams);
