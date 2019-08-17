@@ -3,8 +3,6 @@ namespace VisionTest\Form;
 
 use Vision\Form\Form;
 
-require_once 'BasicForm.php';
-
 use PHPUnit\Framework\TestCase;
 
 class BasicFormTest extends TestCase
