@@ -31,7 +31,7 @@ class SquareBracketNotationTest extends TestCase
 
 
         $mutator->set('foo', 1);
-        $mutator->set('foo[bar]',2);
+        $mutator->set('foo[bar]', 2);
 
         $this->assertSame(['foo' => 1], $mutator->getArrayCopy());
     }
