@@ -64,4 +64,3 @@ class RequestTest extends TestCase
         $this->assertSame('/foo', $request->getPathInfo());
     }
 }
-
