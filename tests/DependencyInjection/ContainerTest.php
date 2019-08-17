@@ -21,26 +21,26 @@ class ContainerTest extends TestCase
 {
     public function testRegisterWithClass()
     {
-        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class));
+        $this->assertInstanceOf(Definition::class, (new Container())->register(BasicClass::class));
     }
 
     public function testRegisterWithClassAndAlias()
     {
-        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, 'alias'));
+        $this->assertInstanceOf(Definition::class, (new Container())->register(BasicClass::class, 'alias'));
     }
 
     public function testRegisterWithClassAndInvalidAlias()
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $this->assertInstanceOf(Definition::class, (new Container)->register(BasicClass::class, new BasicClass()));
+        $this->assertInstanceOf(Definition::class, (new Container())->register(BasicClass::class, new BasicClass()));
     }
 
     public function testRegisterWhenClassIsAlreadyDefined()
     {
         $this->expectException(AliasAlreadyRegisteredException::class);
 
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class);
         $container->register(BasicClass::class);
     }
@@ -49,7 +49,7 @@ class ContainerTest extends TestCase
     {
         $this->expectException(AliasAlreadyRegisteredException::class);
 
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class, 'Alias');
         $container->register(BasicClass::class, 'Alias');
     }
@@ -58,13 +58,13 @@ class ContainerTest extends TestCase
     {
         $this->expectException(AliasReservedException::class);
 
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class, 'self');
     }
 
     public function testGetDefinition()
     {
-        $container = new Container;
+        $container = new Container();
 
         $this->assertSame(null, $container->getDefinition(BasicClass::class));
 
@@ -75,7 +75,7 @@ class ContainerTest extends TestCase
 
     public function testGetDefinitions()
     {
-        $container = new Container;
+        $container = new Container();
 
         $container->register(BasicClass::class);
         $container->register(BasicClass::class, 'Alias');
@@ -85,7 +85,7 @@ class ContainerTest extends TestCase
 
     public function testGet()
     {
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class);
 
         $this->assertInstanceOf(BasicClass::class, $container->get(BasicClass::class));
@@ -95,12 +95,12 @@ class ContainerTest extends TestCase
     {
         $this->expectException(NotFoundException::class);
 
-        (new Container)->get(BasicClass::class);
+        (new Container())->get(BasicClass::class);
     }
 
     public function testGetShared()
     {
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class)->setShared(true);
 
         $instanceOne = $container->get(BasicClass::class);
@@ -111,7 +111,7 @@ class ContainerTest extends TestCase
 
     public function testGetNonShared()
     {
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class)->setShared(false);
 
         $instanceOne = $container->get(BasicClass::class);
@@ -122,7 +122,7 @@ class ContainerTest extends TestCase
 
     public function testGetSelf()
     {
-        $container = new Container;
+        $container = new Container();
 
         $self = $container->get('self');
 
@@ -131,7 +131,7 @@ class ContainerTest extends TestCase
 
     public function testGetViaFactory()
     {
-        $container = new Container;
+        $container = new Container();
         $container->register(FooFactory::class, 'FooFactory');
         $container->register(Foo::class, 'Foo')
             ->factory('@FooFactory', 'getInstance');
@@ -143,7 +143,7 @@ class ContainerTest extends TestCase
     {
         $param1 = 'foo';
 
-        $container = new Container;
+        $container = new Container();
         $container->register(FooFactory::class, 'FooFactory');
         $container->register(Foo::class, 'Foo')
             ->factory('@FooFactory', 'getInstanceWithParameters', [$param1]);
@@ -158,7 +158,7 @@ class ContainerTest extends TestCase
     {
         $param1 = 'foo';
 
-        $container = new Container;
+        $container = new Container();
         $container->register(Foo::class, 'Foo')
             ->factory(FooFactory::class, 'createViaStaticMethod', [$param1]);
 
@@ -170,7 +170,7 @@ class ContainerTest extends TestCase
 
     public function testDependentClass()
     {
-        $container = new Container;
+        $container = new Container();
         $container->register(BasicClass::class);
         $container->register(DependentClass::class)->constructor(['@' . BasicClass::class]);
 
@@ -182,7 +182,7 @@ class ContainerTest extends TestCase
 
     public function testSetAndGetParameter()
     {
-        $container = new Container;
+        $container = new Container();
 
         $this->assertNull($container->getParameter('foo'));
         $this->assertSame($container, $container->setParameter('foo', 'bar'));
@@ -193,7 +193,7 @@ class ContainerTest extends TestCase
     {
         $params = ['foo' => 'bar'];
 
-        $container = new Container;
+        $container = new Container();
         $container->setParameters($params);
 
         $this->assertSame($params, $container->getParameters());

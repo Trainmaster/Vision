@@ -45,15 +45,15 @@ class Form extends AbstractCompositeType implements IteratorAggregate
 
         $this->setTag('form');
 
-        $node = new Node;
+        $node = new Node();
         $node->addChild($this);
         $this->node = $node;
 
         $this->controlsIterator = new Iterator\ControlsIterator(new \RecursiveIteratorIterator(new NodeIterator($this->node)));
         $this->optionControlsIterator = new Iterator\OptionControlsIterator(new \RecursiveIteratorIterator(new NodeIterator($this->node)));
 
-        $this->data = new SquareBracketNotation;
-        $this->values = new SquareBracketNotation;
+        $this->data = new SquareBracketNotation();
+        $this->values = new SquareBracketNotation();
     }
 
     /**

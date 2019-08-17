@@ -14,7 +14,7 @@ class IdenticalTest extends TestCase
     
     protected function setUp()
     {
-        $this->validator = new Validator\Identical;
+        $this->validator = new Validator\Identical();
     }
 
     public function testConstructEmpty()
@@ -48,7 +48,7 @@ class IdenticalTest extends TestCase
         $this->validator->setOperand(1);
         $this->assertTrue($this->validator->validate(1));
 
-        $object = new stdClass;
+        $object = new stdClass();
         $this->validator->setOperand($object);
         $this->assertTrue($this->validator->validate($object));
     }
@@ -60,7 +60,7 @@ class IdenticalTest extends TestCase
         $this->validator->setOperand(1);
         $this->assertFalse($this->validator->validate('1'));
 
-        $this->validator->setOperand(new stdClass);
-        $this->assertFalse($this->validator->validate(new stdClass));
+        $this->validator->setOperand(new stdClass());
+        $this->assertFalse($this->validator->validate(new stdClass()));
     }
 }

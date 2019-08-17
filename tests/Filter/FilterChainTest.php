@@ -13,7 +13,7 @@ class FilterChainTest extends TestCase
 
     protected function setUp()
     {
-        $this->filterChain = new FilterChain;
+        $this->filterChain = new FilterChain();
     }
 
     public function testAddShouldProvideFluentInterface()

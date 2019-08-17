@@ -12,7 +12,7 @@ class EmailTest extends TestCase
 
     protected function setUp()
     {
-        $this->validator = new Email;
+        $this->validator = new Email();
     }
 
     public function testSuccess()

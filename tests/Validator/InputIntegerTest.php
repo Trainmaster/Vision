@@ -21,7 +21,7 @@ class InputIntegerTest extends TestCase
 
     protected function setUp()
     {
-        $this->validator = new InputInteger;
+        $this->validator = new InputInteger();
         $this->minValidator = new InputInteger(1);
         $this->maxValidator = new InputInteger(null, 1);
         $this->minAndMaxValidator = new InputInteger(1, 2);

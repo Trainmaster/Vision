@@ -13,7 +13,7 @@ class ResponseTest extends TestCase
 
     protected function setUp()
     {
-        $this->response = new Response;
+        $this->response = new Response();
     }
 
     public function testDefaultsAfterConstruct()

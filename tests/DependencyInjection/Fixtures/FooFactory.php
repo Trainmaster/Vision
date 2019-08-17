@@ -5,7 +5,7 @@ class FooFactory
 {
     public function getInstance()
     {
-        return new Foo;
+        return new Foo();
     }
 
     public function getInstanceWithParameters($param1) {

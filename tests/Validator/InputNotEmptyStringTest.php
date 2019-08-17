@@ -12,7 +12,7 @@ class InputNotEmptyStringTest extends TestCase
 
     protected function setUp()
     {
-        $this->validator = new Validator\InputNotEmptyString;
+        $this->validator = new Validator\InputNotEmptyString();
     }
 
     public function testSuccess()
@@ -21,7 +21,7 @@ class InputNotEmptyStringTest extends TestCase
         $this->assertTrue($this->validator->validate('0'));
         $this->assertTrue($this->validator->validate(['0', 0]));
         $this->assertTrue($this->validator->validate([['0', 0]]));
-        $this->assertTrue($this->validator->validate(new \stdClass));
+        $this->assertTrue($this->validator->validate(new \stdClass()));
         $this->assertTrue($this->validator->validate(false));
         $this->assertTrue($this->validator->validate(null));
         $this->assertTrue($this->validator->validate(0));

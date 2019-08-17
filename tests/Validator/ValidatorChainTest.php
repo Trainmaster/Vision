@@ -12,7 +12,7 @@ class ValidatorChainTest extends TestCase
 
     public function setUp()
     {
-        $this->chain = new Validator\ValidatorChain;
+        $this->chain = new Validator\ValidatorChain();
     }
 
     public function testAddValidator()

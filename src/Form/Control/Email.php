@@ -17,6 +17,6 @@ class Email extends AbstractInput
     {
         parent::__construct($name);
 
-        $this->addValidator(new Validator\Email);
+        $this->addValidator(new Validator\Email());
     }
 }

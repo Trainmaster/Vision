@@ -9,7 +9,7 @@ class ArrayObjectTest extends TestCase
 {
     public function testHasInterfacesImplemented()
     {
-        $arrayObject = new ArrayObject;
+        $arrayObject = new ArrayObject();
 
         $this->assertInstanceOf('ArrayAccess', $arrayObject);
         $this->assertInstanceOf('Countable', $arrayObject);
@@ -17,7 +17,7 @@ class ArrayObjectTest extends TestCase
 
     public function testDefaultsAfterConstruct()
     {
-        $arrayObject = new ArrayObject;
+        $arrayObject = new ArrayObject();
 
         $this->assertSame([], $arrayObject->getArrayCopy());
         $this->assertTrue($arrayObject->isEmpty());
@@ -25,7 +25,7 @@ class ArrayObjectTest extends TestCase
 
     public function testExchangeArray()
     {
-        $arrayObject = new ArrayObject;
+        $arrayObject = new ArrayObject();
 
         $this->assertSame([], $arrayObject->exchangeArray(['foo']));
         $this->assertSame(['foo'], $arrayObject->getArrayCopy());
@@ -37,7 +37,7 @@ class ArrayObjectTest extends TestCase
 
     public function testIsEmpty()
     {
-        $arrayObject = new ArrayObject;
+        $arrayObject = new ArrayObject();
 
         $this->assertTrue($arrayObject->isEmpty());
 
@@ -48,7 +48,7 @@ class ArrayObjectTest extends TestCase
 
     public function testIndirectModification()
     {
-        $arrayObject = new ArrayObject;
+        $arrayObject = new ArrayObject();
 
         $this->assertFalse(isset($arrayObject['foo']));
         $arrayObject['foo'] = 'bar';
@@ -69,7 +69,7 @@ class ArrayObjectTest extends TestCase
 
     public function testCount()
     {
-        $arrayObject = new ArrayObject;
+        $arrayObject = new ArrayObject();
 
         $this->assertSame(0, count($arrayObject));
 

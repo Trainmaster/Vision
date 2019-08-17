@@ -12,7 +12,7 @@ class IntegerTest extends TestCase
 
     protected function setUp()
     {
-        $this->validator = new Validator\Integer;
+        $this->validator = new Validator\Integer();
     }
 
     public function testSuccess()
@@ -26,7 +26,7 @@ class IntegerTest extends TestCase
 
     public function testFailure()
     {
-        $this->assertFalse($this->validator->validate(new \stdClass));
+        $this->assertFalse($this->validator->validate(new \stdClass()));
         $this->assertFalse($this->validator->validate(false));
         $this->assertFalse($this->validator->validate(null));
         $this->assertFalse($this->validator->validate(0.1));

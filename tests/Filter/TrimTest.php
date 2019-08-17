@@ -12,7 +12,7 @@ class TrimTest extends TestCase
 
     protected function setUp()
     {
-        $this->filter = new Trim;
+        $this->filter = new Trim();
     }
 
     public function testFilter()

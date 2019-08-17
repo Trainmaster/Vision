@@ -54,7 +54,7 @@ class RouteCompilerTest extends TestCase
      * @expectedExceptionMessage Empty "{}" placeholder is not allowed.
      */
     public function testCompileWithEmptyRequiredPlaceholderShouldThrowException() {
-        (new RouteCompiler)->compile(new Route('GET', '/{}', 'test'));
+        (new RouteCompiler())->compile(new Route('GET', '/{}', 'test'));
     }
 
     /**
@@ -62,6 +62,6 @@ class RouteCompilerTest extends TestCase
      * @expectedExceptionMessage Empty "<>" placeholder is not allowed.
      */
     public function testCompileWithEmptyOptionalPlaceholderShouldThrowException() {
-        (new RouteCompiler)->compile(new Route('GET', '/<>', 'test'));
+        (new RouteCompiler())->compile(new Route('GET', '/<>', 'test'));
     }
 }

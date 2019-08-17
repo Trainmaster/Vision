@@ -12,7 +12,7 @@ class NotNullTest extends TestCase
 
     protected function setUp()
     {
-        $this->validator = new Validator\NotNull;
+        $this->validator = new Validator\NotNull();
     }
 
     public function testSuccess()

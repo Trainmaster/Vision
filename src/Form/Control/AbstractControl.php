@@ -180,7 +180,7 @@ abstract class AbstractControl extends AbstractType
         $value = $this->data;
 
         if ($this->isRequired()) {
-            array_unshift($this->validators, new Validator\InputNotEmptyString, new Validator\NotNull);
+            array_unshift($this->validators, new Validator\InputNotEmptyString(), new Validator\NotNull());
         }
 
         foreach ($this->validators as $validator) {
