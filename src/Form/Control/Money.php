@@ -66,7 +66,6 @@ class Money extends Text
         $fmtCurrency = new NumberFormatter(Locale::getDefault(), NumberFormatter::CURRENCY);
 
         if (!is_float($value)) {
-
             $parsedValue = $fmtCurrency->parseCurrency($value, $this->currency);
 
             if (!$parsedValue) {
