@@ -9,7 +9,7 @@ class PregReplace implements Filter
     /** @var string|string[] */
     private $pattern;
 
-    /** @var string|\string[] */
+    /** @var string|string[] */
     private $replacement;
 
     /**
