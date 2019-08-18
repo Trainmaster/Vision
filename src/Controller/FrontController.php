@@ -11,10 +11,10 @@ use Vision\Routing\Router;
 
 class FrontController
 {
-    /** @var null|ContainerInterface $container */
+    /** @var ContainerInterface $container */
     private $container;
 
-    /** @var null|Router $router */
+    /** @var Router $router */
     private $router;
 
     /** @var null|ExceptionHandlerInterface $exceptionHandler */
