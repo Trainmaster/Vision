@@ -66,7 +66,7 @@ class ContainerTest extends TestCase
     {
         $container = new Container();
 
-        $this->assertSame(null, $container->getDefinition(BasicClass::class));
+        $this->assertNull($container->getDefinition(BasicClass::class));
 
         $container->register(BasicClass::class);
 

@@ -66,8 +66,8 @@ class DateTest extends TestCase
 
         $control->setValue(null);
 
-        $this->assertSame(null, $control->getAttribute('value'));
-        $this->assertSame(null, $control->getValue());
+        $this->assertNull($control->getAttribute('value'));
+        $this->assertNull($control->getValue());
     }
 
     /**

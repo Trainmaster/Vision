@@ -57,16 +57,16 @@ class ElementTest extends TestCase
     {
         $element = new Element('div');
 
-        $this->assertSame(null, $element->getAttribute('required'));
+        $this->assertNull($element->getAttribute('required'));
         $this->assertSame($element, $element->setAttribute('required'));
-        $this->assertSame(true, $element->getAttribute('required'));
+        $this->assertTrue($element->getAttribute('required'));
     }
 
     public function testSetAndGetAttributeWithTwoArguments()
     {
         $element = new Element('div');
 
-        $this->assertSame(null, $element->getAttribute('id'));
+        $this->assertNull($element->getAttribute('id'));
         $this->assertSame($element, $element->setAttribute('id', 'foo'));
         $this->assertSame('foo', $element->getAttribute('id'));
     }

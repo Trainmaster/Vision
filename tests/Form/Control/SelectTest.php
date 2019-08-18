@@ -35,8 +35,8 @@ class SelectTest extends TestCase
         $this->assertTrue($control->isRequired());
         $this->assertSame('', (string) $control);
         $this->assertSame('select', $control->getTag());
-        $this->assertSame(null, $control->getSize());
-        $this->assertSame(null, $control->getMultiple());
+        $this->assertNull($control->getSize());
+        $this->assertNull($control->getMultiple());
     }
 
     public function testSetAndGetSize()

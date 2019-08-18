@@ -49,7 +49,7 @@ class AbstractControlTest extends TestCase
         $control = $this->control;
 
         $this->assertTrue($control->isValid());
-        $this->assertSame(null, $control->getValue());
+        $this->assertNull($control->getValue());
         $this->assertEmpty($control->getErrors());
     }
 
@@ -59,7 +59,7 @@ class AbstractControlTest extends TestCase
         $control->setRequired(true);
 
         $this->assertFalse($control->isValid());
-        $this->assertSame(null, $control->getValue());
+        $this->assertNull($control->getValue());
         $this->assertNotEmpty($control->getErrors());
     }
 
@@ -80,7 +80,7 @@ class AbstractControlTest extends TestCase
         $control->setData('');
 
         $this->assertFalse($control->isValid());
-        $this->assertSame(null, $control->getValue());
+        $this->assertNull($control->getValue());
         $this->assertNotEmpty($control->getErrors());
     }
 
