@@ -98,6 +98,13 @@ class ContainerTest extends TestCase
         (new Container())->get(BasicClass::class);
     }
 
+    public function testGetWhenAliasIsNotOfTypeString()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new Container())->get(123);
+    }
+
     public function testGetShared()
     {
         $container = new Container();
@@ -166,6 +173,13 @@ class ContainerTest extends TestCase
 
         $this->assertSame($param1, $foo->param1);
         $this->assertInstanceOf(Foo::class, $foo);
+    }
+
+    public function testHasWhenAliasIsNotOfTypeString()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new Container())->has(123);
     }
 
     public function testDependentClass()

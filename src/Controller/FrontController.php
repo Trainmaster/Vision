@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Vision\Controller;
 
-use Vision\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Vision\Http\RequestInterface;
 use Vision\Http\Response;
 use Vision\Http\ResponseInterface;

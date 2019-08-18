@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Vision\DependencyInjection;
 
+use InvalidArgumentException;
+use Psr\Container\ContainerInterface;
 use ReflectionClass;
 
 class Container implements ContainerInterface
@@ -96,8 +98,12 @@ class Container implements ContainerInterface
         return $this->parameters;
     }
 
-    public function get(string $alias)
+    public function get($alias)
     {
+        if (is_string($alias) === false) {
+            throw new InvalidArgumentException("Argument 1 passed to " . __METHOD__ . " must be a string.");
+        }
+
         if ($alias === 'self') {
             return $this;
         }
@@ -118,8 +124,12 @@ class Container implements ContainerInterface
         return $this->createInstance($definition);
     }
 
-    public function has(string $alias): bool
+    public function has($alias): bool
     {
+        if (is_string($alias) === false) {
+            throw new InvalidArgumentException("Argument 1 passed to " . __METHOD__ . " must be a string.");
+        }
+
         return isset($this->definitions[$alias]);
     }
 
