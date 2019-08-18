@@ -6,7 +6,7 @@ namespace Vision\File\Loader;
 
 class ScopeFileLoader implements LoaderInterface
 {
-    /** @var null|string */
+    /** @var mixed */
     protected $scope;
 
     /** @var null|string */
