@@ -22,3 +22,10 @@ script:
 
 notifications:
   email: false
+
+jobs:
+  include:
+    - stage: "Static Code Analysis"
+      name: "Coding Standard"
+      php: 7.3
+      script: ./vendor/bin/phpcs
