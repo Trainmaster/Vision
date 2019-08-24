@@ -30,5 +30,15 @@
     "psr-4": {
       "VisionTest\\": "tests/"
     }
+  },
+  "archive": {
+    "exclude": [
+      "/docs",
+      "/tests",
+      "/.gitattributes",
+      "/.gitignore",
+      "/phpcs.xml",
+      "/phpunit.xml"
+    ]
   }
 }
