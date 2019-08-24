@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Vision\Controller;
 
-use Vision\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Vision\Http\RequestInterface;
 use Vision\Http\Response;
 use Vision\Http\ResponseInterface;
@@ -11,10 +11,10 @@ use Vision\Routing\Router;
 
 class FrontController
 {
-    /** @var null|ContainerInterface $container */
+    /** @var ContainerInterface $container */
     private $container;
 
-    /** @var null|Router $router */
+    /** @var Router $router */
     private $router;
 
     /** @var null|ExceptionHandlerInterface $exceptionHandler */
