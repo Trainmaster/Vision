@@ -90,11 +90,7 @@ class FrontController
 
         $response = null;
 
-        $preFilter = $instance->preFilter();
-
-        if ($preFilter instanceof ResponseInterface) {
-            return $preFilter;
-        }
+        $instance->preFilter();
 
         $response = $instance();
 
