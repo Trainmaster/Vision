@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Tel;
-
 use PHPUnit\Framework\TestCase;
 
 class TelTest extends TestCase

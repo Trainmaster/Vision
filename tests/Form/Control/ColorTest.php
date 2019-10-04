@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Color;
-
 use PHPUnit\Framework\TestCase;
 
 class ColorTest extends TestCase

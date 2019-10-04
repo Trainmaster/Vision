@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace VisionTest\Url;
 
 use Vision\Url\Url;
-
 use PHPUnit\Framework\TestCase;
 
 class UrlTest extends TestCase

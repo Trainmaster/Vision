@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Text;
-
 use PHPUnit\Framework\TestCase;
 
 class TextTest extends TestCase

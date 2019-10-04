@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Validator;
 
 use Vision\Validator\InputInteger;
-
 use PHPUnit\Framework\TestCase;
 
 class InputIntegerTest extends TestCase

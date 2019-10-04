@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Submit;
-
 use PHPUnit\Framework\TestCase;
 
 class SubmitTest extends TestCase

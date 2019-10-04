@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Validator;
 
 use Vision\Validator\Email;
-
 use PHPUnit\Framework\TestCase;
 
 class EmailTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Textarea;
-
 use PHPUnit\Framework\TestCase;
 
 class TextareaTest extends TestCase

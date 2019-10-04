@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form;
 
 use Vision\Form\Form;
-
 use PHPUnit\Framework\TestCase;
 
 class BasicFormTest extends TestCase

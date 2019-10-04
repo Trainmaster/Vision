@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace VisionTest\Url;
 
 use Vision\Url\UrlFromServerFactory;
-
 use PHPUnit\Framework\TestCase;
 
 class UrlFromServerFactoryTest extends TestCase

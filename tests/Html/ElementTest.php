@@ -1,11 +1,10 @@
 <?php
+
 namespace VisionTest\Html;
 
 use Vision\Html\Element;
-
 use InvalidArgumentException;
 use LogicException;
-
 use PHPUnit\Framework\TestCase;
 
 class ElementTest extends TestCase

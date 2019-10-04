@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vision\Session\Extension;
 
 use Vision\Session\SessionInterface;
-
 use SessionHandlerInterface;
 use RuntimeException;
 

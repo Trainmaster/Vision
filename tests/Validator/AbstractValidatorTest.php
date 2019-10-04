@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Validator;
 
 use Vision\Validator\AbstractValidator;
-
 use PHPUnit\Framework\TestCase;
 
 class AbstractValidatorTest extends TestCase

@@ -1,10 +1,9 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Money;
-
 use Locale;
-
 use PHPUnit\Framework\TestCase;
 
 class MoneyTest extends TestCase

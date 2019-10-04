@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\DataStructures\Arrays\Mutator;
 
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
-
 use PHPUnit\Framework\TestCase;
 
 class SquareBracketNotationTest extends TestCase

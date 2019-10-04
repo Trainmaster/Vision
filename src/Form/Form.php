@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vision\Form;
@@ -6,7 +7,6 @@ namespace Vision\Form;
 use Vision\DataStructures\Arrays\Mutator\SquareBracketNotation;
 use Vision\DataStructures\Tree\Node;
 use Vision\DataStructures\Tree\NodeIterator;
-
 use IteratorAggregate;
 
 class Form extends AbstractCompositeType implements IteratorAggregate

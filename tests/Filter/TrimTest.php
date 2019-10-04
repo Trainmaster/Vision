@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Filter;
 
 use Vision\Filter\Trim;
-
 use PHPUnit\Framework\TestCase;
 
 class TrimTest extends TestCase

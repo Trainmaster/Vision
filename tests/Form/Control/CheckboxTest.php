@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Checkbox;
-
 use PHPUnit\Framework\TestCase;
 
 class CheckboxTest extends TestCase

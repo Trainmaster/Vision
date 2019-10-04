@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Time;
-
 use PHPUnit\Framework\TestCase;
 
 class TimeTest extends TestCase

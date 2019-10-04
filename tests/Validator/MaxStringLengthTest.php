@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Validator;
 
 use Vision\Validator;
-
 use PHPUnit\Framework\TestCase;
 
 class MaxStringLengthTest extends TestCase

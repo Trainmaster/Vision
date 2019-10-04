@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Vision\App;
 
 use Locale;
-
 use Vision\Controller\FrontController;
 use Vision\Http\RequestInterface;
 

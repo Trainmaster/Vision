@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Image;
-
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase

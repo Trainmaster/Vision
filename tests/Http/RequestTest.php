@@ -1,9 +1,9 @@
 <?php
+
 namespace VisionTest\Http;
 
 use Vision\Http\Request;
 use Vision\Url\Url;
-
 use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Range;
-
 use PHPUnit\Framework\TestCase;
 
 class RangeTest extends TestCase

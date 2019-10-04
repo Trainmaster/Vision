@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\File;
-
 use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase

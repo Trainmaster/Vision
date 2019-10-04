@@ -1,9 +1,9 @@
 <?php
+
 namespace VisionTest\Http;
 
 use Vision\Http\Message;
 use Vision\Http\Response;
-
 use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase

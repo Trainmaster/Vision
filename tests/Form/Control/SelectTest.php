@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Select;
-
 use PHPUnit\Framework\TestCase;
 
 class SelectTest extends TestCase

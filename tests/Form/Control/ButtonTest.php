@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Button;
-
 use PHPUnit\Framework\TestCase;
 
 class ButtonTest extends TestCase
