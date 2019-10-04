@@ -141,7 +141,7 @@ class Element
     }
 
     /**
-     * @return array
+     * @return array|string
      */
     public function getContents()
     {

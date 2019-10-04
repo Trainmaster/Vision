@@ -13,7 +13,7 @@ abstract class AbstractInput extends AbstractControl
     {
         parent::__construct($name);
 
-        $this->setTag('input')
-             ->setRequired(true);
+        $this->setTag('input');
+        $this->setRequired(true);
     }
 }

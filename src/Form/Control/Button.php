@@ -13,7 +13,7 @@ class Button extends AbstractControl
     {
         parent::__construct($name);
 
-        $this->setTag('button')
-             ->setRequired(true);
+        $this->setTag('button');
+        $this->setRequired(true);
     }
 }

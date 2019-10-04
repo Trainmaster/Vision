@@ -61,7 +61,7 @@ class Money extends Text
     public function setValue($value)
     {
         if ($value === null) {
-            return null;
+            return $this;
         }
         
         $fmtCurrency = new NumberFormatter(Locale::getDefault(), NumberFormatter::CURRENCY);

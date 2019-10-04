@@ -18,14 +18,14 @@ class Form extends AbstractCompositeType implements IteratorAggregate
         'method' => 'post'
     ];
 
-    /** @var array */
-    protected $data = [];
+    /** @var SquareBracketNotation */
+    protected $data;
 
     /** @var array $errors */
     protected $errors = [];
 
-    /** @var array $values */
-    protected $values = [];
+    /** @var SquareBracketNotation */
+    protected $values;
 
     /** @var Iterator\ControlsIterator $controlsIterator */
     protected $controlsIterator;

@@ -6,6 +6,9 @@ namespace Vision\Form;
 
 abstract class AbstractCompositeType extends AbstractType
 {
+    /** @var AbstractType[] */
+    protected $elements = [];
+
     /**
      * @return string
      */

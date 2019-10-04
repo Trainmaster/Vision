@@ -8,11 +8,11 @@ use Vision\File\File;
 
 class FileResponse extends Response
 {
-    /** @var string $file */
+    /** @var File $file */
     protected $file;
 
     /**
-     * @param \Vision\File\File|string $file
+     * @param File|string $file
      */
     public function __construct($file)
     {
