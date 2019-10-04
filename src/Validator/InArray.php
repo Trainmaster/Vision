@@ -6,11 +6,11 @@ namespace Vision\Validator;
 
 class InArray extends AbstractValidator
 {
-    /** @var string VALUE_NOT_FOUND */
-    const VALUE_NOT_FOUND = 'Value could not be found.';
-
     /** @var array $haystack */
     protected $haystack = [];
+
+    /** @var string VALUE_NOT_FOUND */
+    private const VALUE_NOT_FOUND = 'Value could not be found.';
 
     /** @var bool $strict */
     protected $strict = false;

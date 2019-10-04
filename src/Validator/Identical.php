@@ -6,11 +6,11 @@ namespace Vision\Validator;
 
 class Identical extends AbstractValidator
 {
-    /** @var string NOT_IDENTICAL */
-    const NOT_IDENTICAL = 'The given operands are not identical.';
-
     /** @var mixed $operand */
     protected $operand;
+
+    /** @var string NOT_IDENTICAL */
+    private const NOT_IDENTICAL = 'The given operands are not identical.';
 
     /**
      * @param mixed $operand

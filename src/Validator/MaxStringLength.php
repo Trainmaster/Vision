@@ -6,11 +6,11 @@ namespace Vision\Validator;
 
 class MaxStringLength extends AbstractMultibyteStringValidator
 {
-    /** @var string STRING_TOO_SHORT */
-    const STRING_TOO_LONG = 'The given string "%s" is too long. The maximum length is %s.';
-
     /** @var int $max */
     protected $max;
+
+    /** @var string STRING_TOO_SHORT */
+    private const STRING_TOO_LONG = 'The given string "%s" is too long. The maximum length is %s.';
 
     /**
      * @param int $max

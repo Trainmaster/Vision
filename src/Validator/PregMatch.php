@@ -6,11 +6,11 @@ namespace Vision\Validator;
 
 class PregMatch extends AbstractValidator
 {
-    /** @var string NO_MATCH_FOUND */
-    const NO_MATCH_FOUND = 'No match was found.';
-
     /** @var null|string $pattern */
     protected $pattern;
+
+    /** @var string NO_MATCH_FOUND */
+    private const NO_MATCH_FOUND = 'No match was found.';
 
     /**
      * @param array $options

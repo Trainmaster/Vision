@@ -7,7 +7,7 @@ namespace Vision\Validator;
 class Integer extends AbstractValidator
 {
     /** @var string NO_INTEGER */
-    const NO_INTEGER = 'The given value is not an integer.';
+    private const NO_INTEGER = 'The given value is not an integer.';
 
     /**
      * @param mixed $value

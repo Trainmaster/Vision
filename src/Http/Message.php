@@ -8,14 +8,14 @@ use InvalidArgumentException;
 
 abstract class Message
 {
-    /** @var string VERSION_10 */
-    const PROTOCOL_VERSION_10 = '1.0';
-
-    /** @var string VERSION_11 */
-    const PROTOCOL_VERSION_11 = '1.1';
+    /** @var string */
+    public const PROTOCOL_VERSION_10 = '1.0';
 
     /** @var string */
-    const PROTOCOL_VERSION_2 = '2';
+    public const PROTOCOL_VERSION_11 = '1.1';
+
+    /** @var string */
+    public const PROTOCOL_VERSION_2 = '2';
 
     /** @var string $protocolVersion */
     protected $protocolVersion = self::PROTOCOL_VERSION_11;
