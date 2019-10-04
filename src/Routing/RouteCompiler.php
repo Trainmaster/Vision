@@ -1,15 +1,16 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Vision\Routing;
 
 class RouteCompiler
 {
-    const NAMED_GROUP_PATTERN = '[\w.~-]+';
+    private const NAMED_GROUP_PATTERN = '[\w.~-]+';
 
-    const OPTIONAL_PLACEHOLDER_PATTERN = '#\<([\w\d_=]*)\>#u';
+    private const OPTIONAL_PLACEHOLDER_PATTERN = '#\<([\w\d_=]*)\>#u';
 
-    const REQUIRED_PLACEHOLDER_PATTERN = '#\{([\w\d_=]*)\}#u';
+    private const REQUIRED_PLACEHOLDER_PATTERN = '#\{([\w\d_=]*)\}#u';
 
     /**
      * @param Route $route

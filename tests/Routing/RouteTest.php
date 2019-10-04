@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Routing;
 
 use Vision\Routing\Route;
-
 use PHPUnit\Framework\TestCase;
 
 class RouteTest extends TestCase

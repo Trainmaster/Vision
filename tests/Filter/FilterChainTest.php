@@ -1,9 +1,9 @@
 <?php
+
 namespace VisionTest\Filter;
 
 use Vision\Filter\Filter;
 use Vision\Filter\FilterChain;
-
 use PHPUnit\Framework\TestCase;
 
 class FilterChainTest extends TestCase

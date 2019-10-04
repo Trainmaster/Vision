@@ -1,15 +1,16 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Vision\Validator;
 
 class MinStringLength extends AbstractMultibyteStringValidator
 {
-    /** @var string STRING_TOO_SHORT */
-    const STRING_TOO_SHORT = 'The given string "%s" is too short. The minimum length is %s.';
-
     /** @var int $min */
     protected $min;
+
+    /** @var string STRING_TOO_SHORT */
+    private const STRING_TOO_SHORT = 'The given string "%s" is too short. The minimum length is %s.';
 
     /**
      * @param int $min

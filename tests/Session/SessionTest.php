@@ -1,10 +1,10 @@
 <?php
+
 namespace VisionTest\Random;
 
 use Vision\Session\Extension\ExtensionInterface;
 use Vision\Session\Session;
 use Vision\Session\SessionInterface;
-
 use PHPUnit\Framework\TestCase;
 
 class SessionTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Search;
-
 use PHPUnit\Framework\TestCase;
 
 class SearchTest extends TestCase

@@ -1,4 +1,5 @@
 <?php
+
 namespace VisionTest\Form;
 
 use Vision\Form\Form;

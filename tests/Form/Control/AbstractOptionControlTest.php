@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\AbstractOptionControl;
-
 use PHPUnit\Framework\TestCase;
 
 class AbstractOptionControlTest extends TestCase

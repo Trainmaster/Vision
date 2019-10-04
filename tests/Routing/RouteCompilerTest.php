@@ -1,10 +1,10 @@
 <?php
+
 namespace VisionTest\Routing;
 
 use Vision\Routing\CompiledRoute;
 use Vision\Routing\Route;
 use Vision\Routing\RouteCompiler;
-
 use PHPUnit\Framework\TestCase;
 
 class RouteCompilerTest extends TestCase

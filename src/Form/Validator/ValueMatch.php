@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Vision\Form\Validator;
 
@@ -8,11 +9,11 @@ use Vision\Validator\AbstractValidator;
 
 class ValueMatch extends AbstractValidator
 {
-    /** @var string NO_MATCH */
-    const NOT_UNIQUE = 'The given controls %s do not match.';
-
     /** @var array $controls */
     protected $controls = [];
+
+    /** @var string NO_MATCH */
+    private const NOT_UNIQUE = 'The given controls %s do not match.';
 
     /**
      * @param array $controls

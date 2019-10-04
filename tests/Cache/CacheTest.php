@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Cache;
 
 use Vision\Cache\Cache;
-
 use PHPUnit\Framework\TestCase;
 
 class CacheTest extends TestCase

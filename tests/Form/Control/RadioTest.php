@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Radio;
-
 use PHPUnit\Framework\TestCase;
 
 class RadioTest extends TestCase

@@ -1,12 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Vision\Form\Control;
 
 use Vision\Form\AbstractType;
 use Vision\Filter\Filter;
 use Vision\Validator;
-
 use LogicException;
 
 abstract class AbstractControl extends AbstractType

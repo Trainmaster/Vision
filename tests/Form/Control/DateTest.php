@@ -1,10 +1,9 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Date;
-
 use Exception;
-
 use PHPUnit\Framework\TestCase;
 
 class DateTest extends TestCase

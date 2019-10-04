@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\DateTimeLocal;
-
 use PHPUnit\Framework\TestCase;
 
 class DateTimeLocalTest extends TestCase

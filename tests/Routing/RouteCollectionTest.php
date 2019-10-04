@@ -1,9 +1,9 @@
 <?php
+
 namespace VisionTest\Routing;
 
 use Vision\Routing\Route;
 use Vision\Routing\RouteCollection;
-
 use PHPUnit\Framework\TestCase;
 
 class RouteCollectionTest extends TestCase

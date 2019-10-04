@@ -1,12 +1,13 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Vision\Validator;
 
 class InputNotEmptyString extends AbstractValidator
 {
     /** @var string INPUT_NOT_EMPTY_STRING */
-    const INPUT_NOT_EMPTY_STRING = 'The given value contains an empty string.';
+    private const INPUT_NOT_EMPTY_STRING = 'The given value contains an empty string.';
 
     /**
      * @param mixed $value

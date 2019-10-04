@@ -1,10 +1,9 @@
 <?php
+
 namespace VisionTest\Random;
 
 use Vision\Random\RandomString;
-
 use PHPUnit\Framework\TestCase;
-
 use DomainException;
 
 class RandomStringTest extends TestCase

@@ -1,10 +1,9 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\AbstractControl;
-
 use LogicException;
-
 use PHPUnit\Framework\TestCase;
 
 class AbstractControlTest extends TestCase

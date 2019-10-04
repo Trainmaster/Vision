@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace VisionTest\DependencyInjection;
 
@@ -12,9 +13,7 @@ use VisionTest\DependencyInjection\Fixtures\BasicClass;
 use VisionTest\DependencyInjection\Fixtures\DependentClass;
 use VisionTest\DependencyInjection\Fixtures\Foo;
 use VisionTest\DependencyInjection\Fixtures\FooFactory;
-
 use InvalidArgumentException;
-
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase

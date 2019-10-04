@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\AbstractInput;
-
 use PHPUnit\Framework\TestCase;
 
 class AbstractInputTest extends TestCase

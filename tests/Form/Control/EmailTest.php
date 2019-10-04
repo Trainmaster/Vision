@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\Form\Control;
 
 use Vision\Form\Control\Email;
-
 use PHPUnit\Framework\TestCase;
 
 class EmailTest extends TestCase

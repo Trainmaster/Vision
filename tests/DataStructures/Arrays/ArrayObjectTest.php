@@ -1,8 +1,8 @@
 <?php
+
 namespace VisionTest\DataStructures\Arrays;
 
 use Vision\DataStructures\Arrays\ArrayObject;
-
 use PHPUnit\Framework\TestCase;
 
 class ArrayObjectTest extends TestCase
