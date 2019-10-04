@@ -24,6 +24,9 @@ notifications:
 jobs:
   include:
     - stage: "Static Code Analysis"
+      script: ./vendor/bin/phpcs
       name: "Coding Standard"
       php: 7.3
-      script: ./vendor/bin/phpcs
+    - script: ./vendor/bin/phan --allow-polyfill-parser
+      name: "Phan"
+      php: 7.3
