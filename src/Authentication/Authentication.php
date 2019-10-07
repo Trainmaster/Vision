@@ -27,7 +27,7 @@ class Authentication
     /**
      * @param array $data
      *
-     * @return \Vision\Authentication\ResultInterface
+     * @return ResultInterface
      */
     public function authenticate(array $data)
     {

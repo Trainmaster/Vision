@@ -23,7 +23,7 @@ class Container implements ContainerInterface
      * @param string $class
      * @param null|string $alias
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @throws \LogicException
      *
      * @return Definition
@@ -38,7 +38,7 @@ class Container implements ContainerInterface
         }
 
         if (!is_string($alias)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Argument 2 passed to %s must be a string.',
                 __METHOD__
             ));
