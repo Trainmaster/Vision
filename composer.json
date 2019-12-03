@@ -39,6 +39,7 @@
       "/tests",
       "/.gitattributes",
       "/.gitignore",
+      "/.travis.yml",
       "/phpcs.xml",
       "/phpunit.xml"
     ]
