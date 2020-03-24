@@ -116,7 +116,7 @@ class Container implements ContainerInterface
             ));
         }
 
-        $definition = $this->getDefinition($alias);
+        $definition = $this->definitions[$alias] ?? null;
 
         if ($definition->isShared()) {
             return $this->createSharedInstance($alias, $definition);
@@ -158,7 +158,7 @@ class Container implements ContainerInterface
         if (!empty($interfaces)) {
             $methodInjections = [];
             foreach ($interfaces as $interface) {
-                $interfaceDefinition = $this->getDefinition($interface);
+                $interfaceDefinition = $this->definitions[$interface] ?? null;
 
                 if (!$interfaceDefinition) {
                     continue;

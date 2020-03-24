@@ -61,17 +61,6 @@ class ContainerTest extends TestCase
         $container->register(BasicClass::class, 'self');
     }
 
-    public function testGetDefinition()
-    {
-        $container = new Container();
-
-        $this->assertNull($container->getDefinition(BasicClass::class));
-
-        $container->register(BasicClass::class);
-
-        $this->assertInstanceOf(Definition::class, $container->getDefinition(BasicClass::class));
-    }
-
     public function testGetDefinitions()
     {
         $container = new Container();
