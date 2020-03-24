@@ -109,14 +109,14 @@ class Container implements ContainerInterface
             return $this;
         }
 
-        if (!$this->has($alias)) {
+        $definition = $this->definitions[$alias] ?? null;
+
+        if ($definition === null) {
             throw new NotFoundException(sprintf(
                 'No definition for "%s". Double-check the container configuration file(s).',
                 $alias
             ));
         }
-
-        $definition = $this->definitions[$alias] ?? null;
 
         if ($definition->isShared()) {
             return $this->createSharedInstance($alias, $definition);
