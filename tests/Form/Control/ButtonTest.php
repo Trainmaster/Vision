@@ -10,7 +10,7 @@ class ButtonTest extends TestCase
     /** @var Button */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Button('button');
     }

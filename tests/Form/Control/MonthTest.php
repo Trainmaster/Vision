@@ -10,7 +10,7 @@ class MonthTest extends TestCase
     /** @var Month*/
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Month('month');
     }

@@ -10,7 +10,7 @@ class TextTest extends TestCase
     /** @var Text */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Text('text');
     }

@@ -10,7 +10,7 @@ class UrlTest extends TestCase
     /** @var Url */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Url('url');
     }

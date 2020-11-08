@@ -11,7 +11,7 @@ class AbstractControlTest extends TestCase
     /** @var AbstractControl */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractControl', ['abstract']);
     }

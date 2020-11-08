@@ -10,7 +10,7 @@ class PasswordTest extends TestCase
     /** @var Password */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Password('password');
     }

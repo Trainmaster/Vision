@@ -16,7 +16,7 @@ class SelectTest extends TestCase
         3 => 'baz'
     ];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Select('select');
     }

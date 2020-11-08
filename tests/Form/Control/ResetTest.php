@@ -10,7 +10,7 @@ class ResetTest extends TestCase
     /** @var Reset */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Reset('reset');
     }

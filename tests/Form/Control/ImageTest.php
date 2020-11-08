@@ -10,7 +10,7 @@ class ImageTest extends TestCase
     /** @var Image */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Image('image');
     }

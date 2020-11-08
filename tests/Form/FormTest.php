@@ -10,7 +10,7 @@ class FormTest extends TestCase
     /** @var Form */
     private $form;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->form = new Form('form');
     }

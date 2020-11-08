@@ -30,7 +30,7 @@ class BasicFormTest extends TestCase
         ]
     ];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->form = new BasicForm('basic_form');
     }

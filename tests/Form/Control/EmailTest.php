@@ -10,7 +10,7 @@ class EmailTest extends TestCase
     /** @var Email */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Email('email');
     }

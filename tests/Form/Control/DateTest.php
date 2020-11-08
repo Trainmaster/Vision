@@ -11,7 +11,7 @@ class DateTest extends TestCase
     /** @var Date */
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Date('date');
     }

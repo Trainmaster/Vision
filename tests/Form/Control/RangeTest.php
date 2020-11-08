@@ -10,7 +10,7 @@ class RangeTest extends TestCase
     /** @var Range*/
     private $control;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->control = new Range('range');
     }
