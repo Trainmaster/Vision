@@ -27,12 +27,10 @@ class RouteCollectionTest extends TestCase
         $this->assertSame($controller, $route->getHandler());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Route "/" has already been defined.
-     */
     public function testAddDuplicateThrowsException()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Route "/" has already been defined.');
         $collection = new RouteCollection();
         $collection->add('GET', '/', 'foo');
         $collection->add('GET', '/', 'foo');

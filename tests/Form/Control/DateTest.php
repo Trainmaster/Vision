@@ -69,11 +69,9 @@ class DateTest extends TestCase
         $this->assertNull($control->getValue());
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testInvalidStringAsValue()
     {
+        $this->expectException(Exception::class);
         $control = $this->control;
 
         $control->setValue('2000-101-01');

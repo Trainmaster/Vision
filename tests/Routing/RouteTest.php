@@ -21,12 +21,10 @@ class RouteTest extends TestCase
         $this->assertSame('f1384e92bb8faa64d7cacf0d599f833d', (string) $route);
     }
 
-     /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Method must be one of: DELETE, HEAD, GET, OPTIONS, POST, PUT
-     */
     public function testInvalidHttpMethod()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Method must be one of: DELETE, HEAD, GET, OPTIONS, POST, PUT');
         new Route('FOO', '/', 'foo');
     }
 }

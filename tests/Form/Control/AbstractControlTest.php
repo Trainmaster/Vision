@@ -31,12 +31,10 @@ class AbstractControlTest extends TestCase
         $this->assertSame([], $control->getChildren());
     }
 
-    /**
-     * @expectedException LogicException
-     * @expectedExceptionMessage The element may only be validated once per life-cycle.
-     */
     public function testIsValidLoopException()
     {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('The element may only be validated once per life-cycle.');
         $control = $this->control;
 
         $control->isValid();
