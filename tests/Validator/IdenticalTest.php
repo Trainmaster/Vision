@@ -10,7 +10,7 @@ class IdenticalTest extends TestCase
 {
     /** @var Validator\Identical */
     protected $validator;
-    
+
     protected function setUp()
     {
         $this->validator = new Validator\Identical();

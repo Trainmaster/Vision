@@ -11,7 +11,7 @@ class MoneyTest extends TestCase
     public function testConstruct()
     {
         Locale::setDefault('de-DE');
-        
+
         $control = new Money('money');
         $this->assertInstanceOf('Vision\Form\Control\Text', $control);
         $this->assertNull($control->getCurrency());
@@ -32,7 +32,7 @@ class MoneyTest extends TestCase
     public function testCurrencySignWithoutEmptySpace()
     {
         Locale::setDefault('de-DE');
-        
+
         $control = new Money('money');
         $control->setValue('1.234.567,89$');
 

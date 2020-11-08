@@ -63,7 +63,7 @@ class Money extends Text
         if ($value === null) {
             return $this;
         }
-        
+
         $fmtCurrency = new NumberFormatter(Locale::getDefault(), NumberFormatter::CURRENCY);
 
         if (!is_float($value)) {

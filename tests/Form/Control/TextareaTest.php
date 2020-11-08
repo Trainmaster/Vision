@@ -50,7 +50,7 @@ class TextareaTest extends TestCase
         $this->assertSame($control, $control->setValue('foo'));
         $this->assertSame(['foo'], $control->getContents());
     }
-    
+
     public function testSetValueAfterValidatingWithValueAndData()
     {
         $control = $this->control;
