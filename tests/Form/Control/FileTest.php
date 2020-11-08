@@ -10,7 +10,7 @@ class FileTest extends TestCase
     /** @var File */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new File('file');
     }

@@ -10,7 +10,7 @@ class TextareaTest extends TestCase
     /** @var Textarea */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Textarea('textarea');
     }

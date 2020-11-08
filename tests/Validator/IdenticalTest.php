@@ -11,7 +11,7 @@ class IdenticalTest extends TestCase
     /** @var Validator\Identical */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new Validator\Identical();
     }

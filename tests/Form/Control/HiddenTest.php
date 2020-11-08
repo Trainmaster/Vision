@@ -10,7 +10,7 @@ class HiddenTest extends TestCase
     /** @var Hidden */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Hidden('hidden');
     }

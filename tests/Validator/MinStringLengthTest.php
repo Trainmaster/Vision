@@ -17,7 +17,7 @@ class MinStringLengthTest extends TestCase
 
     protected $multiBytes = ['¢', '€'];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validatorOne = new Validator\MinStringLength(1);
         $this->validatorTwo = new Validator\MinStringLength(2);

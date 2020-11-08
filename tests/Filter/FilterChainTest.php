@@ -11,7 +11,7 @@ class FilterChainTest extends TestCase
     /** @var FilterChain */
     protected $filterChain;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->filterChain = new FilterChain();
     }

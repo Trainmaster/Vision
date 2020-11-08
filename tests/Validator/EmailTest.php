@@ -10,7 +10,7 @@ class EmailTest extends TestCase
     /** @var Email */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new Email();
     }

@@ -10,7 +10,7 @@ class IntegerTest extends TestCase
     /** @var Validator\Integer */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new Validator\Integer();
     }

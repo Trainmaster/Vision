@@ -10,7 +10,7 @@ class InputNotEmptyStringTest extends TestCase
     /** @var Validator\InputNotEmptyString */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new Validator\InputNotEmptyString();
     }

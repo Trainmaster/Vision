@@ -10,7 +10,7 @@ class DateTimeTest extends TestCase
     /** @var DateTime */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new DateTime('datetime');
     }

@@ -10,7 +10,7 @@ class AbstractValidatorTest extends TestCase
     /** @var AbstractValidator */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = $this->getMockForAbstractClass(AbstractValidator::class);
     }

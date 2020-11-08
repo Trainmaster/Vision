@@ -14,7 +14,7 @@ class MaxStringLengthTest extends TestCase
 
     protected $multiBytes = ['¢', '€', "\xF0\xA4\xAD\xA2", '¢¢', '€€', "\xF0\xA4\xAD\xA2\xF0\xA4\xAD\xA2"];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new Validator\MaxStringLength(1);
     }

@@ -10,7 +10,7 @@ class WeekTest extends TestCase
     /** @var Week */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Week('week');
     }

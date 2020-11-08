@@ -10,7 +10,7 @@ class TimeTest extends TestCase
     /** @var Time */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Time('time');
     }

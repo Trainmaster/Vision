@@ -10,7 +10,7 @@ class FileTest extends TestCase
     /** @var File $file */
     protected $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->file = new File(__DIR__ . '/test.gif');
     }

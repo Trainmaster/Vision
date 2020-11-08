@@ -10,7 +10,7 @@ class SearchTest extends TestCase
     /** @var Search */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Search('search');
     }

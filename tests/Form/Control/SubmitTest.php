@@ -11,7 +11,7 @@ class SubmitTest extends TestCase
     private $control;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Submit('submit');
     }

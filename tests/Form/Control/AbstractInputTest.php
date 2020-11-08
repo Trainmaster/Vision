@@ -10,7 +10,7 @@ class AbstractInputTest extends TestCase
     /** @var AbstractInput */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractInput', ['abstract']);
     }

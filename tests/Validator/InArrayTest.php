@@ -19,7 +19,7 @@ class InArrayTest extends TestCase
         true
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->strictValidator = new Validator\InArray($this->haystack);
         $this->validator = new Validator\InArray($this->haystack, false);

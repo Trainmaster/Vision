@@ -10,7 +10,7 @@ class DateTimeLocalTest extends TestCase
     /** @var DateTimeLocal */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new DateTimeLocal('datetime-local');
     }

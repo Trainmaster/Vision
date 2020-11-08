@@ -16,7 +16,7 @@ class AbstractOptionControlTest extends TestCase
         3 => 'baz'
     ];
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = $this->getMockForAbstractClass('\Vision\Form\Control\AbstractOptionControl', ['abstract']);
     }

@@ -16,7 +16,7 @@ class CheckboxTest extends TestCase
         3 => 'baz'
     ];
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Checkbox('checkbox');
     }

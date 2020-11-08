@@ -19,7 +19,7 @@ class InputIntegerTest extends TestCase
     /** @var InputInteger */
     protected $minAndMaxValidator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new InputInteger();
         $this->minValidator = new InputInteger(1);

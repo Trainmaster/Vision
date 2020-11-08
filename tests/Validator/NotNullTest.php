@@ -10,7 +10,7 @@ class NotNullTest extends TestCase
     /** @var Validator\NotNull */
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new Validator\NotNull();
     }

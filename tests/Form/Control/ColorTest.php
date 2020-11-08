@@ -10,7 +10,7 @@ class ColorTest extends TestCase
     /** @var Color */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Color('color');
     }

@@ -10,7 +10,7 @@ class TrimTest extends TestCase
     /** @var Trim */
     protected $filter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->filter = new Trim();
     }

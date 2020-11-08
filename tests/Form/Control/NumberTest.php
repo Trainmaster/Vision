@@ -10,7 +10,7 @@ class NumberTest extends TestCase
     /** @var Number */
     private $control;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->control = new Number('number');
     }
