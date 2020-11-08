@@ -26,7 +26,8 @@ return [
     // your application should be included in this list.
     'directory_list' => [
         'src',
-        'vendor/psr'
+        'vendor/nikic/fast-route',
+        'vendor/psr',
     ],
 
     // A regex used to match every file name that you want to

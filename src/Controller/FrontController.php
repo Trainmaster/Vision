@@ -50,19 +50,18 @@ class FrontController
     public function run(RequestInterface $request): ResponseInterface
     {
         try {
-            $route = $this->router->resolve($request);
+            $route = $this->router->resolve($request->getMethod(), $request->getPathInfo());
 
-            if (!$route) {
+            if ($route === null) {
                 throw new \RuntimeException('No matching route.');
             }
 
-            if (isset($route['params'])) {
-                foreach ($route['params'] as $name => $value) {
-                    $request->getQueryParams()[(string) $name] = $value;
-                }
+            $routeParameters = $route['parameters'] ?? [];
+            foreach ($routeParameters as $name => $value) {
+                $request->getQueryParams()[(string)$name] = $value;
             }
 
-            return $this->invokeHandler($route['handler']);
+            return $this->invokeHandler($route['handler'][0] ?? '');
         } catch (\Exception $e) {
             return $this->handleException($e);
         }
@@ -76,7 +75,7 @@ class FrontController
      *
      * @return ResponseInterface
      */
-    private function invokeHandler($handler): ResponseInterface
+    private function invokeHandler(string $handler): ResponseInterface
     {
         $instance = $this->container->get($handler);
 
