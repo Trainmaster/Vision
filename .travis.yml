@@ -21,7 +21,7 @@ jobs:
     - stage: "Static Code Analysis"
       script: ./vendor/bin/phpcs
       name: "Coding Standard"
-      php: 7.3
+      php: 7.2
     - script: ./vendor/bin/phan --allow-polyfill-parser
       name: "Phan"
-      php: 7.3
+      php: 7.2
